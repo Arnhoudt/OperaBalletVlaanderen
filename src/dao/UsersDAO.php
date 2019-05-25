@@ -2,19 +2,27 @@
 
 require_once( __DIR__ . '/DAO.php');
 
-class DashboardDAO extends DAO {
+class UsersDAO extends DAO {
 
   public function selectAll() {
-    $sql = "SELECT * FROM `questions`";
+    $sql = "SELECT * FROM `users`";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function selectById($id) {
-    $sql = "SELECT * FROM `questions` WHERE `id` = :id";
+    $sql = "SELECT * FROM `users` WHERE `id` = :id";
     $stmt = $this->pdo->prepare($sql);
     $stmt->bindValue(':id', $id);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
+  public function selectByEmail($email) {
+    $sql = "SELECT * FROM `users` WHERE `email` = :email";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':email', $email);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
   }
@@ -22,14 +30,10 @@ class DashboardDAO extends DAO {
   public function insert($data) {
     $errors = $this->validate($data);
     if(empty($errors)) {
-      $sql = "INSERT INTO `questions` (`question`, `param1`, `param2`, `param3`, `param4`, `param5`) VALUES (:question, :param1, :param2, :param3, :param4, :param5)";
+      $sql = "INSERT INTO `users` (`email`, `password`) VALUES (:email, :password)";
       $stmt = $this->pdo->prepare($sql);
-      $stmt->bindValue(':question', $data['question']);
-      $stmt->bindValue(':param1', $data['param1']);
-      $stmt->bindValue(':param2', $data['param2']);
-      $stmt->bindValue(':param3', $data['param3']);
-      $stmt->bindValue(':param4', $data['param4']);
-      $stmt->bindValue(':param5', $data['param5']);
+      $stmt->bindValue(':email', $data['email']);
+      $stmt->bindValue(':password', $data['password']);
       if($stmt->execute()) {
         $insertedId = $this->pdo->lastInsertId();
         return $this->selectById($insertedId);
@@ -41,14 +45,10 @@ class DashboardDAO extends DAO {
   public function update($id, $data) {
     $errors = $this->validate($data);
     if(empty($errors)) {
-      $sql = "UPDATE `questions` SET `question` = :question, `param1` = :param1, `param2` = :param2, `param3` = :param3, `param4` = :param4, `param5` = :param5 WHERE `id` = :id";
+      $sql = "UPDATE `users` SET `email` = :email, `password` = :password WHERE `id` = :id";
       $stmt = $this->pdo->prepare($sql);
-      $stmt->bindValue(':question', $data['question']);
-      $stmt->bindValue(':param1', $data['param1']);
-      $stmt->bindValue(':param2', $data['param2']);
-      $stmt->bindValue(':param3', $data['param3']);
-      $stmt->bindValue(':param4', $data['param4']);
-      $stmt->bindValue(':param5', $data['param5']);
+      $stmt->bindValue(':email', $data['email']);
+      $stmt->bindValue(':password', $data['password']);
       $stmt->bindValue(':id', $id);
       if($stmt->execute()) {
         return $this->selectById($id);
@@ -66,8 +66,11 @@ class DashboardDAO extends DAO {
 
   public function validate($data) {
     $errors = array();
-    if(empty($data['question'])) {
-      $errors['question'] = 'please enter question';
+    if(empty($data['email'])) {
+      $errors['email'] = 'please enter the email';
+    }
+    if(empty($data['password'])) {
+      $errors['password'] = 'please enter the password';
     }
     return $errors;
   }

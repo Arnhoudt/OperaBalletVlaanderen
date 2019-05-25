@@ -1,22 +1,24 @@
 <?php
 
 require_once __DIR__ . '/Controller.php';
+require_once __DIR__ . '/../dao/UsersDAO.php';
 require_once __DIR__ . '/../dao/DashboardDAO.php';
 
 class DashboardController extends Controller {
 
-  private $dashboardDAO;
+  private $usersDAO, $dashboardDAO;
 
   function __construct() {
+    $this->usersDAO = new UsersDAO();
     $this->dashboardDAO = new DashboardDAO();
   }
 
   public function loginView() {
-    $this->set('title', "Login");
     if(!empty($_SESSION['user'])) {
       header('Location: index.php?page=dashboard');
       exit();
     }
+    $this->set('title', "Login");
   }
 
   public function registerView() {
@@ -24,17 +26,53 @@ class DashboardController extends Controller {
   }
 
   public function dashboard() {
-    $this->set('title', "Dashboard");
+    $questions = $this->dashboardDAO->selectAll();
     if(empty($_SESSION['user'])) {
       header('Location: index.php?page=loginView');
       exit();
     }
+    if(!empty($_POST)) {
+      if($_POST['action'] === 'question' && !empty($_POST['question'])) {
+        $data = array(
+          'question' => $_POST['question'],
+          'param1' => $_POST['param1'],
+          'param2' => $_POST['param2'],
+          'param3' => $_POST['param3'],
+          'param4' => $_POST['param4'],
+          'param5' => $_POST['param5']
+        );
+        $insertedQuestion = $this->dashboardDAO->insert($data);
+        if(!empty($insertedQuestion)) {
+          $_SESSION['info'] = 'Question added!';
+        } else {
+          $_SESSION['error'] = 'Something went wrong!';
+        }
+      }
+      if($_POST['action'] === 'update' && !empty($_POST['question'])) {
+        $data = array(
+          'question' => $_POST['question'],
+          'param1' => $_POST['param1'],
+          'param2' => $_POST['param2'],
+          'param3' => $_POST['param3'],
+          'param4' => $_POST['param4'],
+          'param5' => $_POST['param5']
+        );
+        $updatedQuestion = $this->dashboardDAO->update($_POST['id'], $data);
+        if(!empty($updatedQuestion)) {
+          $_SESSION['info'] = 'Question updated!';
+        } else {
+          $_SESSION['error'] = 'Something went wrong!';
+        }
+      }
+    }
+    $this->set('title', "Dashboard");
+    $this->set('questions', $questions);
   }
 
   public function login() {
     if(!empty($_POST)) {
       if(!empty($_POST['email']) && !empty($_POST['password'])) {
-        $existing = $this->dashboardDAO->selectByEmail($_POST['email']);
+        $existing = $this->usersDAO->selectByEmail($_POST['email']);
         if(!empty($existing)) {
           if (password_verify($_POST['password'], $existing['password'])) {
             $_SESSION['user'] = $existing;
@@ -73,7 +111,7 @@ class DashboardController extends Controller {
     if(empty($_POST['email'])) {
       $errors['email'] = 'Please enter your email';
     } else {
-      $existing = $this->dashboardDAO->selectByEmail($_POST['email']);
+      $existing = $this->usersDAO->selectByEmail($_POST['email']);
       if(!empty($existing)) {
         $errors['email'] = 'Email address is already in use';
       }
@@ -89,13 +127,13 @@ class DashboardController extends Controller {
         'email' => $_POST['email'],
         'password' => password_hash($_POST['password'], PASSWORD_BCRYPT)
       );
-      $inserteduser = $this->dashboardDAO->insert($data);
+      $inserteduser = $this->usersDAO->insert($data);
       if(!empty($inserteduser)) {
         $_SESSION['info'] = 'Registration Successful!';
         header('Location: index.php?page=loginView');
         exit();
       } else {
-        $this->set('errors', $this->dashboardDAO->validate($data));
+        $this->set('errors', $this->usersDAO->validate($data));
       }
     }
     $_SESSION['error'] = 'Registration Failed!';
