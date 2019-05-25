@@ -18,7 +18,4 @@
       <button type="submit" class="form-submit">Login</button>
     </div>
   </form>
-  <form method="post" action="index.php?page=registerView">
-    <button>Register</button>
-  </form>
 </section>

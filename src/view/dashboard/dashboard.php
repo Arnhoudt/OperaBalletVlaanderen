@@ -10,6 +10,7 @@
 
   <section>
     <form class="question-form" method="post">
+      <input type="hidden" name="action" value="question" />
       <div class="input-container text">
         <label>
           <span class="form-label">Vraag:</span>
@@ -47,7 +48,7 @@
         </label>
       </div>
       <div>
-        <button type="submit" name="action" value="question" class="form-submit">Add question</button>
+        <button type="submit" class="form-submit">Add question</button>
       </div>
     </form>
   </section>
@@ -57,6 +58,7 @@
       <li>
         <article>
           <form class="update-form" method="post">
+            <input type="hidden" name="action" value="update" />
             <input type="hidden" name="id" value="<?php echo $question['id']; ?>" />
             <input type="text" name="question" class="form-input" value="<?php echo $question['question']; ?>" />
             <input type="number" min="0" max="100" step="1" name="param1" class="form-input" value="<?php echo $question['param1']; ?>" />
@@ -64,7 +66,7 @@
             <input type="number" min="0" max="100" step="1" name="param3" class="form-input" value="<?php echo $question['param3']; ?>" />
             <input type="number" min="0" max="100" step="1" name="param4" class="form-input" value="<?php echo $question['param4']; ?>" />
             <input type="number" min="0" max="100" step="1" name="param5" class="form-input" value="<?php echo $question['param5']; ?>" />
-            <button type="submit" name="action" value="update" class="form-submit">Update</button>
+            <button type="submit" class="form-submit">Update</button>
           </form>
         </article>
       </li>
