@@ -7,6 +7,30 @@ $routes = array(
   'home' => array(
     'controller' => 'Home',
     'action' => 'index'
+  ),
+  'login' => array(
+    'controller' => 'Dashboard',
+    'action' => 'login'
+  ),
+  'register' => array(
+    'controller' => 'Dashboard',
+    'action' => 'register'
+  ),
+  'logout' => array(
+    'controller' => 'Dashboard',
+    'action' => 'logout'
+  ),
+  'loginView' => array(
+    'controller' => 'Dashboard',
+    'action' => 'loginView'
+  ),
+  'registerView' => array(
+    'controller' => 'Dashboard',
+    'action' => 'registerView'
+  ),
+  'dashboard' => array(
+    'controller' => 'Dashboard',
+    'action' => 'dashboard'
   )
 );
 

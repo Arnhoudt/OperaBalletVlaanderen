@@ -1,6 +1,16 @@
 :root {
-  --client-dark-grey: #666;
-  --client-darkest-grey: #444;
-  --client-black: #222;
-  --client-blue: #407ab1;
+  --primary-color: #4d94fd;
+  --accent-color: #ff4824;
+  --black: #262a34;
+  --white: #fdfdfd;
+  --dark-grey: #a3a3a3;
+  --light-grey: #b8b8b8;
+  --lightest-grey: #f1f2f2;
+  --green-grey: #7c98a3;
 }
+
+@custom-media --xs screen and (min-width: 0);
+@custom-media --s screen and (min-width: 768px);
+@custom-media --m screen and (min-width: 1024px);
+@custom-media --l screen and (min-width: 1440px);
+@custom-media --xl screen and (min-width: 1680px);

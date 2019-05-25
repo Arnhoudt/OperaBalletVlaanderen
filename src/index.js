@@ -1,10 +1,6 @@
 require('./style.css');
 {
-
-  const init = () => {
-
-  };
-
+  const init = () => {};
 
   init();
 }
