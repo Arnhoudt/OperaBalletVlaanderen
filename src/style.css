@@ -1,0 +1,40 @@
+@import './css/reset.css';
+@import './css/vars.css';
+
+:root {
+  --primary-color: #4d94fd;
+  --accent-color: #ff4824;
+  --black: #262a34;
+  --dark-grey: #a3a3a3;
+  --light-grey: #b8b8b8;
+  --lightest-grey: #f1f2f2;
+  --green-grey: #7c98a3;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+/* stylelint-disable */
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+/* stylelint-enable */
+
+body {
+  font-family: roboto, sans-serif;
+  color: var(--black);
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+
+@media screen and (min-width: 450px) {
+
+  body {
+    background-color: lightgreen;
+  }
+}
