@@ -8,8 +8,7 @@ class HomeDAO extends DAO {
     $sql = "SELECT * FROM `questions`";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute();
-    $answer = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $answer;
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function selectById($id) {

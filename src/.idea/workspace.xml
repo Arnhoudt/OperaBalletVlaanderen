@@ -17,8 +17,21 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/view/home/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="19" lean-forward="true" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+            <state relative-caret-position="431">
+              <caret line="33" column="16" lean-forward="true" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+              <folding>
+                <marker date="1558878643097" expanded="true" signature="1778:1809" ph="..." />
+                <marker date="1558878643097" expanded="true" signature="2647:2696" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dashboard.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/dashboard.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -37,8 +50,8 @@
       <file leaf-file-name="DashboardController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller/DashboardController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="127" column="37" lean-forward="false" selection-start-line="127" selection-start-column="37" selection-end-line="127" selection-end-column="37" />
+            <state relative-caret-position="193">
+              <caret line="28" column="8" lean-forward="false" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -47,19 +60,23 @@
       <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/dashboard/dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="11" lean-forward="true" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+            <state relative-caret-position="236">
+              <caret line="59" column="37" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="layout.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/view/layout.php">
+      <file leaf-file-name="HomeDAO.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dao/HomeDAO.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="120">
+              <caret line="8" column="32" lean-forward="false" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+              <folding>
+                <marker date="1558877672450" expanded="true" signature="118:143" ph="SELECT * FRO... questions" />
+                <marker date="1558877672450" expanded="true" signature="306:348" ph="SELECT * FRO... questions" />
+                <marker date="1558877672450" expanded="true" signature="340:348" ph="SELECT * FRO... players" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -68,7 +85,7 @@
         <entry file="file://$PROJECT_DIR$/dao/DashboardDAO.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
-              <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+              <caret line="11" column="3" lean-forward="true" selection-start-line="6" selection-start-column="2" selection-end-line="11" selection-end-column="3" />
               <folding>
                 <marker date="1558856652894" expanded="true" signature="123:148" ph="SELECT * FRO... questions" />
                 <marker date="1558856652894" expanded="true" signature="311:353" ph="SELECT * FRO... questions" />
@@ -80,25 +97,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HomeDAO.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dao/HomeDAO.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="38" lean-forward="false" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
-              <folding>
-                <marker date="1558869560826" expanded="true" signature="118:143" ph="SELECT * FRO... questions" />
-                <marker date="1558869560826" expanded="true" signature="326:368" ph="SELECT * FRO... questions" />
-                <marker date="1558869560826" expanded="true" signature="360:368" ph="SELECT * FRO... players" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="HomeController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller/HomeController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
-              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <caret line="15" column="25" lean-forward="false" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -107,8 +110,8 @@
       <file leaf-file-name="registerView.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/dashboard/registerView.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="375">
+              <caret line="25" column="6" lean-forward="true" selection-start-line="25" selection-start-column="6" selection-end-line="27" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -131,6 +134,7 @@
       <find>consol</find>
       <find>happy</find>
       <find>h</find>
+      <find>que</find>
       <find>user</find>
     </findStrings>
   </component>
@@ -140,11 +144,11 @@
         <option value="$PROJECT_DIR$/css/home.css" />
         <option value="$PROJECT_DIR$/style.css" />
         <option value="$PROJECT_DIR$/js/home.js" />
-        <option value="$PROJECT_DIR$/dao/HomeDAO.php" />
-        <option value="$PROJECT_DIR$/controller/HomeController.php" />
-        <option value="$PROJECT_DIR$/view/home/index.php" />
         <option value="$PROJECT_DIR$/dao/UsersDAO.php" />
         <option value="$PROJECT_DIR$/controller/DashboardController.php" />
+        <option value="$PROJECT_DIR$/controller/HomeController.php" />
+        <option value="$PROJECT_DIR$/dao/HomeDAO.php" />
+        <option value="$PROJECT_DIR$/view/home/index.php" />
       </list>
     </option>
   </component>
@@ -274,7 +278,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13117000" />
+    <option name="totallyTimeSpent" value="15155000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -339,7 +343,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="26" lean-forward="true" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
-          <folding />
+          <folding>
+            <marker date="1558878643097" expanded="true" signature="1778:1809" ph="..." />
+            <marker date="1558878643097" expanded="true" signature="2647:2696" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -363,7 +370,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1140">
           <caret line="76" column="35" lean-forward="true" selection-start-line="76" selection-start-column="35" selection-end-line="76" selection-end-column="35" />
-          <folding />
+          <folding>
+            <marker date="1558878643097" expanded="true" signature="1778:1809" ph="..." />
+            <marker date="1558878643097" expanded="true" signature="2647:2696" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -387,7 +397,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="26" lean-forward="true" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
-          <folding />
+          <folding>
+            <marker date="1558878643097" expanded="true" signature="1778:1809" ph="..." />
+            <marker date="1558878643097" expanded="true" signature="2647:2696" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -430,52 +443,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dao/DashboardDAO.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-          <folding>
-            <marker date="1558856652894" expanded="true" signature="123:148" ph="SELECT * FRO... questions" />
-            <marker date="1558856652894" expanded="true" signature="311:353" ph="SELECT * FRO... questions" />
-            <marker date="1558856652894" expanded="true" signature="610:760" ph="INSERT INTO `questions`... " />
-            <marker date="1558856652894" expanded="true" signature="1399:1561" ph="UPDATE `questions`... " />
-            <marker date="1558856652894" expanded="true" signature="2106:2142" ph="DELETE FROM `users`... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dao/HomeDAO.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="38" lean-forward="false" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
-          <folding>
-            <marker date="1558869560826" expanded="true" signature="118:143" ph="SELECT * FRO... questions" />
-            <marker date="1558869560826" expanded="true" signature="326:368" ph="SELECT * FRO... questions" />
-            <marker date="1558869560826" expanded="true" signature="360:368" ph="SELECT * FRO... players" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/dashboard/registerView.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view/layout.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -496,18 +467,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view/dashboard/dashboard.php">
+    <entry file="file://$PROJECT_DIR$/css/dashboard.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="11" lean-forward="true" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/DashboardController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="127" column="37" lean-forward="false" selection-start-line="127" selection-start-column="37" selection-end-line="127" selection-end-column="37" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -520,11 +483,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/controller/DashboardController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="28" column="8" lean-forward="false" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="25" lean-forward="false" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/DashboardDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="3" lean-forward="true" selection-start-line="6" selection-start-column="2" selection-end-line="11" selection-end-column="3" />
+          <folding>
+            <marker date="1558856652894" expanded="true" signature="123:148" ph="SELECT * FRO... questions" />
+            <marker date="1558856652894" expanded="true" signature="311:353" ph="SELECT * FRO... questions" />
+            <marker date="1558856652894" expanded="true" signature="610:760" ph="INSERT INTO `questions`... " />
+            <marker date="1558856652894" expanded="true" signature="1399:1561" ph="UPDATE `questions`... " />
+            <marker date="1558856652894" expanded="true" signature="2106:2142" ph="DELETE FROM `users`... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dao/HomeDAO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="32" lean-forward="false" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+          <folding>
+            <marker date="1558877672450" expanded="true" signature="118:143" ph="SELECT * FRO... questions" />
+            <marker date="1558877672450" expanded="true" signature="306:348" ph="SELECT * FRO... questions" />
+            <marker date="1558877672450" expanded="true" signature="340:348" ph="SELECT * FRO... players" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/dashboard/dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="59" column="37" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/dashboard/registerView.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="6" lean-forward="true" selection-start-line="25" selection-start-column="6" selection-end-line="27" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/view/home/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="19" lean-forward="true" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
-          <folding />
+        <state relative-caret-position="431">
+          <caret line="33" column="16" lean-forward="true" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+          <folding>
+            <marker date="1558878643097" expanded="true" signature="1778:1809" ph="..." />
+            <marker date="1558878643097" expanded="true" signature="2647:2696" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -12,8 +12,7 @@ class HomeController extends Controller {
   }
 
   public function index() {
-    $questions = $this->questionDAO->selectAll();
-    $this->set('questions', $questions);
+    $this->set('questions', $this->questionDAO->selectAll());
     $this->set('title', "Home");
   }
 
