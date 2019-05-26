@@ -1,5 +1,6 @@
 @import './css/reset.css';
 @import './css/vars.css';
+@import './css/home.css';
 
 :root {
   --primary-color: #4d94fd;

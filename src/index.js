@@ -1,3 +1,4 @@
+import './js/home.js'
 require('./style.css');
 {
 
