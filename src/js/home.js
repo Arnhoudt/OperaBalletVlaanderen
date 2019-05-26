@@ -9,16 +9,24 @@
   const init = () =>{
       console.log("bliep bliep bliep javascript is working, let's build this awesome site!");
 
-      $characters = Array.prototype.slice.call(document.querySelectorAll('.character'));
-      $characters.forEach(character =>{
-          characters.push([character.querySelector('.characterName').textContent,character.querySelector('.CharacterStatValueHappy').textContent,character.querySelector('.CharacterStatValueSmart').textContent,character.querySelector('.CharacterStatValueUnicorn').textContent]);
-      })
-      values = document.getElementsByClassName('statValue');
-      answers = Array.prototype.slice.call(document.getElementsByClassName(('answer')));
-      answers.forEach(answer => {
-          answer.addEventListener('click', handleChangeRadioButton);
-      })
-  }
+    const $characters = Array.prototype.slice.call(
+      document.querySelectorAll('.character')
+    );
+    $characters.forEach(character => {
+      characters.push([
+        character.querySelector('.characterName').textContent,
+        character.querySelector('.CharacterStatValueHappy').textContent,
+        character.querySelector('.CharacterStatValueSmart').textContent,
+        character.querySelector('.CharacterStatValueUnicorn').textContent
+      ]);
+    });
+    const $answers = Array.prototype.slice.call(
+      document.getElementsByClassName('answer')
+    );
+    $answers.forEach(answer => {
+      answer.addEventListener('click', handleChangeRadioButton);
+    });
+  };
 
   const handleChangeRadioButton = e =>{
     if(e.currentTarget.value === "true" && answerArray[e.currentTarget.parentElement.parentElement.getAttribute("number")] != true) {
@@ -28,7 +36,6 @@
         stats.unicorn += parseInt(e.currentTarget.parentElement.parentElement.querySelector(".valueUnicorn").textContent);
     }
     if(e.currentTarget.value === "false" && answerArray[e.currentTarget.parentElement.parentElement.getAttribute("number")] != false && answerArray[e.currentTarget.parentElement.parentElement.getAttribute("number")] != undefined){
-        console.log(answerArray[e.currentTarget.parentElement.parentElement.getAttribute("number")]);
         answerArray[e.currentTarget.parentElement.parentElement.getAttribute("number")] = false;
         stats.happy -= parseInt(e.currentTarget.parentElement.parentElement.querySelector(".valueHappy").textContent);
         stats.smart -= parseInt(e.currentTarget.parentElement.parentElement.querySelector(".valueSmart").textContent);
@@ -48,13 +55,16 @@
             bestCharacter = character;
         }
     });
-    $yourCharacter = document.querySelector('.yourCharacter');
-    $yourCharacter.querySelector('.yourCharacterName').textContent = bestCharacter[0];
-    $yourCharacter.querySelector('.yourCharacterStatValueHappy').textContent = bestCharacter[1];
-    $yourCharacter.querySelector('.yourCharacterStatValueSmart').textContent = bestCharacter[2];
-    $yourCharacter.querySelector('.yourCharacterStatValueUnicorn').textContent = bestCharacter[3];
-  }
-
+    const $yourCharacter = document.querySelector('.yourCharacter');
+    $yourCharacter.querySelector('.yourCharacterName').textContent =
+      bestCharacter[0];
+    $yourCharacter.querySelector('.yourCharacterStatValueHappy').textContent =
+      bestCharacter[1];
+    $yourCharacter.querySelector('.yourCharacterStatValueSmart').textContent =
+      bestCharacter[2];
+    $yourCharacter.querySelector('.yourCharacterStatValueUnicorn').textContent =
+      bestCharacter[3];
+  };
   const updateValues = () =>{
       document.querySelector(".statValueHappy").textContent = stats.happy.toString();
       document.querySelector(".statValueSmart").textContent = stats.smart.toString();
