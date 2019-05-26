@@ -44,6 +44,7 @@ class DashboardController extends Controller {
         $insertedQuestion = $this->dashboardDAO->insert($data);
         if(!empty($insertedQuestion)) {
           $_SESSION['info'] = 'Question added!';
+          $questions = $this->dashboardDAO->selectAll();
         } else {
           $_SESSION['error'] = 'Something went wrong!';
         }
@@ -60,6 +61,7 @@ class DashboardController extends Controller {
         $updatedQuestion = $this->dashboardDAO->update($_POST['id'], $data);
         if(!empty($updatedQuestion)) {
           $_SESSION['info'] = 'Question updated!';
+          $questions = $this->dashboardDAO->selectAll();
         } else {
           $_SESSION['error'] = 'Something went wrong!';
         }
