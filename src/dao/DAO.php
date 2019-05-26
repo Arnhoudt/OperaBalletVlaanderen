@@ -4,9 +4,9 @@ class DAO {
 
   // Properties
   private static $dbHost = "localhost";
-	private static $dbName = "fifa";
-	private static $dbUser = "root";
-	private static $dbPass = "root";
+	private static $dbName = "obv";
+	private static $dbUser = "obv";
+	private static $dbPass = "obv";
 	private static $sharedPDO;
 	protected $pdo;
 

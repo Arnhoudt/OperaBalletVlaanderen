@@ -1,6 +1,7 @@
 @import './css/reset.css';
 @import './css/vars.css';
 @import './css/home.css';
+@import './css/dashboard.css';
 
 :root {
   --primary-color: #4d94fd;
@@ -15,6 +16,7 @@
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 /* stylelint-disable */
@@ -31,11 +33,4 @@ body {
   color: var(--black);
   font-size: 1.4rem;
   line-height: 1.5;
-}
-
-@media screen and (min-width: 450px) {
-
-  body {
-    background-color: lightgreen;
-  }
 }

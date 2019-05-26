@@ -1,0 +1,6 @@
+@media (--xs) {
+
+  body {
+    background-color: var(--white);
+  }
+}
