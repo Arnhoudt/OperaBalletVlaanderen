@@ -8,17 +8,17 @@
           <h2><?php echo $question['question']; ?></h2>
           <div class="controls">
               <?php if($question['answerType'] === "BOOL"): ?>
-              <input class="answer" type="radio" name="radio<?php echo $question['id']; ?>" id="optionsRadios1" value="true">
+              <input class="answer" type="radio" name="question<?php echo $question['id']; ?>" id="optionsRadios1" value="true">
               <label class="radio" for="optionsRadios1">
                   Yes
               </label>
-              <input class="answer" type="radio" name="radio<?php echo $question['id']; ?>" id="optionsRadios2" value="false">
+              <input class="answer" type="radio" name="question<?php echo $question['id']; ?>" id="optionsRadios2" value="false">
               <label class="radio" for="optionsRadios2">
                   No
               </label>
               <?php endif;
               if($question['answerType'] === "TEXT"): ?>
-                  <input class="answer" type="text" name="text" id="optionsText2">
+                  <input class="answer" type="text" name="question<?php echo $question['id']; ?>" id="optionsText2">
                   <label class="text" for="optionsText2">
                       Input
                   </label>

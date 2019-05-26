@@ -19,5 +19,10 @@ class HomeDAO extends DAO {
     return $stmt->fetch(PDO::FETCH_ASSOC);
   }
 
+  public function insert($data) {
+    $errors = $this->validate($data);
+    return false;
+  }
+
 
 }
