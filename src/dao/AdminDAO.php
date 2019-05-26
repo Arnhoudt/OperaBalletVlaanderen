@@ -2,17 +2,17 @@
 
 require_once( __DIR__ . '/DAO.php');
 
-class UsersDAO extends DAO {
+class AdminDAO extends DAO {
 
   public function selectAll() {
-    $sql = "SELECT * FROM `users`";
+    $sql = "SELECT * FROM `admins`";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function selectById($id) {
-    $sql = "SELECT * FROM `users` WHERE `id` = :id";
+    $sql = "SELECT * FROM `admins` WHERE `id` = :id";
     $stmt = $this->pdo->prepare($sql);
     $stmt->bindValue(':id', $id);
     $stmt->execute();
@@ -20,7 +20,7 @@ class UsersDAO extends DAO {
   }
 
   public function selectByEmail($email) {
-    $sql = "SELECT * FROM `users` WHERE `email` = :email";
+    $sql = "SELECT * FROM `admins` WHERE `email` = :email";
     $stmt = $this->pdo->prepare($sql);
     $stmt->bindValue(':email', $email);
     $stmt->execute();
@@ -30,7 +30,7 @@ class UsersDAO extends DAO {
   public function insert($data) {
     $errors = $this->validate($data);
     if(empty($errors)) {
-      $sql = "INSERT INTO `users` (`email`, `password`) VALUES (:email, :password)";
+      $sql = "INSERT INTO `admins` (`email`, `password`) VALUES (:email, :password)";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':email', $data['email']);
       $stmt->bindValue(':password', $data['password']);
@@ -45,7 +45,7 @@ class UsersDAO extends DAO {
   public function update($id, $data) {
     $errors = $this->validate($data);
     if(empty($errors)) {
-      $sql = "UPDATE `users` SET `email` = :email, `password` = :password WHERE `id` = :id";
+      $sql = "UPDATE `admins` SET `email` = :email, `password` = :password WHERE `id` = :id";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':email', $data['email']);
       $stmt->bindValue(':password', $data['password']);
@@ -58,7 +58,7 @@ class UsersDAO extends DAO {
   }
 
   public function delete($id) {
-    $sql = "DELETE FROM `users` WHERE `id` = :id";
+    $sql = "DELETE FROM `admins` WHERE `id` = :id";
     $stmt = $this->pdo->prepare($sql);
     $stmt->bindValue(':id', $id);
     return $stmt->execute();

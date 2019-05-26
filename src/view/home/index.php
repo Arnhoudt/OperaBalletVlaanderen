@@ -1,7 +1,10 @@
-<?php ?>
+
 <h1>Awesome front page!</h1>
 <div class="questions">
   <h2>questions</h2>
+  <?php foreach ($questions as $question){
+      var_dump($questions);
+  };?>
   <div class="queston" number="1">
     <h2>Are you a <span class="unicorn">unicorn</span>?</h2>
     <div class="controls">

@@ -1,15 +1,15 @@
 <?php
 
 require_once __DIR__ . '/Controller.php';
-require_once __DIR__ . '/../dao/UsersDAO.php';
+require_once __DIR__ . '/../dao/AdminDAO.php';
 require_once __DIR__ . '/../dao/DashboardDAO.php';
 
 class DashboardController extends Controller {
 
-  private $usersDAO, $dashboardDAO;
+  private $adminsDAO, $dashboardDAO;
 
   function __construct() {
-    $this->usersDAO = new UsersDAO();
+    $this->adminsDAO = new AdminDAO();
     $this->dashboardDAO = new DashboardDAO();
   }
 
@@ -72,7 +72,7 @@ class DashboardController extends Controller {
   public function login() {
     if(!empty($_POST)) {
       if(!empty($_POST['email']) && !empty($_POST['password'])) {
-        $existing = $this->usersDAO->selectByEmail($_POST['email']);
+        $existing = $this->adminsDAO->selectByEmail($_POST['email']);
         if(!empty($existing)) {
           if (password_verify($_POST['password'], $existing['password'])) {
             $_SESSION['user'] = $existing;
@@ -111,7 +111,7 @@ class DashboardController extends Controller {
     if(empty($_POST['email'])) {
       $errors['email'] = 'Please enter your email';
     } else {
-      $existing = $this->usersDAO->selectByEmail($_POST['email']);
+      $existing = $this->adminsDAO->selectByEmail($_POST['email']);
       if(!empty($existing)) {
         $errors['email'] = 'Email address is already in use';
       }
@@ -127,13 +127,13 @@ class DashboardController extends Controller {
         'email' => $_POST['email'],
         'password' => password_hash($_POST['password'], PASSWORD_BCRYPT)
       );
-      $inserteduser = $this->usersDAO->insert($data);
+      $inserteduser = $this->adminsDAO->insert($data);
       if(!empty($inserteduser)) {
         $_SESSION['info'] = 'Registration Successful!';
         header('Location: index.php?page=loginView');
         exit();
       } else {
-        $this->set('errors', $this->usersDAO->validate($data));
+        $this->set('errors', $this->adminsDAO->validate($data));
       }
     }
     $_SESSION['error'] = 'Registration Failed!';
