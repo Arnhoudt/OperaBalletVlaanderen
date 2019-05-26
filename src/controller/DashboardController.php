@@ -95,8 +95,12 @@ class DashboardController extends Controller {
   }
 
   public function register() {
-    if(!empty($_POST)) {
+    if(!empty($_POST) && !empty($_SESSION['user'])) {
       $this->handleRegister();
+    } else {
+      $_SESSION['error'] = 'Something went wrong!';
+      header('Location: index.php?page=loginView');
+      exit();
     }
   }
 

@@ -73,4 +73,7 @@
       <?php } ?>
     </ul>
   </section>
+  <form class="login-form" method="post" action="index.php?page=registerView">
+    <button type="submit">Register</button>
+  </form>
 </section>
