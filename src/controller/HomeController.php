@@ -50,7 +50,11 @@ class HomeController extends Controller {
         foreach ($this->questionDAO->selectAll() as $question) {
           if(!empty($_POST['question'.$question['id']])) {
             if($_POST['question'.$question['id']]==='true'||$_POST['question'.$question['id']]==='false'){
-              $data["AnswerBool"] = $_POST['question'.$question['id']]==='true';
+              if($_POST['question'.$question['id']]==='true'){
+                $data["AnswerBool"] = 1;
+              }else{
+                $data["AnswerBool"] = 0;
+              }
               $data["AnswerText"] = null;
             }else{
               $data["AnswerBool"] = null;
