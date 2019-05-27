@@ -47,6 +47,16 @@
           <input type="number" min="0" max="100" step="1" value="50" name="param5" class="form-input"<?php if(!empty($_POST['param5'])) echo 'value="' . $_POST['param5'] . '"';?> />
         </label>
       </div>
+      <div class="input-container answer">
+        <label>
+          <span class="form-label">Bool:</span>
+          <input type="radio" name="answerType" class="form-input" value="BOOL" checked/>
+        </label>
+        <label>
+          <span class="form-label">Text:</span>
+          <input type="radio" name="answerType" class="form-input" value="TEXT" />
+        </label>
+      </div>
       <div>
         <button type="submit" class="form-submit">Add question</button>
       </div>

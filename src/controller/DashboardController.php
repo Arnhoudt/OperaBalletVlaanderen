@@ -39,7 +39,8 @@ class DashboardController extends Controller {
           'param2' => $_POST['param2'],
           'param3' => $_POST['param3'],
           'param4' => $_POST['param4'],
-          'param5' => $_POST['param5']
+          'param5' => $_POST['param5'],
+          'answerType' => $_POST['answerType']
         );
         $insertedQuestion = $this->dashboardDAO->insert($data);
         if(!empty($insertedQuestion)) {

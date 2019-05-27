@@ -22,7 +22,7 @@ class DashboardDAO extends DAO {
   public function insert($data) {
     $errors = $this->validate($data);
     if(empty($errors)) {
-      $sql = "INSERT INTO `questions` (`question`, `param1`, `param2`, `param3`, `param4`, `param5`) VALUES (:question, :param1, :param2, :param3, :param4, :param5)";
+      $sql = "INSERT INTO `questions` (`question`, `param1`, `param2`, `param3`, `param4`, `param5`, `answerType`) VALUES (:question, :param1, :param2, :param3, :param4, :param5, :answerType)";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':question', $data['question']);
       $stmt->bindValue(':param1', $data['param1']);
@@ -30,6 +30,7 @@ class DashboardDAO extends DAO {
       $stmt->bindValue(':param3', $data['param3']);
       $stmt->bindValue(':param4', $data['param4']);
       $stmt->bindValue(':param5', $data['param5']);
+      $stmt->bindValue(':answerType', $data['answerType']);
       if($stmt->execute()) {
         $insertedId = $this->pdo->lastInsertId();
         return $this->selectById($insertedId);
