@@ -4,8 +4,7 @@
   <h2>questions</h2>
     <form class="update-form" method="post">
         <input type="text" class="hidden" name="clientToken" id="clientToken" value="<?php
-        $date = new DateTime();
-        echo sha1(mt_rand(1, 16000000). $date->getTimestamp() . 'sodium chloride');
+        echo $clientToken;
         ?>">
         <label class="hidden" for="clientToken">Client Token</label>
   <?php foreach ($questions as $question) {?>

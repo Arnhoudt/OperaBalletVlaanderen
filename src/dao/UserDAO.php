@@ -2,27 +2,27 @@
 
 require_once( __DIR__ . '/DAO.php');
 
-class AdminDAO extends DAO {
+class UserDAO extends DAO {
 
   public function selectAll() {
-    $sql = "SELECT * FROM `admins`";
+    $sql = "SELECT * FROM `users`";
     $stmt = $this->pdo->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function selectById($id) {
-    $sql = "SELECT * FROM `admins` WHERE `id` = :id";
+    $sql = "SELECT * FROM `users` WHERE `id` = :id";
     $stmt = $this->pdo->prepare($sql);
     $stmt->bindValue(':id', $id);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
   }
 
-  public function selectByEmail($email) {
-    $sql = "SELECT * FROM `admins` WHERE `email` = :email";
+  public function selectByToken($token) {
+    $sql = "SELECT * FROM `users` WHERE `UserToken` = :token";
     $stmt = $this->pdo->prepare($sql);
-    $stmt->bindValue(':email', $email);
+    $stmt->bindValue(':token', $token);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
   }
@@ -30,10 +30,9 @@ class AdminDAO extends DAO {
   public function insert($data) {
     $errors = $this->validate($data);
     if(empty($errors)) {
-      $sql = "INSERT INTO `admins` (`email`, `password`) VALUES (:email, :password)";
+      $sql = "INSERT INTO `users` (`UserToken`) VALUES (:token)";
       $stmt = $this->pdo->prepare($sql);
-      $stmt->bindValue(':email', $data['email']);
-      $stmt->bindValue(':password', $data['password']);
+      $stmt->bindValue(':token', $data['token']);
       if($stmt->execute()) {
         $insertedId = $this->pdo->lastInsertId();
         return $this->selectById($insertedId);
@@ -42,23 +41,16 @@ class AdminDAO extends DAO {
     return false;
   }
 
-  public function update($id, $data) {
-    $errors = $this->validate($data);
-    if(empty($errors)) {
-      $sql = "UPDATE `admins` SET `email` = :email, `password` = :password WHERE `id` = :id";
-      $stmt = $this->pdo->prepare($sql);
-      $stmt->bindValue(':email', $data['email']);
-      $stmt->bindValue(':password', $data['password']);
-      $stmt->bindValue(':id', $id);
-      if($stmt->execute()) {
-        return $this->selectById($id);
-      }
-    }
-    return false;
+  public function getUserByToken($token) {
+    $sql = "SELECT * FROM `users` WHERE `UserToken` = :token";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(':token', $token);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
   }
 
   public function delete($id) {
-    $sql = "DELETE FROM `admins` WHERE `id` = :id";
+    $sql = "DELETE FROM `users` WHERE `id` = :id";
     $stmt = $this->pdo->prepare($sql);
     $stmt->bindValue(':id', $id);
     return $stmt->execute();
@@ -66,11 +58,8 @@ class AdminDAO extends DAO {
 
   public function validate($data) {
     $errors = array();
-    if(empty($data['email'])) {
-      $errors['email'] = 'please enter the email';
-    }
-    if(empty($data['password'])) {
-      $errors['password'] = 'please enter the password';
+    if(empty($data['token'])) {
+      $errors['email'] = 'please enter a client token';
     }
     return $errors;
   }

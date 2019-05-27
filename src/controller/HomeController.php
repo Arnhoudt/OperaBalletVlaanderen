@@ -3,16 +3,39 @@
 require_once __DIR__ . '/Controller.php';
 require_once __DIR__ . '/../dao/HomeDAO.php';
 require_once __DIR__ . '/../dao/AnswerDAO.php';
-
+require_once __DIR__ . '/../dao/UserDAO.php';
 
 class HomeController extends Controller {
 
   private $questionDAO;
   private $answerDAO;
+  private $userDAO;
+  private $userId;
+
 
   function __construct() {
+  $cookie_name = "clientToken";
+  if(isset($_COOKIE[$cookie_name])) {
+    $cookie_value = $_COOKIE[$cookie_name];
+    setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+  }else{
+    $date = new DateTime();
+    $cookie_value = $clientToken = sha1(mt_rand(1, 16000000). $date->getTimestamp() . 'sodium chloride');
+    setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+  }
     $this->questionDAO = new HomeDAO();
     $this->answerDAO = new AnswerDAO();
+    $this->userDAO = new UserDAO();
+
+    $userId = $this->userDAO->getUserByToken($cookie_value);
+    if(empty($userId['Id'])){
+      $data['token'] = $cookie_value;
+      $this->userDAO->insert($data);
+      $userId = $this->userDAO->getUserByToken($cookie_value);
+    }
+    echo "user id = ".$userId['Id'];
+    $this->set('userId', $userId['Id']);
+    $this->userId = $userId['Id'];
   }
 
   public function index() {
@@ -30,7 +53,7 @@ class HomeController extends Controller {
               $data["AnswerText"] = $_POST['question'.$question['id']];
             }
             $data["QuestionId"] = $question['id'];
-            $data["UserId"] = 1;
+            $data["UserId"] = $this->userId;
 
             $this->answerDAO->insert($data);
 
@@ -38,7 +61,6 @@ class HomeController extends Controller {
             echo "something wrong";
           }
       }
-
     }
   }
 
