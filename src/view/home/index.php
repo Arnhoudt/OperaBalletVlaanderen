@@ -3,6 +3,11 @@
 <div class="questions">
   <h2>questions</h2>
     <form class="update-form" method="post">
+        <input type="text" class="hidden" name="clientToken" id="clientToken" value="<?php
+        $date = new DateTime();
+        echo sha1(mt_rand(1, 16000000). $date->getTimestamp() . 'sodium chloride');
+        ?>">
+        <label class="hidden" for="clientToken">Client Token</label>
   <?php foreach ($questions as $question) {?>
       <div class="queston" number="<?php echo $question['id']; ?>">
           <h2><?php echo $question['question']; ?></h2>
