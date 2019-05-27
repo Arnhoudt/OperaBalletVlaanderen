@@ -2,7 +2,7 @@
 
 require_once( __DIR__ . '/DAO.php');
 
-class DashboardDAO extends DAO {
+class QuestionDAO extends DAO {
 
   public function selectAll() {
     $sql = "SELECT * FROM `questions`";
@@ -60,7 +60,7 @@ class DashboardDAO extends DAO {
   }
 
   public function delete($id) {
-    $sql = "DELETE FROM `users` WHERE `id` = :id";
+    $sql = "DELETE FROM `questions` WHERE `id` = :id";
     $stmt = $this->pdo->prepare($sql);
     $stmt->bindValue(':id', $id);
     return $stmt->execute();

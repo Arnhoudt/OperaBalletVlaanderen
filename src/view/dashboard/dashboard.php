@@ -81,6 +81,11 @@
             <input type="radio" name="answerType" class="form-input" value="TEXT" <?php if($question['answerType'] == 'TEXT') echo 'checked'; ?> />
             <button type="submit" class="form-submit">Update</button>
           </form>
+          <form class="update-form" method="post">
+            <input type="hidden" name="action" value="delete" />
+            <input type="hidden" name="id" value="<?php echo $question['id']; ?>" />
+            <button type="submit" class="form-submit">Delete</button>
+          </form>
         </article>
       </li>
       <?php } ?>

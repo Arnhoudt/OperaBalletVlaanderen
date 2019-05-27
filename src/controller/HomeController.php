@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/Controller.php';
-require_once __DIR__ . '/../dao/HomeDAO.php';
+require_once __DIR__ . '/../dao/QuestionDAO.php';
 require_once __DIR__ . '/../dao/AnswerDAO.php';
 
 
@@ -11,7 +11,7 @@ class HomeController extends Controller {
   private $answerDAO;
 
   function __construct() {
-    $this->questionDAO = new HomeDAO();
+    $this->questionDAO = new QuestionDAO();
     $this->answerDAO = new AnswerDAO();
   }
 

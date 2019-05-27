@@ -2,16 +2,16 @@
 
 require_once __DIR__ . '/Controller.php';
 require_once __DIR__ . '/../dao/AdminDAO.php';
-require_once __DIR__ . '/../dao/DashboardDAO.php';
+require_once __DIR__ . '/../dao/QuestionDAO.php';
 require_once __DIR__ . '/../dao/AnswerDAO.php';
 
 class DashboardController extends Controller {
 
-  private $adminsDAO, $dashboardDAO;
+  private $adminsDAO, $questionDAO, $answerDAO;
 
   function __construct() {
     $this->adminsDAO = new AdminDAO();
-    $this->dashboardDAO = new DashboardDAO();
+    $this->questionDAO = new QuestionDAO();
     $this->answerDAO = new AnswerDAO();
   }
 
@@ -28,7 +28,7 @@ class DashboardController extends Controller {
   }
 
   public function dashboard() {
-    $questions = $this->dashboardDAO->selectAll();
+    $questions = $this->questionDAO->selectAll();
     $answers = $this->answerDAO->selectAll();
     if(empty($_SESSION['user'])) {
       header('Location: index.php?page=loginView');
@@ -45,10 +45,10 @@ class DashboardController extends Controller {
           'param5' => $_POST['param5'],
           'answerType' => $_POST['answerType']
         );
-        $insertedQuestion = $this->dashboardDAO->insert($data);
+        $insertedQuestion = $this->questionDAO->insert($data);
         if(!empty($insertedQuestion)) {
           $_SESSION['info'] = 'Question added!';
-          $questions = $this->dashboardDAO->selectAll();
+          $questions = $this->questionDAO->selectAll();
         } else {
           $_SESSION['error'] = 'Something went wrong!';
         }
@@ -63,10 +63,19 @@ class DashboardController extends Controller {
           'param5' => $_POST['param5'],
           'answerType' => $_POST['answerType']
         );
-        $updatedQuestion = $this->dashboardDAO->update($_POST['id'], $data);
+        $updatedQuestion = $this->questionDAO->update($_POST['id'], $data);
         if(!empty($updatedQuestion)) {
           $_SESSION['info'] = 'Question updated!';
-          $questions = $this->dashboardDAO->selectAll();
+          $questions = $this->questionDAO->selectAll();
+        } else {
+          $_SESSION['error'] = 'Something went wrong!';
+        }
+      }
+      if($_POST['action'] === 'delete') {
+        $deletedQuestion = $this->questionDAO->delete($_POST['id']);
+        if(!empty($deletedQuestion)) {
+          $_SESSION['info'] = 'Question deleted!';
+          $questions = $this->questionDAO->selectAll();
         } else {
           $_SESSION['error'] = 'Something went wrong!';
         }
