@@ -3,6 +3,7 @@
 require_once __DIR__ . '/Controller.php';
 require_once __DIR__ . '/../dao/AdminDAO.php';
 require_once __DIR__ . '/../dao/DashboardDAO.php';
+require_once __DIR__ . '/../dao/AnswerDAO.php';
 
 class DashboardController extends Controller {
 
@@ -11,6 +12,7 @@ class DashboardController extends Controller {
   function __construct() {
     $this->adminsDAO = new AdminDAO();
     $this->dashboardDAO = new DashboardDAO();
+    $this->answerDAO = new AnswerDAO();
   }
 
   public function loginView() {
@@ -27,6 +29,7 @@ class DashboardController extends Controller {
 
   public function dashboard() {
     $questions = $this->dashboardDAO->selectAll();
+    $answers = $this->answerDAO->selectAll();
     if(empty($_SESSION['user'])) {
       header('Location: index.php?page=loginView');
       exit();
@@ -71,6 +74,7 @@ class DashboardController extends Controller {
     }
     $this->set('title', "Dashboard");
     $this->set('questions', $questions);
+    $this->set('answers', $answers);
   }
 
   public function login() {

@@ -63,6 +63,7 @@
     </form>
   </section>
   <section>
+    <header class="hidden"><h1>Questions</h1></header>
     <ul class="menu">
       <?php foreach ($questions as $question) {?>
       <li>
@@ -80,6 +81,31 @@
             <input type="radio" name="answerType" class="form-input" value="TEXT" <?php if($question['answerType'] == 'TEXT') echo 'checked'; ?> />
             <button type="submit" class="form-submit">Update</button>
           </form>
+        </article>
+      </li>
+      <?php } ?>
+    </ul>
+  </section>
+  <section>
+    <header class="hidden"><h1>Answers</h1></header>
+    <ul class="menu">
+      <?php foreach ($answers as $answer) {?>
+      <li>
+        <article>
+          <div>
+            <span class="form-label">Question:</span>
+            <p><?php echo $answer['question']; ?></p>
+          </div>
+          <p><?php echo $answer['AnswerBool']; ?></p>
+          <p><?php echo $answer['AnswerText']; ?></p>
+          <div>
+            <span class="form-label">UserId:</span>
+            <p><?php echo $answer['UserId']; ?></p>
+          </div>
+          <div>
+            <span class="form-label">date:</span>
+            <p><?php echo $answer['date']; ?></p>
+          </div>
         </article>
       </li>
       <?php } ?>
