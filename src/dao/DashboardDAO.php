@@ -41,7 +41,7 @@ class DashboardDAO extends DAO {
   public function update($id, $data) {
     $errors = $this->validate($data);
     if(empty($errors)) {
-      $sql = "UPDATE `questions` SET `question` = :question, `param1` = :param1, `param2` = :param2, `param3` = :param3, `param4` = :param4, `param5` = :param5 WHERE `id` = :id";
+      $sql = "UPDATE `questions` SET `question` = :question, `param1` = :param1, `param2` = :param2, `param3` = :param3, `param4` = :param4, `param5` = :param5, `answerType` = :answerType WHERE `id` = :id";
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':question', $data['question']);
       $stmt->bindValue(':param1', $data['param1']);
@@ -49,6 +49,7 @@ class DashboardDAO extends DAO {
       $stmt->bindValue(':param3', $data['param3']);
       $stmt->bindValue(':param4', $data['param4']);
       $stmt->bindValue(':param5', $data['param5']);
+      $stmt->bindValue(':answerType', $data['answerType']);
       $stmt->bindValue(':id', $id);
       if($stmt->execute()) {
         return $this->selectById($id);
