@@ -1,4 +1,3 @@
-
 <h1>Awesome front page!</h1>
 <div class="questions">
   <h2>questions</h2>
@@ -78,55 +77,23 @@
 </div>
 <div>
     <h2>Possible characters</h2>
+    <?php foreach ($characters as $character): ?>
     <div class="character">
-        <h3 class="characterName">Elon Musk</h3>
+        <h3 class="characterName"><?php echo $character['name'] ?></h3>
         <div class="characterStats">
             <div class="stat">
                 <p>happy</p>
-                <p class="CharacterStatValueHappy">50</p>
+                <p class="CharacterStatValueHappy"><?php echo $character['param1'] ?></p>
             </div>
             <div class="stat">
                 <p>smart</p>
-                <p class="CharacterStatValueSmart">300</p>
+                <p class="CharacterStatValueSmart"><?php echo $character['param2'] ?></p>
             </div>
             <div class="stat">
                 <p>unicorn</p>
-                <p class="CharacterStatValueUnicorn">200</p>
+                <p class="CharacterStatValueUnicorn"><?php echo $character['param3'] ?></p>
             </div>
         </div>
     </div>
-    <div class="character">
-        <h3 class="characterName">Donald Trump</h3>
-        <div class="characterStats">
-            <div class="stat">
-                <p>happy</p>
-                <p class="CharacterStatValueHappy">100</p>
-            </div>
-            <div class="stat">
-                <p>smart</p>
-                <p class="CharacterStatValueSmart">50</p>
-            </div>
-            <div class="stat">
-                <p>unicorn</p>
-                <p class="CharacterStatValueUnicorn">0</p>
-            </div>
-        </div>
-    </div>
-    <div class="character">
-        <h3 class="characterName">Mickey Mouse</h3>
-        <div class="characterStats">
-            <div class="stat">
-                <p>happy</p>
-                <p class="CharacterStatValueHappy">300</p>
-            </div>
-            <div class="stat">
-                <p>smart</p>
-                <p class="CharacterStatValueSmart">0</p>
-            </div>
-            <div class="stat">
-                <p>unicorn</p>
-                <p class="CharacterStatValueUnicorn">300</p>
-            </div>
-        </div>
-    </div>
+    <?php endforeach; ?>
 </div>

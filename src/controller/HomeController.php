@@ -4,12 +4,14 @@ require_once __DIR__ . '/Controller.php';
 require_once __DIR__ . '/../dao/HomeDAO.php';
 require_once __DIR__ . '/../dao/AnswerDAO.php';
 require_once __DIR__ . '/../dao/UserDAO.php';
+require_once __DIR__ . '/../dao/CharacterDAO.php';
 
 class HomeController extends Controller {
 
   private $questionDAO;
   private $answerDAO;
   private $userDAO;
+  private $characterDAO;
   private $userId;
 
 
@@ -26,6 +28,7 @@ class HomeController extends Controller {
     $this->questionDAO = new HomeDAO();
     $this->answerDAO = new AnswerDAO();
     $this->userDAO = new UserDAO();
+    $this->characterDAO = new CharacterDAO();
 
     $userId = $this->userDAO->getUserByToken($cookie_value);
     if(empty($userId['Id'])){
@@ -40,6 +43,7 @@ class HomeController extends Controller {
 
   public function index() {
     $this->set('questions', $this->questionDAO->selectAll());
+    $this->set('characters', $this->characterDAO->selectAll());
     $this->set('title', "Home");
     if(!empty($_POST)) {
       $data = array();

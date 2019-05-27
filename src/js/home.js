@@ -31,6 +31,8 @@
   };
 
   const handleChangeRadioButton = e => {
+    console.log("lengte van de array");
+    console.log(answerArray);
     if (
       e.currentTarget.value === 'true' &&
       answerArray[
