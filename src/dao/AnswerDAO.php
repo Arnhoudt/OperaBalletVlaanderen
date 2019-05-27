@@ -26,6 +26,4 @@ class AnswerDAO extends DAO {
     }
     return $errors;
   }
-
-
 }
