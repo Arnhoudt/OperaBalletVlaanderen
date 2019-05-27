@@ -14,7 +14,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="home.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="home.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/home.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="220">
@@ -27,8 +27,8 @@
       <file leaf-file-name="DashboardController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller/DashboardController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="10" lean-forward="false" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="10" />
+            <state relative-caret-position="495">
+              <caret line="33" column="10" lean-forward="false" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -84,27 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DashboardDAO.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dao/DashboardDAO.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="945">
-              <caret line="63" column="4" lean-forward="false" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="28" />
-              <folding>
-                <marker date="1558856652894" expanded="true" signature="123:148" ph="SELECT * FRO... questions" />
-                <marker date="1558856652894" expanded="true" signature="311:353" ph="SELECT * FRO... questions" />
-                <marker date="1558856652894" expanded="true" signature="610:760" ph="INSERT INTO `questions`... " />
-                <marker date="1558856652894" expanded="true" signature="1399:1561" ph="UPDATE `questions`... " />
-                <marker date="1558856652894" expanded="true" signature="2106:2142" ph="DELETE FROM `users`... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HomeController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="HomeController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controller/HomeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="521">
-              <caret line="44" column="61" lean-forward="true" selection-start-line="44" selection-start-column="61" selection-end-line="44" selection-end-column="61" />
+            <state relative-caret-position="189">
+              <caret line="27" column="43" lean-forward="true" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -127,9 +111,9 @@
         <entry file="file://$PROJECT_DIR$/dao/AnswerDAO.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+              <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
               <folding>
-                <marker date="1558939955829" expanded="true" signature="188:318" ph="INSERT INTO `answers`... " />
+                <marker date="1558956538950" expanded="true" signature="544:674" ph="INSERT INTO `answers`... " />
               </folding>
             </state>
           </provider>
@@ -172,9 +156,9 @@
         <option value="$PROJECT_DIR$/dao/UserDAO.php" />
         <option value="$PROJECT_DIR$/view/layout.php" />
         <option value="$PROJECT_DIR$/dao/CharacterDAO.php" />
-        <option value="$PROJECT_DIR$/controller/HomeController.php" />
         <option value="$PROJECT_DIR$/view/home/index.php" />
         <option value="$PROJECT_DIR$/js/home.js" />
+        <option value="$PROJECT_DIR$/controller/HomeController.php" />
       </list>
     </option>
   </component>
@@ -300,12 +284,12 @@
       <workItem from="1558789366980" duration="437000" />
       <workItem from="1558790250749" duration="6956000" />
       <workItem from="1558853690537" duration="1000" />
-      <workItem from="1558940558850" duration="6754000" />
+      <workItem from="1558940558850" duration="7174000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28639000" />
+    <option name="totallyTimeSpent" value="29059000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -383,11 +367,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="17" lean-forward="true" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
-          <folding>
-            <marker date="1558889625714" expanded="true" signature="118:143" ph="SELECT * FRO... questions" />
-            <marker date="1558889625714" expanded="true" signature="306:348" ph="SELECT * FRO... questions" />
-            <marker date="1558889625714" expanded="true" signature="340:348" ph="SELECT * FRO... players" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -395,13 +375,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="945">
           <caret line="63" column="4" lean-forward="false" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="28" />
-          <folding>
-            <marker date="1558856652894" expanded="true" signature="123:148" ph="SELECT * FRO... questions" />
-            <marker date="1558856652894" expanded="true" signature="311:353" ph="SELECT * FRO... questions" />
-            <marker date="1558856652894" expanded="true" signature="610:760" ph="INSERT INTO `questions`... " />
-            <marker date="1558856652894" expanded="true" signature="1399:1561" ph="UPDATE `questions`... " />
-            <marker date="1558856652894" expanded="true" signature="2106:2142" ph="DELETE FROM `users`... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -418,7 +392,7 @@
         <state relative-caret-position="240">
           <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
           <folding>
-            <marker date="1558939955829" expanded="true" signature="188:318" ph="INSERT INTO `answers`... " />
+            <marker date="1558956538950" expanded="true" signature="544:674" ph="INSERT INTO `answers`... " />
           </folding>
         </state>
       </provider>
@@ -583,11 +557,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="23" column="17" lean-forward="true" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
-          <folding>
-            <marker date="1558889625714" expanded="true" signature="118:143" ph="SELECT * FRO... questions" />
-            <marker date="1558889625714" expanded="true" signature="306:348" ph="SELECT * FRO... questions" />
-            <marker date="1558889625714" expanded="true" signature="340:348" ph="SELECT * FRO... players" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -617,20 +587,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="945">
           <caret line="63" column="4" lean-forward="false" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="28" />
-          <folding>
-            <marker date="1558856652894" expanded="true" signature="123:148" ph="SELECT * FRO... questions" />
-            <marker date="1558856652894" expanded="true" signature="311:353" ph="SELECT * FRO... questions" />
-            <marker date="1558856652894" expanded="true" signature="610:760" ph="INSERT INTO `questions`... " />
-            <marker date="1558856652894" expanded="true" signature="1399:1561" ph="UPDATE `questions`... " />
-            <marker date="1558856652894" expanded="true" signature="2106:2142" ph="DELETE FROM `users`... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controller/DashboardController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="10" lean-forward="false" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="10" />
+        <state relative-caret-position="495">
+          <caret line="33" column="10" lean-forward="false" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
           <folding />
         </state>
       </provider>
@@ -669,9 +633,9 @@
     <entry file="file://$PROJECT_DIR$/dao/AnswerDAO.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+          <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
           <folding>
-            <marker date="1558939955829" expanded="true" signature="188:318" ph="INSERT INTO `answers`... " />
+            <marker date="1558956538950" expanded="true" signature="544:674" ph="INSERT INTO `answers`... " />
           </folding>
         </state>
       </provider>
@@ -698,18 +662,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/HomeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="44" column="61" lean-forward="true" selection-start-line="44" selection-start-column="61" selection-end-line="44" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/home.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="37" column="14" lean-forward="false" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/HomeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="27" column="43" lean-forward="true" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
           <folding />
         </state>
       </provider>

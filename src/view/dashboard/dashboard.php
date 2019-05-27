@@ -47,12 +47,23 @@
           <input type="number" min="0" max="100" step="1" value="50" name="param5" class="form-input"<?php if(!empty($_POST['param5'])) echo 'value="' . $_POST['param5'] . '"';?> />
         </label>
       </div>
+      <div class="input-container answer">
+        <label>
+          <span class="form-label">Bool:</span>
+          <input type="radio" name="answerType" class="form-input" value="BOOL" checked/>
+        </label>
+        <label>
+          <span class="form-label">Text:</span>
+          <input type="radio" name="answerType" class="form-input" value="TEXT" />
+        </label>
+      </div>
       <div>
         <button type="submit" class="form-submit">Add question</button>
       </div>
     </form>
   </section>
   <section>
+    <header class="hidden"><h1>Questions</h1></header>
     <ul class="menu">
       <?php foreach ($questions as $question) {?>
       <li>
@@ -66,8 +77,40 @@
             <input type="number" min="0" max="100" step="1" name="param3" class="form-input" value="<?php echo $question['param3']; ?>" />
             <input type="number" min="0" max="100" step="1" name="param4" class="form-input" value="<?php echo $question['param4']; ?>" />
             <input type="number" min="0" max="100" step="1" name="param5" class="form-input" value="<?php echo $question['param5']; ?>" />
+            <input type="radio" name="answerType" class="form-input" value="BOOL" <?php if($question['answerType'] == 'BOOL') echo 'checked'; ?> />
+            <input type="radio" name="answerType" class="form-input" value="TEXT" <?php if($question['answerType'] == 'TEXT') echo 'checked'; ?> />
             <button type="submit" class="form-submit">Update</button>
           </form>
+          <form class="update-form" method="post">
+            <input type="hidden" name="action" value="delete" />
+            <input type="hidden" name="id" value="<?php echo $question['id']; ?>" />
+            <button type="submit" class="form-submit">Delete</button>
+          </form>
+        </article>
+      </li>
+      <?php } ?>
+    </ul>
+  </section>
+  <section>
+    <header class="hidden"><h1>Answers</h1></header>
+    <ul class="menu">
+      <?php foreach ($answers as $answer) {?>
+      <li>
+        <article>
+          <div>
+            <span class="form-label">Question:</span>
+            <p><?php echo $answer['question']; ?></p>
+          </div>
+          <p><?php echo $answer['AnswerBool']; ?></p>
+          <p><?php echo $answer['AnswerText']; ?></p>
+          <div>
+            <span class="form-label">UserId:</span>
+            <p><?php echo $answer['UserId']; ?></p>
+          </div>
+          <div>
+            <span class="form-label">date:</span>
+            <p><?php echo $answer['date']; ?></p>
+          </div>
         </article>
       </li>
       <?php } ?>

@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/Controller.php';
-require_once __DIR__ . '/../dao/HomeDAO.php';
+require_once __DIR__ . '/../dao/QuestionDAO.php';
 require_once __DIR__ . '/../dao/AnswerDAO.php';
 require_once __DIR__ . '/../dao/UserDAO.php';
 require_once __DIR__ . '/../dao/CharacterDAO.php';
@@ -25,7 +25,7 @@ class HomeController extends Controller {
     $cookie_value = $clientToken = sha1(mt_rand(1, 16000000). $date->getTimestamp() . 'sodium chloride');
     setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
   }
-    $this->questionDAO = new HomeDAO();
+    $this->questionDAO = new QuestionDAO();
     $this->answerDAO = new AnswerDAO();
     $this->userDAO = new UserDAO();
     $this->characterDAO = new CharacterDAO();
