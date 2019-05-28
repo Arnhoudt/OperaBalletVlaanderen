@@ -4,15 +4,17 @@ require_once __DIR__ . '/Controller.php';
 require_once __DIR__ . '/../dao/AdminDAO.php';
 require_once __DIR__ . '/../dao/QuestionDAO.php';
 require_once __DIR__ . '/../dao/AnswerDAO.php';
+require_once __DIR__ . '/../dao/CharacterDAO.php';
 
 class DashboardController extends Controller {
 
-  private $adminsDAO, $questionDAO, $answerDAO;
+  private $adminsDAO, $questionDAO, $answerDAO, $characterDAO;
 
   function __construct() {
     $this->adminsDAO = new AdminDAO();
     $this->questionDAO = new QuestionDAO();
     $this->answerDAO = new AnswerDAO();
+    $this->characterDAO = new CharacterDAO();
   }
 
   public function loginView() {
@@ -30,6 +32,7 @@ class DashboardController extends Controller {
   public function dashboard() {
     $questions = $this->questionDAO->selectAll();
     $answers = $this->answerDAO->selectAll();
+    $characters = $this->characterDAO->selectAll();
     if(empty($_SESSION['user'])) {
       header('Location: index.php?page=loginView');
       exit();
@@ -80,10 +83,54 @@ class DashboardController extends Controller {
           $_SESSION['error'] = 'Something went wrong!';
         }
       }
+      if($_POST['action'] === 'character' && !empty($_POST['name'])) {
+        $data = array(
+          'name' => $_POST['name'],
+          'param1' => $_POST['param1'],
+          'param2' => $_POST['param2'],
+          'param3' => $_POST['param3'],
+          'param4' => $_POST['param4'],
+          'param5' => $_POST['param5']
+        );
+        $insertedCharacter = $this->characterDAO->insert($data);
+        if(!empty($insertedCharacter)) {
+          $_SESSION['info'] = 'Character added!';
+          $characters = $this->characterDAO->selectAll();
+        } else {
+          $_SESSION['error'] = 'Something went wrong!';
+        }
+      }
+      if($_POST['action'] === 'update_character' && !empty($_POST['name'])) {
+        $data = array(
+          'name' => $_POST['name'],
+          'param1' => $_POST['param1'],
+          'param2' => $_POST['param2'],
+          'param3' => $_POST['param3'],
+          'param4' => $_POST['param4'],
+          'param5' => $_POST['param5']
+        );
+        $updatedCharacter = $this->characterDAO->update($_POST['id'], $data);
+        if(!empty($updatedCharacter)) {
+          $_SESSION['info'] = 'Character updated!';
+          $characters = $this->characterDAO->selectAll();
+        } else {
+          $_SESSION['error'] = 'Something went wrong!';
+        }
+      }
+      if($_POST['action'] === 'delete') {
+        $deletedCharacter = $this->characterDAO->delete($_POST['id']);
+        if(!empty($deletedCharacter)) {
+          $_SESSION['info'] = 'Question deleted!';
+          $characters = $this->characterDAO->selectAll();
+        } else {
+          $_SESSION['error'] = 'Something went wrong!';
+        }
+      }
     }
     $this->set('title', "Dashboard");
     $this->set('questions', $questions);
     $this->set('answers', $answers);
+    $this->set('characters', $characters);
   }
 
   public function login() {
