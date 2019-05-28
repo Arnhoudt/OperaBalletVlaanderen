@@ -65,7 +65,7 @@
   <section>
     <header class="hidden"><h1>Questions</h1></header>
     <ul class="menu">
-      <?php foreach ($questions as $question) {?>
+      <?php foreach ($questions as $question):?>
       <li>
         <article>
           <form class="update-form" method="post">
@@ -88,13 +88,13 @@
           </form>
         </article>
       </li>
-      <?php } ?>
+      <?php endforeach; ?>
     </ul>
   </section>
   <section>
     <header class="hidden"><h1>Answers</h1></header>
     <ul class="menu">
-      <?php foreach ($answers as $answer) {?>
+      <?php foreach ($answers as $answer):?>
       <li>
         <article>
           <div>
@@ -113,7 +113,7 @@
           </div>
         </article>
       </li>
-      <?php } ?>
+      <?php endforeach; ?>
     </ul>
   </section>
   <form class="login-form" method="post" action="index.php?page=registerView">
