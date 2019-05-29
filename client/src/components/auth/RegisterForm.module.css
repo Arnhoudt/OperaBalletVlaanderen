@@ -1,0 +1,51 @@
+.form_container {
+  display: grid;
+  grid-template-rows: 2em repeat(2, 1fr) 2em repeat(2, 1fr) 10em;
+}
+
+.message {
+  grid-area: 1;
+  font-size: 1.6em;
+}
+
+.name {
+  grid-area: 2;
+}
+
+.email {
+  grid-area: 3;
+}
+
+.error {
+  grid-area: 4;
+  font-size: 1.6em;
+  color: var(--red-color);
+  padding-top: .4em;
+}
+
+.password {
+  grid-area: 5;
+}
+
+.password_repeat {
+  grid-area: 6;
+}
+
+.button {
+  grid-area: 7;
+  align-self: flex-end;
+}
+
+.text {
+  font-size: 2em;
+  padding-bottom: .4em;
+  padding-top: 1.6em;
+}
+
+.button:disabled {
+  background-color: var(--red-color);
+}
+
+.button:disabled:hover {
+  cursor: default;
+}
