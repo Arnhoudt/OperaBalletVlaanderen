@@ -30,60 +30,15 @@
     });
   };
 
-  const handleChangeRadioButton = e => {
-    console.log("lengte van de array");
-    console.log(answerArray);
-    if (
-      e.currentTarget.value === 'true' &&
-      answerArray[
-        e.currentTarget.parentElement.parentElement.getAttribute('number')
-      ] !== true
-    ) {
-      answerArray[
-        e.currentTarget.parentElement.parentElement.getAttribute('number')
-      ] = true;
-      stats.happy += parseInt(
-        e.currentTarget.parentElement.parentElement.querySelector('.valueHappy')
-          .textContent
-      );
-      stats.smart += parseInt(
-        e.currentTarget.parentElement.parentElement.querySelector('.valueSmart')
-          .textContent
-      );
-      stats.unicorn += parseInt(
-        e.currentTarget.parentElement.parentElement.querySelector(
-          '.valueUnicorn'
-        ).textContent
-      );
-    }
-    if (
-      e.currentTarget.value === 'false' &&
-      answerArray[
-        e.currentTarget.parentElement.parentElement.getAttribute('number')
-      ] !== false &&
-      answerArray[
-        e.currentTarget.parentElement.parentElement.getAttribute('number')
-      ] !== undefined
-    ) {
-      answerArray[
-        e.currentTarget.parentElement.parentElement.getAttribute('number')
-      ] = false;
-      stats.happy -= parseInt(
-        e.currentTarget.parentElement.parentElement.querySelector('.valueHappy')
-          .textContent
-      );
-      stats.smart -= parseInt(
-        e.currentTarget.parentElement.parentElement.querySelector('.valueSmart')
-          .textContent
-      );
-      stats.unicorn -= parseInt(
-        e.currentTarget.parentElement.parentElement.querySelector(
-          '.valueUnicorn'
-        ).textContent
-      );
-    }
-    updateValues();
+  const countArray = (array) =>{
+    let counter = 0;
+    array.forEach(() =>{
+        counter++;
+    })
+      return counter;
+  }
 
+  const handleChangeRadioButton = e => {
     let lowestDifference = 31415926535;
     let bestCharacter = [];
     characters.forEach(character => {
@@ -105,17 +60,66 @@
       bestCharacter[2];
     $yourCharacter.querySelector('.yourCharacterStatValueUnicorn').textContent =
       bestCharacter[3];
+      if (
+          e.currentTarget.value === 'true' &&
+          answerArray[
+              e.currentTarget.parentElement.parentElement.parentElement.getAttribute('number')
+              ] !== true
+      ) {
+          answerArray[
+              e.currentTarget.parentElement.parentElement.parentElement.getAttribute('number')
+              ] = true;
+          console.log("the next number is ");
+          console.log(e.currentTarget.parentElement.parentElement.parentElement);
+
+          stats.happy += parseInt(
+              e.currentTarget.parentElement.parentElement.parentElement.querySelector('.valueHappy')
+                  .textContent
+          )/countArray(answerArray);
+          stats.smart += parseInt(
+              e.currentTarget.parentElement.parentElement.parentElement.querySelector('.valueSmart')
+                  .textContent
+          )/countArray(answerArray);
+          stats.unicorn += parseInt(
+              e.currentTarget.parentElement.parentElement.parentElement.querySelector(
+                  '.valueUnicorn'
+              ).textContent
+          )/countArray(answerArray);
+      }
+      if (
+          e.currentTarget.value === 'false' &&
+          answerArray[
+              e.currentTarget.parentElement.parentElement.parentElement.getAttribute('number')
+              ] !== false &&
+          answerArray[
+              e.currentTarget.parentElement.parentElement.parentElement.getAttribute('number')
+              ] !== undefined
+      ) {
+          answerArray[
+              e.currentTarget.parentElement.parentElement.parentElement.getAttribute('number')
+              ] = false;
+          let $happy = e.currentTarget.parentElement.parentElement.parentElement.querySelector('.valueHappy');
+          let $smart = e.currentTarget.parentElement.parentElement.parentElement.querySelector('.valueSmart');
+          let $unicorn = e.currentTarget.parentElement.parentElement.parentElement.querySelector('.valueUnicorn')
+
+          stats.happy -= parseInt($happy.textContent)/countArray(answerArray);
+          stats.smart -= parseInt($smart.textContent)/countArray(answerArray);
+          stats.unicorn -= parseInt($unicorn.textContent)/countArray(answerArray);
+      }
+      updateValues();
+      console.log(countArray(answerArray));
   };
+
   const updateValues = () => {
     document.querySelector(
       '.statValueHappy'
-    ).textContent = stats.happy.toString();
+    ).textContent = (stats.happy/countArray(answerArray)).toString();
     document.querySelector(
       '.statValueSmart'
-    ).textContent = stats.smart.toString();
+    ).textContent = (stats.smart/countArray(answerArray)).toString();
     document.querySelector(
       '.statValueUnicorn'
-    ).textContent = stats.unicorn.toString();
+    ).textContent = (stats.unicorn/countArray(answerArray)).toString();
   };
 
   init();

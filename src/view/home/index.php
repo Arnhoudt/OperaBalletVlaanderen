@@ -7,22 +7,26 @@
         ?>">
         <label class="hidden" for="clientToken">Client Token</label>
   <?php foreach ($questions as $question) {?>
-      <div class="queston" number="<?php echo $question['id']; ?>">
-          <h2><?php echo $question['question']; ?></h2>
+      <div class="question" number="<?php echo $question['id']; ?>">
+          <h3 class="questionText"><?php echo $question['question']; ?></h3>
           <div class="controls">
               <?php if($question['answerType'] === "BOOL"): ?>
-              <input class="answer" type="radio" name="question<?php echo $question['id']; ?>" id="optionsRadios1" value="true">
-              <label class="radio" for="optionsRadios1">
-                  Yes
-              </label>
-              <input class="answer" type="radio" name="question<?php echo $question['id']; ?>" id="optionsRadios2" value="false">
-              <label class="radio" for="optionsRadios2">
-                  No
-              </label>
+              <div class="radio-container">
+                  <input class="answer" type="radio" name="question<?php echo $question['id']; ?>" id="optionsRadios1<?php echo $question['id']; ?>" value="true">
+                  <label class="radio" for="optionsRadios1<?php echo $question['id']; ?>">
+                      Yes
+                  </label>
+              </div>
+              <div class="radio-container">
+                  <input class="answer" type="radio" name="question<?php echo $question['id']; ?>" id="optionsRadios2<?php echo $question['id']; ?>" value="false">
+                  <label class="radio" for="optionsRadios2<?php echo $question['id']; ?>">
+                      No
+                  </label>
+              </div>
               <?php endif;
               if($question['answerType'] === "TEXT"): ?>
-                  <input class="answer" type="text" name="question<?php echo $question['id']; ?>" id="optionsText2">
-                  <label class="text" for="optionsText2">
+                  <input class="answer" type="text" name="question<?php echo $question['id']; ?>" id="optionsText2<?php echo $question['id']; ?>">
+                  <label class="text" for="optionsText2<?php echo $question['id']; ?>">
                       Input
                   </label>
               <?php endif; ?>

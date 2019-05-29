@@ -36,7 +36,7 @@ class HomeController extends Controller {
       $this->userDAO->insert($data);
       $userId = $this->userDAO->getUserByToken($cookie_value);
     }
-    echo "user id = ".$userId['Id'];
+    //echo "user id = ".$userId['Id'];
     $this->set('userId', $userId['Id']);
     $this->userId = $userId['Id'];
   }

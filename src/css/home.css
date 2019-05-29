@@ -1,3 +1,40 @@
+body{
+	background-color: #4d94fd;
+	height: 100%;
+}
+html{
+	height: 100%;
+}
+
+h1, h2{
+	display: none;
+}
+.questions{
+	height: 100%;
+}
+.update-form{
+	height: 100%;
+}
+.question{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	height: 100%;
+}
+.questionText {
+	position: absolute;
+	top: 20%;
+	width: 100%;
+	font-size: 4.6rem;
+	font-family: "Arial Rounded MT Bold",Verdana,sans-serif;
+	text-align: center;
+	color: white;
+}
+.controls{
+	position: absolute;
+	bottom: 30%;
+}
+
 .unicorn{
 	font-family: "comic sans ms", sans-serif;
 }
@@ -5,3 +42,58 @@
 	display: none;
 }
 .hidden{display: none}
+
+
+
+.radio {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.radio:after {
+	content: "";
+	clear: both;
+}
+
+.radio-container {
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+	float: left;
+	height: 10rem;
+	position: relative;
+	width: 25rem;
+}
+
+.radio-container label {
+	background: dodgerblue no-repeat center center;
+	bottom: 1px;
+	cursor: pointer;
+	display: block;
+	font-size: 0;
+	left: 1px;
+	position: absolute;
+	right: 1px;
+	text-indent: 100%;
+	top: 1px;
+	white-space: nowrap;
+}
+
+.radio-container + .radio-container {
+	margin-left: 30rem;
+}
+
+
+.radio-container>input[type="radio"]:checked + label {
+	background: white no-repeat center center;
+	bottom: 1px;
+	cursor: pointer;
+	display: block;
+	font-size: 0;
+	left: 1px;
+	position: absolute;
+	right: 1px;
+	text-indent: 100%;
+	top: 1px;
+	white-space: nowrap;
+}
