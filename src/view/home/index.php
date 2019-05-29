@@ -2,11 +2,11 @@
 <div class="questions">
   <h2>questions</h2>
     <form class="update-form" method="post">
-        <input type="text" class="hidden" name="clientToken" id="clientToken" value="<?php
+      <input type="text" class="hidden" name="clientToken" id="clientToken" value="<?php
         echo $clientToken;
         ?>">
         <label class="hidden" for="clientToken">Client Token</label>
-  <?php foreach ($questions as $question) {?>
+  <?php foreach ($questions as $question):?>
       <div class="question" number="<?php echo $question['id']; ?>">
           <h3 class="questionText"><?php echo $question['question']; ?></h3>
           <div class="controls">
@@ -40,7 +40,7 @@
 
           </div>
       </div>
-  <?php } ?>
+    <?php endforeach; ?>
     <div>
         <input type="submit" name="action" value="Submit" class="form-submit" />
     </div>

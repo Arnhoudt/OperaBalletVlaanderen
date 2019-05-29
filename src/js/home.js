@@ -37,7 +37,7 @@
     })
       return counter;
   }
-
+  
   const handleChangeRadioButton = e => {
     let lowestDifference = 31415926535;
     let bestCharacter = [];

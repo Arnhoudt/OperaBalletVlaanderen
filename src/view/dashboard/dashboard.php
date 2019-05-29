@@ -7,7 +7,77 @@
   <?php
     endif;
   ?>
-
+  <section>
+    <form class="question-form" method="post">
+      <input type="hidden" name="action" value="character" />
+      <div class="input-container text">
+        <label>
+          <span class="form-label">Name:</span>
+          <input type="text" name="name" class="form-input"<?php if(!empty($_POST['name'])) echo 'value="' . $_POST['name'] . '"';?> />
+        </label>
+      </div>
+      <div class="input-container number">
+        <label>
+          <span class="form-label">Param1:</span>
+          <input type="number" min="0" max="100" step="1" value="50" name="param1" class="form-input"<?php if(!empty($_POST['param1'])) echo 'value="' . $_POST['param1'] . '"';?> />
+        </label>
+      </div>
+      <div class="input-container number">
+        <label>
+          <span class="form-label">Param2:</span>
+          <input type="number" min="0" max="100" step="1" value="50" name="param2" class="form-input"<?php if(!empty($_POST['param2'])) echo 'value="' . $_POST['param2'] . '"';?> />
+        </label>
+      </div>
+      <div class="input-container number">
+        <label>
+          <span class="form-label">Param3:</span>
+          <input type="number" min="0" max="100" step="1" value="50" name="param3" class="form-input"<?php if(!empty($_POST['param3'])) echo 'value="' . $_POST['param3'] . '"';?> />
+        </label>
+      </div>
+      <div class="input-container number">
+        <label>
+          <span class="form-label">Param4:</span>
+          <input type="number" min="0" max="100" step="1" value="50" name="param4" class="form-input"<?php if(!empty($_POST['param4'])) echo 'value="' . $_POST['param4'] . '"';?> />
+        </label>
+      </div>
+      <div class="input-container number">
+        <label>
+          <span class="form-label">Param5:</span>
+          <input type="number" min="0" max="100" step="1" value="50" name="param5" class="form-input"<?php if(!empty($_POST['param5'])) echo 'value="' . $_POST['param5'] . '"';?> />
+        </label>
+      </div>
+      <div>
+        <button type="submit" class="form-submit">Add character</button>
+      </div>
+    </form>
+  </section>
+  <section>
+    <header class="hidden"><h1>Characters</h1></header>
+    <ul class="menu">
+      <?php foreach ($characters as $character):?>
+      <li>
+        <article>
+          <form class="update-form" method="post">
+            <input type="hidden" name="action" value="update_character" />
+            <input type="hidden" name="id" value="<?php echo $character['id']; ?>" />
+            <input type="text" name="name" class="form-input" value="<?php echo $character['name']; ?>" />
+            <input type="number" min="0" max="100" step="1" name="param1" class="form-input" value="<?php echo $character['param1']; ?>" />
+            <input type="number" min="0" max="100" step="1" name="param2" class="form-input" value="<?php echo $character['param2']; ?>" />
+            <input type="number" min="0" max="100" step="1" name="param3" class="form-input" value="<?php echo $character['param3']; ?>" />
+            <input type="number" min="0" max="100" step="1" name="param4" class="form-input" value="<?php echo $character['param4']; ?>" />
+            <input type="number" min="0" max="100" step="1" name="param5" class="form-input" value="<?php echo $character['param5']; ?>" />
+            <button type="submit" class="form-submit">Update</button>
+          </form>
+          <form class="update-form" method="post">
+            <input type="hidden" name="action" value="delete" />
+            <input type="hidden" name="id" value="<?php echo $character['id']; ?>" />
+            <button type="submit" class="form-submit">Delete</button>
+          </form>
+        </article>
+      </li>
+      <?php endforeach; ?>
+    </ul>
+  </section>
   <section>
     <form class="question-form" method="post">
       <input type="hidden" name="action" value="question" />
@@ -65,7 +135,7 @@
   <section>
     <header class="hidden"><h1>Questions</h1></header>
     <ul class="menu">
-      <?php foreach ($questions as $question) {?>
+      <?php foreach ($questions as $question):?>
       <li>
         <article>
           <form class="update-form" method="post">
@@ -88,13 +158,13 @@
           </form>
         </article>
       </li>
-      <?php } ?>
+      <?php endforeach; ?>
     </ul>
   </section>
   <section>
     <header class="hidden"><h1>Answers</h1></header>
     <ul class="menu">
-      <?php foreach ($answers as $answer) {?>
+      <?php foreach ($answers as $answer):?>
       <li>
         <article>
           <div>
@@ -113,7 +183,7 @@
           </div>
         </article>
       </li>
-      <?php } ?>
+      <?php endforeach; ?>
     </ul>
   </section>
   <form class="login-form" method="post" action="index.php?page=registerView">
