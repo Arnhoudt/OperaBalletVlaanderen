@@ -28,7 +28,7 @@ class RegisterForm extends Component {
     uiStore
       .register(name, email, pwd)
       .then(data => {
-        history.push(ROUTES.login);
+        history.push(ROUTES.dashboard);
       })
       .catch(data => {
         const state = { ...this.state };

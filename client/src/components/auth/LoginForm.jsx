@@ -1,6 +1,5 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
-import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { ROUTES } from "../../constants";
 import form from "../../styles/form.module.css";
@@ -13,7 +12,7 @@ const LoginForm = ({ uiStore, history }) => {
   const handleSubmit = e => {
     e.preventDefault();
     uiStore.login(emailInput.current.value, pwdInput.current.value).then(() => {
-      history.push(ROUTES.home);
+      history.push(ROUTES.dashboard);
     });
   };
 
@@ -57,20 +56,6 @@ const LoginForm = ({ uiStore, history }) => {
             value="Inloggen"
             className={`${form.button} ${styles.button}`}
           />
-          <div className={styles.register}>
-            <div className={styles.or}>
-              <p>OF</p>
-            </div>
-            <Link className={styles.signup} to={ROUTES.register}>
-              <button
-                className={`${form.button} ${styles.button} ${
-                  styles.btnRegister
-                }`}
-              >
-                Wordt lid
-              </button>
-            </Link>
-          </div>
         </div>
       </form>
     </>

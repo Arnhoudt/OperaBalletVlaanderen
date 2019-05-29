@@ -59,20 +59,23 @@ exports.logout = (req, res) => {
     .sendStatus(200);
 };
 
-exports.register = (req, res) => {
-  const {email, password, name} = req.body;
-  const user = new Admin({email, password, name});
-  user.save(err => {
-    if (err) {
-      res.status(500).send({
-        success: false,
-        message: 'Email is al in gebruik'
-      });
-    } else {
-      res.status(200).send({
-        success: true,
-        message: 'Welkom bij obv dashboard!'
-      });
-    }
-  });
+exports.register = async (req, res) => {
+  const admin = await Admin.findOne({_id: req.authUserId});
+  if (admin) {
+    const {email, password, name} = req.body;
+    const user = new Admin({email, password, name});
+    user.save(err => {
+      if (err) {
+        res.status(500).send({
+          success: false,
+          message: 'Email is al in gebruik'
+        });
+      } else {
+        res.status(200).send({
+          success: true,
+          message: 'Welkom bij obv dashboard!'
+        });
+      }
+    });
+  }
 };

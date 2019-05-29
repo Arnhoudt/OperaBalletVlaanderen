@@ -9,7 +9,6 @@ class UiStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.authService = new Auth();
-    this.socket = rootStore.socket;
     this.setUser(getUserFromCookie());
   }
 
@@ -29,7 +28,6 @@ class UiStore {
       .then(data => {
         this.setUser(getUserFromCookie());
         this.emptyError();
-        this.socket.connect(`https://localhost:5000`);
         Promise.resolve();
       })
       .catch(data => {
@@ -51,9 +49,7 @@ class UiStore {
 
   logout = () => {
     return this.authService.logout().then(() => {
-      this.rootStore.chatStore.emptyMessages();
       this.setUser(null);
-      this.socket.disconnect();
     });
   };
 }
