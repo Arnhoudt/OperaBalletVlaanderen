@@ -11,13 +11,6 @@ const Characters = ({ characterStore }) => {
   const characterParam3 = React.createRef();
   const characterParam4 = React.createRef();
   const characterParam5 = React.createRef();
-  const characterUpdateId = React.createRef();
-  const characterUpdateName = React.createRef();
-  const characterUpdateParam1 = React.createRef();
-  const characterUpdateParam2 = React.createRef();
-  const characterUpdateParam3 = React.createRef();
-  const characterUpdateParam4 = React.createRef();
-  const characterUpdateParam5 = React.createRef();
 
   const handleSubmitCharacter = e => {
     e.preventDefault();
@@ -34,13 +27,13 @@ const Characters = ({ characterStore }) => {
   const handleUpdateCharacter = e => {
     e.preventDefault();
     characterStore.update({
-      _id: characterUpdateId.current.value,
-      name: characterUpdateName.current.value,
-      param1: characterUpdateParam1.current.value,
-      param2: characterUpdateParam2.current.value,
-      param3: characterUpdateParam3.current.value,
-      param4: characterUpdateParam4.current.value,
-      param5: characterUpdateParam5.current.value
+      _id: e.currentTarget.children[0].value,
+      name: e.currentTarget.children[1].value,
+      param1: e.currentTarget.children[2].value,
+      param2: e.currentTarget.children[3].value,
+      param3: e.currentTarget.children[4].value,
+      param4: e.currentTarget.children[5].value,
+      param5: e.currentTarget.children[6].value
     });
   };
 
@@ -143,16 +136,10 @@ const Characters = ({ characterStore }) => {
             <li key={character._id}>
               <article>
                 <form method="post" onSubmit={handleUpdateCharacter}>
-                  <input
-                    type="hidden"
-                    name="id"
-                    defaultValue={character._id}
-                    ref={characterUpdateId}
-                  />
+                  <input type="hidden" name="id" defaultValue={character._id} />
                   <input
                     type="text"
                     name="name"
-                    ref={characterUpdateName}
                     defaultValue={character.name}
                   />
                   <input
@@ -161,7 +148,6 @@ const Characters = ({ characterStore }) => {
                     max="100"
                     step="1"
                     name="param1"
-                    ref={characterUpdateParam1}
                     defaultValue={character.param1}
                   />
                   <input
@@ -170,7 +156,6 @@ const Characters = ({ characterStore }) => {
                     max="100"
                     step="1"
                     name="param2"
-                    ref={characterUpdateParam2}
                     defaultValue={character.param2}
                   />
                   <input
@@ -179,7 +164,6 @@ const Characters = ({ characterStore }) => {
                     max="100"
                     step="1"
                     name="param3"
-                    ref={characterUpdateParam3}
                     defaultValue={character.param3}
                   />
                   <input
@@ -188,7 +172,6 @@ const Characters = ({ characterStore }) => {
                     max="100"
                     step="1"
                     name="param4"
-                    ref={characterUpdateParam4}
                     defaultValue={character.param4}
                   />
                   <input
@@ -197,7 +180,6 @@ const Characters = ({ characterStore }) => {
                     max="100"
                     step="1"
                     name="param5"
-                    ref={characterUpdateParam5}
                     defaultValue={character.param5}
                   />
                   <button type="submit">Update</button>

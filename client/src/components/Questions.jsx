@@ -12,13 +12,6 @@ const Questions = ({ questionStore }) => {
   const questionParam4 = React.createRef();
   const questionParam5 = React.createRef();
   let questionAnswerType = `BOOL`;
-  const questionUpdateId = React.createRef();
-  const questionUpdateName = React.createRef();
-  const questionUpdateParam1 = React.createRef();
-  const questionUpdateParam2 = React.createRef();
-  const questionUpdateParam3 = React.createRef();
-  const questionUpdateParam4 = React.createRef();
-  const questionUpdateParam5 = React.createRef();
   let questionUpdateAnswerType = `BOOL`;
 
   const handleSubmitQuestion = e => {
@@ -37,13 +30,13 @@ const Questions = ({ questionStore }) => {
   const handleUpdateQuestion = e => {
     e.preventDefault();
     questionStore.update({
-      _id: questionUpdateId.current.value,
-      questionValue: questionUpdateName.current.value,
-      param1: questionUpdateParam1.current.value,
-      param2: questionUpdateParam2.current.value,
-      param3: questionUpdateParam3.current.value,
-      param4: questionUpdateParam4.current.value,
-      param5: questionUpdateParam5.current.value,
+      _id: e.currentTarget.children[0].value,
+      question: e.currentTarget.children[1].value,
+      param1: e.currentTarget.children[2].value,
+      param2: e.currentTarget.children[3].value,
+      param3: e.currentTarget.children[4].value,
+      param4: e.currentTarget.children[5].value,
+      param5: e.currentTarget.children[6].value,
       answerType: questionUpdateAnswerType
     });
   };
@@ -181,17 +174,11 @@ const Questions = ({ questionStore }) => {
             <li key={question._id}>
               <article>
                 <form method="post" onSubmit={handleUpdateQuestion}>
-                  <input
-                    type="hidden"
-                    name="id"
-                    defaultValue={question._id}
-                    ref={questionUpdateId}
-                  />
+                  <input type="hidden" name="id" defaultValue={question._id} />
                   <input
                     type="text"
                     name="question"
                     defaultValue={question.question}
-                    ref={questionUpdateName}
                   />
                   <input
                     type="number"
@@ -200,7 +187,6 @@ const Questions = ({ questionStore }) => {
                     step="1"
                     name="param1"
                     defaultValue={question.param1}
-                    ref={questionUpdateParam1}
                   />
                   <input
                     type="number"
@@ -209,7 +195,6 @@ const Questions = ({ questionStore }) => {
                     step="1"
                     name="param2"
                     defaultValue={question.param2}
-                    ref={questionUpdateParam2}
                   />
                   <input
                     type="number"
@@ -218,7 +203,6 @@ const Questions = ({ questionStore }) => {
                     step="1"
                     name="param3"
                     defaultValue={question.param3}
-                    ref={questionUpdateParam3}
                   />
                   <input
                     type="number"
@@ -227,7 +211,6 @@ const Questions = ({ questionStore }) => {
                     step="1"
                     name="param4"
                     defaultValue={question.param4}
-                    ref={questionUpdateParam4}
                   />
                   <input
                     type="number"
@@ -236,7 +219,6 @@ const Questions = ({ questionStore }) => {
                     step="1"
                     name="param5"
                     defaultValue={question.param5}
-                    ref={questionUpdateParam5}
                   />
                   <input
                     type="radio"

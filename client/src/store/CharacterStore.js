@@ -1,4 +1,11 @@
-import { decorate, configure, observable, action } from "mobx";
+import {
+  decorate,
+  configure,
+  observable,
+  action,
+  observe,
+  runInAction
+} from "mobx";
 import Api from "../api";
 
 configure({ enforceActions: `observed` });
@@ -9,7 +16,16 @@ class CharacterStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`characters`);
-    if (this.rootStore.uiStore.authUser) this.findAll();
+    if (this.rootStore.uiStore.authUser) {
+      this.findAll();
+    }
+    observe(this.rootStore.uiStore, `authUser`, change => {
+      if (change.newValue) {
+        this.findAll();
+      } else {
+        runInAction(() => (this.characters = []));
+      }
+    });
   }
 
   create = character => {
@@ -19,9 +35,13 @@ class CharacterStore {
   update = character => {
     this.api.update(character).then(d => {
       this.characters.forEach((index, character) => {
-        if (character._id === d._id) this.characters[index] = d;
+        if (character._id === d._id) this.updateQuestion(index, d);
       });
     });
+  };
+
+  updateQuestion = (i, d) => {
+    this.characters[i] = d;
   };
 
   delete = id => {
@@ -48,7 +68,8 @@ decorate(CharacterStore, {
   _add: action,
   update: action,
   delete: action,
-  create: action
+  create: action,
+  updateQuestion: action
 });
 
 export default CharacterStore;

@@ -1,4 +1,11 @@
-import { decorate, configure, observable, action } from "mobx";
+import {
+  decorate,
+  configure,
+  observable,
+  action,
+  observe,
+  runInAction
+} from "mobx";
 import Api from "../api";
 
 configure({ enforceActions: `observed` });
@@ -9,7 +16,16 @@ class QuestionStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`questions`);
-    if (this.rootStore.uiStore.authUser) this.findAll();
+    if (this.rootStore.uiStore.authUser) {
+      this.findAll();
+    }
+    observe(this.rootStore.uiStore, `authUser`, change => {
+      if (change.newValue) {
+        this.findAll();
+      } else {
+        runInAction(() => (this.questions = []));
+      }
+    });
   }
 
   create = question => {
@@ -18,10 +34,14 @@ class QuestionStore {
 
   update = question => {
     this.api.update(question).then(d => {
-      this.characters.forEach((index, character) => {
-        if (character._id === d._id) this.characters[index] = d;
+      this.questions.forEach((question, index) => {
+        if (question._id === d._id) this.updateQuestion(index, d);
       });
     });
+  };
+
+  updateQuestion = (i, d) => {
+    this.questions[i] = d;
   };
 
   delete = id => {
@@ -50,7 +70,8 @@ decorate(QuestionStore, {
   _add: action,
   update: action,
   delete: action,
-  create: action
+  create: action,
+  updateQuestion: action
 });
 
 export default QuestionStore;
