@@ -19,7 +19,8 @@ exports.login = async (req, res) => {
       .send({error: 'We hebben je email of wachtwoord nodig'});
   }
   try {
-    const user = await Admin.findOne({email});
+    const emailLowerCase = email.toLowerCase();
+    const user = await Admin.findOne({email: emailLowerCase});
     if (!user) {
       res.status(401).send({error: 'Email of wachtwoord is niet juist'});
     } else {

@@ -6,15 +6,18 @@ import form from "../../styles/form.module.css";
 import styles from "./RegisterForm.module.css";
 
 const RegisterForm = ({ uiStore, history }) => {
-  const [email] = useState(``);
+  const [email, setEmail] = useState(``);
   const [pwd, setPwd] = useState(``);
   const [pwd2, setPwd2] = useState(``);
   const [name, setName] = useState(``);
   const [error, setError] = useState(``);
 
   const handleChange = e => {
-    if (e.currentTarget.name === `name`) setName(e.currentTarget);
-    if (e.currentTarget.name === `email`) setError(``);
+    if (e.currentTarget.name === `name`) setName(e.currentTarget.value);
+    if (e.currentTarget.name === `email`) {
+      setEmail(e.currentTarget.value);
+      setError(``);
+    }
     if (e.currentTarget.name === `pwd2`) setPwd2(e.currentTarget.value);
     if (e.currentTarget.name === `pwd`) setPwd(e.currentTarget.value);
   };
