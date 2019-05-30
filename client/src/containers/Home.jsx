@@ -1,4 +1,8 @@
 import React from "react";
+import Questions from "../components/user/Questions";
+import Characters from "../components/user/Characters";
+import Stats from "../components/user/Stats";
+
 import styles from "./Home.module.css";
 
 const Home = () => {
@@ -6,6 +10,9 @@ const Home = () => {
     <>
       <h1 className={styles.title}>Jij bent als een zonnegod</h1>
       <h1>Awesome front page!</h1>
+      <Questions />
+      <Characters />
+      <Stats />
       <div>
         <h2>questions</h2>
         <form method="post">
