@@ -1,5 +1,5 @@
 import React from "react";
-import Questions from "../../components/user/Questions";
+import Question from "../../components/user/Question";
 //import Characters from "../../components/user/Characters";
 //import Stats from "../../components/user/Stats";
 
@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <>
       <h1>Awesome front page!</h1>
-      <Questions />
+      <Question />
     </>
   );
 };
