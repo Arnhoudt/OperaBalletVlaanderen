@@ -3,6 +3,5 @@ export const ROUTES = {
   home: `/home`,
   login: `/login`,
   register: `/register`,
-  dashboard: `/dashboard`,
-  questions: `/questions`
+  dashboard: `/dashboard`
 };

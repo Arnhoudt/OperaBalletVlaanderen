@@ -14,7 +14,7 @@ const App = () => {
     <main className={styles.layout}>
       <Switch>
         <Route path={ROUTES.questions} exact strict component={Questions} />
-        <Route path={ROUTES.home} exact strict component={Home} />
+        <Route path={ROUTES.home} component={Home} />
         <Route path={ROUTES.login} component={Login} />
         <Route path={ROUTES.register} component={Register} />
         <Route path={ROUTES.dashboard} component={Dashboard} />
