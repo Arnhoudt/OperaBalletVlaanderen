@@ -1,14 +1,24 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 //import styles from "./Answers.module.css";
-import BinaryQuestion from "./BinaryQuestion";
 
-const Question = ({ question }) => {
+const Questions = ({ questionStore }) => {
+
+    const handleChangeBinaryQuestion = e => {
+        questionStore.nextIndex();
+    };
+
   return (
-    <div>
-      <h3>{question.question}</h3>
-      <BinaryQuestion />
-    </div>
+    <>
+        <h3>{questionStore.currentQuestion.question}</h3>
+        <button onClick={handleChangeBinaryQuestion}>Yes</button>
+        <button onClick={handleChangeBinaryQuestion}>No</button>
+    </>
   );
 };
 
-export default Question;
+Questions.propTypes = {
+  questionStore: PropTypes.observableObject.isRequired
+};
+
+export default inject(`questionStore`)(observer(Questions));
