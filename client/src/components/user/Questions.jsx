@@ -6,6 +6,7 @@ import Question from './Question';
 
 const Questions = ({ questionStore }) => {
     const { questions } = questionStore;
+    console.log(questions.toArray());
   return (
       <>
           <div>
@@ -19,8 +20,14 @@ const Questions = ({ questionStore }) => {
                   />
                   <label for="clientToken">Client Token</label>
                   <ul>
-                      {questions.map(question => <Question question={question}/>)}
+                      {
+                          //questions.map(question => <Question question={question}/>)
+                          <Question question={questions}/>
+                      }
                   </ul>
+                  <div>
+                      <input type="submit" name="action" value="Submit" />
+                  </div>
               </form>
           </div>
       </>

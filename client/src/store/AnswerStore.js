@@ -21,6 +21,21 @@ class AnswerStore {
       .catch(e => console.log(`Geen answers beschikbaar`));
   };
 
+  create = answer => {
+      this.api.create(answer).then(data => this._add(data));
+  };
+
+  update = answer => {
+      this.api.update(answer).then(data => {
+          this.answers.forEach((index, answer) => {
+              if (answer._id === data._id) this.updateAnswer(index, data);
+          });
+      });
+  };
+    updateAnswer = (i, data) => {
+        this.answers[i] = data;
+    };
+
   _add = values => {
     this.answers.push(values);
   };
