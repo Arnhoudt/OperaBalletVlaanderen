@@ -9,17 +9,17 @@ class AnswerStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`answers`);
-    this.findAll();
+    if (this.rootStore.uiStore.authUser) this.findAll();
   }
 
   findAll = () => {
     this.api.findAll().then(d => {
-      if (d.length > 0) d.forEach(this._add);
+      if (d) d.forEach(this._add);
     });
   };
 
-  _add = value => {
-    this.answers.push(value);
+  _add = values => {
+    this.answers.push(values);
   };
 }
 

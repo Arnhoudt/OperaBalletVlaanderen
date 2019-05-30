@@ -12,8 +12,8 @@ const Answers = ({ answerStore }) => {
           <h1>Answers</h1>
         </header>
         <ul>
-          {answers.filter(answer => (
-            <li>
+          {answers.map(answer => (
+            <li key={answer._id}>
               <article>
                 <div>
                   <span>Question:</span>

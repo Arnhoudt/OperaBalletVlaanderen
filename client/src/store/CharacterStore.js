@@ -9,8 +9,12 @@ class CharacterStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`characters`);
-    this.findAll();
+    if (this.rootStore.uiStore.authUser) this.findAll();
   }
+
+  create = character => {
+    this.api.create(character).then(d => this._add(d));
+  };
 
   update = character => {
     this.api.update(character).then(d => {
@@ -20,9 +24,11 @@ class CharacterStore {
     });
   };
 
-  delete = character => {
-    this.characters.remove(character);
-    this.api.delete(character);
+  delete = id => {
+    this.characters.forEach((index, character) => {
+      if (character._id === id) this.characters.splice(index, 1);
+    });
+    this.api.delete({ _id: id });
   };
 
   findAll = () => {
@@ -31,8 +37,8 @@ class CharacterStore {
     });
   };
 
-  _add = value => {
-    this.characters.push(value);
+  _add = values => {
+    this.characters.push(values);
   };
 }
 
@@ -41,7 +47,8 @@ decorate(CharacterStore, {
   findAll: action,
   _add: action,
   update: action,
-  delete: action
+  delete: action,
+  create: action
 });
 
 export default CharacterStore;
