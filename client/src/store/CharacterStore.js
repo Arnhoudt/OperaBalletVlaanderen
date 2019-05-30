@@ -1,11 +1,4 @@
-import {
-  decorate,
-  configure,
-  observable,
-  action,
-  observe,
-  runInAction
-} from "mobx";
+import { decorate, configure, observable, action } from "mobx";
 import Api from "../api";
 
 configure({ enforceActions: `observed` });
@@ -16,16 +9,7 @@ class CharacterStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`characters`);
-    if (this.rootStore.uiStore.authUser) {
-      this.findAll();
-    }
-    observe(this.rootStore.uiStore, `authUser`, change => {
-      if (change.newValue) {
-        this.findAll();
-      } else {
-        runInAction(() => (this.characters = []));
-      }
-    });
+    this.findAll();
   }
 
   create = character => {
