@@ -1,5 +1,6 @@
 export const ROUTES = {
-  home: `/`,
+  questions: `/`,
+  home: `/home`,
   login: `/login`,
   register: `/register`,
   dashboard: `/dashboard`,

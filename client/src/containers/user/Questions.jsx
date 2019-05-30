@@ -8,7 +8,8 @@ import Question from "../../components/user/Question";
 const Questions = () => {
   return (
     <>
-      <h1>YeeY je zit nu op de home page</h1>
+      <h1>Awesome front page!</h1>
+      <Question />
     </>
   );
 };
