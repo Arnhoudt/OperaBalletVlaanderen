@@ -6,94 +6,94 @@ const Home = () => {
     <>
       <h1 className={styles.title}>Jij bent als een zonnegod</h1>
         <h1>Awesome front page!</h1>
-        <div class="questions">
+        <div>
             <h2>questions</h2>
-            <form class="update-form" method="post">
-                <input type="text" class="hidden" name="clientToken" id="clientToken" value="value"/>
-                    <label class="hidden" for="clientToken">Client Token</label>
-                    <div class="question" number="">
-                        <h3 class="questionText">text</h3>
-                        <div class="controls">
-                            <div class="radio-container">
-                                <input class="answer" type="radio" name="question" id="optionsRadios1" value="true"/>
-                                    <label class="radio" for="optionsRadios1">
+            <form method="post">
+                <input type="text" name="clientToken" id="clientToken" value="value"/>
+                    <label for="clientToken">Client Token</label>
+                    <div number="">
+                        <h3>text</h3>
+                        <div>
+                            <div>
+                                <input type="radio" name="question" id="optionsRadios1" value="true"/>
+                                    <label for="optionsRadios1">
                                         Yes
                                     </label>
                             </div>
-                            <div class="radio-container">
-                                <input class="answer" type="radio" name="question" id="optionsRadios2" value="false"/>
-                                    <label class="radio" for="optionsRadios2">
+                            <div >
+                                <input type="radio" name="question" id="optionsRadios2" value="false"/>
+                                    <label for="optionsRadios2">
                                         No
                                     </label>
                             </div>
-                            <input class="answer" type="text" name="question" id="optionsText2"/>
-                                <label class="text" for="optionsText2">
+                            <input type="text" name="question" id="optionsText2"/>
+                                <label for="optionsText2">
                                     Input
                                 </label>
                         </div>
-                        <div class="questionValues">
-                            <div class="valueHappy">1</div>
-                            <div class="valueSmart">2</div>
-                            <div class="valueUnicorn">3</div>
-                            <div class="valueUnicorn">4</div>
-                            <div class="valueUnicorn">5</div>
+                        <div >
+                            <div>1</div>
+                            <div>2</div>
+                            <div>3</div>
+                            <div>4</div>
+                            <div>5</div>
 
                         </div>
                     </div>
                     <div>
-                        <input type="submit" name="action" value="Submit" class="form-submit" />
+                        <input type="submit" name="action" value="Submit" />
                     </div>
             </form>
         </div>
         <div>
             <h2>Stats</h2>
-            <div class="stat">
+            <div>
                 <p>happy</p>
-                <p class="statValueHappy">0</p>
+                <p>0</p>
             </div>
-            <div class="stat">
+            <div>
                 <p>smart</p>
-                <p class="statValueSmart">0</p>
+                <p>0</p>
             </div>
-            <div class="stat">
+            <div>
                 <p>unicorn</p>
-                <p class="statValueUnicorn">0</p>
+                <p>0</p>
             </div>
         </div>
-        <div class="yourCharacter">
+        <div>
             <h2>your character is</h2>
-            <p class="yourCharacterName">YOUR CHARACTER</p>
-            <div class="yourCharacterStats">
-                <div class="yourCharacterStat">
+            <p>YOUR CHARACTER</p>
+            <div>
+                <div>
                     <p>happy</p>
-                    <p class="yourCharacterStatValueHappy">50</p>
+                    <p>50</p>
                 </div>
-                <div class="yourCharacterStat">
+                <div>
                     <p>smart</p>
-                    <p class="yourCharacterStatValueSmart">300</p>
+                    <p>300</p>
                 </div>
-                <div class="yourCharacterStat">
+                <div>
                     <p>unicorn</p>
-                    <p class="yourCharacterStatValueUnicorn">200</p>
+                    <p>200</p>
                 </div>
             </div>
         </div>
         <div>
             <h2>Possible characters</h2>
-            <div class="character">
-                <h3 class="characterName">name</h3>
-                <div class="characterStats">
-                    <div class="stat">
+            <div>
+                <h3>name</h3>
+                <div>
+                    <div>
                         <p>happy</p>
-                        <p class="CharacterStatValueHappy">1</p>
+                        <p>1</p>
                     </div>
-                    <div class="stat">
+                    <div>
                         <p>smart</p>
-                        <p class="CharacterStatValueSmart">2</p>
+                        <p>2</p>
                     </div>
-                    <div class="stat">
+                    <div>
                         <p>unicorn</p>
-                        <p class="CharacterStatValueUnicorn">3</p>
+                        <p>3</p>
                     </div>
                 </div>
             </div>
