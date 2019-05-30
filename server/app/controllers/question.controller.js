@@ -44,7 +44,6 @@ exports.findAll = async (req, res) => {
 
 exports.update = async (req, res) => {
   const {
-    id,
     question,
     param1,
     param2,
@@ -55,7 +54,7 @@ exports.update = async (req, res) => {
   } = req.body;
   try {
     Question.findByIdAndUpdate(
-      id,
+      req.params.questionId,
       {
         $set: {
           question: question,
@@ -82,7 +81,7 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
-    Question.deleteOne({_id: req.params.id})
+    Question.deleteOne({_id: req.params.questionId})
       .then(question => {
         res.status(200).send({success: true, data: question});
       })
