@@ -5,6 +5,19 @@ configure({ enforceActions: `observed` });
 
 class QuestionStore {
   questions = [];
+  currentQuestion = 0;
+
+  getCurrentQuestion = () =>{
+      return this.currentQuestion;
+  }
+
+  setCurrentQuestion = value =>{
+      this.currentQuestion = value;
+  }
+
+  nextQuestion = () => {
+      return (this.setCurrentQuestion(this.getCurrentQuestion++));
+  }
 
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -52,13 +65,16 @@ class QuestionStore {
 }
 
 decorate(QuestionStore, {
-  questions: observable,
-  findAll: action,
-  _add: action,
-  update: action,
-  delete: action,
-  create: action,
-  updateQuestion: action
+    questions: observable,
+    findAll: action,
+    _add: action,
+    update: action,
+    delete: action,
+    create: action,
+    updateQuestion: action,
+    getCurrentQuestion: action,
+    setCurrentQuestion: action,
+    nextQuestion: action
 });
 
 export default QuestionStore;
