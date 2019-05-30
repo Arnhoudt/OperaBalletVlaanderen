@@ -16,10 +16,10 @@ class AnswerStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`answers`);
-    if (this.rootStore.uiStore.authUser) {
+    if (this.rootStore.uiStore.authAdmin) {
       this.findAll();
     }
-    observe(this.rootStore.uiStore, `authUser`, change => {
+    observe(this.rootStore.uiStore, `authAdmin`, change => {
       if (change.newValue) {
         this.findAll();
       } else {
@@ -38,19 +38,19 @@ class AnswerStore {
   };
 
   create = answer => {
-      this.api.create(answer).then(data => this._add(data));
+    this.api.create(answer).then(data => this._add(data));
   };
 
   update = answer => {
-      this.api.update(answer).then(data => {
-          this.answers.forEach((index, answer) => {
-              if (answer._id === data._id) this.updateAnswer(index, data);
-          });
+    this.api.update(answer).then(data => {
+      this.answers.forEach((index, answer) => {
+        if (answer._id === data._id) this.updateAnswer(index, data);
       });
+    });
   };
-    updateAnswer = (i, data) => {
-        this.answers[i] = data;
-    };
+  updateAnswer = (i, data) => {
+    this.answers[i] = data;
+  };
 
   _add = values => {
     this.answers.push(values);

@@ -1,6 +1,10 @@
 class Auth {
+  constructor(entity) {
+    this.entity = entity;
+  }
+
   login = (email, password) => {
-    return fetch(`/auth/login`, {
+    return fetch(`/auth/${this.entity}/login`, {
       method: `POST`,
       headers: {
         "content-type": `application/json`
@@ -21,7 +25,7 @@ class Auth {
   };
 
   logout = () => {
-    return fetch(`/auth/logout`, {
+    return fetch(`/auth/${this.entity}/logout`, {
       method: `POST`,
       headers: {
         "content-type": `application/json`
@@ -30,7 +34,7 @@ class Auth {
   };
 
   register = (name, email, password) => {
-    return fetch(`/auth/register`, {
+    return fetch(`/auth/${this.entity}/register`, {
       method: `POST`,
       headers: {
         "content-type": `application/json`

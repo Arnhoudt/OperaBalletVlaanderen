@@ -11,9 +11,11 @@ const LoginForm = ({ uiStore, history }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    uiStore.login(emailInput.current.value, pwdInput.current.value).then(() => {
-      history.push(ROUTES.dashboard);
-    });
+    uiStore
+      .loginUser(emailInput.current.value, pwdInput.current.value)
+      .then(() => {
+        history.push(ROUTES.home);
+      });
   };
 
   const handleChange = e => {

@@ -25,7 +25,7 @@ const RegisterForm = ({ uiStore, history }) => {
   const handleSubmit = e => {
     e.preventDefault();
     uiStore
-      .register(name, email, pwd)
+      .registerAdmin(name, email, pwd)
       .then(data => {
         history.push(ROUTES.dashboard);
       })

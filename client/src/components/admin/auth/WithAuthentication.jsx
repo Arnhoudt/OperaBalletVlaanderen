@@ -6,10 +6,12 @@ import { ROUTES } from "../../../constants";
 
 const withAuthentication = ComponentToProtect => {
   const WithAuth = props => {
-    if (!props.uiStore.authUser) {
+    if (!props.uiStore.authAdmin) {
       return <Redirect to={ROUTES.login} />;
     }
-    return <ComponentToProtect {...props} authUser={props.uiStore.authUser} />;
+    return (
+      <ComponentToProtect {...props} authAdmin={props.uiStore.authAdmin} />
+    );
   };
 
   return inject(`uiStore`)(observer(WithAuth));
