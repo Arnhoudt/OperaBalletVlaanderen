@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { inject } from "mobx-react";
 import { withRouter } from "react-router-dom";
-import { ROUTES } from "../../constants";
-import form from "../../styles/form.module.css";
+import { ROUTES } from "../../../constants";
+import form from "../../../styles/form.module.css";
 import styles from "./RegisterForm.module.css";
 
 const RegisterForm = ({ uiStore, history }) => {

@@ -2,10 +2,10 @@ import React from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import styles from "./App.module.css";
 
-import Home from "./Home";
-import Login from "./Login";
-import Register from "./Register";
-import Dashboard from "./Dashboard";
+import Home from "./user/Home";
+import Login from "./admin/Login";
+import Register from "./admin/Register";
+import Dashboard from "./admin/Dashboard";
 import { ROUTES } from "../constants";
 
 const App = () => {

@@ -1,8 +1,8 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { withRouter } from "react-router-dom";
-import { ROUTES } from "../../constants";
-import form from "../../styles/form.module.css";
+import { ROUTES } from "../../../constants";
+import form from "../../../styles/form.module.css";
 import styles from "./LoginForm.module.css";
 
 const LoginForm = ({ uiStore, history }) => {
@@ -22,7 +22,6 @@ const LoginForm = ({ uiStore, history }) => {
 
   return (
     <>
-
       <form onSubmit={handleSubmit}>
         <div className={styles.form_container}>
           <label htmlFor="email" className={styles.email}>
