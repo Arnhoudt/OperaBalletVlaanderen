@@ -63,7 +63,7 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
-    Character.remove({_id: req.params.id})
+    Character.deleteOne({_id: req.params.id})
       .then(character => {
         res.status(200).send({success: true, data: character});
       })

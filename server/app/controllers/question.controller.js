@@ -82,7 +82,7 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
-    Question.remove({_id: req.params.id})
+    Question.deleteOne({_id: req.params.id})
       .then(question => {
         res.status(200).send({success: true, data: question});
       })

@@ -9,8 +9,12 @@ class QuestionStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`questions`);
-    this.findAll();
+    if (this.rootStore.uiStore.authUser) this.findAll();
   }
+
+  create = question => {
+    this.api.create(question).then(d => this._add(d));
+  };
 
   update = question => {
     this.api.update(question).then(d => {
@@ -20,19 +24,21 @@ class QuestionStore {
     });
   };
 
-  delete = question => {
-    this.characters.remove(question);
-    this.api.delete(question);
+  delete = id => {
+    this.questions.forEach((index, question) => {
+      if (question._id === id) this.questions.splice(index, 1);
+    });
+    this.api.delete({ _id: id });
   };
 
   findAll = () => {
     this.api.findAll().then(d => {
-      if (d.length > 0) d.forEach(this._add);
+      if (d) d.forEach(this._add);
     });
   };
 
-  _add = value => {
-    this.answers.push(value);
+  _add = values => {
+    this.questions.push(values);
   };
 }
 
@@ -41,7 +47,8 @@ decorate(QuestionStore, {
   findAll: action,
   _add: action,
   update: action,
-  delete: action
+  delete: action,
+  create: action
 });
 
 export default QuestionStore;
