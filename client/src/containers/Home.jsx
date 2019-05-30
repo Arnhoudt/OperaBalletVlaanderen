@@ -10,8 +10,6 @@ const Home = () => {
     <>
       <h1>Awesome front page!</h1>
       <Questions />
-      <Characters />
-      <Stats />
     </>
   );
 };
