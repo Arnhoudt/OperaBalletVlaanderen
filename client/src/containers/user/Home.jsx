@@ -1,9 +1,9 @@
 import React from "react";
 import Questions from "../../components/user/Questions";
-import Characters from "../../components/user/Characters";
-import Stats from "../../components/user/Stats";
+//import Characters from "../../components/user/Characters";
+//import Stats from "../../components/user/Stats";
 
-import styles from "./Home.module.css";
+//import styles from "./Home.module.css";
 
 const Home = () => {
   return (

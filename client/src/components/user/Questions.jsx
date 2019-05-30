@@ -4,14 +4,9 @@ import Question from "./Question";
 //import styles from "./Answers.module.css";
 
 const Questions = ({ questionStore }) => {
-  const { questions } = questionStore;
   return (
     <>
-      {questions.map((question, index) => {
-        if (index === questionStore.getCurrentQuestion()) {
-          return <Question question={question} />;
-        }
-      })}
+      <Question question={questionStore.currentQuestion} />
     </>
   );
 };

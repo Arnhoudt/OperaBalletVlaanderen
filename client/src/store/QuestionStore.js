@@ -5,25 +5,39 @@ configure({ enforceActions: `observed` });
 
 class QuestionStore {
   questions = [];
-  currentQuestion = 0;
-
-  getCurrentQuestion = () =>{
-      return this.currentQuestion;
-  }
-
-  setCurrentQuestion = value =>{
-      this.currentQuestion = value;
-  }
-
-  nextQuestion = () => {
-      return (this.setCurrentQuestion(this.getCurrentQuestion++));
-  }
+  currentIndex = 0;
+  currentQuestion = ``;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`questions`);
-    this.findAll();
+    this.findAll().then(mes => {
+      this.updateCurrentQuestion();
+    });
   }
+
+  getCurrentIndex = () => {
+    return this.currentIndex;
+  };
+
+  setCurrentIndex = value => {
+    this.currentIndex = value;
+    this.updateCurrentQuestion();
+  };
+
+  updateCurrentQuestion = () => {
+    this.questions.map((question, index) => {
+      if (index === this.currentIndex) {
+        this.currentQuestion = question;
+      }
+      return null;
+    });
+  };
+
+  nextIndex = () => {
+    let currentIndex = this.getCurrentIndex();
+    this.setCurrentIndex((currentIndex += 1));
+  };
 
   create = question => {
     this.api.create(question).then(d => this._add(d));
@@ -51,12 +65,13 @@ class QuestionStore {
   };
 
   findAll = () => {
-    this.api
+    return this.api
       .findAll()
       .then(d => {
         d.forEach(this._add);
+        Promise.resolve({ message: `succes` });
       })
-      .catch(e => console.log(`Geen questions beschikbaar`));
+      .catch(e => Promise.reject({ message: `failed` }));
   };
 
   _add = values => {
@@ -65,16 +80,19 @@ class QuestionStore {
 }
 
 decorate(QuestionStore, {
-    questions: observable,
-    findAll: action,
-    _add: action,
-    update: action,
-    delete: action,
-    create: action,
-    updateQuestion: action,
-    getCurrentQuestion: action,
-    setCurrentQuestion: action,
-    nextQuestion: action
+  questions: observable,
+  findAll: action,
+  _add: action,
+  update: action,
+  delete: action,
+  create: action,
+  updateQuestion: action,
+  currentIndex: observable,
+  getCurrentIndex: action,
+  setCurrentIndex: action,
+  nextIndex: action,
+  currentQuestion: observable,
+  updateCurrentQuestion: action
 });
 
 export default QuestionStore;
