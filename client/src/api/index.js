@@ -9,10 +9,7 @@ class Api {
   };
 
   create = async obj => {
-    const r = await fetch(
-      `/api/${this.entity}/add`,
-      this.getOptions(`post`, obj)
-    );
+    const r = await fetch(`/api/${this.entity}/add`, this.getOptions(`post`, obj));
     return await r.json();
   };
 

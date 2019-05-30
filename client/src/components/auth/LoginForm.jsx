@@ -22,6 +22,7 @@ const LoginForm = ({ uiStore, history }) => {
 
   return (
     <>
+
       <form onSubmit={handleSubmit}>
         <div className={styles.form_container}>
           <label htmlFor="email" className={styles.email}>

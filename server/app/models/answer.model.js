@@ -7,7 +7,6 @@ const AnswerSchema = mongoose.Schema(
     answerBool: Boolean,
     answerText: String,
     userId: ObjectId,
-    createdAt: {type: Date, default: Date.now}
   },
   {
     timestamps: true
