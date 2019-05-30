@@ -3,6 +3,7 @@ import { inject, observer, PropTypes } from "mobx-react";
 //import styles from "./Answers.module.css";
 
 const Questions = ({ questionStore }) => {
+    const { questions } = questionStore;
   return (
     <>
       <div>
@@ -15,6 +16,9 @@ const Questions = ({ questionStore }) => {
             value="value"
           />
           <label for="clientToken">Client Token</label>
+            {questions.map(question=>{
+              console.log(question);
+            })}
           <div number="3">
             <h3>text</h3>
             <div>
