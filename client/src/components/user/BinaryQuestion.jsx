@@ -2,35 +2,23 @@ import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 //import styles from "./Answers.module.css";
 
-const handleChangeBinaryQuestion = e =>{
-    console.log(e.currentTarget);
-}
 
-const BinaryQuestion = ( ) => {
+
+const BinaryQuestion = ({ questionStore }) => {
+    const handleChangeBinaryQuestion = e =>{
+        questionStore.nextQuestion();
+    }
+
     return (
             <div>
-                <div>
-                    <input
-                        type="radio"
-                        name="question"
-                        id="optionsRadios1"
-                        value="true"
-                        onChange={handleChangeBinaryQuestion}
-                    />
-                    <label for="optionsRadios1">Yes</label>
-                </div>
-                <div>
-                    <input
-                        type="radio"
-                        name="question"
-                        id="optionsRadios2"
-                        value="false"
-                        onChange={handleChangeBinaryQuestion}
-                    />
-                    <label for="optionsRadios2">No</label>
-                </div>
+                <button onChange={handleChangeBinaryQuestion}>Yes</button>
+                <button onChange={handleChangeBinaryQuestion}>No</button>
             </div>
     );
 };
 
-export default BinaryQuestion;
+BinaryQuestion.propTypes = {
+    questionStore: PropTypes.observableObject.isRequired
+};
+
+export default inject(`questionStore`)(observer(BinaryQuestion));
