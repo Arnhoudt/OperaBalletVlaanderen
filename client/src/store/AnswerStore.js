@@ -13,9 +13,12 @@ class AnswerStore {
   }
 
   findAll = () => {
-    this.api.findAll().then(d => {
-      if (d) d.forEach(this._add);
-    });
+    this.api
+      .findAll()
+      .then(d => {
+        d.forEach(this._add);
+      })
+      .catch(e => console.log(`Geen answers beschikbaar`));
   };
 
   _add = values => {
