@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40982b21-5fc6-420d-946e-08d23e2f80fa" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/client/src/components/Answers.jsx" afterPath="$PROJECT_DIR$/client/src/components/admin/Answers.jsx" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Answers.module.css" afterPath="$PROJECT_DIR$/client/src/components/admin/Answers.module.css" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Characters.jsx" afterPath="$PROJECT_DIR$/client/src/components/admin/Characters.jsx" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Characters.module.css" afterPath="$PROJECT_DIR$/client/src/components/admin/Characters.module.css" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Questions.jsx" afterPath="$PROJECT_DIR$/client/src/components/admin/Questions.jsx" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/Questions.module.css" afterPath="$PROJECT_DIR$/client/src/components/admin/Questions.module.css" />
-      <change beforePath="$PROJECT_DIR$/client/src/containers/Dashboard.jsx" afterPath="$PROJECT_DIR$/client/src/containers/Dashboard.jsx" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/user/Questions.jsx" afterPath="$PROJECT_DIR$/client/src/components/user/Questions.jsx" />
+      <change beforePath="$PROJECT_DIR$/client/src/containers/Home.jsx" afterPath="$PROJECT_DIR$/client/src/containers/Home.jsx" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Home.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Home.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/containers/Home.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state relative-caret-position="165">
+              <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -85,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Questions.jsx" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Questions.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/components/user/Questions.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="29" column="18" lean-forward="false" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+            <state relative-caret-position="315">
+              <caret line="21" column="9" lean-forward="false" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -97,12 +93,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="answer.model.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/app/models/answer.model.js">
+      <file leaf-file-name="Question.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/components/user/Question.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="12" lean-forward="false" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="12" />
+            <state relative-caret-position="630">
+              <caret line="43" column="4" lean-forward="true" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QuestionStore.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/store/QuestionStore.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="547">
+              <caret line="37" column="4" lean-forward="false" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+              <folding>
+                <element signature="e#0#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Questions.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/components/admin/Questions.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="139">
+              <caret line="173" column="21" lean-forward="true" selection-start-line="173" selection-start-column="21" selection-end-line="173" selection-end-column="33" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -118,8 +138,10 @@
       <find>andmin</find>
       <find>admins</find>
       <find>answer</find>
-      <find>admin</find>
       <find>questions</find>
+      <find>admin</find>
+      <find>question</find>
+      <find>console</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -143,8 +165,9 @@
         <option value="$PROJECT_DIR$/server/app/routes/question.routes.js" />
         <option value="$PROJECT_DIR$/client/src/components/user/Stats.jsx" />
         <option value="$PROJECT_DIR$/client/src/components/user/Characters.jsx" />
-        <option value="$PROJECT_DIR$/client/src/components/user/Questions.jsx" />
         <option value="$PROJECT_DIR$/client/src/containers/Home.jsx" />
+        <option value="$PROJECT_DIR$/client/src/components/user/Question.jsx" />
+        <option value="$PROJECT_DIR$/client/src/components/user/Questions.jsx" />
       </list>
     </option>
   </component>
@@ -219,6 +242,14 @@
               <item name="client" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="components" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="OperaBalletVlaanderen" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OperaBalletVlaanderen" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="client" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="components" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="user" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -227,6 +258,13 @@
               <item name="client" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="containers" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="OperaBalletVlaanderen" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OperaBalletVlaanderen" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="client" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="store" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="OperaBalletVlaanderen" type="b2602c69:ProjectViewProjectNode" />
@@ -311,17 +349,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1559145542846</updated>
-      <workItem from="1559145543999" duration="14254000" />
+      <workItem from="1559145543999" duration="18986000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14254000" />
+    <option name="totallyTimeSpent" value="18986000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24969475" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24969475" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -361,32 +400,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/src/api/auth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/api/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="20" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/store/QuestionStore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#97#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/store/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -401,9 +414,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#97#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -774,16 +785,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/user/Questions.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="29" column="18" lean-forward="false" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/containers/Dashboard.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -794,8 +795,46 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/containers/Home.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+        <state relative-caret-position="165">
+          <caret line="11" column="19" lean-forward="false" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/store/QuestionStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="547">
+          <caret line="37" column="4" lean-forward="false" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/components/admin/Questions.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="173" column="21" lean-forward="true" selection-start-line="173" selection-start-column="21" selection-end-line="173" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/components/user/Question.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="43" column="4" lean-forward="true" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/components/user/Questions.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="9" lean-forward="false" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
