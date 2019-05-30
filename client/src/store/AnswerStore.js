@@ -1,4 +1,11 @@
-import { decorate, configure, observable, action } from "mobx";
+import {
+  decorate,
+  configure,
+  observable,
+  action,
+  observe,
+  runInAction
+} from "mobx";
 import Api from "../api";
 
 configure({ enforceActions: `observed` });
@@ -9,7 +16,16 @@ class AnswerStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`answers`);
-    this.findAll();
+    if (this.rootStore.uiStore.authUser) {
+      this.findAll();
+    }
+    observe(this.rootStore.uiStore, `authUser`, change => {
+      if (change.newValue) {
+        this.findAll();
+      } else {
+        runInAction(() => (this.answers = []));
+      }
+    });
   }
 
   findAll = () => {

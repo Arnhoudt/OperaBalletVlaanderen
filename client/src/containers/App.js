@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import styles from "./App.module.css";
 
@@ -8,19 +8,17 @@ import Register from "./Register";
 import Dashboard from "./Dashboard";
 import { ROUTES } from "../constants";
 
-class App extends Component {
-  render() {
-    return (
-      <main className={styles.layout}>
-        <Switch>
-          <Route path={ROUTES.home} exact strict component={Home} />
-          <Route path={ROUTES.login} component={Login} />
-          <Route path={ROUTES.register} component={Register} />
-          <Route path={ROUTES.dashboard} component={Dashboard} />
-        </Switch>
-      </main>
-    );
-  }
-}
+const App = () => {
+  return (
+    <main className={styles.layout}>
+      <Switch>
+        <Route path={ROUTES.home} exact strict component={Home} />
+        <Route path={ROUTES.login} component={Login} />
+        <Route path={ROUTES.register} component={Register} />
+        <Route path={ROUTES.dashboard} component={Dashboard} />
+      </Switch>
+    </main>
+  );
+};
 
 export default withRouter(App);
