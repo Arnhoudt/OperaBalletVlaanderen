@@ -11,7 +11,7 @@ const Questions = ({ questionStore }) => {
   const questionParam3 = React.createRef();
   const questionParam4 = React.createRef();
   const questionParam5 = React.createRef();
-  const questionAnswerType = React.createRef();
+  let questionAnswerType = `BOOL`;
   const questionUpdateId = React.createRef();
   const questionUpdateName = React.createRef();
   const questionUpdateParam1 = React.createRef();
@@ -19,7 +19,7 @@ const Questions = ({ questionStore }) => {
   const questionUpdateParam3 = React.createRef();
   const questionUpdateParam4 = React.createRef();
   const questionUpdateParam5 = React.createRef();
-  const questionUpdateAnswerType = React.createRef();
+  let questionUpdateAnswerType = `BOOL`;
 
   const handleSubmitQuestion = e => {
     e.preventDefault();
@@ -30,7 +30,7 @@ const Questions = ({ questionStore }) => {
       param3: questionParam3.current.value,
       param4: questionParam4.current.value,
       param5: questionParam5.current.value,
-      answerType: questionAnswerType.current.value
+      answerType: questionAnswerType
     });
   };
 
@@ -38,19 +38,32 @@ const Questions = ({ questionStore }) => {
     e.preventDefault();
     questionStore.update({
       _id: questionUpdateId.current.value,
-      question: questionUpdateName.current.value,
+      questionValue: questionUpdateName.current.value,
       param1: questionUpdateParam1.current.value,
       param2: questionUpdateParam2.current.value,
       param3: questionUpdateParam3.current.value,
       param4: questionUpdateParam4.current.value,
       param5: questionUpdateParam5.current.value,
-      answerType: questionUpdateAnswerType.current.value
+      answerType: questionUpdateAnswerType
     });
   };
 
   const handleDeleteQuestion = e => {
     e.preventDefault();
     questionStore.delete(e.currentTarget.children[0].value);
+  };
+
+  const checkChangeAnswerType = e => {
+    questionAnswerType = e.currentTarget.value;
+  };
+
+  const checkChangeUpdateAnswerType = e => {
+    questionUpdateAnswerType = e.currentTarget.value;
+  };
+
+  const checked = (type, answerType) => {
+    if (type === answerType) return true;
+    else return false;
   };
 
   return (
@@ -140,7 +153,7 @@ const Questions = ({ questionStore }) => {
                 type="radio"
                 name="answerType"
                 defaultValue="BOOL"
-                ref={questionAnswerType}
+                onChange={checkChangeAnswerType}
                 defaultChecked
               />
             </label>
@@ -150,7 +163,7 @@ const Questions = ({ questionStore }) => {
                 type="radio"
                 name="answerType"
                 defaultValue="TEXT"
-                ref={questionAnswerType}
+                onChange={checkChangeAnswerType}
               />
             </label>
           </div>
@@ -229,13 +242,15 @@ const Questions = ({ questionStore }) => {
                     type="radio"
                     name="answerType"
                     defaultValue="BOOL"
-                    ref={questionUpdateAnswerType}
+                    onChange={checkChangeUpdateAnswerType}
+                    defaultChecked={checked(`BOOL`, question.answerType)}
                   />
                   <input
                     type="radio"
                     name="answerType"
                     defaultValue="TEXT"
-                    ref={questionUpdateAnswerType}
+                    onChange={checkChangeUpdateAnswerType}
+                    defaultChecked={checked(`TEXT`, question.answerType)}
                   />
                   <button type="submit">Update</button>
                 </form>

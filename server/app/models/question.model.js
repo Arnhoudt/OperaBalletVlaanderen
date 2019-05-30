@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const QuestionSchema = mongoose.Schema(
   {
-    name: String,
+    question: String,
     param1: {type: Number, min: 0, max: 100},
     param2: {type: Number, min: 0, max: 100},
     param3: {type: Number, min: 0, max: 100},

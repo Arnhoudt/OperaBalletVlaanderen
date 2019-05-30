@@ -25,8 +25,10 @@ class QuestionStore {
   };
 
   delete = id => {
-    this.questions.forEach((index, question) => {
-      if (question._id === id) this.questions.splice(index, 1);
+    this.questions.forEach((question, index) => {
+      if (question._id === id) {
+        this.questions.splice(index, 1);
+      }
     });
     this.api.delete({ _id: id });
   };

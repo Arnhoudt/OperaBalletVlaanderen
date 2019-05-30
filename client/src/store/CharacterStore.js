@@ -25,7 +25,7 @@ class CharacterStore {
   };
 
   delete = id => {
-    this.characters.forEach((index, character) => {
+    this.characters.forEach((character, index) => {
       if (character._id === id) this.characters.splice(index, 1);
     });
     this.api.delete({ _id: id });
