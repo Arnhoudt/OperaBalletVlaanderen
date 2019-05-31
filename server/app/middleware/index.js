@@ -48,4 +48,30 @@ const checkToken = (req, res, next) => {
   }
 };
 
-module.exports = {checkTokenAdmin, checkToken};
+const checkTokenUser = (req, res, next) => {
+  const {tokenUser, signatureUser} = req.cookies;
+  if (!tokenUser) {
+    res.status(401).send({
+      success: false,
+      message: 'Auth token is not supplied'
+    });
+  } else {
+    jwt.verify(
+      `${tokenUser}.${signatureUser}`,
+      process.env.SECRET,
+      (err, decoded) => {
+        if (err) {
+          res.status(401).send({
+            success: false,
+            message: 'Token is not valid'
+          });
+        } else {
+          req.authUserId = decoded._id;
+          next();
+        }
+      }
+    );
+  }
+};
+
+module.exports = {checkTokenAdmin, checkToken, checkTokenUser};

@@ -9,7 +9,7 @@ exports.create = async (req, res) => {
         value: value,
         userId: user
       });
-      console.log("current answer");
+      console.log('current answer');
       console.log(Currentanswer[0]._id);
       if (Currentanswer.length === 0) {
         answer
@@ -38,12 +38,10 @@ exports.create = async (req, res) => {
           .catch(err => {
             res.status(500).send({error: err || 'Error'});
           });
-
       }
     } catch (err) {
       return res.status(500).send(err);
     }
-
   });
 };
 
@@ -55,7 +53,7 @@ exports.findByUserIdAndQuestionId = async (userId, questionId) => {
     console.log(err);
     return `could not complete find by userId and Question id`;
   }
-}
+};
 
 exports.findAll = async (req, res) => {
   try {
