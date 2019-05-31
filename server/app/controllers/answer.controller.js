@@ -1,26 +1,63 @@
 const Answer = require('../models/answer.model.js');
 
 exports.create = async (req, res) => {
-  const {questionId, answerBool, answerText, userId} = req.body;
-  try {
-    const answer = new Answer({
-      questionId: questionId,
-      answerBool: answerBool,
-      answerText: answerText,
-      userId: userId
-    });
-    answer
-      .save()
-      .then(answer => {
-        res.send(answer);
-      })
-      .catch(err => {
-        res.status(500).send({error: err.todo || 'Error'});
+  const {index, value, user} = req.body;
+  console.log("value =");
+  console.log(value);
+  this.findByUserIdAndQuestionId(user, index).then(Currentanswer => {
+    try {
+      const answer = new Answer({
+        questionId: index,
+        value: value,
+        userId: user
       });
-  } catch (err) {
-    return res.status(500).send(err);
-  }
+      console.log("current answer");
+      console.log(Currentanswer[0]._id);
+      if (Currentanswer.length === 0) {
+        answer
+          .save()
+          .then(answer => {
+            res.send(answer);
+          })
+          .catch(err => {
+            res.status(500).send({error: err || 'Error'});
+          });
+      } else {
+        answer
+          .findByIdAndUpdate(
+            Currentanswer[0]._id,
+            {
+              $set: {
+                questionId: index,
+                value: value,
+                userId: user
+              }
+            },
+            {new: true}
+          ).then(answer => {
+            res.send(answer);
+          })
+          .catch(err => {
+            res.status(500).send({error: err || 'Error'});
+          });
+
+      }
+    } catch (err) {
+      return res.status(500).send(err);
+    }
+
+  });
 };
+
+exports.findByUserIdAndQuestionId = async (userId, questionId) => {
+  try {
+    return await Answer.find({userId, questionId});
+  } catch (err) {
+    console.log(`find by id did not work`);
+    console.log(err);
+    return `could not complete find by userId and Question id`;
+  }
+}
 
 exports.findAll = async (req, res) => {
   try {

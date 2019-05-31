@@ -37,6 +37,11 @@ class AnswerStore {
       .catch(e => console.log(`Geen answers beschikbaar`));
   };
 
+  save = answer =>{
+    console.log(answer);
+    this.create(answer);
+  }
+
   create = answer => {
     this.api.create(answer).then(data => this._add(data));
   };
