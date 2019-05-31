@@ -31,7 +31,7 @@ const Question = ({ uiStore, questionStore, answerStore, history }) => {
 
   return (
     <>
-      <h3>{questionStore.currentQuestion.question}</h3>
+      <h3>{questionStore.currentQuestion.value}</h3>
       <button onClick={handleChangeBinaryQuestion} value={`yes`}>
         YES
       </button>

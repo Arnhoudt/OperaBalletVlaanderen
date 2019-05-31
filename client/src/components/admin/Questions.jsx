@@ -5,7 +5,7 @@ import { inject, observer, PropTypes } from "mobx-react";
 const Questions = ({ questionStore }) => {
   const { questions } = questionStore;
 
-  const questionName = React.createRef();
+  const questionValue = React.createRef();
   const questionParam1 = React.createRef();
   const questionParam2 = React.createRef();
   const questionParam3 = React.createRef();
@@ -15,7 +15,7 @@ const Questions = ({ questionStore }) => {
   const handleSubmitQuestion = e => {
     e.preventDefault();
     questionStore.create({
-      questionValue: questionName.current.value,
+      value: questionValue.current.value,
       param1: questionParam1.current.value,
       param2: questionParam2.current.value,
       param3: questionParam3.current.value,
@@ -28,7 +28,7 @@ const Questions = ({ questionStore }) => {
     e.preventDefault();
     questionStore.update({
       _id: e.currentTarget.children[0].value,
-      question: e.currentTarget.children[1].value,
+      value: e.currentTarget.children[1].value,
       param1: e.currentTarget.children[2].value,
       param2: e.currentTarget.children[3].value,
       param3: e.currentTarget.children[4].value,
@@ -49,7 +49,7 @@ const Questions = ({ questionStore }) => {
           <div>
             <label>
               <span>Vraag:</span>
-              <input type="text" name="question" ref={questionName} />
+              <input type="text" name="question" ref={questionValue} />
             </label>
           </div>
           <div>
@@ -140,7 +140,7 @@ const Questions = ({ questionStore }) => {
                   <input
                     type="text"
                     name="question"
-                    defaultValue={question.question}
+                    defaultValue={question.value}
                   />
                   <input
                     type="number"

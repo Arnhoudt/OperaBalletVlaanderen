@@ -59,7 +59,7 @@ exports.findAll = async (req, res) => {
       {
         $project: {
           value: 1,
-          question: {question: 1}
+          question: {value: 1}
         }
       },
       {

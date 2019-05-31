@@ -14,7 +14,7 @@ const Answers = ({ answerStore }) => {
           {answers.map(answer => (
             <li key={answer._id}>
               <article>
-                <p>Question: {answer.question.question}</p>
+                <p>Question: {answer.question.value}</p>
                 <p>Answer: {`${answer.value}`}</p>
               </article>
             </li>
