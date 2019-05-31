@@ -50,6 +50,7 @@ const checkToken = (req, res, next) => {
 
 const checkTokenUser = (req, res, next) => {
   const {tokenUser, signatureUser} = req.cookies;
+  console.log(req.cookies);
   if (!tokenUser) {
     res.status(401).send({
       success: false,
