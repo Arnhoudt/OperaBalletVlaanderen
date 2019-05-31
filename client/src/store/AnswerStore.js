@@ -37,11 +37,6 @@ class AnswerStore {
       .catch(e => console.log(`Geen answers beschikbaar`));
   };
 
-  save = answer =>{
-    console.log(answer);
-    this.create(answer);
-  }
-
   create = answer => {
     this.api.create(answer).then(data => this._add(data));
   };
@@ -53,6 +48,7 @@ class AnswerStore {
       });
     });
   };
+
   updateAnswer = (i, data) => {
     this.answers[i] = data;
   };
@@ -65,7 +61,10 @@ class AnswerStore {
 decorate(AnswerStore, {
   answers: observable,
   findAll: action,
-  _add: action
+  _add: action,
+  updateAnswer: action,
+  update: action,
+  create: action
 });
 
 export default AnswerStore;

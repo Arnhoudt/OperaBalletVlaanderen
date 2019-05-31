@@ -4,22 +4,25 @@ import { withRouter } from "react-router-dom";
 import { ROUTES } from "../../constants";
 //import styles from "./Answers.module.css";
 
-const Question = ({ questionStore, answerStore, history }) => {
+const Question = ({ uiStore, questionStore, answerStore, history }) => {
   const handleChangeBinaryQuestion = e => {
+    let userId = null;
+    if (uiStore.authUser) userId = uiStore.authUser._id;
+    else userId = uiStore.randomUser._id;
     if (e.currentTarget.value === `yes`) {
-      answerStore.save({
+      answerStore.create({
+        questionId: questionStore.currentQuestion._id,
         value: true,
-        index: questionStore.getCurrentIndex(),
-        user: 1
+        userId: userId
       });
     } else {
-      answerStore.save({
+      answerStore.create({
+        questionId: questionStore.currentQuestion._id,
         value: false,
-        index: questionStore.getCurrentIndex(),
-        user: 1
+        userId: userId
       });
     }
-    //answerStore.create()
+
     questionStore.nextIndex();
     if (questionStore.questions.length <= questionStore.getCurrentIndex()) {
       history.push(ROUTES.home);
@@ -40,9 +43,11 @@ const Question = ({ questionStore, answerStore, history }) => {
 };
 
 Question.propTypes = {
-  questionStore: PropTypes.observableObject.isRequired
+  uiStore: PropTypes.observableObject.isRequired,
+  questionStore: PropTypes.observableObject.isRequired,
+  answerStore: PropTypes.observableObject.isRequired
 };
 
-export default inject(`questionStore`, `answerStore`)(
+export default inject(`uiStore`, `questionStore`, `answerStore`)(
   withRouter(observer(Question))
 );
