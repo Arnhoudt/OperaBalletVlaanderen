@@ -53,15 +53,17 @@ class Auth {
   };
 
   delete = () => {
-    return fetch(`/auth/${this.entity}/delete`).then(res => {
-      return res.json().then(data => {
-        if (res.status === 200) {
-          return Promise.resolve(data);
-        } else {
-          return Promise.reject(data);
-        }
-      });
-    });
+    return fetch(`/auth/${this.entity}/delete`, this.getOptions(`post`)).then(
+      res => {
+        return res.json().then(data => {
+          if (res.status === 200) {
+            return Promise.resolve(data);
+          } else {
+            return Promise.reject(data);
+          }
+        });
+      }
+    );
   };
 
   getOptions = (method, body = null) => {

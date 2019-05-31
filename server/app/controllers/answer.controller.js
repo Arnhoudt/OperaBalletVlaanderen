@@ -71,3 +71,13 @@ exports.findAll = async (req, res) => {
     return res.status(500).send(err);
   }
 };
+
+exports.getAllByUserId = async (req, res) => {
+  const {userId} = req.params;
+  try {
+    const answers = await Answer.find({userId: userId});
+    res.send(answers);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};

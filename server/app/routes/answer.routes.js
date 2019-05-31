@@ -4,5 +4,9 @@ module.exports = app => {
   const controller = require('../controllers/answer.controller.js');
   app.post('/api/answers/add', controller.create);
   app.get('/api/answers', checkTokenAdmin, controller.findAll);
-  //app.get('/api/answers/:id', checkTokenUserRandom, controller.getByUserId);
+  app.get(
+    '/api/answers/:userId',
+    checkTokenUserRandom,
+    controller.getAllByUserId
+  );
 };
