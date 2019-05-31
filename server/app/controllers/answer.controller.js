@@ -47,7 +47,25 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    const answers = await Answer.find();
+    const answers = await Answer.aggregate([
+      {
+        $lookup: {
+          from: 'questions',
+          localField: 'questionId',
+          foreignField: '_id',
+          as: 'question'
+        }
+      },
+      {
+        $project: {
+          value: 1,
+          question: {question: 1}
+        }
+      },
+      {
+        $unwind: '$question'
+      }
+    ]);
     res.send(answers);
   } catch (err) {
     return res.status(500).send(err);

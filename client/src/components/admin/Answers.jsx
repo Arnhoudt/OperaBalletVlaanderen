@@ -4,7 +4,6 @@ import { inject, observer, PropTypes } from "mobx-react";
 
 const Answers = ({ answerStore }) => {
   const { answers } = answerStore;
-
   return (
     <>
       <section>
@@ -15,20 +14,8 @@ const Answers = ({ answerStore }) => {
           {answers.map(answer => (
             <li key={answer._id}>
               <article>
-                <div>
-                  <span>Question:</span>
-                  <p>{answer.question}</p>
-                </div>
-                <p>{answer.answerBool}</p>
-                <p>{answer.answerText}</p>
-                <div>
-                  <span>UserId:</span>
-                  <p>{answer.userId}</p>
-                </div>
-                <div>
-                  <span>date:</span>
-                  <p>{answer.createdAt}</p>
-                </div>
+                <p>Question: {answer.question.question}</p>
+                <p>Answer: {`${answer.value}`}</p>
               </article>
             </li>
           ))}
