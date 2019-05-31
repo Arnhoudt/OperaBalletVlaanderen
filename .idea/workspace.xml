@@ -2,14 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40982b21-5fc6-420d-946e-08d23e2f80fa" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/client/src/components/user/Gdpr.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/app/controllers/authUser.controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/app/models/unregisteredUser.model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/app/models/user.model.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/app/routes/authAdmin.routes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/app/routes/authUser.routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/api/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/api/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/admin/auth/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/admin/auth/LoginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/admin/auth/RegisterForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/admin/auth/RegisterForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/admin/auth/WithAuthentication.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/admin/auth/WithAuthentication.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/user/Question.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/user/Question.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/user/Stats.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/user/Stats.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/user/auth/LoginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/user/auth/LoginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/user/auth/RegisterForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/user/auth/RegisterForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/user/auth/WithAuthentication.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/user/auth/WithAuthentication.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/constants/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/constants/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/containers/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/containers/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/containers/admin/Dashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/containers/admin/Dashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/containers/admin/Register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/containers/admin/Register.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/containers/user/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/containers/user/Home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/AnswerStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/AnswerStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app/controllers/answer.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/controllers/answer.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app/models/answer.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/models/answer.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app/routes/answer.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/routes/answer.routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/containers/user/Questions.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/containers/user/Questions.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/containers/user/Register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/containers/user/Register.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/UiStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/UiStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/controllers/auth.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/controllers/authAdmin.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/middleware/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app/middleware/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/app/routes/auth.routes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,11 +44,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/components/user/Question.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="522">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -77,20 +97,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/app/controllers/answer.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="31" column="26" lean-forward="true" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+            <state relative-caret-position="576">
+              <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/app/controllers/auth.controller.js">
+        <entry file="file://$PROJECT_DIR$/client/src/containers/user/Home.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="423">
-              <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
+            <state relative-caret-position="594">
+              <caret line="33" column="8" lean-forward="true" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,7 +122,7 @@
         <entry file="file://$PROJECT_DIR$/server/app/controllers/question.controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="552">
-              <caret line="69" column="5" lean-forward="true" selection-start-line="55" selection-start-column="4" selection-end-line="69" selection-end-column="5" />
+              <caret line="69" column="5" selection-start-line="55" selection-start-column="4" selection-end-line="69" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -162,14 +185,14 @@
         <option value="$PROJECT_DIR$/client/src/components/user/Questions.jsx" />
         <option value="$PROJECT_DIR$/client/src/constants/index.js" />
         <option value="$PROJECT_DIR$/client/src/containers/App.js" />
-        <option value="$PROJECT_DIR$/client/src/containers/user/Home.jsx" />
         <option value="$PROJECT_DIR$/client/src/components/user/Stats.jsx" />
         <option value="$PROJECT_DIR$/client/src/components/user/UserStats.jsx" />
         <option value="$PROJECT_DIR$/client/src/store/AnswerStore.js" />
         <option value="$PROJECT_DIR$/server/app/models/answer.model.js" />
         <option value="$PROJECT_DIR$/server/app/routes/answer.routes.js" />
-        <option value="$PROJECT_DIR$/client/src/components/user/Question.jsx" />
         <option value="$PROJECT_DIR$/server/app/controllers/answer.controller.js" />
+        <option value="$PROJECT_DIR$/client/src/containers/user/Home.jsx" />
+        <option value="$PROJECT_DIR$/client/src/components/user/Question.jsx" />
       </list>
     </option>
   </component>
@@ -378,12 +401,12 @@
       <updated>1559145542846</updated>
       <workItem from="1559145543999" duration="25417000" />
       <workItem from="1559245832609" duration="38000" />
-      <workItem from="1559246069008" duration="13343000" />
+      <workItem from="1559246069008" duration="14212000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38798000" />
+    <option name="totallyTimeSpent" value="39667000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -587,13 +610,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/containers/user/Home.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/components/user/Characters.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
@@ -708,16 +724,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/components/user/Question.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/app/routes/answer.routes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
@@ -728,14 +734,34 @@
     <entry file="file://$PROJECT_DIR$/server/app/controllers/question.controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="552">
-          <caret line="69" column="5" lean-forward="true" selection-start-line="55" selection-start-column="4" selection-end-line="69" selection-end-column="5" />
+          <caret line="69" column="5" selection-start-line="55" selection-start-column="4" selection-end-line="69" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/app/controllers/answer.controller.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/containers/user/Home.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="33" column="8" lean-forward="true" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/components/user/Question.jsx">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="522">
-          <caret line="31" column="26" lean-forward="true" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

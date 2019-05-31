@@ -1,5 +1,31 @@
 const jwt = require('jsonwebtoken');
 
+const checkTokenAdmin = (req, res, next) => {
+  const {tokenAdmin, signatureAdmin} = req.cookies;
+  if (!tokenAdmin) {
+    res.status(401).send({
+      success: false,
+      message: 'Auth token is not supplied'
+    });
+  } else {
+    jwt.verify(
+      `${tokenAdmin}.${signatureAdmin}`,
+      process.env.SECRET,
+      (err, decoded) => {
+        if (err) {
+          res.status(401).send({
+            success: false,
+            message: 'Token is not valid'
+          });
+        } else {
+          req.authUserId = decoded._id;
+          next();
+        }
+      }
+    );
+  }
+};
+
 const checkToken = (req, res, next) => {
   const {token, signature} = req.cookies;
   if (!token) {
@@ -22,4 +48,4 @@ const checkToken = (req, res, next) => {
   }
 };
 
-module.exports = {checkToken};
+module.exports = {checkTokenAdmin, checkToken};

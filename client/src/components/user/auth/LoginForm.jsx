@@ -53,11 +53,9 @@ const LoginForm = ({ uiStore, history }) => {
             />
           </label>
           <p className={styles.error}>{uiStore.error}</p>
-          <input
-            type="submit"
-            value="Inloggen"
-            className={`${form.button} ${styles.button}`}
-          />
+          <button type="submit" className={`${form.button} ${styles.button}`}>
+            Inloggen
+          </button>
         </div>
       </form>
     </>
@@ -68,4 +66,4 @@ LoginForm.propTypes = {
   uiStore: PropTypes.observableObject.isRequired
 };
 
-export default inject(`uiStore`)(observer(withRouter(LoginForm)));
+export default inject(`uiStore`)(withRouter(observer(LoginForm)));

@@ -1,7 +1,9 @@
 export const ROUTES = {
   questions: `/`,
   home: `/home`,
-  login: `/login`,
-  register: `/register`,
+  loginAdmin: `/loginAdmin`,
+  registerAdmin: `/registerAdmin`,
+  loginUser: `/loginUser`,
+  registerUser: `/registerUser`,
   dashboard: `/dashboard`
 };

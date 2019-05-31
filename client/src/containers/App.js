@@ -4,8 +4,10 @@ import styles from "./App.module.css";
 
 import Questions from "./user/Questions";
 import Home from "./user/Home";
-import Login from "./admin/Login";
-import Register from "./admin/Register";
+import LoginAdmin from "./admin/Login";
+import RegisterAdmin from "./admin/Register";
+import LoginUser from "./user/Login";
+import RegisterUser from "./user/Register";
 import Dashboard from "./admin/Dashboard";
 import { ROUTES } from "../constants";
 
@@ -15,8 +17,10 @@ const App = () => {
       <Switch>
         <Route path={ROUTES.questions} exact strict component={Questions} />
         <Route path={ROUTES.home} component={Home} />
-        <Route path={ROUTES.login} component={Login} />
-        <Route path={ROUTES.register} component={Register} />
+        <Route path={ROUTES.loginAdmin} component={LoginAdmin} />
+        <Route path={ROUTES.registerAdmin} component={RegisterAdmin} />
+        <Route path={ROUTES.loginUser} component={LoginUser} />
+        <Route path={ROUTES.registerUser} component={RegisterUser} />
         <Route path={ROUTES.dashboard} component={Dashboard} />
       </Switch>
     </main>
