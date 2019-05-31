@@ -11,8 +11,6 @@ const Questions = ({ questionStore }) => {
   const questionParam3 = React.createRef();
   const questionParam4 = React.createRef();
   const questionParam5 = React.createRef();
-  let questionAnswerType = `BOOL`;
-  let questionUpdateAnswerType = `BOOL`;
 
   const handleSubmitQuestion = e => {
     e.preventDefault();
@@ -22,8 +20,7 @@ const Questions = ({ questionStore }) => {
       param2: questionParam2.current.value,
       param3: questionParam3.current.value,
       param4: questionParam4.current.value,
-      param5: questionParam5.current.value,
-      answerType: questionAnswerType
+      param5: questionParam5.current.value
     });
   };
 
@@ -36,27 +33,13 @@ const Questions = ({ questionStore }) => {
       param2: e.currentTarget.children[3].value,
       param3: e.currentTarget.children[4].value,
       param4: e.currentTarget.children[5].value,
-      param5: e.currentTarget.children[6].value,
-      answerType: questionUpdateAnswerType
+      param5: e.currentTarget.children[6].value
     });
   };
 
   const handleDeleteQuestion = e => {
     e.preventDefault();
     questionStore.delete(e.currentTarget.children[0].value);
-  };
-
-  const checkChangeAnswerType = e => {
-    questionAnswerType = e.currentTarget.value;
-  };
-
-  const checkChangeUpdateAnswerType = e => {
-    questionUpdateAnswerType = e.currentTarget.value;
-  };
-
-  const checked = (type, answerType) => {
-    if (type === answerType) return true;
-    else return false;
   };
 
   return (
@@ -140,27 +123,6 @@ const Questions = ({ questionStore }) => {
             </label>
           </div>
           <div>
-            <label>
-              <span>Bool:</span>
-              <input
-                type="radio"
-                name="answerType"
-                defaultValue="BOOL"
-                onChange={checkChangeAnswerType}
-                defaultChecked
-              />
-            </label>
-            <label>
-              <span>Text:</span>
-              <input
-                type="radio"
-                name="answerType"
-                defaultValue="TEXT"
-                onChange={checkChangeAnswerType}
-              />
-            </label>
-          </div>
-          <div>
             <button type="submit">Add question</button>
           </div>
         </form>
@@ -219,20 +181,6 @@ const Questions = ({ questionStore }) => {
                     step="1"
                     name="param5"
                     defaultValue={question.param5}
-                  />
-                  <input
-                    type="radio"
-                    name="answerType"
-                    defaultValue="BOOL"
-                    onChange={checkChangeUpdateAnswerType}
-                    defaultChecked={checked(`BOOL`, question.answerType)}
-                  />
-                  <input
-                    type="radio"
-                    name="answerType"
-                    defaultValue="TEXT"
-                    onChange={checkChangeUpdateAnswerType}
-                    defaultChecked={checked(`TEXT`, question.answerType)}
                   />
                   <button type="submit">Update</button>
                 </form>

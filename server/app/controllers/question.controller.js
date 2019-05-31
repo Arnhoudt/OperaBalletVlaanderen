@@ -1,15 +1,7 @@
 const Question = require('../models/question.model.js');
 
 exports.create = async (req, res) => {
-  const {
-    questionValue,
-    param1,
-    param2,
-    param3,
-    param4,
-    param5,
-    answerType
-  } = req.body;
+  const {questionValue, param1, param2, param3, param4, param5} = req.body;
   try {
     const question = new Question({
       question: questionValue,
@@ -17,8 +9,7 @@ exports.create = async (req, res) => {
       param2: param2,
       param3: param3,
       param4: param4,
-      param5: param5,
-      answerType: answerType
+      param5: param5
     });
     question
       .save()
@@ -43,15 +34,7 @@ exports.findAll = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const {
-    question,
-    param1,
-    param2,
-    param3,
-    param4,
-    param5,
-    answerType
-  } = req.body;
+  const {question, param1, param2, param3, param4, param5} = req.body;
   try {
     Question.findByIdAndUpdate(
       req.params.questionId,
@@ -62,8 +45,7 @@ exports.update = async (req, res) => {
           param2: param2,
           param3: param3,
           param4: param4,
-          param5: param5,
-          answerType: answerType
+          param5: param5
         }
       },
       {new: true}
