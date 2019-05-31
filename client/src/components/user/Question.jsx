@@ -22,8 +22,8 @@ const handleChangeBinaryQuestion = e => {
     return (
         <>
             <h3>{questionStore.currentQuestion.question}</h3>
-            <button onClick={handleChangeBinaryQuestion} value={`yes`}>Yes</button>
-            <button onClick={handleChangeBinaryQuestion} value={`no`}>No</button>
+            <button onClick={handleChangeBinaryQuestion} value={`yes`}>YES</button>
+            <button onClick={handleChangeBinaryQuestion} value={`no`}>NO</button>
         </>
     );
 };
