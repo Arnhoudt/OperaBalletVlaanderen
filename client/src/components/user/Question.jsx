@@ -29,9 +29,14 @@ const Question = ({ uiStore, questionStore, answerStore, history }) => {
     }
   };
 
+  const handleClickPrevious = e => {
+    questionStore.previousIndex();
+  };
+
   return (
     <>
       <h3>{questionStore.currentQuestion.value}</h3>
+      <button onClick={handleClickPrevious}>PreviousQuestion</button>
       <button onClick={handleChangeBinaryQuestion} value={`yes`}>
         YES
       </button>
