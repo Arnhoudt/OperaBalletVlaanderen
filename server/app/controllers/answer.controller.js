@@ -3,7 +3,10 @@ const Answer = require('../models/answer.model.js');
 exports.create = async (req, res) => {
   const {questionId, value, userId} = req.body;
   try {
-    const currentAnswer = await Answer.findOne({userId, questionId});
+    const currentAnswer = await Answer.findOne({
+      userId: userId,
+      questionId: questionId
+    });
     if (!currentAnswer) {
       const answer = new Answer({
         questionId: questionId,

@@ -28,7 +28,10 @@ class AnswerStore {
     });
   }
 
+  emptyAnswers = () => (this.answers = []);
+
   findAll = () => {
+    this.emptyAnswers();
     this.api
       .findAll()
       .then(d => {
@@ -64,7 +67,8 @@ decorate(AnswerStore, {
   _add: action,
   updateAnswer: action,
   update: action,
-  create: action
+  create: action,
+  emptyAnswers: action
 });
 
 export default AnswerStore;

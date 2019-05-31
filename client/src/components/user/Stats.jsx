@@ -1,18 +1,17 @@
 import React from "react";
-import { inject, observer, PropTypes } from "mobx-react";
 //import styles from "./Answers.module.css";
 
-const Stats = ({data}) => {
-
+const Stats = ({ data }) => {
   return (
-      <>
-        {data.map(field =>{
-          return(
+    <>
+      {data.map(field => {
+        return (
           <div key={field.parameter}>
             <p>{field.parameter}</p>
             <p>{field.value}</p>
           </div>
-          )})}
+        );
+      })}
     </>
   );
 };
