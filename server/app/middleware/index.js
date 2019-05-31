@@ -74,4 +74,57 @@ const checkTokenUser = (req, res, next) => {
   }
 };
 
-module.exports = {checkTokenAdmin, checkToken, checkTokenUser};
+const checkTokenUserRandom = (req, res, next) => {
+  const {tokenUser, signatureUser, token, signature} = req.cookies;
+  if (!tokenUser) {
+    if (!token) {
+      res.status(401).send({
+        success: false,
+        message: 'Auth token is not supplied'
+      });
+    }
+  } else {
+    jwt.verify(
+      `${tokenUser}.${signatureUser}`,
+      process.env.SECRET,
+      (err, decoded) => {
+        if (err) {
+          res.status(401).send({
+            success: false,
+            message: 'Token is not valid'
+          });
+        } else {
+          req.authUserId = decoded._id;
+          next();
+        }
+      }
+    );
+  }
+  if (!token) {
+    if (!tokenUser) {
+      res.status(401).send({
+        success: false,
+        message: 'Auth token is not supplied'
+      });
+    }
+  } else {
+    jwt.verify(`${token}.${signature}`, process.env.SECRET, (err, decoded) => {
+      if (err) {
+        res.status(401).send({
+          success: false,
+          message: 'Token is not valid'
+        });
+      } else {
+        req.authUserId = decoded._id;
+        next();
+      }
+    });
+  }
+};
+
+module.exports = {
+  checkTokenAdmin,
+  checkToken,
+  checkTokenUser,
+  checkTokenUserRandom
+};
