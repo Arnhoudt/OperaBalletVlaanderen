@@ -93,12 +93,13 @@ const RegisterForm = ({ uiStore, history }) => {
               required
             />
           </label>
-          <input
+          <button
             type="submit"
-            defaultValue="Registreer"
             disabled={pwd && pwd !== pwd2}
             className={`${form.button} ${styles.button}`}
-          />
+          >
+            Registreer
+          </button>
         </div>
       </form>
     </>

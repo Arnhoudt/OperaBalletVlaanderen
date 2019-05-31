@@ -4,16 +4,10 @@ class Auth {
   }
 
   login = (email, password) => {
-    return fetch(`/auth/${this.entity}/login`, {
-      method: `POST`,
-      headers: {
-        "content-type": `application/json`
-      },
-      body: JSON.stringify({
-        email,
-        password
-      })
-    }).then(res => {
+    return fetch(
+      `/auth/${this.entity}/login`,
+      this.getOptions(`post`, { email, password })
+    ).then(res => {
       return res.json().then(data => {
         if (res.status === 200) {
           return Promise.resolve(data);
@@ -25,26 +19,14 @@ class Auth {
   };
 
   logout = () => {
-    return fetch(`/auth/${this.entity}/logout`, {
-      method: `POST`,
-      headers: {
-        "content-type": `application/json`
-      }
-    });
+    return fetch(`/auth/${this.entity}/logout`, this.getOptions(`post`));
   };
 
   register = (name, email, password) => {
-    return fetch(`/auth/${this.entity}/register`, {
-      method: `POST`,
-      headers: {
-        "content-type": `application/json`
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        password
-      })
-    }).then(res => {
+    return fetch(
+      `/auth/${this.entity}/register`,
+      this.getOptions(`post`, { name, email, password })
+    ).then(res => {
       return res.json().then(data => {
         if (res.status === 200) {
           return Promise.resolve(data);
@@ -56,12 +38,10 @@ class Auth {
   };
 
   registerRandom = () => {
-    return fetch(`/auth/${this.entity}/registerRandom`, {
-      method: `POST`,
-      headers: {
-        "content-type": `application/json`
-      }
-    }).then(res => {
+    return fetch(
+      `/auth/${this.entity}/registerRandom`,
+      this.getOptions(`post`)
+    ).then(res => {
       return res.json().then(data => {
         if (res.status === 200) {
           return Promise.resolve(data);
@@ -70,6 +50,34 @@ class Auth {
         }
       });
     });
+  };
+
+  delete = id => {
+    return fetch(
+      `/auth/${this.entity}/delete`,
+      this.getOptions(`post`, { id })
+    ).then(res => {
+      return res.json().then(data => {
+        if (res.status === 200) {
+          return Promise.resolve(data);
+        } else {
+          return Promise.reject(data);
+        }
+      });
+    });
+  };
+
+  getOptions = (method, body = null) => {
+    const options = {
+      method: method.toUpperCase(),
+      headers: {
+        "content-type": `application/json`
+      }
+    };
+    if (body) {
+      options.body = JSON.stringify(body);
+    }
+    return options;
   };
 }
 

@@ -6,9 +6,7 @@ const Register = () => {
   return (
     <>
       <div>
-        <div>
-          <RegisterForm />
-        </div>
+        <RegisterForm />
       </div>
     </>
   );

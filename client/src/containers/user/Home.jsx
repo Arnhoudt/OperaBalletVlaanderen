@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { inject, observer, PropTypes } from "mobx-react";
 import { ROUTES } from "../../constants";
-//import withAuthentication from "../../components/user/auth/WithAuthentication";
+import Gdpr from "../../components/user/Gdpr";
 //import Characters from "../../components/user/Characters";
 //import Stats from "../../components/user/Stats";
 //import styles from "./Home.module.css";
@@ -10,19 +10,27 @@ import { ROUTES } from "../../constants";
 const Home = ({ uiStore, history }) => {
   const handleClick = e => {
     uiStore.logoutUser();
-    history.push(ROUTES.dashboard);
+    history.push(ROUTES.home);
   };
 
   return (
     <>
       <h1>YeeY je zit nu op de home page</h1>
-      <button onClick={handleClick}>Logout</button>
-      <Link to={ROUTES.loginUser}>
-        <button>Log in</button>
-      </Link>
-      <Link to={ROUTES.registerUser}>
-        <button>Bewaar jouw gegevens</button>
-      </Link>
+      {uiStore.authUser ? (
+        <>
+          <Gdpr />
+          <button onClick={handleClick}>Logout</button>
+        </>
+      ) : (
+        <>
+          <Link to={ROUTES.loginUser}>
+            <button>Log in</button>
+          </Link>
+          <Link to={ROUTES.registerUser}>
+            <button>Bewaar jouw gegevens</button>
+          </Link>
+        </>
+      )}
     </>
   );
 };

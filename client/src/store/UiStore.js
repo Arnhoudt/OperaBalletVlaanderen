@@ -48,7 +48,7 @@ class UiStore {
     return this.authServiceAdmin
       .login(username, password)
       .then(data => {
-        this.setAdmin(getUserFromCookie());
+        this.setAdmin(getAdminFromCookie());
         this.emptyError();
         Promise.resolve();
       })
@@ -105,6 +105,16 @@ class UiStore {
       this.setUser(null);
     });
   };
+
+  deleteUser = () => {
+    return this.authServiceUser
+      .delete(this.authUser._id)
+      .then(() => {
+        this.setUser(null);
+        Promise.resolve();
+      })
+      .catch(e => Promise.reject());
+  };
 }
 
 decorate(UiStore, {
@@ -123,7 +133,8 @@ decorate(UiStore, {
   emptyError: action,
   randomUser: observable,
   setRandomUser: action,
-  registerRandom: action
+  registerRandom: action,
+  deleteUser: action
 });
 
 export default UiStore;

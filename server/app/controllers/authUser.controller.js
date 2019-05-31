@@ -111,3 +111,17 @@ exports.registerRandom = async (req, res) => {
     }
   });
 };
+
+exports.delete = async (req, res) => {
+  try {
+    User.deleteOne({_id: req.body.id})
+      .then(user => {
+        res.status(200).send({success: true, data: user});
+      })
+      .catch(err => {
+        res.status(500).send({error: err.todo || 'Error'});
+      });
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};
