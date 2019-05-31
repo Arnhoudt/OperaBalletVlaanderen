@@ -82,6 +82,22 @@ const checkTokenUserRandom = (req, res, next) => {
         success: false,
         message: 'Auth token is not supplied'
       });
+    } else {
+      jwt.verify(
+        `${token}.${signature}`,
+        process.env.SECRET,
+        (err, decoded) => {
+          if (err) {
+            res.status(401).send({
+              success: false,
+              message: 'Token is not valid'
+            });
+          } else {
+            req.authUserId = decoded._id;
+            next();
+          }
+        }
+      );
     }
   } else {
     jwt.verify(
@@ -99,26 +115,6 @@ const checkTokenUserRandom = (req, res, next) => {
         }
       }
     );
-  }
-  if (!token) {
-    if (!tokenUser) {
-      res.status(401).send({
-        success: false,
-        message: 'Auth token is not supplied'
-      });
-    }
-  } else {
-    jwt.verify(`${token}.${signature}`, process.env.SECRET, (err, decoded) => {
-      if (err) {
-        res.status(401).send({
-          success: false,
-          message: 'Token is not valid'
-        });
-      } else {
-        req.authUserId = decoded._id;
-        next();
-      }
-    });
   }
 };
 
