@@ -5,25 +5,22 @@ import { inject, observer, PropTypes } from "mobx-react";
 const Questions = ({ questionStore }) => {
   const { questions } = questionStore;
 
-  const questionName = React.createRef();
+  const questionValue = React.createRef();
   const questionParam1 = React.createRef();
   const questionParam2 = React.createRef();
   const questionParam3 = React.createRef();
   const questionParam4 = React.createRef();
   const questionParam5 = React.createRef();
-  let questionAnswerType = `BOOL`;
-  let questionUpdateAnswerType = `BOOL`;
 
   const handleSubmitQuestion = e => {
     e.preventDefault();
     questionStore.create({
-      questionValue: questionName.current.value,
+      value: questionValue.current.value,
       param1: questionParam1.current.value,
       param2: questionParam2.current.value,
       param3: questionParam3.current.value,
       param4: questionParam4.current.value,
-      param5: questionParam5.current.value,
-      answerType: questionAnswerType
+      param5: questionParam5.current.value
     });
   };
 
@@ -31,32 +28,18 @@ const Questions = ({ questionStore }) => {
     e.preventDefault();
     questionStore.update({
       _id: e.currentTarget.children[0].value,
-      question: e.currentTarget.children[1].value,
+      value: e.currentTarget.children[1].value,
       param1: e.currentTarget.children[2].value,
       param2: e.currentTarget.children[3].value,
       param3: e.currentTarget.children[4].value,
       param4: e.currentTarget.children[5].value,
-      param5: e.currentTarget.children[6].value,
-      answerType: questionUpdateAnswerType
+      param5: e.currentTarget.children[6].value
     });
   };
 
   const handleDeleteQuestion = e => {
     e.preventDefault();
     questionStore.delete(e.currentTarget.children[0].value);
-  };
-
-  const checkChangeAnswerType = e => {
-    questionAnswerType = e.currentTarget.value;
-  };
-
-  const checkChangeUpdateAnswerType = e => {
-    questionUpdateAnswerType = e.currentTarget.value;
-  };
-
-  const checked = (type, answerType) => {
-    if (type === answerType) return true;
-    else return false;
   };
 
   return (
@@ -66,7 +49,7 @@ const Questions = ({ questionStore }) => {
           <div>
             <label>
               <span>Vraag:</span>
-              <input type="text" name="question" ref={questionName} />
+              <input type="text" name="question" ref={questionValue} />
             </label>
           </div>
           <div>
@@ -140,27 +123,6 @@ const Questions = ({ questionStore }) => {
             </label>
           </div>
           <div>
-            <label>
-              <span>Bool:</span>
-              <input
-                type="radio"
-                name="answerType"
-                defaultValue="BOOL"
-                onChange={checkChangeAnswerType}
-                defaultChecked
-              />
-            </label>
-            <label>
-              <span>Text:</span>
-              <input
-                type="radio"
-                name="answerType"
-                defaultValue="TEXT"
-                onChange={checkChangeAnswerType}
-              />
-            </label>
-          </div>
-          <div>
             <button type="submit">Add question</button>
           </div>
         </form>
@@ -178,7 +140,7 @@ const Questions = ({ questionStore }) => {
                   <input
                     type="text"
                     name="question"
-                    defaultValue={question.question}
+                    defaultValue={question.value}
                   />
                   <input
                     type="number"
@@ -219,20 +181,6 @@ const Questions = ({ questionStore }) => {
                     step="1"
                     name="param5"
                     defaultValue={question.param5}
-                  />
-                  <input
-                    type="radio"
-                    name="answerType"
-                    defaultValue="BOOL"
-                    onChange={checkChangeUpdateAnswerType}
-                    defaultChecked={checked(`BOOL`, question.answerType)}
-                  />
-                  <input
-                    type="radio"
-                    name="answerType"
-                    defaultValue="TEXT"
-                    onChange={checkChangeUpdateAnswerType}
-                    defaultChecked={checked(`TEXT`, question.answerType)}
                   />
                   <button type="submit">Update</button>
                 </form>

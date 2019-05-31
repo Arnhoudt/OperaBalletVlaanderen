@@ -8,6 +8,11 @@ class Api {
     return await r.json();
   };
 
+  getAllByUserId = async id => {
+    const r = await fetch(`/api/${this.entity}/${id}`);
+    return await r.json();
+  };
+
   create = async obj => {
     const r = await fetch(
       `/api/${this.entity}/add`,

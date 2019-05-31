@@ -16,7 +16,6 @@ const Home = ({ uiStore, history }) => {
   return (
     <>
       <h1>YeeY je zit nu op de home page</h1>
-        <UserStats />
       {uiStore.authUser ? (
         <>
           <Gdpr />
@@ -32,6 +31,7 @@ const Home = ({ uiStore, history }) => {
           </Link>
         </>
       )}
+      <UserStats />
     </>
   );
 };

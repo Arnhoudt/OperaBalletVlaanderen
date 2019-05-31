@@ -1,63 +1,71 @@
 const Answer = require('../models/answer.model.js');
 
 exports.create = async (req, res) => {
-  const {index, value, user} = req.body;
-  this.findByUserIdAndQuestionId(user, index).then(Currentanswer => {
-    try {
-      const answer = new Answer({
-        questionId: index,
-        value: value,
-        userId: user
-      });
-      console.log('current answer');
-      console.log(Currentanswer[0]._id);
-      if (Currentanswer.length === 0) {
-        answer
-          .save()
-          .then(answer => {
-            res.send(answer);
-          })
-          .catch(err => {
-            res.status(500).send({error: err || 'Error'});
-          });
-      } else {
-        Answer
-          .findByIdAndUpdate(
-            Currentanswer[0]._id,
-            {
-              $set: {
-                questionId: index,
-                value: value,
-                userId: user
-              }
-            },
-            {new: true}
-          ).then(answer => {
-            res.send(answer);
-          })
-          .catch(err => {
-            res.status(500).send({error: err || 'Error'});
-          });
-      }
-    } catch (err) {
-      return res.status(500).send(err);
-    }
-  });
-};
-
-exports.findByUserIdAndQuestionId = async (userId, questionId) => {
+  const {questionId, value, userId} = req.body;
   try {
-    return await Answer.find({userId, questionId});
+    const currentAnswer = await Answer.findOne({
+      userId: userId,
+      questionId: questionId
+    });
+    if (!currentAnswer) {
+      const answer = new Answer({
+        questionId: questionId,
+        value: value,
+        userId: userId
+      });
+      answer
+        .save()
+        .then(answer => {
+          res.send(answer);
+        })
+        .catch(err => {
+          res.status(500).send({error: err || 'Error'});
+        });
+    } else {
+      Answer.findByIdAndUpdate(
+        currentAnswer._id,
+        {
+          $set: {
+            questionId: questionId,
+            value: value,
+            userId: userId
+          }
+        },
+        {new: true}
+      )
+        .then(answer => {
+          res.send(answer);
+        })
+        .catch(err => {
+          res.status(500).send({error: err || 'Error'});
+        });
+    }
   } catch (err) {
-    console.log(`find by id did not work`);
-    console.log(err);
-    return `could not complete find by userId and Question id`;
+    return res.status(500).send(err);
   }
 };
 
 exports.findAll = async (req, res) => {
   try {
-    const answers = await Answer.find();
+    const answers = await Answer.aggregate([
+      {
+        $lookup: {
+          from: 'questions',
+          localField: 'questionId',
+          foreignField: '_id',
+          as: 'question'
+        }
+      },
+      {
+        $project: {
+          value: 1,
+          question: {value: 1}
+        }
+      },
+      {
+        $unwind: '$question'
+      }
+    ]);
     res.send(answers);
   } catch (err) {
     return res.status(500).send(err);

@@ -28,7 +28,10 @@ class AnswerStore {
     });
   }
 
+  emptyAnswers = () => (this.answers = []);
+
   findAll = () => {
+    this.emptyAnswers();
     this.api
       .findAll()
       .then(d => {
@@ -37,9 +40,13 @@ class AnswerStore {
       .catch(e => console.log(`Geen answers beschikbaar`));
   };
 
-  save = answer =>{
-    console.log(answer);
-    this.create(answer);
+  getAllByUserId = id =>{
+    this.api
+        .getAllByUserId(id)
+        .then(data =>{
+          console.log("data = ");
+          console.log(data);
+        })
   }
 
   create = answer => {
@@ -53,6 +60,7 @@ class AnswerStore {
       });
     });
   };
+
   updateAnswer = (i, data) => {
     this.answers[i] = data;
   };
@@ -65,7 +73,11 @@ class AnswerStore {
 decorate(AnswerStore, {
   answers: observable,
   findAll: action,
-  _add: action
+  _add: action,
+  updateAnswer: action,
+  update: action,
+  create: action,
+  emptyAnswers: action
 });
 
 export default AnswerStore;

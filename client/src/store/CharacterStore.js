@@ -19,12 +19,12 @@ class CharacterStore {
   update = character => {
     this.api.update(character).then(d => {
       this.characters.forEach((index, character) => {
-        if (character._id === d._id) this.updateQuestion(index, d);
+        if (character._id === d._id) this.updateCharacter(index, d);
       });
     });
   };
 
-  updateQuestion = (i, d) => {
+  updateCharacter = (i, d) => {
     this.characters[i] = d;
   };
 
@@ -35,7 +35,10 @@ class CharacterStore {
     this.api.delete({ _id: id });
   };
 
+  emptyCharacters = () => (this.characters = []);
+
   findAll = () => {
+    this.emptyCharacters();
     this.api
       .findAll()
       .then(d => {
@@ -56,7 +59,8 @@ decorate(CharacterStore, {
   update: action,
   delete: action,
   create: action,
-  updateQuestion: action
+  updateCharacter: action,
+  emptyCharacters: action
 });
 
 export default CharacterStore;

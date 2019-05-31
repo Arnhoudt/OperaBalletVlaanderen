@@ -64,7 +64,10 @@ class QuestionStore {
     this.api.delete({ _id: id });
   };
 
+  emptyQuestions = () => (this.questions = []);
+
   findAll = () => {
+    this.emptyQuestions();
     return this.api
       .findAll()
       .then(d => {
@@ -92,7 +95,8 @@ decorate(QuestionStore, {
   setCurrentIndex: action,
   nextIndex: action,
   currentQuestion: observable,
-  updateCurrentQuestion: action
+  updateCurrentQuestion: action,
+  emptyQuestions: action
 });
 
 export default QuestionStore;
