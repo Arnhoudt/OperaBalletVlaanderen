@@ -5,5 +5,5 @@ module.exports = app => {
   app.post('/auth/user/logout', checkTokenUser, controller.logout);
   app.post('/auth/user/register', checkToken, controller.register);
   app.post('/auth/user/registerRandom', controller.registerRandom);
-  app.post('/auth/user/delete', checkTokenUser, controller.delete);
+  app.delete('/auth/user/delete', checkTokenUser, controller.delete);
 };

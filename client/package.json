@@ -11,6 +11,7 @@
     "react-infinite-scroller": "^1.2.4",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.8",
+    "sha1": "^1.1.1",
     "socket.io-client": "^2.2.0",
     "uuid": "^3.3.2"
   },
