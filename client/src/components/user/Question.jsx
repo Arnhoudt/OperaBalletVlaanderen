@@ -36,7 +36,9 @@ const Question = ({ uiStore, questionStore, answerStore, history }) => {
   return (
     <>
       <h3>{questionStore.currentQuestion.value}</h3>
-      <button onClick={handleClickPrevious}>PreviousQuestion</button>
+      {questionStore.getCurrentIndex() > 0 ? (
+        <button onClick={handleClickPrevious}>PreviousQuestion</button>
+      ) : null}
       <button onClick={handleChangeBinaryQuestion} value={`yes`}>
         YES
       </button>
