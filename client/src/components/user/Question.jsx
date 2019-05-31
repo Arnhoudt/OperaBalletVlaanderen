@@ -8,7 +8,7 @@ const Question = ({ uiStore, questionStore, answerStore, history }) => {
   const handleChangeBinaryQuestion = e => {
     let userId = null;
     if (uiStore.authUser) userId = uiStore.authUser._id;
-    else userId = uiStore.randomUser._id;
+    if (uiStore.randomUser) userId = uiStore.randomUser._id;
     if (e.currentTarget.value === `yes`) {
       answerStore.create({
         questionId: questionStore.currentQuestion._id,

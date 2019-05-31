@@ -108,7 +108,7 @@ class UiStore {
 
   deleteUser = () => {
     return this.authServiceUser
-      .delete(this.authUser._id)
+      .delete()
       .then(() => {
         this.setUser(null);
         Promise.resolve();

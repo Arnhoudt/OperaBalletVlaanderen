@@ -18,7 +18,7 @@ exports.login = async (req, res) => {
   if (!email || !password) {
     return res
       .status(400)
-      .send({error: 'We hebben je email of wachtwoord nodig'});
+      .send({error: 'We hebben je email en wachtwoord nodig'});
   }
   try {
     const emailLowerCase = email.toLowerCase();
@@ -114,7 +114,7 @@ exports.registerRandom = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
-    User.deleteOne({_id: req.body.id})
+    User.deleteOne({_id: req.authUserId})
       .then(user => {
         res.status(200).send({success: true, data: user});
       })
