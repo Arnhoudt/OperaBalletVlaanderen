@@ -2,8 +2,6 @@ const Answer = require('../models/answer.model.js');
 
 exports.create = async (req, res) => {
   const {index, value, user} = req.body;
-  console.log("value =");
-  console.log(value);
   this.findByUserIdAndQuestionId(user, index).then(Currentanswer => {
     try {
       const answer = new Answer({
@@ -23,7 +21,7 @@ exports.create = async (req, res) => {
             res.status(500).send({error: err || 'Error'});
           });
       } else {
-        answer
+        Answer
           .findByIdAndUpdate(
             Currentanswer[0]._id,
             {
