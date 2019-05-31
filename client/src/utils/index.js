@@ -6,7 +6,7 @@ const decodeJWT = jwt => {
   return JSON.parse(window.atob(base64));
 };
 
-const getUserFromCookie = () => {
+const getRandomFromCookie = () => {
   const token = Cookies.get(`token`);
   if (token) {
     return decodeJWT(token);
@@ -14,4 +14,20 @@ const getUserFromCookie = () => {
   return null;
 };
 
-export { getUserFromCookie };
+const getUserFromCookie = () => {
+  const tokenUser = Cookies.get(`tokenUser`);
+  if (tokenUser) {
+    return decodeJWT(tokenUser);
+  }
+  return null;
+};
+
+const getAdminFromCookie = () => {
+  const tokenAdmin = Cookies.get(`tokenAdmin`);
+  if (tokenAdmin) {
+    return decodeJWT(tokenAdmin);
+  }
+  return null;
+};
+
+export { getUserFromCookie, getAdminFromCookie, getRandomFromCookie };

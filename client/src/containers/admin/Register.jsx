@@ -9,7 +9,9 @@ const Register = () => {
   return (
     <>
       <div>
-        <Link to={ROUTES.login}>Login</Link>
+        <Link to={ROUTES.dashboard}>
+          <button>Terug</button>
+        </Link>
         <div>
           <RegisterForm />
         </div>

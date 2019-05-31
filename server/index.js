@@ -27,7 +27,8 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-require('./app/routes/auth.routes.js')(app);
+require('./app/routes/authAdmin.routes.js')(app);
+require('./app/routes/authUser.routes.js')(app);
 require('./app/routes/answer.routes.js')(app);
 require('./app/routes/character.routes.js')(app);
 require('./app/routes/question.routes.js')(app);

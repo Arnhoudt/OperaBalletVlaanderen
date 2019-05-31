@@ -54,6 +54,23 @@ class Auth {
       });
     });
   };
+
+  registerRandom = () => {
+    return fetch(`/auth/${this.entity}/registerRandom`, {
+      method: `POST`,
+      headers: {
+        "content-type": `application/json`
+      }
+    }).then(res => {
+      return res.json().then(data => {
+        if (res.status === 200) {
+          return Promise.resolve(data);
+        } else {
+          return Promise.reject(data);
+        }
+      });
+    });
+  };
 }
 
 export default Auth;

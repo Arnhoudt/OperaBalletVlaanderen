@@ -10,14 +10,14 @@ import Questions from "../../components/admin/Questions";
 
 const Dashboard = ({ uiStore, history }) => {
   const handleClick = e => {
-    uiStore.logout();
-    history.push(ROUTES.login);
+    uiStore.logoutAdmin();
+    history.push(ROUTES.loginAdmin);
   };
 
   return (
     <>
       <h1 className={`${styles.title}`}>Welkom in het dashboard</h1>
-      <Link to={ROUTES.register}>
+      <Link to={ROUTES.registerAdmin}>
         <button>Wordt lid</button>
       </Link>
       <button onClick={handleClick}>Logout</button>

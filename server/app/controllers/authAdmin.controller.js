@@ -20,21 +20,21 @@ exports.login = async (req, res) => {
   }
   try {
     const emailLowerCase = email.toLowerCase();
-    const user = await Admin.findOne({email: emailLowerCase});
-    if (!user) {
+    const admin = await Admin.findOne({email: emailLowerCase});
+    if (!admin) {
       res.status(401).send({error: 'Email of wachtwoord is niet juist'});
     } else {
-      const isPasswordCorrect = await user.validPassword(password);
+      const isPasswordCorrect = await admin.validPassword(password);
       if (isPasswordCorrect) {
-        const {_id, name, roles} = user;
+        const {_id, name, roles} = admin;
         const token = jwt.sign({_id, name, roles}, process.env.SECRET, {
           expiresIn: '24h'
         });
         const parts = token.split('.');
         const signature = parts.splice(2);
         res
-          .cookie('token', parts.join('.'), tokenCookie)
-          .cookie('signature', signature, signatureCookie)
+          .cookie('tokenAdmin', parts.join('.'), tokenCookie)
+          .cookie('signatureAdmin', signature, signatureCookie)
           .status(200)
           .send({
             success: true,
@@ -55,8 +55,8 @@ exports.login = async (req, res) => {
 
 exports.logout = (req, res) => {
   res
-    .clearCookie('token', tokenCookie)
-    .clearCookie('signature', signatureCookie)
+    .clearCookie('tokenAdmin', tokenCookie)
+    .clearCookie('signatureAdmin', signatureCookie)
     .sendStatus(200);
 };
 

@@ -68,4 +68,4 @@ LoginForm.propTypes = {
   uiStore: PropTypes.observableObject.isRequired
 };
 
-export default inject(`uiStore`)(observer(withRouter(LoginForm)));
+export default inject(`uiStore`)(withRouter(observer(LoginForm)));

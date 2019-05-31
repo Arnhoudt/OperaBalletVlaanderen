@@ -1,10 +1,15 @@
 import { decorate, observable, action } from "mobx";
 import Auth from "../api/auth";
-import { getUserFromCookie } from "../utils/index.js";
+import {
+  getUserFromCookie,
+  getAdminFromCookie,
+  getRandomFromCookie
+} from "../utils/index.js";
 
 class UiStore {
   authUser = null;
   authAdmin = null;
+  randomUser = null;
   error = ``;
 
   constructor(rootStore) {
@@ -12,6 +17,14 @@ class UiStore {
     this.authServiceUser = new Auth(`user`);
     this.authServiceAdmin = new Auth(`admin`);
     this.setUser(getUserFromCookie());
+    this.setAdmin(getAdminFromCookie());
+    if (!getUserFromCookie()) {
+      if (getRandomFromCookie()) {
+        this.setRandomUser(getRandomFromCookie());
+      } else {
+        this.registerRandom();
+      }
+    }
   }
 
   emptyError = () => {
@@ -24,6 +37,12 @@ class UiStore {
 
   setUser = value => (this.authUser = value);
   setAdmin = value => (this.authAdmin = value);
+  setRandomUser = value => (this.randomUser = value);
+
+  registerRandom = () => {
+    this.emptyError();
+    return this.authServiceUser.registerRandom();
+  };
 
   loginAdmin = (username, password) => {
     return this.authServiceAdmin
@@ -60,12 +79,12 @@ class UiStore {
     return this.authServiceUser
       .login(username, password)
       .then(data => {
-        this.setAdmin(getUserFromCookie());
+        this.setUser(getUserFromCookie());
         this.emptyError();
         Promise.resolve();
       })
       .catch(data => {
-        this.setAdmin(null);
+        this.setUser(null);
         if (data.message === `Unexpected token P in JSON at position 0`) {
           this.changeError(`Verbinding verbroken`);
         } else {
@@ -83,7 +102,7 @@ class UiStore {
 
   logoutUser = () => {
     return this.authServiceUser.logout().then(() => {
-      this.setAdmin(null);
+      this.setUser(null);
     });
   };
 }
@@ -101,7 +120,10 @@ decorate(UiStore, {
   registerUser: action,
   logoutUser: action,
   error: observable,
-  emptyError: action
+  emptyError: action,
+  randomUser: observable,
+  setRandomUser: action,
+  registerRandom: action
 });
 
 export default UiStore;
