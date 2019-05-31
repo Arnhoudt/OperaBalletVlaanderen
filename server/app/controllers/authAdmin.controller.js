@@ -16,7 +16,7 @@ exports.login = async (req, res) => {
   if (!email || !password) {
     return res
       .status(400)
-      .send({error: 'We hebben je email of wachtwoord nodig'});
+      .send({error: 'We hebben je email en wachtwoord nodig'});
   }
   try {
     const emailLowerCase = email.toLowerCase();

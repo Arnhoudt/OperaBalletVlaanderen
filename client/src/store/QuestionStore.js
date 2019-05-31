@@ -39,6 +39,11 @@ class QuestionStore {
     this.setCurrentIndex((currentIndex += 1));
   };
 
+  previousIndex = () => {
+    let currentIndex = this.getCurrentIndex();
+    this.setCurrentIndex((currentIndex -= 1));
+  };
+
   create = question => {
     this.api.create(question).then(d => this._add(d));
   };
@@ -96,7 +101,8 @@ decorate(QuestionStore, {
   nextIndex: action,
   currentQuestion: observable,
   updateCurrentQuestion: action,
-  emptyQuestions: action
+  emptyQuestions: action,
+  previousIndex: action
 });
 
 export default QuestionStore;
