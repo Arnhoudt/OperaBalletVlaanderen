@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 
 const UserStats = ({ questionStore, answerStore }) => {
   let variablele = 0;
-  console.log(`answer = ` + answerStore.getAllByUserId(1));
+  //console.log(`answer = ` + answerStore.getAllByUserId(1));
   answerStore.answers.map(answer => {
     return console.log(variablele++);
   });

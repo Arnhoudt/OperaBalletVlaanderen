@@ -73,10 +73,14 @@ exports.register = async (req, res) => {
       });
     } else {
       await UnregisteredUser.deleteOne({_id: req.authUserId});
-      res.status(200).send({
-        success: true,
-        message: 'Welkom bij obv dashboard!'
-      });
+      res
+        .clearCookie('token', tokenCookie)
+        .clearCookie('signature', signatureCookie)
+        .status(200)
+        .send({
+          success: true,
+          message: 'Welkom bij obv dashboard!'
+        });
     }
   });
 };
