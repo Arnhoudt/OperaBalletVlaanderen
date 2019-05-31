@@ -3,9 +3,9 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const AnswerSchema = mongoose.Schema(
   {
-    questionId: Number,
+    questionId: ObjectId,
     value: Boolean,
-    userId: Number,
+    userId: ObjectId
   },
   {
     timestamps: true
