@@ -4,6 +4,9 @@ import Stats from "./Stats";
 import { withRouter } from "react-router-dom";
 const UserStats = ({ questionStore, answerStore }) => {
   answerStore.getAllByUser().then(data => console.log(data));
+  questionStore.findAll();
+  console.log(questionStore.questions);
+
   let data = [
     { parameter: `param1`, value: 10 },
     { parameter: `param2`, value: 20 },
