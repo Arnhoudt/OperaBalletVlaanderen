@@ -1,9 +1,12 @@
+const sha1 = require(`sha1`);
+
 class Auth {
   constructor(entity) {
     this.entity = entity;
   }
 
-  login = (email, password) => {
+  login = (email, passwordS) => {
+    const password = sha1(`${passwordS}natr1umchl0ride`);
     return fetch(
       `/auth/${this.entity}/login`,
       this.getOptions(`post`, { email, password })
@@ -22,7 +25,8 @@ class Auth {
     return fetch(`/auth/${this.entity}/logout`, this.getOptions(`post`));
   };
 
-  register = (name, email, password) => {
+  register = (name, email, passwordS) => {
+    const password = sha1(`${passwordS}natr1umchl0ride`);
     return fetch(
       `/auth/${this.entity}/register`,
       this.getOptions(`post`, { name, email, password })
@@ -53,7 +57,7 @@ class Auth {
   };
 
   delete = () => {
-    return fetch(`/auth/${this.entity}/delete`, this.getOptions(`post`)).then(
+    return fetch(`/auth/${this.entity}/delete`, this.getOptions(`delete`)).then(
       res => {
         return res.json().then(data => {
           if (res.status === 200) {
