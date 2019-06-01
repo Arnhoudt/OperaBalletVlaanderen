@@ -13,8 +13,8 @@ const UserStats = ({ questionStore, answerStore }) => {
   };
   answerStore.getAllByUser().then(answers => {
     questionStore.findAll().then(questions => {
-      answers.map(answer => {
-        questions.map(question => {
+      answers.forEach(answer => {
+        questions.forEach(question => {
           if (question._id === answer.questionId) {
             console.log(question.value);
           }
