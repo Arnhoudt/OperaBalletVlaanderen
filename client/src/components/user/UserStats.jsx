@@ -3,27 +3,25 @@ import { inject, observer, PropTypes } from "mobx-react";
 import Stats from "./Stats";
 import { withRouter } from "react-router-dom";
 const UserStats = ({ questionStore, answerStore }) => {
-    let answers = [];
-    let params = {
-        param1:0,
-        param2:0,
-        param3:0,
-        param4:0,
-        param5:0
-    }
+  let answers = [];
+  let params = {
+    param1: 0,
+    param2: 0,
+    param3: 0,
+    param4: 0,
+    param5: 0
+  };
   answerStore.getAllByUser().then(answers => {
-      questionStore.getAllQuestions().then(questions => {
-          answers.map(answer=>{
-              console.log(questions);
-              questions.map(question =>{
-                  if(question._id === answer.questionId){
-                      console.log(question.value);
-                  }
-              })
-          })
-      })
+    questionStore.findAll().then(questions => {
+      answers.map(answer => {
+        questions.map(question => {
+          if (question._id === answer.questionId) {
+            console.log(question.value);
+          }
+        });
+      });
+    });
   });
-  console.log(answers);
 
   let data = [
     { parameter: `param1`, value: 10 },
