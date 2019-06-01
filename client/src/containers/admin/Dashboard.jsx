@@ -7,6 +7,7 @@ import { ROUTES } from "../../constants";
 import Answers from "../../components/admin/Answers";
 import Characters from "../../components/admin/Characters";
 import Questions from "../../components/admin/Questions";
+import Acts from "../../components/admin/Acts";
 
 const Dashboard = ({ uiStore, history }) => {
   const handleClick = e => {
@@ -23,6 +24,7 @@ const Dashboard = ({ uiStore, history }) => {
       <button onClick={handleClick}>Logout</button>
       <Characters />
       <Questions />
+      <Acts />
       <Answers />
     </>
   );

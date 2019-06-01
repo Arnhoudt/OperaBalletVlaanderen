@@ -5,6 +5,7 @@ import { ROUTES } from "../../constants";
 //import styles from "./Answers.module.css";
 
 const Question = ({ uiStore, questionStore, answerStore, history }) => {
+  const { currentQuestion, questions } = questionStore;
   let userId = null;
   if (uiStore.authUser) userId = uiStore.authUser._id;
   if (uiStore.randomUser) userId = uiStore.randomUser._id;
@@ -17,15 +18,13 @@ const Question = ({ uiStore, questionStore, answerStore, history }) => {
       if (key === `B`) value = false;
       answerStore
         .create({
-          questionId: questionStore.currentQuestion._id,
+          questionId: currentQuestion._id,
           value: value,
           userId: userId
         })
         .then(() => {
           questionStore.nextIndex();
-          if (
-            questionStore.questions.length <= questionStore.getCurrentIndex()
-          ) {
+          if (questions.length <= questionStore.getCurrentIndex()) {
             history.push(ROUTES.home);
           }
         });
@@ -40,13 +39,13 @@ const Question = ({ uiStore, questionStore, answerStore, history }) => {
   const handleChangeBinaryQuestion = e => {
     answerStore
       .create({
-        questionId: questionStore.currentQuestion._id,
+        questionId: currentQuestion._id,
         value: e.currentTarget.value,
         userId: userId
       })
       .then(() => {
         questionStore.nextIndex();
-        if (questionStore.questions.length <= questionStore.getCurrentIndex()) {
+        if (questions.length <= questionStore.getCurrentIndex()) {
           history.push(ROUTES.home);
         }
       });
@@ -58,15 +57,15 @@ const Question = ({ uiStore, questionStore, answerStore, history }) => {
 
   return (
     <>
-      <h3>{questionStore.currentQuestion.value}</h3>
+      <h3>{currentQuestion.value}</h3>
       {questionStore.getCurrentIndex() > 0 ? (
         <button onClick={handleClickPrevious}>PreviousQuestion</button>
       ) : null}
       <button onClick={handleChangeBinaryQuestion} value={true}>
-        YES
+        {currentQuestion.answer1}
       </button>
       <button onClick={handleChangeBinaryQuestion} value={false}>
-        NO
+        {currentQuestion.answer2}
       </button>
     </>
   );

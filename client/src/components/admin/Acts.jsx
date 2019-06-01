@@ -2,60 +2,67 @@ import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 //import styles from "./Answers.module.css";
 
-const Questions = ({ questionStore }) => {
-  const { questions } = questionStore;
+const Acts = ({ actStore }) => {
+  const { acts } = actStore;
 
-  const questionValue = React.createRef();
-  const questionParam1 = React.createRef();
-  const questionParam2 = React.createRef();
-  const questionParam3 = React.createRef();
-  const questionParam4 = React.createRef();
-  const questionParam5 = React.createRef();
-  const questionAnswer1 = React.createRef();
-  const questionAnswer2 = React.createRef();
+  const actName = React.createRef();
+  const actSpotifyPlaylist = React.createRef();
+  const actParam1 = React.createRef();
+  const actParam2 = React.createRef();
+  const actParam3 = React.createRef();
+  const actParam4 = React.createRef();
+  const actParam5 = React.createRef();
 
-  const handleSubmitQuestion = e => {
+  const handleSubmitAct = e => {
     e.preventDefault();
-    questionStore.create({
-      value: questionValue.current.value,
-      param1: questionParam1.current.value,
-      param2: questionParam2.current.value,
-      param3: questionParam3.current.value,
-      param4: questionParam4.current.value,
-      param5: questionParam5.current.value,
-      answer1: questionAnswer1.current.value,
-      answer2: questionAnswer2.current.value
+    actStore.create({
+      name: actName.current.value,
+      spotifyPlaylist: actSpotifyPlaylist.current.value,
+      param1: actParam1.current.value,
+      param2: actParam2.current.value,
+      param3: actParam3.current.value,
+      param4: actParam4.current.value,
+      param5: actParam5.current.value
     });
   };
 
-  const handleUpdateQuestion = e => {
+  const handleUpdateAct = e => {
     e.preventDefault();
-    questionStore.update({
+    actStore.update({
       _id: e.currentTarget.children[0].value,
-      value: e.currentTarget.children[1].value,
-      param1: e.currentTarget.children[2].value,
-      param2: e.currentTarget.children[3].value,
-      param3: e.currentTarget.children[4].value,
-      param4: e.currentTarget.children[5].value,
-      param5: e.currentTarget.children[6].value,
-      answer1: e.currentTarget.children[7].value,
-      answer2: e.currentTarget.children[8].value
+      name: e.currentTarget.children[1].value,
+      spotifyPlaylist: e.currentTarget.children[2].value,
+      param1: e.currentTarget.children[3].value,
+      param2: e.currentTarget.children[4].value,
+      param3: e.currentTarget.children[5].value,
+      param4: e.currentTarget.children[6].value,
+      param5: e.currentTarget.children[7].value
     });
   };
 
-  const handleDeleteQuestion = e => {
+  const handleDeleteAct = e => {
     e.preventDefault();
-    questionStore.delete(e.currentTarget.children[0].value);
+    actStore.delete(e.currentTarget.children[0].value);
   };
 
   return (
     <>
       <section>
-        <form method="post" onSubmit={handleSubmitQuestion}>
+        <form method="post" onSubmit={handleSubmitAct}>
           <div>
             <label>
-              <span>Vraag:</span>
-              <input type="text" name="question" ref={questionValue} />
+              <span>Naam:</span>
+              <input type="text" name="name" ref={actName} />
+            </label>
+          </div>
+          <div>
+            <label>
+              <span>Spotify playlist:</span>
+              <input
+                type="text"
+                name="spotifyPlaylist"
+                ref={actSpotifyPlaylist}
+              />
             </label>
           </div>
           <div>
@@ -67,7 +74,7 @@ const Questions = ({ questionStore }) => {
                 max="100"
                 step="1"
                 defaultValue="50"
-                ref={questionParam1}
+                ref={actParam1}
                 name="param1"
               />
             </label>
@@ -81,7 +88,7 @@ const Questions = ({ questionStore }) => {
                 max="100"
                 step="1"
                 defaultValue="50"
-                ref={questionParam2}
+                ref={actParam2}
                 name="param2"
               />
             </label>
@@ -95,7 +102,7 @@ const Questions = ({ questionStore }) => {
                 max="100"
                 step="1"
                 defaultValue="50"
-                ref={questionParam3}
+                ref={actParam3}
                 name="param3"
               />
             </label>
@@ -109,7 +116,7 @@ const Questions = ({ questionStore }) => {
                 max="100"
                 step="1"
                 defaultValue="50"
-                ref={questionParam4}
+                ref={actParam4}
                 name="param4"
               />
             </label>
@@ -123,42 +130,31 @@ const Questions = ({ questionStore }) => {
                 max="100"
                 step="1"
                 defaultValue="50"
-                ref={questionParam5}
+                ref={actParam5}
                 name="param5"
               />
             </label>
           </div>
           <div>
-            <label>
-              <span>Answer1:</span>
-              <input type="text" name="answer1" ref={questionAnswer1} />
-            </label>
-          </div>
-          <div>
-            <label>
-              <span>Answer2:</span>
-              <input type="text" name="answer2" ref={questionAnswer2} />
-            </label>
-          </div>
-          <div>
-            <button type="submit">Add question</button>
+            <button type="submit">Add act</button>
           </div>
         </form>
       </section>
       <section>
         <header>
-          <h1>Questions</h1>
+          <h1>Acts</h1>
         </header>
         <ul>
-          {questions.map(question => (
-            <li key={question._id}>
+          {acts.map(act => (
+            <li key={act._id}>
               <article>
-                <form method="post" onSubmit={handleUpdateQuestion}>
-                  <input type="hidden" name="id" defaultValue={question._id} />
+                <form method="post" onSubmit={handleUpdateAct}>
+                  <input type="hidden" name="id" defaultValue={act._id} />
+                  <input type="text" name="act" defaultValue={act.name} />
                   <input
                     type="text"
-                    name="question"
-                    defaultValue={question.value}
+                    name="spotifyPlaylist"
+                    defaultValue={act.spotifyPlaylist}
                   />
                   <input
                     type="number"
@@ -166,7 +162,7 @@ const Questions = ({ questionStore }) => {
                     max="100"
                     step="1"
                     name="param1"
-                    defaultValue={question.param1}
+                    defaultValue={act.param1}
                   />
                   <input
                     type="number"
@@ -174,7 +170,7 @@ const Questions = ({ questionStore }) => {
                     max="100"
                     step="1"
                     name="param2"
-                    defaultValue={question.param2}
+                    defaultValue={act.param2}
                   />
                   <input
                     type="number"
@@ -182,7 +178,7 @@ const Questions = ({ questionStore }) => {
                     max="100"
                     step="1"
                     name="param3"
-                    defaultValue={question.param3}
+                    defaultValue={act.param3}
                   />
                   <input
                     type="number"
@@ -190,7 +186,7 @@ const Questions = ({ questionStore }) => {
                     max="100"
                     step="1"
                     name="param4"
-                    defaultValue={question.param4}
+                    defaultValue={act.param4}
                   />
                   <input
                     type="number"
@@ -198,22 +194,12 @@ const Questions = ({ questionStore }) => {
                     max="100"
                     step="1"
                     name="param5"
-                    defaultValue={question.param5}
-                  />
-                  <input
-                    type="text"
-                    name="answer1"
-                    defaultValue={question.answer1}
-                  />
-                  <input
-                    type="text"
-                    name="answer2"
-                    defaultValue={question.answer2}
+                    defaultValue={act.param5}
                   />
                   <button type="submit">Update</button>
                 </form>
-                <form method="post" onSubmit={handleDeleteQuestion}>
-                  <input type="hidden" name="id" defaultValue={question._id} />
+                <form method="post" onSubmit={handleDeleteAct}>
+                  <input type="hidden" name="id" defaultValue={act._id} />
                   <button type="submit">Delete</button>
                 </form>
               </article>
@@ -225,8 +211,8 @@ const Questions = ({ questionStore }) => {
   );
 };
 
-Questions.propTypes = {
-  questionStore: PropTypes.observableObject.isRequired
+Acts.propTypes = {
+  actStore: PropTypes.observableObject.isRequired
 };
 
-export default inject(`questionStore`)(observer(Questions));
+export default inject(`actStore`)(observer(Acts));

@@ -1,11 +1,11 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
 import { inject, observer, PropTypes } from "mobx-react";
 import { ROUTES } from "../../constants";
 import Gdpr from "../../components/user/Gdpr";
 //import Characters from "../../components/user/Characters";
 import UserStats from "../../components/user/UserStats";
+import Acts from "./Acts";
 //import styles from "./Home.module.css";
 
 const Home = ({ uiStore, history }) => {
@@ -32,6 +32,7 @@ const Home = ({ uiStore, history }) => {
         </>
       )}
       <UserStats />
+      <Acts />
     </>
   );
 };

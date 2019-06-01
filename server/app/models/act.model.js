@@ -1,19 +1,18 @@
 const mongoose = require('mongoose');
 
-const QuestionSchema = mongoose.Schema(
+const ActSchema = mongoose.Schema(
   {
-    value: String,
+    name: String,
+    spotifyPlaylist: String,
     param1: {type: Number, min: 0, max: 100},
     param2: {type: Number, min: 0, max: 100},
     param3: {type: Number, min: 0, max: 100},
     param4: {type: Number, min: 0, max: 100},
-    param5: {type: Number, min: 0, max: 100},
-    answer1: String,
-    answer2: String
+    param5: {type: Number, min: 0, max: 100}
   },
   {
     timestamps: true
   }
 );
 
-module.exports = mongoose.model('Question', QuestionSchema);
+module.exports = mongoose.model('Act', ActSchema);
