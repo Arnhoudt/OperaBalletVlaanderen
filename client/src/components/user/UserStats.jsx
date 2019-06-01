@@ -3,10 +3,7 @@ import { inject, observer, PropTypes } from "mobx-react";
 import Stats from "./Stats";
 import { withRouter } from "react-router-dom";
 const UserStats = ({ questionStore, answerStore }) => {
-
-  answerStore.getAllByUser().map(answer => {
-    return console.log(answer);
-  });
+  answerStore.getAllByUser().then(data => console.log(data));
   let data = [
     { parameter: `param1`, value: 10 },
     { parameter: `param2`, value: 20 },

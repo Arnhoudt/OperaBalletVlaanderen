@@ -40,13 +40,10 @@ class AnswerStore {
       .catch(e => console.log(`Geen answers beschikbaar`));
   };
 
-  getAllByUser = () =>{
-    return( this.api
-        .getAllByUser()
-        .then(data => {
-          return data;
-        }))
-}
+  getAllByUser = () => {
+    return this.api.getAllByUser().then(data => data);
+  };
+
   create = answer => {
     this.api.create(answer).then(data => this._add(data));
   };
@@ -75,7 +72,8 @@ decorate(AnswerStore, {
   updateAnswer: action,
   update: action,
   create: action,
-  emptyAnswers: action
+  emptyAnswers: action,
+  getAllByUser: action
 });
 
 export default AnswerStore;
