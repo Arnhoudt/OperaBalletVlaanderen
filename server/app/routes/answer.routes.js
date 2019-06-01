@@ -5,7 +5,7 @@ module.exports = app => {
   app.post('/api/answers/add', controller.create);
   app.get('/api/answers', checkTokenAdmin, controller.findAll);
   app.get(
-    '/api/answers/:userId',
+    '/api/answers/byUser',
     checkTokenUserRandom,
     controller.getAllByUserId
   );

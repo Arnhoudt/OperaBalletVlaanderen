@@ -73,9 +73,8 @@ exports.findAll = async (req, res) => {
 };
 
 exports.getAllByUserId = async (req, res) => {
-  const {userId} = req.params;
   try {
-    const answers = await Answer.find({userId: userId});
+    const answers = await Answer.find({userId: req.authUserId});
     res.send(answers);
   } catch (err) {
     return res.status(500).send(err);
