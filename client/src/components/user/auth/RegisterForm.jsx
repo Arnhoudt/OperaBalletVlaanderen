@@ -27,7 +27,9 @@ const RegisterForm = ({ uiStore, history }) => {
     uiStore
       .registerUser(name, email, pwd)
       .then(data => {
-        history.push(ROUTES.home);
+        uiStore.loginUser(email, pwd).then(() => {
+          history.push(ROUTES.home);
+        });
       })
       .catch(data => {
         if (data.message === `Unexpected token P in JSON at position 0`)

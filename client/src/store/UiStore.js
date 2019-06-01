@@ -50,7 +50,7 @@ class UiStore {
       .then(data => {
         this.setAdmin(getAdminFromCookie());
         this.emptyError();
-        Promise.resolve();
+        return Promise.resolve();
       })
       .catch(data => {
         this.setAdmin(null);
@@ -60,7 +60,7 @@ class UiStore {
           if (data.error) this.changeError(data.error);
           if (data.message) this.changeError(data.message);
         }
-        Promise.reject();
+        return Promise.reject();
       });
   };
 
@@ -81,7 +81,7 @@ class UiStore {
       .then(data => {
         this.setUser(getUserFromCookie());
         this.emptyError();
-        Promise.resolve();
+        return Promise.resolve();
       })
       .catch(data => {
         this.setUser(null);
@@ -91,7 +91,7 @@ class UiStore {
           if (data.error) this.changeError(data.error);
           if (data.message) this.changeError(data.message);
         }
-        Promise.reject();
+        return Promise.reject();
       });
   };
 
@@ -111,7 +111,7 @@ class UiStore {
       .delete()
       .then(() => {
         this.setUser(null);
-        Promise.resolve();
+        return Promise.resolve();
       })
       .catch(e => Promise.reject());
   };
