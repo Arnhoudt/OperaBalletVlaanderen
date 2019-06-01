@@ -41,7 +41,9 @@ class UiStore {
 
   registerRandom = () => {
     this.emptyError();
-    return this.authServiceUser.registerRandom();
+    return this.authServiceUser
+      .registerRandom()
+      .then(() => this.setRandomUser(getRandomFromCookie()));
   };
 
   loginAdmin = (username, password) => {

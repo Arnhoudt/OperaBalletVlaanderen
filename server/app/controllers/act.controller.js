@@ -1,31 +1,29 @@
-const Question = require('../models/question.model.js');
+const Act = require('../models/act.model.js');
 
 exports.create = async (req, res) => {
   const {
-    value,
+    name,
+    spotifyPlaylist,
     param1,
     param2,
     param3,
     param4,
-    param5,
-    answer1,
-    answer2
+    param5
   } = req.body;
   try {
-    const question = new Question({
-      value: value,
+    const act = new Act({
+      name: name,
+      spotifyPlaylist: spotifyPlaylist,
       param1: param1,
       param2: param2,
       param3: param3,
       param4: param4,
-      param5: param5,
-      answer1: answer1,
-      answer2: answer2
+      param5: param5
     });
-    question
+    act
       .save()
-      .then(question => {
-        res.send(question);
+      .then(act => {
+        res.send(act);
       })
       .catch(err => {
         res.status(500).send({error: err.todo || 'Error'});
@@ -37,8 +35,17 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    const questions = await Question.find();
-    res.send(questions);
+    const acts = await Act.find();
+    res.send(acts);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};
+
+exports.findById = async (req, res) => {
+  try {
+    const act = await Act.findOne({_id: req.params.actId});
+    res.send(act);
   } catch (err) {
     return res.status(500).send(err);
   }
@@ -46,34 +53,32 @@ exports.findAll = async (req, res) => {
 
 exports.update = async (req, res) => {
   const {
-    value,
+    name,
+    spotifyPlaylist,
     param1,
     param2,
     param3,
     param4,
-    param5,
-    answer1,
-    answer2
+    param5
   } = req.body;
   try {
-    Question.findByIdAndUpdate(
-      req.params.questionId,
+    Act.findByIdAndUpdate(
+      req.params.actId,
       {
         $set: {
-          value: value,
+          name: name,
+          spotifyPlaylist: spotifyPlaylist,
           param1: param1,
           param2: param2,
           param3: param3,
           param4: param4,
-          param5: param5,
-          answer1: answer1,
-          answer2: answer2
+          param5: param5
         }
       },
       {new: true}
     )
-      .then(question => {
-        res.send(question);
+      .then(act => {
+        res.send(act);
       })
       .catch(err => {
         res.status(500).send({error: err.todo || 'Error'});
@@ -85,9 +90,9 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
-    Question.deleteOne({_id: req.params.questionId})
-      .then(question => {
-        res.status(200).send({success: true, data: question});
+    Act.deleteOne({_id: req.params.actId})
+      .then(act => {
+        res.status(200).send({success: true, data: act});
       })
       .catch(err => {
         res.status(500).send({error: err.todo || 'Error'});

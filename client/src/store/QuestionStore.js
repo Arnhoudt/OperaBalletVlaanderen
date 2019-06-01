@@ -79,13 +79,10 @@ class QuestionStore {
 
   findAll = () => {
     this.emptyQuestions();
-    return this.api
-      .findAll()
-      .then(d => {
-        d.forEach(this._add);
-        Promise.resolve({ message: `succes` });
-      })
-      .catch(e => Promise.reject({ message: `failed` }));
+    return this.api.findAll().then(d => {
+      d.forEach(this._add);
+      return d;
+    });
   };
 
   _add = values => {

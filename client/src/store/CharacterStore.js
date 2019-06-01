@@ -39,12 +39,10 @@ class CharacterStore {
 
   findAll = () => {
     this.emptyCharacters();
-    this.api
-      .findAll()
-      .then(d => {
-        d.forEach(this._add);
-      })
-      .catch(e => console.log(`Geen characters beschikbaar`));
+    return this.api.findAll().then(d => {
+      d.forEach(this._add);
+      return d;
+    });
   };
 
   _add = values => {
