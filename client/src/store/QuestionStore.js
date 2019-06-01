@@ -11,14 +11,10 @@ class QuestionStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`questions`);
-    this.findAll().then(mes => {
-      this.updateCurrentQuestion();
-    });
+    this.findAll().then(data => this.updateCurrentQuestion());
   }
 
-  getCurrentIndex = () => {
-    return this.currentIndex;
-  };
+  getCurrentIndex = () => this.currentIndex;
 
   setCurrentIndex = value => {
     this.currentIndex = value;
@@ -26,62 +22,45 @@ class QuestionStore {
   };
 
   updateCurrentQuestion = () => {
-    this.questions.map((question, index) => {
-      if (index === this.currentIndex) {
-        this.currentQuestion = question;
-      }
-      return null;
+    this.questions.forEach((question, i) => {
+      if (i === this.currentIndex) this.currentQuestion = question;
     });
   };
 
-  nextIndex = () => {
-    let currentIndex = this.getCurrentIndex();
-    this.setCurrentIndex((currentIndex += 1));
-  };
+  nextIndex = () => this.setCurrentIndex((this.currentIndex += 1));
+  previousIndex = () => this.setCurrentIndex((this.currentIndex -= 1));
 
-  previousIndex = () => {
-    let currentIndex = this.getCurrentIndex();
-    this.setCurrentIndex((currentIndex -= 1));
-  };
-
-  create = question => {
-    this.api.create(question).then(d => this._add(d));
-  };
+  create = question => this.api.create(question).then(data => this._add(data));
 
   update = question => {
-    this.api.update(question).then(d => {
-      this.questions.forEach((question, index) => {
-        if (question._id === d._id) this.updateQuestion(index, d);
+    this.api.update(question).then(data => {
+      this.questions.forEach((question, i) => {
+        if (question._id === data._id) this.updateQuestion(data, i);
       });
     });
   };
 
-  updateQuestion = (i, d) => {
-    this.questions[i] = d;
-  };
+  updateQuestion = (data, i) => (this.questions[i] = data);
 
   delete = id => {
-    this.questions.forEach((question, index) => {
-      if (question._id === id) {
-        this.questions.splice(index, 1);
-      }
+    this.api.delete({ _id: id }).then(data => {
+      this.questions.forEach((question, i) => {
+        if (question._id === id) this.questions.splice(i, 1);
+      });
     });
-    this.api.delete({ _id: id });
   };
 
   emptyQuestions = () => (this.questions = []);
 
   findAll = () => {
     this.emptyQuestions();
-    return this.api.findAll().then(d => {
-      d.forEach(this._add);
-      return d;
+    return this.api.findAll().then(data => {
+      data.forEach(this._add);
+      return data;
     });
   };
 
-  _add = values => {
-    this.questions.push(values);
-  };
+  _add = values => this.questions.push(values);
 }
 
 decorate(QuestionStore, {

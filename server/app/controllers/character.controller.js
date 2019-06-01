@@ -11,32 +11,26 @@ exports.create = async (req, res) => {
       param4: param4,
       param5: param5
     });
-    character
-      .save()
-      .then(character => {
-        res.send(character);
-      })
-      .catch(err => {
-        res.status(500).send({error: err.todo || 'Error'});
-      });
+    const r = await character.save();
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };
 
 exports.findAll = async (req, res) => {
   try {
-    const characters = await Character.find();
-    res.send(characters);
+    const r = await Character.find();
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };
 
 exports.update = async (req, res) => {
   const {name, param1, param2, param3, param4, param5} = req.body;
   try {
-    Character.findByIdAndUpdate(
+    const r = await Character.findByIdAndUpdate(
       req.params.characterId,
       {
         $set: {
@@ -49,28 +43,18 @@ exports.update = async (req, res) => {
         }
       },
       {new: true}
-    )
-      .then(character => {
-        res.send(character);
-      })
-      .catch(err => {
-        res.status(500).send({error: err.todo || 'Error'});
-      });
+    );
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };
 
 exports.delete = async (req, res) => {
   try {
-    Character.deleteOne({_id: req.params.characterId})
-      .then(character => {
-        res.status(200).send({success: true, data: character});
-      })
-      .catch(err => {
-        res.status(500).send({error: err.todo || 'Error'});
-      });
+    const r = await Character.deleteOne({_id: req.params.characterId});
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };

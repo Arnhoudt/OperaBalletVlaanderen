@@ -13,11 +13,8 @@ const signatureCookie = {
 
 exports.login = async (req, res) => {
   const {email, password} = req.body;
-  if (!email || !password) {
-    return res
-      .status(400)
-      .send({error: 'We hebben je email en wachtwoord nodig'});
-  }
+  if (!email || !password)
+    res.status(400).send({error: 'We hebben je email en wachtwoord nodig'});
   try {
     const emailLowerCase = email.toLowerCase();
     const admin = await Admin.findOne({email: emailLowerCase});
@@ -61,22 +58,18 @@ exports.logout = (req, res) => {
 };
 
 exports.register = async (req, res) => {
-  const admin = await Admin.findOne({_id: req.authUserId});
-  if (admin) {
-    const {email, password, name} = req.body;
-    const user = new Admin({email, password, name});
-    user.save(err => {
-      if (err) {
-        res.status(500).send({
-          success: false,
-          message: 'Email is al in gebruik'
-        });
-      } else {
-        res.status(200).send({
-          success: true,
-          message: 'Welkom bij obv dashboard!'
-        });
-      }
+  try {
+    const admin = await Admin.findOne({_id: req.authUserId});
+    if (admin) {
+      const {email, password, name} = req.body;
+      const user = new Admin({email, password, name});
+      const r = await user.save();
+      res.status(200).send(r);
+    }
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: 'Email is al in gebruik'
     });
   }
 };

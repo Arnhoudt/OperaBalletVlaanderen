@@ -4,7 +4,7 @@ class Api {
   }
 
   findAll = async () => {
-    const r = await fetch(`/api/${this.entity}`);
+    const r = await fetch(`/api/${this.entity}`, this.getOptions(`get`));
     return await r.json();
   };
 
@@ -14,7 +14,7 @@ class Api {
   };
 
   getAllByUser = async () => {
-    const r = await fetch(`/api/${this.entity}/byUser`);
+    const r = await fetch(`/api/${this.entity}/byUser`, this.getOptions(`get`));
     return await r.json();
   };
 

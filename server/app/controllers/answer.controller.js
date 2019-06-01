@@ -13,16 +13,10 @@ exports.create = async (req, res) => {
         value: value,
         userId: userId
       });
-      answer
-        .save()
-        .then(answer => {
-          res.send(answer);
-        })
-        .catch(err => {
-          res.status(500).send({error: err || 'Error'});
-        });
+      const r = await answer.save();
+      res.status(200).send(r);
     } else {
-      Answer.findByIdAndUpdate(
+      const r = await Answer.findByIdAndUpdate(
         currentAnswer._id,
         {
           $set: {
@@ -32,22 +26,17 @@ exports.create = async (req, res) => {
           }
         },
         {new: true}
-      )
-        .then(answer => {
-          res.send(answer);
-        })
-        .catch(err => {
-          res.status(500).send({error: err || 'Error'});
-        });
+      );
+      res.status(200).send(r);
     }
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };
 
 exports.findAll = async (req, res) => {
   try {
-    const answers = await Answer.aggregate([
+    const r = await Answer.aggregate([
       {
         $lookup: {
           from: 'questions',
@@ -66,17 +55,17 @@ exports.findAll = async (req, res) => {
         $unwind: '$question'
       }
     ]);
-    res.send(answers);
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };
 
 exports.getAllByUserId = async (req, res) => {
   try {
-    const answers = await Answer.find({userId: req.authUserId});
-    res.send(answers);
+    const r = await Answer.find({userId: req.authUserId});
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };

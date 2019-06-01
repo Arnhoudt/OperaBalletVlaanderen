@@ -15,11 +15,8 @@ const signatureCookie = {
 
 exports.login = async (req, res) => {
   const {email, password} = req.body;
-  if (!email || !password) {
-    return res
-      .status(400)
-      .send({error: 'We hebben je email en wachtwoord nodig'});
-  }
+  if (!email || !password)
+    res.status(400).send({error: 'We hebben je email en wachtwoord nodig'});
   try {
     const emailLowerCase = email.toLowerCase();
     const user = await User.findOne({email: emailLowerCase});
@@ -64,68 +61,55 @@ exports.logout = (req, res) => {
 
 exports.register = async (req, res) => {
   const {email, password, name} = req.body;
-  const user = new User({_id: req.authUserId, email, password, name});
-  user.save(async err => {
-    if (err) {
-      res.status(500).send({
-        success: false,
-        message: 'Email is al in gebruik'
-      });
-    } else {
-      await UnregisteredUser.deleteOne({_id: req.authUserId});
-      res
-        .clearCookie('token', tokenCookie)
-        .clearCookie('signature', signatureCookie)
-        .status(200)
-        .send({
-          success: true,
-          message: 'Welkom bij obv dashboard!'
-        });
-    }
-  });
+  try {
+    const user = new User({_id: req.authUserId, email, password, name});
+    const r = await user.save();
+    await UnregisteredUser.deleteOne({_id: req.authUserId});
+    res
+      .clearCookie('token', tokenCookie)
+      .clearCookie('signature', signatureCookie)
+      .status(200)
+      .send(r);
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: 'Email is al in gebruik'
+    });
+  }
 };
 
 exports.registerRandom = async (req, res) => {
-  const customId = mongoose.Types.ObjectId();
-  const token = jwt.sign(
-    {_id: customId, name: `random`},
-    process.env.SECRET,
-    {
-      expiresIn: '24h'
-    }
-  );
-  const parts = token.split('.');
-  const signature = parts.splice(2);
-  const unregisteredUser = new UnregisteredUser({_id: customId, token});
-  unregisteredUser.save(err => {
-    if (err) {
-      res.status(500).send({
-        success: false,
-        message: 'User niet geregistreerd'
-      });
-    } else {
-      res
-        .cookie('token', parts.join('.'), tokenCookie)
-        .cookie('signature', signature, signatureCookie)
-        .status(200)
-        .send({
-          success: true,
-          message: 'Succesvol geregistreerd'
-        });
-    }
-  });
+  try {
+    const customId = mongoose.Types.ObjectId();
+    const token = jwt.sign(
+      {_id: customId, name: `random`},
+      process.env.SECRET,
+      {
+        expiresIn: '24h'
+      }
+    );
+    const parts = token.split('.');
+    const signature = parts.splice(2);
+    const unregisteredUser = new UnregisteredUser({_id: customId, token});
+    const r = await unregisteredUser.save();
+    res
+      .cookie('token', parts.join('.'), tokenCookie)
+      .cookie('signature', signature, signatureCookie)
+      .status(200)
+      .send(r);
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: 'User niet geregistreerd'
+    });
+  }
 };
 
 exports.delete = async (req, res) => {
   try {
-    User.deleteOne({_id: req.authUserId})
-      .then(user => {
-        res.status(200).send({success: true, data: user});
-      })
-      .catch(err => {
-        res.status(500).send({error: err.todo || 'Error'});
-      });
+    const r = await User.deleteOne({_id: req.authUserId});
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };

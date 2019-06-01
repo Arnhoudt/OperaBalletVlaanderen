@@ -12,48 +12,39 @@ class ActStore {
     this.findAll();
   }
 
-  create = act => {
-    this.api.create(act).then(d => this._add(d));
-  };
+  create = act => this.api.create(act).then(data => this._add(data));
 
   update = act => {
-    this.api.update(act).then(d => {
-      this.acts.forEach((act, index) => {
-        if (act._id === d._id) this.updateAct(index, d);
+    this.api.update(act).then(data => {
+      this.acts.forEach((act, i) => {
+        if (act._id === data._id) this.updateAct(data, i);
       });
     });
   };
 
-  updateAct = (i, d) => {
-    this.acts[i] = d;
-  };
+  updateAct = (data, i) => (this.acts[i] = data);
 
   delete = id => {
-    this.acts.forEach((act, index) => {
-      if (act._id === id) {
-        this.acts.splice(index, 1);
-      }
+    this.api.delete({ _id: id }).then(data => {
+      this.acts.forEach((act, i) => {
+        if (act._id === id) this.acts.splice(i, 1);
+      });
     });
-    this.api.delete({ _id: id });
   };
 
   emptyActs = () => (this.acts = []);
 
   findAll = () => {
     this.emptyActs();
-    return this.api.findAll().then(d => {
-      d.forEach(this._add);
-      return d;
+    return this.api.findAll().then(data => {
+      data.forEach(this._add);
+      return data;
     });
   };
 
-  findById = id => {
-    return this.api.findById(id).then(d => d);
-  };
+  findById = id => this.api.findById(id).then(data => data);
 
-  _add = values => {
-    return this.acts.push(values);
-  };
+  _add = values => this.acts.push(values);
 }
 
 decorate(ActStore, {

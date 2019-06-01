@@ -19,21 +19,13 @@ class UiStore {
     this.setUser(getUserFromCookie());
     this.setAdmin(getAdminFromCookie());
     if (!getUserFromCookie()) {
-      if (getRandomFromCookie()) {
-        this.setRandomUser(getRandomFromCookie());
-      } else {
-        this.registerRandom();
-      }
+      if (getRandomFromCookie()) this.setRandomUser(getRandomFromCookie());
+      else this.registerRandom();
     }
   }
 
-  emptyError = () => {
-    this.error = ``;
-  };
-
-  changeError = error => {
-    this.error = error;
-  };
+  emptyError = () => (this.error = ``);
+  changeError = error => (this.error = error);
 
   setUser = value => (this.authUser = value);
   setAdmin = value => (this.authAdmin = value);
@@ -43,7 +35,7 @@ class UiStore {
     this.emptyError();
     return this.authServiceUser
       .registerRandom()
-      .then(() => this.setRandomUser(getRandomFromCookie()));
+      .then(data => this.setRandomUser(getRandomFromCookie()));
   };
 
   loginAdmin = (username, password) => {
@@ -52,7 +44,7 @@ class UiStore {
       .then(data => {
         this.setAdmin(getAdminFromCookie());
         this.emptyError();
-        return Promise.resolve();
+        return Promise.resolve(data);
       })
       .catch(data => {
         this.setAdmin(null);
@@ -62,7 +54,7 @@ class UiStore {
           if (data.error) this.changeError(data.error);
           if (data.message) this.changeError(data.message);
         }
-        return Promise.reject();
+        return Promise.reject(data);
       });
   };
 
@@ -72,9 +64,7 @@ class UiStore {
   };
 
   logoutAdmin = () => {
-    return this.authServiceAdmin.logout().then(() => {
-      this.setAdmin(null);
-    });
+    return this.authServiceAdmin.logout().then(data => this.setAdmin(null));
   };
 
   loginUser = (username, password) => {
@@ -83,7 +73,7 @@ class UiStore {
       .then(data => {
         this.setUser(getUserFromCookie());
         this.emptyError();
-        return Promise.resolve();
+        return Promise.resolve(data);
       })
       .catch(data => {
         this.setUser(null);
@@ -93,7 +83,7 @@ class UiStore {
           if (data.error) this.changeError(data.error);
           if (data.message) this.changeError(data.message);
         }
-        return Promise.reject();
+        return Promise.reject(data);
       });
   };
 
@@ -103,19 +93,14 @@ class UiStore {
   };
 
   logoutUser = () => {
-    return this.authServiceUser.logout().then(() => {
-      this.setUser(null);
-    });
+    return this.authServiceUser.logout().then(data => this.setUser(null));
   };
 
   deleteUser = () => {
-    return this.authServiceUser
-      .delete()
-      .then(() => {
-        this.setUser(null);
-        return Promise.resolve();
-      })
-      .catch(e => Promise.reject());
+    return this.authServiceUser.delete().then(data => {
+      this.setUser(null);
+      return data;
+    });
   };
 }
 
