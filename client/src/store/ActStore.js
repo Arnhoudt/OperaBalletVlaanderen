@@ -41,20 +41,14 @@ class ActStore {
 
   findAll = () => {
     this.emptyActs();
-    return this.api
-      .findAll()
-      .then(d => {
-        d.forEach(this._add);
-        return Promise.resolve({ message: `succes` });
-      })
-      .catch(e => Promise.reject({ error: e }));
+    return this.api.findAll().then(d => {
+      d.forEach(this._add);
+      return d;
+    });
   };
 
   findById = id => {
-    return this.api
-      .findById(id)
-      .then(d => Promise.resolve(d))
-      .catch(e => Promise.reject({ error: e }));
+    return this.api.findById(id).then(d => d);
   };
 
   _add = values => {

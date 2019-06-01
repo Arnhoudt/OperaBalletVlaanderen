@@ -32,12 +32,10 @@ class AnswerStore {
 
   findAll = () => {
     this.emptyAnswers();
-    this.api
-      .findAll()
-      .then(d => {
-        d.forEach(this._add);
-      })
-      .catch(e => console.log(`Geen answers beschikbaar`));
+    return this.api.findAll().then(d => {
+      d.forEach(this._add);
+      return d;
+    });
   };
 
   getAllByUser = () => {
