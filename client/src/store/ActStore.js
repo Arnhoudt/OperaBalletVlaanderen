@@ -45,13 +45,20 @@ class ActStore {
       .findAll()
       .then(d => {
         d.forEach(this._add);
-        Promise.resolve({ message: `succes` });
+        return Promise.resolve({ message: `succes` });
       })
-      .catch(e => Promise.reject({ message: `failed` }));
+      .catch(e => Promise.reject({ error: e }));
+  };
+
+  findById = id => {
+    return this.api
+      .findById(id)
+      .then(d => Promise.resolve(d))
+      .catch(e => Promise.reject({ error: e }));
   };
 
   _add = values => {
-    this.acts.push(values);
+    return this.acts.push(values);
   };
 }
 
@@ -63,7 +70,8 @@ decorate(ActStore, {
   delete: action,
   create: action,
   updateAct: action,
-  emptyActs: action
+  emptyActs: action,
+  findById: action
 });
 
 export default ActStore;

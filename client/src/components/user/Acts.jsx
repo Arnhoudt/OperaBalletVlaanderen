@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
-import Act from "../../components/user/Act";
-//import styles from "./Questions.module.css";
+import { Link } from "react-router-dom";
+//import styles from "./Acts.module.css";
 
 const Acts = ({ actStore }) => {
   const { acts } = actStore;
@@ -9,7 +9,9 @@ const Acts = ({ actStore }) => {
   return (
     <>
       {acts.map(act => (
-        <Act key={act._id} act={act} />
+        <Link key={act._id} to={`/actDetail/${act._id}`}>
+          <button>{act.name}</button>
+        </Link>
       ))}
     </>
   );

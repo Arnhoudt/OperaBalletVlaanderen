@@ -42,6 +42,15 @@ exports.findAll = async (req, res) => {
   }
 };
 
+exports.findById = async (req, res) => {
+  try {
+    const act = await Act.findOne({_id: req.params.actId});
+    res.send(act);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};
+
 exports.update = async (req, res) => {
   const {
     name,

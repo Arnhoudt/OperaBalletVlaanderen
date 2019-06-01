@@ -5,7 +5,7 @@ import { ROUTES } from "../../constants";
 import Gdpr from "../../components/user/Gdpr";
 //import Characters from "../../components/user/Characters";
 import UserStats from "../../components/user/UserStats";
-import Acts from "./Acts";
+import Acts from "../../components/user/Acts";
 //import styles from "./Home.module.css";
 
 const Home = ({ uiStore, history }) => {

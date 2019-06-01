@@ -9,6 +9,7 @@ import RegisterAdmin from "./admin/Register";
 import LoginUser from "./user/Login";
 import RegisterUser from "./user/Register";
 import Dashboard from "./admin/Dashboard";
+import ActDetail from "./user/ActDetail";
 import { ROUTES } from "../constants";
 
 const App = () => {
@@ -22,6 +23,10 @@ const App = () => {
         <Route path={ROUTES.loginUser} component={LoginUser} />
         <Route path={ROUTES.registerUser} component={RegisterUser} />
         <Route path={ROUTES.dashboard} component={Dashboard} />
+        <Route
+          path={ROUTES.actDetail}
+          render={({ match }) => <ActDetail id={match.params.id} />}
+        />
       </Switch>
     </main>
   );
