@@ -45,7 +45,7 @@ class AnswerStore {
   };
 
   create = answer => {
-    this.api.create(answer).then(data => this._add(data));
+    return this.api.create(answer).then(data => this._add(data));
   };
 
   update = answer => {

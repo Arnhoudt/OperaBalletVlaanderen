@@ -1,32 +1,55 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { withRouter } from "react-router-dom";
 import { ROUTES } from "../../constants";
 //import styles from "./Answers.module.css";
 
 const Question = ({ uiStore, questionStore, answerStore, history }) => {
-  const handleChangeBinaryQuestion = e => {
-    let userId = null;
-    if (uiStore.authUser) userId = uiStore.authUser._id;
-    if (uiStore.randomUser) userId = uiStore.randomUser._id;
-    if (e.currentTarget.value === `yes`) {
-      answerStore.create({
-        questionId: questionStore.currentQuestion._id,
-        value: true,
-        userId: userId
-      });
-    } else {
-      answerStore.create({
-        questionId: questionStore.currentQuestion._id,
-        value: false,
-        userId: userId
-      });
-    }
+  let userId = null;
+  if (uiStore.authUser) userId = uiStore.authUser._id;
+  if (uiStore.randomUser) userId = uiStore.randomUser._id;
 
-    questionStore.nextIndex();
-    if (questionStore.questions.length <= questionStore.getCurrentIndex()) {
-      history.push(ROUTES.home);
+  const handleKeyUp = e => {
+    const key = String.fromCharCode(e.keyCode);
+    if (key === `A` || key === `B`) {
+      let value = ``;
+      if (key === `A`) value = true;
+      if (key === `B`) value = false;
+      answerStore
+        .create({
+          questionId: questionStore.currentQuestion._id,
+          value: value,
+          userId: userId
+        })
+        .then(() => {
+          questionStore.nextIndex();
+          if (
+            questionStore.questions.length <= questionStore.getCurrentIndex()
+          ) {
+            history.push(ROUTES.home);
+          }
+        });
     }
+  };
+
+  useEffect(() => {
+    document.addEventListener(`keyup`, handleKeyUp);
+    return () => document.removeEventListener(`keyup`, handleKeyUp);
+  });
+
+  const handleChangeBinaryQuestion = e => {
+    answerStore
+      .create({
+        questionId: questionStore.currentQuestion._id,
+        value: e.currentTarget.value,
+        userId: userId
+      })
+      .then(() => {
+        questionStore.nextIndex();
+        if (questionStore.questions.length <= questionStore.getCurrentIndex()) {
+          history.push(ROUTES.home);
+        }
+      });
   };
 
   const handleClickPrevious = e => {
@@ -39,10 +62,10 @@ const Question = ({ uiStore, questionStore, answerStore, history }) => {
       {questionStore.getCurrentIndex() > 0 ? (
         <button onClick={handleClickPrevious}>PreviousQuestion</button>
       ) : null}
-      <button onClick={handleChangeBinaryQuestion} value={`yes`}>
+      <button onClick={handleChangeBinaryQuestion} value={true}>
         YES
       </button>
-      <button onClick={handleChangeBinaryQuestion} value={`no`}>
+      <button onClick={handleChangeBinaryQuestion} value={false}>
         NO
       </button>
     </>

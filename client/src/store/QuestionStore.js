@@ -16,6 +16,12 @@ class QuestionStore {
     });
   }
 
+  getAllQuestions = () =>{
+    return this.findAll().then(e=>{
+          return this.questions;
+    });
+  }
+
   getCurrentIndex = () => {
     return this.currentIndex;
   };
@@ -102,7 +108,8 @@ decorate(QuestionStore, {
   currentQuestion: observable,
   updateCurrentQuestion: action,
   emptyQuestions: action,
-  previousIndex: action
+  previousIndex: action,
+  getAllQuestions: action
 });
 
 export default QuestionStore;
