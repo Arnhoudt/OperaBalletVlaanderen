@@ -2,13 +2,10 @@ import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import Stats from "./Stats";
 import { withRouter } from "react-router-dom";
-//import styles from "./Answers.module.css";
-
 const UserStats = ({ questionStore, answerStore }) => {
-  let variablele = 0;
-  //console.log(`answer = ` + answerStore.getAllByUserId(1));
-  answerStore.answers.map(answer => {
-    return console.log(variablele++);
+
+  answerStore.getAllByUser().map(answer => {
+    return console.log(answer);
   });
   let data = [
     { parameter: `param1`, value: 10 },

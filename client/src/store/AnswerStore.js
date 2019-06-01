@@ -40,15 +40,13 @@ class AnswerStore {
       .catch(e => console.log(`Geen answers beschikbaar`));
   };
 
-  getAllByUserId = id =>{
-    this.api
-        .getAllByUserId(id)
-        .then(data =>{
-          console.log("data = ");
-          console.log(data);
-        })
-  }
-
+  getAllByUser = () =>{
+    return( this.api
+        .getAllByUser()
+        .then(data => {
+          return data;
+        }))
+}
   create = answer => {
     this.api.create(answer).then(data => this._add(data));
   };
