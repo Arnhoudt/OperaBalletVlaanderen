@@ -10,7 +10,7 @@ const Characters = ({ characterStore }) => {
     <>
       <h2>Characters:</h2>
       {characters.map(character => (
-        <Link key={character._id} to={`/characterDetail/${character._id}`}>
+        <Link key={character.id} to={`/characterDetail/${character.id}`}>
           <button>{character.name}</button>
         </Link>
       ))}

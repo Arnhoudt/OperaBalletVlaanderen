@@ -18,8 +18,6 @@ const UserStats = ({ questionStore, answerStore }) => {
       let parameterArray = [0, 0, 0, 0, 0];
       const answers = await answerStore.findAllByUser();
       const questions = await questionStore.findAll();
-      console.log(answers);
-      console.log(questions);
       if (answers && questions) {
         answers.forEach(answer => {
           answerCount += 1;
