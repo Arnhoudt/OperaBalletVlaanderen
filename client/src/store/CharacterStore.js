@@ -48,6 +48,8 @@ class CharacterStore {
     });
   };
 
+  findById = id => this.api.findById(id).then(data => data);
+
   _add = values => this.characters.push(values);
 }
 
@@ -60,7 +62,8 @@ decorate(CharacterStore, {
   create: action,
   updateCharacter: action,
   emptyCharacters: action,
-  error: observable
+  error: observable,
+  findById: action
 });
 
 export default CharacterStore;

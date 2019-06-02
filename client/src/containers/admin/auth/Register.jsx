@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 //import styles from "./Register.module.css";
-import RegisterForm from "../../components/admin/auth/RegisterForm";
-import withAuthentication from "../../components/admin/auth/WithAuthentication";
-import { ROUTES } from "../../constants";
+import RegisterForm from "../../../components/admin/auth/RegisterForm";
+import withAuthentication from "../../../components/admin/auth/WithAuthentication";
+import { ROUTES } from "../../../constants";
 
 const Register = () => {
   return (

@@ -6,6 +6,7 @@ import Gdpr from "../../components/user/Gdpr";
 //import Characters from "../../components/user/Characters";
 import UserStats from "../../components/user/UserStats";
 import Acts from "../../components/user/Acts";
+import Characters from "../../components/user/Characters";
 //import styles from "./Home.module.css";
 
 const Home = ({ uiStore, history }) => {
@@ -33,6 +34,7 @@ const Home = ({ uiStore, history }) => {
       )}
       <UserStats />
       <Acts />
+      <Characters />
     </>
   );
 };
