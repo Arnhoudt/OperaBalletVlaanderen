@@ -12,42 +12,42 @@ class CharacterStore {
     this.findAll();
   }
 
-  create = character => {
-    this.api.create(character).then(d => this._add(d));
-  };
+  create = character =>
+    this.api.create(character).then(data => this._add(data));
 
   update = character => {
-    this.api.update(character).then(d => {
-      this.characters.forEach((index, character) => {
-        if (character._id === d._id) this.updateCharacter(index, d);
+    this.api.update(character).then(data => {
+      this.characters.forEach((character, i) => {
+        if (character._id === data._id) {
+          this.updateCharacter(data, i);
+        }
       });
     });
   };
 
-  updateCharacter = (i, d) => {
-    this.characters[i] = d;
-  };
+  updateCharacter = (data, i) => (this.characters[i] = data);
 
   delete = id => {
-    this.characters.forEach((character, index) => {
-      if (character._id === id) this.characters.splice(index, 1);
+    this.api.delete({ _id: id }).then(data => {
+      this.characters.forEach((character, i) => {
+        if (character._id === id) {
+          this.characters.splice(i, 1);
+        }
+      });
     });
-    this.api.delete({ _id: id });
   };
 
   emptyCharacters = () => (this.characters = []);
 
   findAll = () => {
     this.emptyCharacters();
-    return this.api.findAll().then(d => {
-      d.forEach(this._add);
-      return d;
+    return this.api.findAll().then(data => {
+      data.forEach(this._add);
+      return data;
     });
   };
 
-  _add = values => {
-    this.characters.push(values);
-  };
+  _add = values => this.characters.push(values);
 }
 
 decorate(CharacterStore, {

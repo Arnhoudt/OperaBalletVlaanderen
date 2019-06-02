@@ -5,69 +5,42 @@ class Auth {
     this.entity = entity;
   }
 
-  login = (email, passwordS) => {
-    const password = sha1(`${passwordS}natr1umchl0ride`);
-    return fetch(
+  login = async (email, passwordS) => {
+    const password = await sha1(`${passwordS}natr1umchl0ride`);
+    const r = await fetch(
       `/auth/${this.entity}/login`,
       this.getOptions(`post`, { email, password })
-    ).then(res => {
-      return res.json().then(data => {
-        if (res.status === 200) {
-          return Promise.resolve(data);
-        } else {
-          return Promise.reject(data);
-        }
-      });
-    });
+    );
+    return await r.json();
   };
 
-  logout = () => {
-    return fetch(`/auth/${this.entity}/logout`, this.getOptions(`post`));
+  logout = async () => {
+    return await fetch(`/auth/${this.entity}/logout`, this.getOptions(`post`));
   };
 
-  register = (name, email, passwordS) => {
-    const password = sha1(`${passwordS}natr1umchl0ride`);
-    return fetch(
+  register = async (name, email, passwordS) => {
+    const password = await sha1(`${passwordS}natr1umchl0ride`);
+    const r = await fetch(
       `/auth/${this.entity}/register`,
       this.getOptions(`post`, { name, email, password })
-    ).then(res => {
-      return res.json().then(data => {
-        if (res.status === 200) {
-          return Promise.resolve(data);
-        } else {
-          return Promise.reject(data);
-        }
-      });
-    });
+    );
+    return await r.json();
   };
 
-  registerRandom = () => {
-    return fetch(
+  registerRandom = async () => {
+    const r = await fetch(
       `/auth/${this.entity}/registerRandom`,
       this.getOptions(`post`)
-    ).then(res => {
-      return res.json().then(data => {
-        if (res.status === 200) {
-          return Promise.resolve(data);
-        } else {
-          return Promise.reject(data);
-        }
-      });
-    });
+    );
+    return await r.json();
   };
 
-  delete = () => {
-    return fetch(`/auth/${this.entity}/delete`, this.getOptions(`delete`)).then(
-      res => {
-        return res.json().then(data => {
-          if (res.status === 200) {
-            return Promise.resolve(data);
-          } else {
-            return Promise.reject(data);
-          }
-        });
-      }
+  delete = async () => {
+    const r = await fetch(
+      `/auth/${this.entity}/delete`,
+      this.getOptions(`delete`)
     );
+    return await r.json();
   };
 
   getOptions = (method, body = null) => {

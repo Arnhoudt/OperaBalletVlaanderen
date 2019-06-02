@@ -20,34 +20,28 @@ exports.create = async (req, res) => {
       param4: param4,
       param5: param5
     });
-    act
-      .save()
-      .then(act => {
-        res.send(act);
-      })
-      .catch(err => {
-        res.status(500).send({error: err.todo || 'Error'});
-      });
+    const r = await act.save();
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };
 
 exports.findAll = async (req, res) => {
   try {
-    const acts = await Act.find();
-    res.send(acts);
+    const r = await Act.find();
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };
 
 exports.findById = async (req, res) => {
   try {
-    const act = await Act.findOne({_id: req.params.actId});
-    res.send(act);
+    const r = await Act.findOne({_id: req.params.actId});
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };
 
@@ -62,7 +56,7 @@ exports.update = async (req, res) => {
     param5
   } = req.body;
   try {
-    Act.findByIdAndUpdate(
+    const r = await Act.findByIdAndUpdate(
       req.params.actId,
       {
         $set: {
@@ -76,28 +70,18 @@ exports.update = async (req, res) => {
         }
       },
       {new: true}
-    )
-      .then(act => {
-        res.send(act);
-      })
-      .catch(err => {
-        res.status(500).send({error: err.todo || 'Error'});
-      });
+    );
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };
 
 exports.delete = async (req, res) => {
   try {
-    Act.deleteOne({_id: req.params.actId})
-      .then(act => {
-        res.status(200).send({success: true, data: act});
-      })
-      .catch(err => {
-        res.status(500).send({error: err.todo || 'Error'});
-      });
+    const r = await Act.deleteOne({_id: req.params.actId});
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };

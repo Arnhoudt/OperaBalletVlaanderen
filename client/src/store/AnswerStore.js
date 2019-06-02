@@ -32,35 +32,29 @@ class AnswerStore {
 
   findAll = () => {
     this.emptyAnswers();
-    return this.api.findAll().then(d => {
-      d.forEach(this._add);
-      return d;
+    return this.api.findAll().then(data => {
+      data.forEach(this._add);
+      return data;
     });
   };
 
-  getAllByUser = () => {
-    return this.api.getAllByUser().then(data => data);
-  };
+  getAllByUser = () => this.api.getAllByUser().then(data => data);
 
-  create = answer => {
-    return this.api.create(answer).then(data => this._add(data));
-  };
+  create = answer => this.api.create(answer).then(data => this._add(data));
 
   update = answer => {
     this.api.update(answer).then(data => {
-      this.answers.forEach((index, answer) => {
-        if (answer._id === data._id) this.updateAnswer(index, data);
+      this.answers.forEach((answer, i) => {
+        if (answer._id === data._id) {
+          this.updateAnswer(data, i);
+        }
       });
     });
   };
 
-  updateAnswer = (i, data) => {
-    this.answers[i] = data;
-  };
+  updateAnswer = (data, i) => (this.answers[i] = data);
 
-  _add = values => {
-    this.answers.push(values);
-  };
+  _add = values => this.answers.push(values);
 }
 
 decorate(AnswerStore, {

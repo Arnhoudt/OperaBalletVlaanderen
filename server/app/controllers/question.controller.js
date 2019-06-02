@@ -22,25 +22,19 @@ exports.create = async (req, res) => {
       answer1: answer1,
       answer2: answer2
     });
-    question
-      .save()
-      .then(question => {
-        res.send(question);
-      })
-      .catch(err => {
-        res.status(500).send({error: err.todo || 'Error'});
-      });
+    const r = await question.save();
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };
 
 exports.findAll = async (req, res) => {
   try {
-    const questions = await Question.find();
-    res.send(questions);
+    const r = await Question.find();
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };
 
@@ -56,7 +50,7 @@ exports.update = async (req, res) => {
     answer2
   } = req.body;
   try {
-    Question.findByIdAndUpdate(
+    const r = await Question.findByIdAndUpdate(
       req.params.questionId,
       {
         $set: {
@@ -71,28 +65,18 @@ exports.update = async (req, res) => {
         }
       },
       {new: true}
-    )
-      .then(question => {
-        res.send(question);
-      })
-      .catch(err => {
-        res.status(500).send({error: err.todo || 'Error'});
-      });
+    );
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };
 
 exports.delete = async (req, res) => {
   try {
-    Question.deleteOne({_id: req.params.questionId})
-      .then(question => {
-        res.status(200).send({success: true, data: question});
-      })
-      .catch(err => {
-        res.status(500).send({error: err.todo || 'Error'});
-      });
+    const r = await Question.deleteOne({_id: req.params.questionId});
+    res.status(200).send(r);
   } catch (err) {
-    return res.status(500).send(err);
+    res.status(500).send(err);
   }
 };

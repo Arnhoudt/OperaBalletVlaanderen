@@ -7,15 +7,23 @@ import { ROUTES } from "../../constants";
 const Question = ({ uiStore, questionStore, answerStore, history }) => {
   const { currentQuestion, questions } = questionStore;
   let userId = null;
-  if (uiStore.authUser) userId = uiStore.authUser._id;
-  if (uiStore.randomUser) userId = uiStore.randomUser._id;
+  if (uiStore.authUser) {
+    userId = uiStore.authUser._id;
+  }
+  if (uiStore.randomUser) {
+    userId = uiStore.randomUser._id;
+  }
 
   const handleKeyUp = e => {
     const key = String.fromCharCode(e.keyCode);
     if (key === `A` || key === `B`) {
       let value = ``;
-      if (key === `A`) value = true;
-      if (key === `B`) value = false;
+      if (key === `A`) {
+        value = true;
+      }
+      if (key === `B`) {
+        value = false;
+      }
       answerStore
         .create({
           questionId: currentQuestion._id,

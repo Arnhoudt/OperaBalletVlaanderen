@@ -13,13 +13,19 @@ const RegisterForm = ({ uiStore, history }) => {
   const [error, setError] = useState(``);
 
   const handleChange = e => {
-    if (e.currentTarget.name === `name`) setName(e.currentTarget.value);
+    if (e.currentTarget.name === `name`) {
+      setName(e.currentTarget.value);
+    }
     if (e.currentTarget.name === `email`) {
       setEmail(e.currentTarget.value);
       setError(``);
     }
-    if (e.currentTarget.name === `pwd2`) setPwd2(e.currentTarget.value);
-    if (e.currentTarget.name === `pwd`) setPwd(e.currentTarget.value);
+    if (e.currentTarget.name === `pwd2`) {
+      setPwd2(e.currentTarget.value);
+    }
+    if (e.currentTarget.name === `pwd`) {
+      setPwd(e.currentTarget.value);
+    }
   };
 
   const handleSubmit = e => {
@@ -32,9 +38,11 @@ const RegisterForm = ({ uiStore, history }) => {
         });
       })
       .catch(data => {
-        if (data.message === `Unexpected token P in JSON at position 0`)
+        if (data.message === `Unexpected token P in JSON at position 0`) {
           setError(`Verbinding verbroken`);
-        else setError(data.message);
+        } else {
+          setError(data.message);
+        }
       });
   };
 
