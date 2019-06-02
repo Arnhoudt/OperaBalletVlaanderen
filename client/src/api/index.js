@@ -13,8 +13,16 @@ class Api {
     return await r.json();
   };
 
-  getAllByUser = async () => {
-    const r = await fetch(`/api/${this.entity}/byUser`, this.getOptions(`get`));
+  findAllByUser = async () => {
+    const r = await fetch(`/api/${this.entity}/user`, this.getOptions(`get`));
+    return await r.json();
+  };
+
+  findAllByUserId = async id => {
+    const r = await fetch(
+      `/api/${this.entity}/user/${id}`,
+      this.getOptions(`get`)
+    );
     return await r.json();
   };
 
@@ -28,7 +36,7 @@ class Api {
 
   update = async obj => {
     const r = await fetch(
-      `/api/${this.entity}/${obj._id}`,
+      `/api/${this.entity}/${obj.id}`,
       this.getOptions(`put`, obj)
     );
     return await r.json();
@@ -36,7 +44,7 @@ class Api {
 
   delete = async obj => {
     const r = await fetch(
-      `/api/${this.entity}/${obj._id}`,
+      `/api/${this.entity}/${obj.id}`,
       this.getOptions(`delete`)
     );
     return r.json();

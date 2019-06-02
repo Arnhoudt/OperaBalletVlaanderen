@@ -1,56 +1,66 @@
-import { decorate, configure, observable, action } from "mobx";
+import {
+  decorate,
+  configure,
+  observable,
+  action,
+  runInAction,
+  observe
+} from "mobx";
 import Api from "../api";
+import Character from "../models/Character";
 
 configure({ enforceActions: `observed` });
 
 class CharacterStore {
   characters = [];
-  error = ``;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`characters`);
-    this.findAll().catch(error => (this.error = error));
+    if (this.rootStore.uiStore.authAdmin) {
+      this.findAll();
+    }
+    observe(this.rootStore.uiStore, `authAdmin`, change => {
+      if (change.newValue) {
+        this.findAll();
+      } else {
+        runInAction(() => (this.characters = []));
+      }
+    });
   }
 
-  create = character =>
-    this.api.create(character).then(data => this._add(data));
-
-  update = character => {
-    this.api.update(character).then(data => {
-      this.characters.forEach((character, index) => {
-        if (character._id === data._id) {
-          this.updateCharacter(data, index);
-        }
-      });
-    });
+  create = character => {
+    const newCharacter = new Character();
+    newCharacter.updateFromServer(character);
+    this.characters.push(newCharacter);
+    this.api
+      .create(newCharacter)
+      .then(data => newCharacter.updateFromServer(data));
   };
 
-  updateCharacter = (data, index) => (this.characters[index] = data);
+  update = character => {
+    this.api.update(character).then(data => character.updateFromServer(data));
+  };
 
-  delete = id => {
-    this.api.delete({ _id: id }).then(data => {
-      this.characters.forEach((character, index) => {
-        if (character._id === id) {
-          this.characters.splice(index, 1);
-        }
-      });
-    });
+  delete = character => {
+    this.characters.remove(character);
+    this.api.delete(character);
   };
 
   emptyCharacters = () => (this.characters = []);
 
   findAll = () => {
     this.emptyCharacters();
-    return this.api.findAll().then(data => {
-      data.forEach(this._add);
-      return data;
-    });
+    this.api.findAll().then(data => data.forEach(this._add));
   };
 
   findById = id => this.api.findById(id).then(data => data);
 
-  _add = values => this.characters.push(values);
+  _add = values => {
+    const character = new Character();
+    character.updateFromServer(values);
+    runInAction(() => this.characters.push(character));
+  };
 }
 
 decorate(CharacterStore, {
@@ -60,9 +70,7 @@ decorate(CharacterStore, {
   update: action,
   delete: action,
   create: action,
-  updateCharacter: action,
   emptyCharacters: action,
-  error: observable,
   findById: action
 });
 

@@ -14,7 +14,7 @@ const UserStats = ({ questionStore, answerStore }) => {
     const f = async () => {
       let answerCount = 0;
       let parameterArray = [0, 0, 0, 0, 0];
-      const answers = await answerStore.getAllByUser();
+      const answers = await answerStore.findAllByUser();
       const questions = await questionStore.findAll();
       answers.forEach(answer => {
         answerCount += 1;

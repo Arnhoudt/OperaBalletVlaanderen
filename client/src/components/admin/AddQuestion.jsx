@@ -2,9 +2,7 @@ import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 //import styles from "./Answers.module.css";
 
-const Questions = ({ questionStore }) => {
-  const { questions } = questionStore;
-
+const AddQuestion = ({ questionStore }) => {
   const questionValue = React.createRef();
   const questionParam1 = React.createRef();
   const questionParam2 = React.createRef();
@@ -26,26 +24,6 @@ const Questions = ({ questionStore }) => {
       answer1: questionAnswer1.current.value,
       answer2: questionAnswer2.current.value
     });
-  };
-
-  const handleUpdateQuestion = e => {
-    e.preventDefault();
-    questionStore.update({
-      _id: e.currentTarget.children[0].value,
-      value: e.currentTarget.children[1].value,
-      param1: e.currentTarget.children[2].value,
-      param2: e.currentTarget.children[3].value,
-      param3: e.currentTarget.children[4].value,
-      param4: e.currentTarget.children[5].value,
-      param5: e.currentTarget.children[6].value,
-      answer1: e.currentTarget.children[7].value,
-      answer2: e.currentTarget.children[8].value
-    });
-  };
-
-  const handleDeleteQuestion = e => {
-    e.preventDefault();
-    questionStore.delete(e.currentTarget.children[0].value);
   };
 
   return (
@@ -145,88 +123,12 @@ const Questions = ({ questionStore }) => {
           </div>
         </form>
       </section>
-      <section>
-        <header>
-          <h1>Questions</h1>
-        </header>
-        <ul>
-          {questions.map(question => (
-            <li key={question._id}>
-              <article>
-                <form method="post" onSubmit={handleUpdateQuestion}>
-                  <input type="hidden" name="id" defaultValue={question._id} />
-                  <input
-                    type="text"
-                    name="question"
-                    defaultValue={question.value}
-                  />
-                  <input
-                    type="number"
-                    min="0"
-                    max="50"
-                    step="1"
-                    name="param1"
-                    defaultValue={question.param1}
-                  />
-                  <input
-                    type="number"
-                    min="0"
-                    max="50"
-                    step="1"
-                    name="param2"
-                    defaultValue={question.param2}
-                  />
-                  <input
-                    type="number"
-                    min="0"
-                    max="50"
-                    step="1"
-                    name="param3"
-                    defaultValue={question.param3}
-                  />
-                  <input
-                    type="number"
-                    min="0"
-                    max="50"
-                    step="1"
-                    name="param4"
-                    defaultValue={question.param4}
-                  />
-                  <input
-                    type="number"
-                    min="0"
-                    max="50"
-                    step="1"
-                    name="param5"
-                    defaultValue={question.param5}
-                  />
-                  <input
-                    type="text"
-                    name="answer1"
-                    defaultValue={question.answer1}
-                  />
-                  <input
-                    type="text"
-                    name="answer2"
-                    defaultValue={question.answer2}
-                  />
-                  <button type="submit">Update</button>
-                </form>
-                <form method="post" onSubmit={handleDeleteQuestion}>
-                  <input type="hidden" name="id" defaultValue={question._id} />
-                  <button type="submit">Delete</button>
-                </form>
-              </article>
-            </li>
-          ))}
-        </ul>
-      </section>
     </>
   );
 };
 
-Questions.propTypes = {
+AddQuestion.propTypes = {
   questionStore: PropTypes.observableObject.isRequired
 };
 
-export default inject(`questionStore`)(observer(Questions));
+export default inject(`questionStore`)(observer(AddQuestion));

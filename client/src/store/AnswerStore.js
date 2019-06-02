@@ -7,22 +7,22 @@ import {
   runInAction
 } from "mobx";
 import Api from "../api";
+import Answer from "../models/Answer";
 
 configure({ enforceActions: `observed` });
 
 class AnswerStore {
   answers = [];
-  error = ``;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`answers`);
     if (this.rootStore.uiStore.authAdmin) {
-      this.findAll().catch(error => (this.error = error));
+      this.findAll();
     }
     observe(this.rootStore.uiStore, `authAdmin`, change => {
       if (change.newValue) {
-        this.findAll().catch(error => (this.error = error));
+        this.findAll();
       } else {
         runInAction(() => (this.answers = []));
       }
@@ -33,41 +33,43 @@ class AnswerStore {
 
   findAll = () => {
     this.emptyAnswers();
-    return this.api.findAll().then(data => {
-      data.forEach(this._add);
-      return data;
-    });
+    this.api.findAll().then(data => data.forEach(this._add));
   };
 
-  getAllByUser = () => this.api.getAllByUser().then(data => data);
+  findAllByUser = () => this.api.findAllByUser().then(data => data);
 
-  create = answer => this.api.create(answer).then(data => this._add(data));
+  create = answer => {
+    const newAnswer = new Answer();
+    newAnswer.updateFromServer(answer);
+    this.answers.push(newAnswer);
+    this.api.create(newAnswer).then(data => newAnswer.updateFromServer(data));
+  };
 
   update = answer => {
-    this.api.update(answer).then(data => {
-      this.answers.forEach((answer, index) => {
-        if (answer._id === data._id) {
-          this.updateAnswer(data, index);
-        }
-      });
-    });
+    this.api.update(answer).then(data => answer.updateFromServer(data));
   };
 
-  updateAnswer = (data, index) => (this.answers[index] = data);
+  delete = answer => {
+    this.answers.remove(answer);
+    this.api.delete(answer);
+  };
 
-  _add = values => this.answers.push(values);
+  _add = values => {
+    const answer = new Answer();
+    answer.updateFromServer(values);
+    runInAction(() => this.answers.push(answer));
+  };
 }
 
 decorate(AnswerStore, {
   answers: observable,
   findAll: action,
   _add: action,
-  updateAnswer: action,
   update: action,
   create: action,
   emptyAnswers: action,
-  getAllByUser: action,
-  error: observable
+  findAllByUser: action,
+  delete: action
 });
 
 export default AnswerStore;

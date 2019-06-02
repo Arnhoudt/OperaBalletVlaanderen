@@ -36,34 +36,25 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    const r = await Answer.aggregate([
-      {
-        $lookup: {
-          from: 'questions',
-          localField: 'questionId',
-          foreignField: '_id',
-          as: 'question'
-        }
-      },
-      {
-        $project: {
-          value: 1,
-          question: {value: 1}
-        }
-      },
-      {
-        $unwind: '$question'
-      }
-    ]);
+    const r = await Answer.find();
     res.status(200).send(r);
   } catch (error) {
     res.status(500).send(error);
   }
 };
 
-exports.getAllByUserId = async (req, res) => {
+exports.findAllByUserId = async (req, res) => {
   try {
     const r = await Answer.find({userId: req.authUserId});
+    res.status(200).send(r);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+exports.delete = async (req, res) => {
+  try {
+    const r = await Answer.deleteOne({_id: req.params.answerId});
     res.status(200).send(r);
   } catch (error) {
     res.status(500).send(error);

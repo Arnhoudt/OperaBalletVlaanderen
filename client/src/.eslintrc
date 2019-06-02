@@ -2,8 +2,6 @@
   "extends": "react-app",
   "plugins": ["react-hooks"],
   "rules": {
-    "quotes": ["error", "backtick"],
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "quotes": ["error", "backtick"]
   }
 }
