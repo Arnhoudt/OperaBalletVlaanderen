@@ -21,8 +21,7 @@ class UiStore {
     if (!getUserFromCookie()) {
       if (getRandomFromCookie()) {
         this.setRandomUser(getRandomFromCookie());
-      }
-      else {
+      } else {
         this.registerRandom();
       }
     }
@@ -43,23 +42,11 @@ class UiStore {
   };
 
   loginAdmin = (username, password) => {
-    return this.authServiceAdmin
-      .login(username, password)
-      .then(data => {
-        this.setAdmin(getAdminFromCookie());
-        this.emptyError();
-        return Promise.resolve(data);
-      })
-      .catch(data => {
-        this.setAdmin(null);
-        if (data.message === `Unexpected token P in JSON at position 0`) {
-          this.changeError(`Verbinding verbroken`);
-        } else {
-          if (data.error) this.changeError(data.error);
-          if (data.message) this.changeError(data.message);
-        }
-        return Promise.reject(data);
-      });
+    return this.authServiceAdmin.login(username, password).then(data => {
+      this.setAdmin(getAdminFromCookie());
+      this.emptyError();
+      return data;
+    });
   };
 
   registerAdmin = (name, email, pwd) => {
@@ -72,23 +59,11 @@ class UiStore {
   };
 
   loginUser = (username, password) => {
-    return this.authServiceUser
-      .login(username, password)
-      .then(data => {
-        this.setUser(getUserFromCookie());
-        this.emptyError();
-        return Promise.resolve(data);
-      })
-      .catch(data => {
-        this.setUser(null);
-        if (data.message === `Unexpected token P in JSON at position 0`) {
-          this.changeError(`Verbinding verbroken`);
-        } else {
-          if (data.error) this.changeError(data.error);
-          if (data.message) this.changeError(data.message);
-        }
-        return Promise.reject(data);
-      });
+    return this.authServiceUser.login(username, password).then(data => {
+      this.setUser(getUserFromCookie());
+      this.emptyError();
+      return data;
+    });
   };
 
   registerUser = (name, email, pwd) => {

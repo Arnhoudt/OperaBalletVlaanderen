@@ -15,6 +15,15 @@ const LoginForm = ({ uiStore, history }) => {
       .loginUser(emailInput.current.value, pwdInput.current.value)
       .then(() => {
         history.push(ROUTES.home);
+      })
+      .catch(data => {
+        uiStore.setUser(null);
+        if (data.message === `Unexpected token P in JSON at position 0`) {
+          uiStore.changeError(`Verbinding verbroken`);
+        } else {
+          if (data.error) uiStore.changeError(data.error);
+          if (data.message) uiStore.changeError(data.message);
+        }
       });
   };
 
