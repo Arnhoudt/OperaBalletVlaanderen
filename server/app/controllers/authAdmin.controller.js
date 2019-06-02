@@ -13,8 +13,9 @@ const signatureCookie = {
 
 exports.login = async (req, res) => {
   const {email, password} = req.body;
-  if (!email || !password)
+  if (!email || !password) {
     res.status(400).send({error: 'We hebben je email en wachtwoord nodig'});
+  }
   try {
     const emailLowerCase = email.toLowerCase();
     const admin = await Admin.findOne({email: emailLowerCase});

@@ -17,7 +17,9 @@ class ActStore {
   update = act => {
     this.api.update(act).then(data => {
       this.acts.forEach((act, i) => {
-        if (act._id === data._id) this.updateAct(data, i);
+        if (act._id === data._id) {
+          this.updateAct(data, i);
+        }
       });
     });
   };
@@ -27,7 +29,9 @@ class ActStore {
   delete = id => {
     this.api.delete({ _id: id }).then(data => {
       this.acts.forEach((act, i) => {
-        if (act._id === id) this.acts.splice(i, 1);
+        if (act._id === id) {
+          this.acts.splice(i, 1);
+        }
       });
     });
   };

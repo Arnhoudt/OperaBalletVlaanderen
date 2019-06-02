@@ -19,8 +19,12 @@ class UiStore {
     this.setUser(getUserFromCookie());
     this.setAdmin(getAdminFromCookie());
     if (!getUserFromCookie()) {
-      if (getRandomFromCookie()) this.setRandomUser(getRandomFromCookie());
-      else this.registerRandom();
+      if (getRandomFromCookie()) {
+        this.setRandomUser(getRandomFromCookie());
+      }
+      else {
+        this.registerRandom();
+      }
     }
   }
 

@@ -16,7 +16,9 @@ class AnswerStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`answers`);
-    if (this.rootStore.uiStore.authAdmin) this.findAll();
+    if (this.rootStore.uiStore.authAdmin) {
+      this.findAll();
+    }
     observe(this.rootStore.uiStore, `authAdmin`, change => {
       if (change.newValue) {
         this.findAll();
@@ -43,7 +45,9 @@ class AnswerStore {
   update = answer => {
     this.api.update(answer).then(data => {
       this.answers.forEach((answer, i) => {
-        if (answer._id === data._id) this.updateAnswer(data, i);
+        if (answer._id === data._id) {
+          this.updateAnswer(data, i);
+        }
       });
     });
   };

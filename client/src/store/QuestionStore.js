@@ -23,7 +23,9 @@ class QuestionStore {
 
   updateCurrentQuestion = () => {
     this.questions.forEach((question, i) => {
-      if (i === this.currentIndex) this.currentQuestion = question;
+      if (i === this.currentIndex) {
+        this.currentQuestion = question;
+      }
     });
   };
 
@@ -35,7 +37,9 @@ class QuestionStore {
   update = question => {
     this.api.update(question).then(data => {
       this.questions.forEach((question, i) => {
-        if (question._id === data._id) this.updateQuestion(data, i);
+        if (question._id === data._id) {
+          this.updateQuestion(data, i);
+        }
       });
     });
   };
@@ -45,7 +49,9 @@ class QuestionStore {
   delete = id => {
     this.api.delete({ _id: id }).then(data => {
       this.questions.forEach((question, i) => {
-        if (question._id === id) this.questions.splice(i, 1);
+        if (question._id === id) {
+          this.questions.splice(i, 1);
+        }
       });
     });
   };

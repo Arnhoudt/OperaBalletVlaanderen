@@ -18,7 +18,9 @@ class CharacterStore {
   update = character => {
     this.api.update(character).then(data => {
       this.characters.forEach((character, i) => {
-        if (character._id === data._id) this.updateCharacter(data, i);
+        if (character._id === data._id) {
+          this.updateCharacter(data, i);
+        }
       });
     });
   };
@@ -28,7 +30,9 @@ class CharacterStore {
   delete = id => {
     this.api.delete({ _id: id }).then(data => {
       this.characters.forEach((character, i) => {
-        if (character._id === id) this.characters.splice(i, 1);
+        if (character._id === id) {
+          this.characters.splice(i, 1);
+        }
       });
     });
   };
