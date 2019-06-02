@@ -1,14 +1,14 @@
 import React from "react";
 //import styles from "./Answers.module.css";
 
-const Stats = ({ data }) => {
+const Stats = ({params}) => {
   return (
     <>
-      {data.map(field => {
+      {params.map((field, index) => {
         return (
-          <div key={field.parameter}>
-            <p>{field.parameter}</p>
-            <p>{field.value}</p>
+          <div key={index}>
+            <p>{index}</p>
+            <p>{field}</p>
           </div>
         );
       })}
