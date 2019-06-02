@@ -51,7 +51,7 @@ class QuestionStore {
 
   findAll = () => {
     this.emptyQuestions();
-    return this.api.findAll().then(data =>{
+    return this.api.findAll().then(data => {
       data.forEach(this._add);
       return data;
     });
