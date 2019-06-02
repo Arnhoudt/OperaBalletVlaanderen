@@ -12,23 +12,32 @@ const UserStats = ({ questionStore, answerStore }) => {
 
   useEffect(() => {
     const f = async () => {
+      let answerCount = 0;
+      let parameterArray = [0,0,0,0,0]
       const answers = await answerStore.getAllByUser();
       const questions = await questionStore.findAll();
       answers.forEach(answer => {
+        answerCount+=1;
         questions.forEach(question => {
           if (question._id === answer.questionId) {
             setAnswersCount(answersCount + 1);
+            let sign = -1;
             if (answer.value) {
-              setParam1(param1 + 90);
-              setParam2(param2 + question.param2);
-              setParam3(param3 + question.param3);
-              setParam4(param4 + question.param4);
-              setParam5(param5 + question.param5);
-              console.log(param1);
+            sign = 1;
             }
+            parameterArray[0] += (50+sign*question.param1);
+            parameterArray[1] += (50+sign*question.param2);
+            parameterArray[2] += (50+sign*question.param3);
+            parameterArray[3] += (50+sign*question.param4);
+            parameterArray[4] += (50+sign*question.param5);
           }
         });
       });
+      setParam1(param1 + (parameterArray[0])/answerCount);
+      setParam2(param2 + (parameterArray[1])/answerCount);
+      setParam3(param3 + (parameterArray[2])/answerCount);
+      setParam4(param4 + (parameterArray[3])/answerCount);
+      setParam5(param5 + (parameterArray[4])/answerCount);
     };
     f();
     // eslint-disable-next-line react-hooks/exhaustive-deps
