@@ -13,7 +13,7 @@ const UserStats = ({ questionStore, answerStore }) => {
   useEffect(() => {
     const f = async () => {
       let answerCount = 0;
-      let parameterArray = [0,0,0,0,0]
+      let parameterArray = [0,0,0,0,0];
       const answers = await answerStore.getAllByUser();
       const questions = await questionStore.findAll();
       answers.forEach(answer => {
@@ -31,14 +31,15 @@ const UserStats = ({ questionStore, answerStore }) => {
             parameterArray[3] += (50+sign*question.param4);
             parameterArray[4] += (50+sign*question.param5);
           }
-        });
-      });
+
+          });
       setParam1(param1 + (parameterArray[0])/answerCount);
       setParam2(param2 + (parameterArray[1])/answerCount);
       setParam3(param3 + (parameterArray[2])/answerCount);
       setParam4(param4 + (parameterArray[3])/answerCount);
       setParam5(param5 + (parameterArray[4])/answerCount);
-    };
+      });
+      }
     f();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

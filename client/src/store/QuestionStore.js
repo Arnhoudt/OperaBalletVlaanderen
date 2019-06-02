@@ -7,11 +7,14 @@ class QuestionStore {
   questions = [];
   currentIndex = 0;
   currentQuestion = ``;
+  error = ``;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`questions`);
-    this.findAll().then(data => this.updateCurrentQuestion());
+    this.findAll()
+      .then(data => this.updateCurrentQuestion())
+      .catch(error => (this.error = error));
   }
 
   getCurrentIndex = () => this.currentIndex;
@@ -22,8 +25,8 @@ class QuestionStore {
   };
 
   updateCurrentQuestion = () => {
-    this.questions.forEach((question, i) => {
-      if (i === this.currentIndex) {
+    this.questions.forEach((question, index) => {
+      if (index === this.currentIndex) {
         this.currentQuestion = question;
       }
     });
@@ -36,21 +39,21 @@ class QuestionStore {
 
   update = question => {
     this.api.update(question).then(data => {
-      this.questions.forEach((question, i) => {
+      this.questions.forEach((question, index) => {
         if (question._id === data._id) {
-          this.updateQuestion(data, i);
+          this.updateQuestion(data, index);
         }
       });
     });
   };
 
-  updateQuestion = (data, i) => (this.questions[i] = data);
+  updateQuestion = (data, index) => (this.questions[index] = data);
 
   delete = id => {
     this.api.delete({ _id: id }).then(data => {
-      this.questions.forEach((question, i) => {
+      this.questions.forEach((question, index) => {
         if (question._id === id) {
-          this.questions.splice(i, 1);
+          this.questions.splice(index, 1);
         }
       });
     });
@@ -84,7 +87,8 @@ decorate(QuestionStore, {
   currentQuestion: observable,
   updateCurrentQuestion: action,
   emptyQuestions: action,
-  previousIndex: action
+  previousIndex: action,
+  error: observable
 });
 
 export default QuestionStore;

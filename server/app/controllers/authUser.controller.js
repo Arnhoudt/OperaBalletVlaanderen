@@ -110,7 +110,7 @@ exports.delete = async (req, res) => {
   try {
     const r = await User.deleteOne({_id: req.authUserId});
     res.status(200).send(r);
-  } catch (err) {
-    res.status(500).send(err);
+  } catch (error) {
+    res.status(500).send(error);
   }
 };

@@ -22,8 +22,8 @@ exports.create = async (req, res) => {
     });
     const r = await act.save();
     res.status(200).send(r);
-  } catch (err) {
-    res.status(500).send(err);
+  } catch (error) {
+    res.status(500).send(error);
   }
 };
 
@@ -31,8 +31,8 @@ exports.findAll = async (req, res) => {
   try {
     const r = await Act.find();
     res.status(200).send(r);
-  } catch (err) {
-    res.status(500).send(err);
+  } catch (error) {
+    res.status(500).send(error);
   }
 };
 
@@ -40,8 +40,8 @@ exports.findById = async (req, res) => {
   try {
     const r = await Act.findOne({_id: req.params.actId});
     res.status(200).send(r);
-  } catch (err) {
-    res.status(500).send(err);
+  } catch (error) {
+    res.status(500).send(error);
   }
 };
 
@@ -72,8 +72,8 @@ exports.update = async (req, res) => {
       {new: true}
     );
     res.status(200).send(r);
-  } catch (err) {
-    res.status(500).send(err);
+  } catch (error) {
+    res.status(500).send(error);
   }
 };
 
@@ -81,7 +81,7 @@ exports.delete = async (req, res) => {
   try {
     const r = await Act.deleteOne({_id: req.params.actId});
     res.status(200).send(r);
-  } catch (err) {
-    res.status(500).send(err);
+  } catch (error) {
+    res.status(500).send(error);
   }
 };

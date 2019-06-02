@@ -22,7 +22,7 @@ class UiStore {
       if (getRandomFromCookie()) {
         this.setRandomUser(getRandomFromCookie());
       } else {
-        this.registerRandom();
+        this.registerRandom().catch(error => (this.error = error));
       }
     }
   }

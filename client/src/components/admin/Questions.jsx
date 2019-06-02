@@ -64,7 +64,7 @@ const Questions = ({ questionStore }) => {
               <input
                 type="number"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 defaultValue="50"
                 ref={questionParam1}
@@ -78,7 +78,7 @@ const Questions = ({ questionStore }) => {
               <input
                 type="number"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 defaultValue="50"
                 ref={questionParam2}
@@ -92,7 +92,7 @@ const Questions = ({ questionStore }) => {
               <input
                 type="number"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 defaultValue="50"
                 ref={questionParam3}
@@ -106,7 +106,7 @@ const Questions = ({ questionStore }) => {
               <input
                 type="number"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 defaultValue="50"
                 ref={questionParam4}
@@ -120,7 +120,7 @@ const Questions = ({ questionStore }) => {
               <input
                 type="number"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 defaultValue="50"
                 ref={questionParam5}
@@ -163,7 +163,7 @@ const Questions = ({ questionStore }) => {
                   <input
                     type="number"
                     min="0"
-                    max="100"
+                    max="50"
                     step="1"
                     name="param1"
                     defaultValue={question.param1}
@@ -171,7 +171,7 @@ const Questions = ({ questionStore }) => {
                   <input
                     type="number"
                     min="0"
-                    max="100"
+                    max="50"
                     step="1"
                     name="param2"
                     defaultValue={question.param2}
@@ -179,7 +179,7 @@ const Questions = ({ questionStore }) => {
                   <input
                     type="number"
                     min="0"
-                    max="100"
+                    max="50"
                     step="1"
                     name="param3"
                     defaultValue={question.param3}
@@ -187,7 +187,7 @@ const Questions = ({ questionStore }) => {
                   <input
                     type="number"
                     min="0"
-                    max="100"
+                    max="50"
                     step="1"
                     name="param4"
                     defaultValue={question.param4}
@@ -195,7 +195,7 @@ const Questions = ({ questionStore }) => {
                   <input
                     type="number"
                     min="0"
-                    max="100"
+                    max="50"
                     step="1"
                     name="param5"
                     defaultValue={question.param5}

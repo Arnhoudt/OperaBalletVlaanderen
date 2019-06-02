@@ -29,8 +29,8 @@ exports.create = async (req, res) => {
       );
       res.status(200).send(r);
     }
-  } catch (err) {
-    res.status(500).send(err);
+  } catch (error) {
+    res.status(500).send(error);
   }
 };
 
@@ -56,8 +56,8 @@ exports.findAll = async (req, res) => {
       }
     ]);
     res.status(200).send(r);
-  } catch (err) {
-    res.status(500).send(err);
+  } catch (error) {
+    res.status(500).send(error);
   }
 };
 
@@ -65,7 +65,7 @@ exports.getAllByUserId = async (req, res) => {
   try {
     const r = await Answer.find({userId: req.authUserId});
     res.status(200).send(r);
-  } catch (err) {
-    res.status(500).send(err);
+  } catch (error) {
+    res.status(500).send(error);
   }
 };
