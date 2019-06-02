@@ -5,11 +5,12 @@ configure({ enforceActions: `observed` });
 
 class CharacterStore {
   characters = [];
+  error = ``;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`characters`);
-    this.findAll();
+    this.findAll().catch(error => (this.error = error));
   }
 
   create = character =>
@@ -17,21 +18,21 @@ class CharacterStore {
 
   update = character => {
     this.api.update(character).then(data => {
-      this.characters.forEach((character, i) => {
+      this.characters.forEach((character, index) => {
         if (character._id === data._id) {
-          this.updateCharacter(data, i);
+          this.updateCharacter(data, index);
         }
       });
     });
   };
 
-  updateCharacter = (data, i) => (this.characters[i] = data);
+  updateCharacter = (data, index) => (this.characters[index] = data);
 
   delete = id => {
     this.api.delete({ _id: id }).then(data => {
-      this.characters.forEach((character, i) => {
+      this.characters.forEach((character, index) => {
         if (character._id === id) {
-          this.characters.splice(i, 1);
+          this.characters.splice(index, 1);
         }
       });
     });
@@ -58,7 +59,8 @@ decorate(CharacterStore, {
   delete: action,
   create: action,
   updateCharacter: action,
-  emptyCharacters: action
+  emptyCharacters: action,
+  error: observable
 });
 
 export default CharacterStore;

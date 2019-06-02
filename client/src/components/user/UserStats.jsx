@@ -14,21 +14,23 @@ const UserStats = ({ questionStore, answerStore }) => {
     const f = async () => {
       const answers = await answerStore.getAllByUser();
       const questions = await questionStore.findAll();
-      answers.forEach(answer => {
-        questions.forEach(question => {
-          if (question._id === answer.questionId) {
-            setAnswersCount(answersCount + 1);
-            if (answer.value) {
-              setParam1(param1 + 90);
-              setParam2(param2 + question.param2);
-              setParam3(param3 + question.param3);
-              setParam4(param4 + question.param4);
-              setParam5(param5 + question.param5);
-              console.log(param1);
+      if (answers && questions) {
+        answers.forEach(answer => {
+          questions.forEach(question => {
+            if (question._id === answer.questionId) {
+              setAnswersCount(answersCount + 1);
+              if (answer.value) {
+                setParam1(param1 + 90);
+                setParam2(param2 + question.param2);
+                setParam3(param3 + question.param3);
+                setParam4(param4 + question.param4);
+                setParam5(param5 + question.param5);
+                console.log(param1);
+              }
             }
-          }
+          });
         });
-      });
+      }
     };
     f();
     // eslint-disable-next-line react-hooks/exhaustive-deps

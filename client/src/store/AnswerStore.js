@@ -12,16 +12,17 @@ configure({ enforceActions: `observed` });
 
 class AnswerStore {
   answers = [];
+  error = ``;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`answers`);
     if (this.rootStore.uiStore.authAdmin) {
-      this.findAll();
+      this.findAll().catch(error => (this.error = error));
     }
     observe(this.rootStore.uiStore, `authAdmin`, change => {
       if (change.newValue) {
-        this.findAll();
+        this.findAll().catch(error => (this.error = error));
       } else {
         runInAction(() => (this.answers = []));
       }
@@ -44,15 +45,15 @@ class AnswerStore {
 
   update = answer => {
     this.api.update(answer).then(data => {
-      this.answers.forEach((answer, i) => {
+      this.answers.forEach((answer, index) => {
         if (answer._id === data._id) {
-          this.updateAnswer(data, i);
+          this.updateAnswer(data, index);
         }
       });
     });
   };
 
-  updateAnswer = (data, i) => (this.answers[i] = data);
+  updateAnswer = (data, index) => (this.answers[index] = data);
 
   _add = values => this.answers.push(values);
 }
@@ -65,7 +66,8 @@ decorate(AnswerStore, {
   update: action,
   create: action,
   emptyAnswers: action,
-  getAllByUser: action
+  getAllByUser: action,
+  error: observable
 });
 
 export default AnswerStore;

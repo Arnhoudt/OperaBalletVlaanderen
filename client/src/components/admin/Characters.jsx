@@ -58,7 +58,7 @@ const Characters = ({ characterStore }) => {
               <input
                 type="number"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 defaultValue="50"
                 ref={characterParam1}
@@ -72,7 +72,7 @@ const Characters = ({ characterStore }) => {
               <input
                 type="number"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 defaultValue="50"
                 ref={characterParam2}
@@ -86,7 +86,7 @@ const Characters = ({ characterStore }) => {
               <input
                 type="number"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 defaultValue="50"
                 ref={characterParam3}
@@ -100,7 +100,7 @@ const Characters = ({ characterStore }) => {
               <input
                 type="number"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 defaultValue="50"
                 ref={characterParam4}
@@ -114,7 +114,7 @@ const Characters = ({ characterStore }) => {
               <input
                 type="number"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 defaultValue="50"
                 ref={characterParam5}
@@ -145,7 +145,7 @@ const Characters = ({ characterStore }) => {
                   <input
                     type="number"
                     min="0"
-                    max="100"
+                    max="50"
                     step="1"
                     name="param1"
                     defaultValue={character.param1}
@@ -153,7 +153,7 @@ const Characters = ({ characterStore }) => {
                   <input
                     type="number"
                     min="0"
-                    max="100"
+                    max="50"
                     step="1"
                     name="param2"
                     defaultValue={character.param2}
@@ -161,7 +161,7 @@ const Characters = ({ characterStore }) => {
                   <input
                     type="number"
                     min="0"
-                    max="100"
+                    max="50"
                     step="1"
                     name="param3"
                     defaultValue={character.param3}
@@ -169,7 +169,7 @@ const Characters = ({ characterStore }) => {
                   <input
                     type="number"
                     min="0"
-                    max="100"
+                    max="50"
                     step="1"
                     name="param4"
                     defaultValue={character.param4}
@@ -177,7 +177,7 @@ const Characters = ({ characterStore }) => {
                   <input
                     type="number"
                     min="0"
-                    max="100"
+                    max="50"
                     step="1"
                     name="param5"
                     defaultValue={character.param5}

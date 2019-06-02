@@ -71,7 +71,7 @@ const Acts = ({ actStore }) => {
               <input
                 type="number"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 defaultValue="50"
                 ref={actParam1}
@@ -85,7 +85,7 @@ const Acts = ({ actStore }) => {
               <input
                 type="number"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 defaultValue="50"
                 ref={actParam2}
@@ -99,7 +99,7 @@ const Acts = ({ actStore }) => {
               <input
                 type="number"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 defaultValue="50"
                 ref={actParam3}
@@ -113,7 +113,7 @@ const Acts = ({ actStore }) => {
               <input
                 type="number"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 defaultValue="50"
                 ref={actParam4}
@@ -127,7 +127,7 @@ const Acts = ({ actStore }) => {
               <input
                 type="number"
                 min="0"
-                max="100"
+                max="50"
                 step="1"
                 defaultValue="50"
                 ref={actParam5}
@@ -159,7 +159,7 @@ const Acts = ({ actStore }) => {
                   <input
                     type="number"
                     min="0"
-                    max="100"
+                    max="50"
                     step="1"
                     name="param1"
                     defaultValue={act.param1}
@@ -167,7 +167,7 @@ const Acts = ({ actStore }) => {
                   <input
                     type="number"
                     min="0"
-                    max="100"
+                    max="50"
                     step="1"
                     name="param2"
                     defaultValue={act.param2}
@@ -175,7 +175,7 @@ const Acts = ({ actStore }) => {
                   <input
                     type="number"
                     min="0"
-                    max="100"
+                    max="50"
                     step="1"
                     name="param3"
                     defaultValue={act.param3}
@@ -183,7 +183,7 @@ const Acts = ({ actStore }) => {
                   <input
                     type="number"
                     min="0"
-                    max="100"
+                    max="50"
                     step="1"
                     name="param4"
                     defaultValue={act.param4}
@@ -191,7 +191,7 @@ const Acts = ({ actStore }) => {
                   <input
                     type="number"
                     min="0"
-                    max="100"
+                    max="50"
                     step="1"
                     name="param5"
                     defaultValue={act.param5}
