@@ -8,8 +8,9 @@ const Acts = ({ actStore }) => {
 
   return (
     <>
+      <h2>Acts:</h2>
       {acts.map(act => (
-        <Link key={act._id} to={`/actDetail/${act._id}`}>
+        <Link key={act.id} to={`/actDetail/${act.id}`}>
           <button>{act.name}</button>
         </Link>
       ))}

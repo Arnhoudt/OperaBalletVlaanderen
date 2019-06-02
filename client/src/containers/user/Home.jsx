@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import { inject, observer, PropTypes } from "mobx-react";
 import { ROUTES } from "../../constants";
 import Gdpr from "../../components/user/Gdpr";
-//import Characters from "../../components/user/Characters";
 import UserStats from "../../components/user/UserStats";
 import Acts from "../../components/user/Acts";
-import Character from "../../components/user/Character";
+import Characters from "../../components/user/Characters";
 //import styles from "./Home.module.css";
 
 const Home = ({ uiStore, history }) => {
@@ -33,6 +32,7 @@ const Home = ({ uiStore, history }) => {
         </>
       )}
       <UserStats />
+      <Characters />
       <Acts />
     </>
   );

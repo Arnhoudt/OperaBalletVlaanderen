@@ -1,55 +1,64 @@
-import { decorate, configure, observable, action } from "mobx";
+import {
+  decorate,
+  configure,
+  observable,
+  action,
+  runInAction,
+  observe
+} from "mobx";
 import Api from "../api";
+import Act from "../models/Act";
 
 configure({ enforceActions: `observed` });
 
 class ActStore {
   acts = [];
-  error = ``;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`acts`);
-    this.findAll().catch(error => (this.error = error));
+    if (this.rootStore.uiStore.authAdmin) {
+      this.findAll();
+    }
+    observe(this.rootStore.uiStore, `authAdmin`, change => {
+      if (change.newValue) {
+        this.findAll();
+      } else {
+        runInAction(() => (this.answers = []));
+      }
+    });
   }
 
-  create = act => this.api.create(act).then(data => this._add(data));
-
-  update = act => {
-    this.api.update(act).then(data => {
-      this.acts.forEach((act, index) => {
-        if (act._id === data._id) {
-          this.updateAct(data, index);
-        }
-      });
-    });
+  create = act => {
+    const newAct = new Act();
+    newAct.updateFromServer(act);
+    this.acts.push(newAct);
+    this.api.create(newAct).then(data => newAct.updateFromServer(data));
   };
 
-  updateAct = (data, index) => (this.acts[index] = data);
+  update = act => {
+    this.api.update(act).then(data => act.updateFromServer(data));
+  };
 
-  delete = id => {
-    this.api.delete({ _id: id }).then(data => {
-      this.acts.forEach((act, index) => {
-        if (act._id === id) {
-          this.acts.splice(index, 1);
-        }
-      });
-    });
+  delete = act => {
+    this.acts.remove(act);
+    this.api.delete(act);
   };
 
   emptyActs = () => (this.acts = []);
 
   findAll = () => {
     this.emptyActs();
-    return this.api.findAll().then(data => {
-      data.forEach(this._add);
-      return data;
-    });
+    this.api.findAll().then(data => data.forEach(this._add));
   };
 
   findById = id => this.api.findById(id).then(data => data);
 
-  _add = values => this.acts.push(values);
+  _add = values => {
+    const act = new Act();
+    act.updateFromServer(values);
+    runInAction(() => this.acts.push(act));
+  };
 }
 
 decorate(ActStore, {
@@ -59,10 +68,8 @@ decorate(ActStore, {
   update: action,
   delete: action,
   create: action,
-  updateAct: action,
   emptyActs: action,
-  findById: action,
-  error: observable
+  findById: action
 });
 
 export default ActStore;

@@ -1,75 +1,67 @@
-import { decorate, configure, observable, action } from "mobx";
+import {
+  decorate,
+  configure,
+  observable,
+  action,
+  runInAction,
+  observe
+} from "mobx";
 import Api from "../api";
+import Question from "../models/Question";
 
 configure({ enforceActions: `observed` });
 
 class QuestionStore {
   questions = [];
-  currentIndex = 0;
-  currentQuestion = ``;
-  error = ``;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`questions`);
-    this.findAll()
-      .then(data => this.updateCurrentQuestion())
-      .catch(error => (this.error = error));
-  }
-
-  getCurrentIndex = () => this.currentIndex;
-
-  setCurrentIndex = value => {
-    this.currentIndex = value;
-    this.updateCurrentQuestion();
-  };
-
-  updateCurrentQuestion = () => {
-    this.questions.forEach((question, index) => {
-      if (index === this.currentIndex) {
-        this.currentQuestion = question;
+    if (this.rootStore.uiStore.authAdmin) {
+      this.findAll();
+    }
+    observe(this.rootStore.uiStore, `authAdmin`, change => {
+      if (change.newValue) {
+        this.findAll();
+      } else {
+        runInAction(() => (this.questions = []));
       }
     });
+  }
+
+  create = question => {
+    const newQuestion = new Question();
+    newQuestion.updateFromServer(question);
+    this.questions.push(newQuestion);
+    this.api
+      .create(newQuestion)
+      .then(data => newQuestion.updateFromServer(data));
   };
-
-  nextIndex = () => this.setCurrentIndex((this.currentIndex += 1));
-  previousIndex = () => this.setCurrentIndex((this.currentIndex -= 1));
-
-  create = question => this.api.create(question).then(data => this._add(data));
 
   update = question => {
-    this.api.update(question).then(data => {
-      this.questions.forEach((question, index) => {
-        if (question._id === data._id) {
-          this.updateQuestion(data, index);
-        }
-      });
-    });
+    this.api.update(question).then(data => question.updateFromServer(data));
   };
 
-  updateQuestion = (data, index) => (this.questions[index] = data);
-
-  delete = id => {
-    this.api.delete({ _id: id }).then(data => {
-      this.questions.forEach((question, index) => {
-        if (question._id === id) {
-          this.questions.splice(index, 1);
-        }
-      });
-    });
+  delete = question => {
+    this.questions.remove(question);
+    this.api.delete(question);
   };
 
   emptyQuestions = () => (this.questions = []);
 
   findAll = () => {
     this.emptyQuestions();
-    return this.api.findAll().then(data => {
+    return this.api.findAll().then(data =>{
       data.forEach(this._add);
       return data;
     });
   };
 
-  _add = values => this.questions.push(values);
+  _add = values => {
+    const question = new Question();
+    question.updateFromServer(values);
+    runInAction(() => this.questions.push(question));
+  };
 }
 
 decorate(QuestionStore, {
@@ -79,16 +71,8 @@ decorate(QuestionStore, {
   update: action,
   delete: action,
   create: action,
-  updateQuestion: action,
-  currentIndex: observable,
-  getCurrentIndex: action,
-  setCurrentIndex: action,
-  nextIndex: action,
-  currentQuestion: observable,
-  updateCurrentQuestion: action,
   emptyQuestions: action,
-  previousIndex: action,
-  error: observable
+  getAll: action
 });
 
 export default QuestionStore;

@@ -6,8 +6,7 @@ const ActDetail = ({ id, actStore }) => {
   const [act, setAct] = useState(``);
 
   useEffect(() => {
-    actStore.findById(id).then(d => setAct(d));
-    return () => ``;
+    actStore.findById(id).then(data => setAct(data));
   }, [actStore, id]);
 
   return (

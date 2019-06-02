@@ -10,6 +10,7 @@ const Character = ({ params, characterStore }) => {
     useEffect(() => {
         const f = async () => {
             const characters = await characterStore.findAll();
+
             let bestCharacterScore = 314159235;
             characters.map(character =>{
                 let score = 0;
