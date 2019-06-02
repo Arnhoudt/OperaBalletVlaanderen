@@ -1,7 +1,7 @@
 import uuid from "uuid";
 import { decorate, observable, action } from "mobx";
 
-class Character {
+class Question {
   constructor(
     value,
     param1,
@@ -46,7 +46,7 @@ class Character {
   };
 }
 
-decorate(Character, {
+decorate(Question, {
   id: observable,
   value: observable,
   param1: observable,
@@ -67,4 +67,4 @@ decorate(Character, {
   setAnswer2: action
 });
 
-export default Character;
+export default Question;

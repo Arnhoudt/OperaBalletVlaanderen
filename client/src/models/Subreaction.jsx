@@ -1,7 +1,7 @@
 import uuid from "uuid";
 import { decorate, observable, action } from "mobx";
 
-class Reaction {
+class Subreaction {
   constructor(reactionId, userId, title, text, id = uuid.v4()) {
     this.id = id;
     this.reactionId = reactionId;
@@ -25,7 +25,7 @@ class Reaction {
   };
 }
 
-decorate(Reaction, {
+decorate(Subreaction, {
   id: observable,
   reactionId: observable,
   userId: observable,
@@ -38,4 +38,4 @@ decorate(Reaction, {
   setText: action
 });
 
-export default Reaction;
+export default Subreaction;

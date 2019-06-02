@@ -5,12 +5,11 @@ import { ROUTES } from "../../constants";
 //import styles from "./Answers.module.css";
 
 const Question = ({ uiStore, questionStore, answerStore, history }) => {
-  let { questions } = questionStore;
+  const { questions } = questionStore;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState(``);
 
   useEffect(() => {
-    questionStore.findAll().then(data => setCurrentQuestion(data[0]));
+    questionStore.findAll();
     document.addEventListener(`keyup`, handleKeyUp);
     return () => document.removeEventListener(`keyup`, handleKeyUp);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,29 +34,27 @@ const Question = ({ uiStore, questionStore, answerStore, history }) => {
         value = false;
       }
       answerStore.create({
-        questionId: currentQuestion.id,
+        questionId: questions[currentIndex].id,
         value: value,
         userId: userId
       });
-      setCurrentIndex(currentIndex + 1);
-      setCurrentQuestion(questions[currentIndex]);
-      if (questions.length <= currentIndex) {
+      if (questions.length <= currentIndex + 1) {
         history.push(ROUTES.home);
       }
+      setCurrentIndex(currentIndex + 1);
     }
   };
 
   const handleChangeBinaryQuestion = e => {
     answerStore.create({
-      questionId: currentQuestion.id,
+      questionId: questions[currentIndex].id,
       value: e.currentTarget.value,
       userId: userId
     });
-    setCurrentIndex(currentIndex + 1);
-    setCurrentQuestion(questions[currentIndex]);
-    if (questions.length <= currentIndex) {
+    if (questions.length <= currentIndex + 1) {
       history.push(ROUTES.home);
     }
+    setCurrentIndex(currentIndex + 1);
   };
 
   const handleClickPrevious = e => {
@@ -66,16 +63,24 @@ const Question = ({ uiStore, questionStore, answerStore, history }) => {
 
   return (
     <>
-      <h3>{currentQuestion.value}</h3>
-      {currentIndex > 0 ? (
-        <button onClick={handleClickPrevious}>PreviousQuestion</button>
+      {questions.length > 0 ? (
+        <>
+          {questions[currentIndex] ? (
+            <>
+              <h3>{questions[currentIndex].value}</h3>
+              <button onClick={handleChangeBinaryQuestion} value={true}>
+                {questions[currentIndex].answer1}
+              </button>
+              <button onClick={handleChangeBinaryQuestion} value={false}>
+                {questions[currentIndex].answer2}
+              </button>
+            </>
+          ) : null}
+          {currentIndex ? (
+            <button onClick={handleClickPrevious}>PreviousQuestion</button>
+          ) : null}
+        </>
       ) : null}
-      <button onClick={handleChangeBinaryQuestion} value={true}>
-        {currentQuestion.answer1}
-      </button>
-      <button onClick={handleChangeBinaryQuestion} value={false}>
-        {currentQuestion.answer2}
-      </button>
     </>
   );
 };
