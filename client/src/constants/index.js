@@ -6,6 +6,5 @@ export const ROUTES = {
   loginUser: `/loginUser`,
   registerUser: `/registerUser`,
   dashboard: `/dashboard`,
-  actDetail: `/actDetail/:id`,
-  characterDetail: `/characterDetail/:id`
+  actDetail: `/actDetail/:id`
 };

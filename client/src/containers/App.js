@@ -10,7 +10,6 @@ import LoginUser from "./user/auth/Login";
 import RegisterUser from "./user/auth/Register";
 import Dashboard from "./admin/Dashboard";
 import ActDetail from "./user/ActDetail";
-import CharacterDetail from "./user/CharacterDetail";
 import { ROUTES } from "../constants";
 
 const App = () => {
@@ -27,10 +26,6 @@ const App = () => {
         <Route
           path={ROUTES.actDetail}
           render={({ match }) => <ActDetail id={match.params.id} />}
-        />
-        <Route
-          path={ROUTES.characterDetail}
-          render={({ match }) => <CharacterDetail id={match.params.id} />}
         />
       </Switch>
     </main>

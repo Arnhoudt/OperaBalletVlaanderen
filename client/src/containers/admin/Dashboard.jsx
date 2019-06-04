@@ -4,8 +4,6 @@ import { inject, observer, PropTypes } from "mobx-react";
 import styles from "./Dashboard.module.css";
 import withAuthentication from "../../components/admin/auth/WithAuthentication";
 import { ROUTES } from "../../constants";
-import AddCharacter from "../../components/admin/AddCharacter";
-import EditCharacter from "../../components/admin/EditCharacter";
 import AddQuestion from "../../components/admin/AddQuestion";
 import EditQuestion from "../../components/admin/EditQuestion";
 import AddAct from "../../components/admin/AddAct";
@@ -31,15 +29,6 @@ const Dashboard = ({
         <button>Wordt lid</button>
       </Link>
       <button onClick={handleClick}>Logout</button>
-      <AddCharacter />
-      {characterStore.characters.map(character => (
-        <EditCharacter
-          key={character.id}
-          character={character}
-          update={characterStore.update}
-          remove={characterStore.delete}
-        />
-      ))}
       <AddQuestion />
       {questionStore.questions.map(question => (
         <EditQuestion
