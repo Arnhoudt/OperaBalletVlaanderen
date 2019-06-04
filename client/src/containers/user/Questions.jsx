@@ -1,14 +1,18 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import Question from "../../components/user/Question";
 //import styles from "./Questions.module.css";
 
-const Questions = () => {
+const Questions = ({ pixiTest }) => {
   return (
     <>
-      <h1>Awesome front page!</h1>
-      <Question />
+      {pixiTest.showPikachu()}
+      {/* <h1>Awesome front page!</h1>
+      <Question /> */}
     </>
   );
 };
 
-export default Questions;
+Questions.propTypes = {};
+
+export default inject(`pixiTest`)(observer(Questions));
