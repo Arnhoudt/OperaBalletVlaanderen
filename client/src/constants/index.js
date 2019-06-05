@@ -6,5 +6,6 @@ export const ROUTES = {
   loginUser: `/loginUser`,
   registerUser: `/registerUser`,
   dashboard: `/dashboard`,
-  actDetail: `/actDetail/:id`
+  actDetail: `/actDetail/:id`,
+  threeScene: `/threeScene`
 };
