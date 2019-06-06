@@ -32,6 +32,7 @@ require('./app/routes/authUser.routes.js')(app);
 require('./app/routes/answer.routes.js')(app);
 require('./app/routes/question.routes.js')(app);
 require('./app/routes/act.routes.js')(app);
+require('./app/routes/character.routes.js')(app);
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build/', 'index.html'));

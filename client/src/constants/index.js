@@ -7,5 +7,6 @@ export const ROUTES = {
   registerUser: `/registerUser`,
   dashboard: `/dashboard`,
   actDetail: `/actDetail/:id`,
+  characterDetail: `/characterDetail`,
   threeScene: `/threeScene`
 };

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import Stats from "./Stats";
 import { withRouter } from "react-router-dom";
-//import Character from "./Character";
+import Character from "./Character";
+
 const UserStats = ({ questionStore, answerStore }) => {
   const [param1, setParam1] = useState(0);
   const [param2, setParam2] = useState(0);
@@ -54,7 +55,7 @@ const UserStats = ({ questionStore, answerStore }) => {
         <>
           <h2>Stats</h2>
           <Stats params={[param1, param2, param3, param4, param5]} />
-          {/* <Character params={[param1, param2, param3, param4, param5]} /> */}
+          <Character params={[param1, param2, param3, param4, param5]} />
         </>
       ) : (
         <p>Je karakter wordt berekend</p>
