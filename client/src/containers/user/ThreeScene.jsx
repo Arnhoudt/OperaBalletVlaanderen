@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import * as THREE from "three";
 import Canary from "../../three/Canary";
+import styles from "./ThreeScene.module.css";
 let canary = new Canary();
+
 
 class ThreeScene extends Component {
   constructor(props) {
@@ -340,7 +342,7 @@ class ThreeScene extends Component {
 
   render() {
     return (
-      <div
+      <div className={styles.div}
         ref={mount => {
           this.mount = mount;
         }}
