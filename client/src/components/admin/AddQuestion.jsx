@@ -9,8 +9,6 @@ const AddQuestion = ({ questionStore }) => {
   const questionParam3 = React.createRef();
   const questionParam4 = React.createRef();
   const questionParam5 = React.createRef();
-  const questionAnswer1 = React.createRef();
-  const questionAnswer2 = React.createRef();
 
   const handleSubmitQuestion = e => {
     e.preventDefault();
@@ -20,9 +18,7 @@ const AddQuestion = ({ questionStore }) => {
       param2: questionParam2.current.value,
       param3: questionParam3.current.value,
       param4: questionParam4.current.value,
-      param5: questionParam5.current.value,
-      answer1: questionAnswer1.current.value,
-      answer2: questionAnswer2.current.value
+      param5: questionParam5.current.value
     });
   };
 
@@ -107,18 +103,6 @@ const AddQuestion = ({ questionStore }) => {
             </label>
           </div>
           <div>
-            <label>
-              <span>Answer1:</span>
-              <input type="text" name="answer1" ref={questionAnswer1} />
-            </label>
-          </div>
-          <div>
-            <label>
-              <span>Answer2:</span>
-              <input type="text" name="answer2" ref={questionAnswer2} />
-            </label>
-          </div>
-          <div>
             <button type="submit">Add question</button>
           </div>
         </form>
@@ -126,9 +110,7 @@ const AddQuestion = ({ questionStore }) => {
     </>
   );
 };
-
 AddQuestion.propTypes = {
   questionStore: PropTypes.observableObject.isRequired
 };
-
 export default inject(`questionStore`)(observer(AddQuestion));

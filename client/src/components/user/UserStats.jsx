@@ -4,7 +4,7 @@ import Stats from "./Stats";
 import { withRouter } from "react-router-dom";
 import Character from "./Character";
 
-const UserStats = ({ questionStore, answerStore }) => {
+const UserStats = ({ answerStore }) => {
   const [param1, setParam1] = useState(0);
   const [param2, setParam2] = useState(0);
   const [param3, setParam3] = useState(0);
@@ -18,24 +18,18 @@ const UserStats = ({ questionStore, answerStore }) => {
       let answerCount = 0;
       let parameterArray = [0, 0, 0, 0, 0];
       const answers = await answerStore.findAllByUser();
-      const questions = await questionStore.findAll();
-      if (answers && questions) {
+      if (answers.length > 0) {
         answers.forEach(answer => {
-          answerCount += 1;
-          questions.forEach(question => {
-            if (question._id === answer.questionId) {
-              setAnswersCount(answersCount + 1);
-              let sign = -1;
-              if (answer.value) {
-                sign = 1;
-              }
-              parameterArray[0] += 50 + sign * question.param1;
-              parameterArray[1] += 50 + sign * question.param2;
-              parameterArray[2] += 50 + sign * question.param3;
-              parameterArray[3] += 50 + sign * question.param4;
-              parameterArray[4] += 50 + sign * question.param5;
-            }
-          });
+          setAnswersCount(answersCount + 1);
+          let sign = -1;
+          if (answer.answer) {
+            sign = 1;
+          }
+          parameterArray[0] += 50 + sign * answer.param1;
+          parameterArray[1] += 50 + sign * answer.param2;
+          parameterArray[2] += 50 + sign * answer.param3;
+          parameterArray[3] += 50 + sign * answer.param4;
+          parameterArray[4] += 50 + sign * answer.param5;
           setParam1(param1 + parameterArray[0] / answerCount);
           setParam2(param2 + parameterArray[1] / answerCount);
           setParam3(param3 + parameterArray[2] / answerCount);
@@ -65,10 +59,7 @@ const UserStats = ({ questionStore, answerStore }) => {
 };
 
 UserStats.propTypes = {
-  questionStore: PropTypes.observableObject.isRequired,
   answerStore: PropTypes.observableObject.isRequired
 };
 
-export default inject(`questionStore`, `answerStore`)(
-  withRouter(observer(UserStats))
-);
+export default inject(`answerStore`)(withRouter(observer(UserStats)));

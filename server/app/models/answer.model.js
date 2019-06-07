@@ -3,9 +3,14 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const AnswerSchema = mongoose.Schema(
   {
-    questionId: ObjectId,
-    value: Boolean,
-    userId: ObjectId
+    question: String,
+    answer: String,
+    userId: ObjectId,
+    param1: {type: Number, min: 0, max: 50},
+    param2: {type: Number, min: 0, max: 50},
+    param3: {type: Number, min: 0, max: 50},
+    param4: {type: Number, min: 0, max: 50},
+    param5: {type: Number, min: 0, max: 50}
   },
   {
     timestamps: true

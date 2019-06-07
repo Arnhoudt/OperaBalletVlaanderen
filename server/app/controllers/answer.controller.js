@@ -1,28 +1,38 @@
 const Answer = require('../models/answer.model.js');
 
 exports.create = async (req, res) => {
-  const {questionId, value, userId} = req.body;
+  const {question, answer, userId, param1, param2, param3, param4, param5} = req.body;
   try {
     const currentAnswer = await Answer.findOne({
       userId: userId,
-      questionId: questionId
+      question: question
     });
     if (!currentAnswer) {
-      const answer = new Answer({
-        questionId: questionId,
-        value: value,
-        userId: userId
+      const answerD = new Answer({
+        question: question,
+        answer: answer,
+        userId: userId,
+        param1: param1,
+        param2: param2,
+        param3: param3,
+        param4: param4,
+        param5: param5
       });
-      const r = await answer.save();
+      const r = await answerD.save();
       res.status(200).send(r);
     } else {
       const r = await Answer.findByIdAndUpdate(
         currentAnswer._id,
         {
           $set: {
-            questionId: questionId,
-            value: value,
-            userId: userId
+            question: question,
+            answer: answer,
+            userId: userId,
+            param1: param1,
+            param2: param2,
+            param3: param3,
+            param4: param4,
+            param5: param5
           }
         },
         {new: true}

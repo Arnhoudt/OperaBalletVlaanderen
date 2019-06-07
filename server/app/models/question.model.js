@@ -7,9 +7,7 @@ const QuestionSchema = mongoose.Schema(
     param2: {type: Number, min: 0, max: 50},
     param3: {type: Number, min: 0, max: 50},
     param4: {type: Number, min: 0, max: 50},
-    param5: {type: Number, min: 0, max: 50},
-    answer1: String,
-    answer2: String
+    param5: {type: Number, min: 0, max: 50}
   },
   {
     timestamps: true

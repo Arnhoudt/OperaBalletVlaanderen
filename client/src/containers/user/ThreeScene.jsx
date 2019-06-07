@@ -6,14 +6,6 @@ let canary = new Canary();
 
 
 class ThreeScene extends Component {
-  constructor(props) {
-    super(props);
-    this.start = this.start.bind(this);
-    this.stop = this.stop.bind(this);
-    this.animate = this.animate.bind(this);
-    this.renderScene = this.renderScene.bind(this);
-  }
-
   componentDidMount() {
     this.closeUpData = {};
     this.currentColor = {
@@ -292,17 +284,17 @@ class ThreeScene extends Component {
     this.camera.updateProjectionMatrix();
   };
 
-  start() {
+  start = () => {
     if (!this.frameId) {
       this.frameId = requestAnimationFrame(this.animate);
     }
   }
 
-  stop() {
+  stop = () => {
     cancelAnimationFrame(this.frameId);
   }
 
-  animate() {
+  animate = () => {
     //ANIMATION
     if (this.mouseMoved === true) {
       const vx =
@@ -336,7 +328,7 @@ class ThreeScene extends Component {
     this.frameId = window.requestAnimationFrame(this.animate);
   }
 
-  renderScene() {
+  renderScene = () => {
     this.renderer.render(this.scene, this.camera);
   }
 

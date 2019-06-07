@@ -66,18 +66,6 @@ const EditQuestion = ({ question, update, remove }) => {
           defaultValue={question.param5}
           onChange={e => question.setParam5(e.target.value)}
         />
-        <input
-          type="text"
-          name="answer1"
-          defaultValue={question.answer1}
-          onChange={e => question.setAnswer1(e.target.value)}
-        />
-        <input
-          type="text"
-          name="answer2"
-          defaultValue={question.answer2}
-          onChange={e => question.setAnswer2(e.target.value)}
-        />
         <button type="submit">Update</button>
       </form>
       <form method="post" onSubmit={handleDeleteQuestion}>
@@ -86,5 +74,4 @@ const EditQuestion = ({ question, update, remove }) => {
     </>
   );
 };
-
 export default EditQuestion;

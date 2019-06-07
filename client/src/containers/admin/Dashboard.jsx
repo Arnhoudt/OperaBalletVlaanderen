@@ -6,8 +6,8 @@ import withAuthentication from "../../components/admin/auth/WithAuthentication";
 import { ROUTES } from "../../constants";
 import AddCharacter from "../../components/admin/AddCharacter";
 import EditCharacter from "../../components/admin/EditCharacter";
-import AddQuestion from "../../components/admin/AddQuestion";
-import EditQuestion from "../../components/admin/EditQuestion";
+//import AddQuestion from "../../components/admin/AddQuestion";
+//import EditQuestion from "../../components/admin/EditQuestion";
 import AddAct from "../../components/admin/AddAct";
 import EditAct from "../../components/admin/EditAct";
 
@@ -40,7 +40,7 @@ const Dashboard = ({
           remove={characterStore.delete}
         />
       ))}
-      <AddQuestion />
+      {/* <AddQuestion />
       {questionStore.questions.map(question => (
         <EditQuestion
           key={question.id}
@@ -48,7 +48,7 @@ const Dashboard = ({
           update={questionStore.update}
           remove={questionStore.delete}
         />
-      ))}
+      ))} */}
       <AddAct />
       {actStore.acts.map(act => (
         <EditAct
@@ -60,8 +60,8 @@ const Dashboard = ({
       ))}
       {answerStore.answers.map(answer => (
         <div key={answer.id}>
-          <p>Question: {answer.questionId}</p>
-          <p>Answer: {`${answer.value}`}</p>
+          <p>Question: {answer.question}</p>
+          <p>Answer: {`${answer.answer}`}</p>
         </div>
       ))}
     </>

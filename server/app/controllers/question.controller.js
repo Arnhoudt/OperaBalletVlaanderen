@@ -7,9 +7,7 @@ exports.create = async (req, res) => {
     param2,
     param3,
     param4,
-    param5,
-    answer1,
-    answer2
+    param5
   } = req.body;
   try {
     const question = new Question({
@@ -18,9 +16,7 @@ exports.create = async (req, res) => {
       param2: param2,
       param3: param3,
       param4: param4,
-      param5: param5,
-      answer1: answer1,
-      answer2: answer2
+      param5: param5
     });
     const r = await question.save();
     res.status(200).send(r);
@@ -45,9 +41,7 @@ exports.update = async (req, res) => {
     param2,
     param3,
     param4,
-    param5,
-    answer1,
-    answer2
+    param5
   } = req.body;
   try {
     const r = await Question.findByIdAndUpdate(
@@ -59,9 +53,7 @@ exports.update = async (req, res) => {
           param2: param2,
           param3: param3,
           param4: param4,
-          param5: param5,
-          answer1: answer1,
-          answer2: answer2
+          param5: param5
         }
       },
       {new: true}
