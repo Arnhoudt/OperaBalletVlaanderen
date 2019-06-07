@@ -16,9 +16,7 @@ class Canary {
 
         component.scene.add(plane);
       },
-      xhr => {
-        console.log((xhr.loaded / xhr.total) * 100 + `% loaded`);
-      },
+      undefined,
       xhr => {
         console.log(`An error happened`);
       }

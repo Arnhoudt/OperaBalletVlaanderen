@@ -4,8 +4,35 @@ import Canary from "../../three/Canary";
 import styles from "./ThreeScene.module.css";
 let canary = new Canary();
 
-
 class ThreeScene extends Component {
+  constructor() {
+    super();
+    this.state = { loading: ``, error: ``, done: false };
+    THREE.DefaultLoadingManager.onStart = (url, itemsLoaded, itemsTotal) => {
+      const state = { ...this.state };
+      state.loading = (itemsLoaded / itemsTotal) * 100;
+      this.setState(state);
+    };
+
+    THREE.DefaultLoadingManager.onLoad = () => {
+      const state = { ...this.state };
+      state.done = true;
+      this.setState(state);
+    };
+
+    THREE.DefaultLoadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
+      const state = { ...this.state };
+      state.loading = (itemsLoaded / itemsTotal) * 100;
+      this.setState(state);
+    };
+
+    THREE.DefaultLoadingManager.onError = url => {
+      const state = { ...this.state };
+      state.error = url;
+      this.setState(state);
+    };
+  }
+
   componentDidMount() {
     this.closeUpData = {};
     this.currentColor = {
@@ -288,11 +315,11 @@ class ThreeScene extends Component {
     if (!this.frameId) {
       this.frameId = requestAnimationFrame(this.animate);
     }
-  }
+  };
 
   stop = () => {
     cancelAnimationFrame(this.frameId);
-  }
+  };
 
   animate = () => {
     //ANIMATION
@@ -326,19 +353,29 @@ class ThreeScene extends Component {
     //ANIMATION
     this.renderScene();
     this.frameId = window.requestAnimationFrame(this.animate);
-  }
+  };
 
   renderScene = () => {
     this.renderer.render(this.scene, this.camera);
-  }
+  };
 
   render() {
     return (
-      <div className={styles.div}
-        ref={mount => {
-          this.mount = mount;
-        }}
-      />
+      <>
+        <div
+          className={styles.div}
+          ref={mount => {
+            this.mount = mount;
+          }}
+        />
+        {!this.state.done ? (
+          <div className={styles.loading}>
+            <p>{this.state.loading} %</p>
+          </div>
+        ) : (
+          <></>
+        )}
+      </>
     );
   }
 }

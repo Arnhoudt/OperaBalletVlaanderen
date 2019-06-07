@@ -1,3 +1,17 @@
 .div {
   position: fixed;
 }
+
+.loading {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading p {
+  font-size: 5em;
+  color: white;
+}
