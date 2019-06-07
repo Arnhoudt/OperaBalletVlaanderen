@@ -11,14 +11,7 @@ import EditCharacter from "../../components/admin/EditCharacter";
 import AddAct from "../../components/admin/AddAct";
 import EditAct from "../../components/admin/EditAct";
 
-const Dashboard = ({
-  uiStore,
-  actStore,
-  answerStore,
-  characterStore,
-  questionStore,
-  history
-}) => {
+const Dashboard = ({ uiStore, actStore, answerStore, characterStore, questionStore, history }) => {
   const handleClick = e => {
     uiStore.logoutAdmin();
     history.push(ROUTES.loginAdmin);
@@ -33,12 +26,7 @@ const Dashboard = ({
       <button onClick={handleClick}>Logout</button>
       <AddCharacter />
       {characterStore.characters.map(character => (
-        <EditCharacter
-          key={character.id}
-          character={character}
-          update={characterStore.update}
-          remove={characterStore.delete}
-        />
+        <EditCharacter key={character.id} character={character} update={characterStore.update} remove={characterStore.delete} />
       ))}
       {/* <AddQuestion />
       {questionStore.questions.map(question => (
@@ -51,12 +39,7 @@ const Dashboard = ({
       ))} */}
       <AddAct />
       {actStore.acts.map(act => (
-        <EditAct
-          key={act.id}
-          act={act}
-          update={actStore.update}
-          remove={actStore.delete}
-        />
+        <EditAct key={act.id} act={act} update={actStore.update} remove={actStore.delete} />
       ))}
       {answerStore.answers.map(answer => (
         <div key={answer.id}>
@@ -76,10 +59,4 @@ Dashboard.propTypes = {
   questionStore: PropTypes.observableObject.isRequired
 };
 
-export default inject(
-  `uiStore`,
-  `actStore`,
-  `answerStore`,
-  `characterStore`,
-  `questionStore`
-)(withAuthentication(observer(Dashboard)));
+export default inject(`uiStore`, `actStore`, `answerStore`, `characterStore`, `questionStore`)(withAuthentication(observer(Dashboard)));

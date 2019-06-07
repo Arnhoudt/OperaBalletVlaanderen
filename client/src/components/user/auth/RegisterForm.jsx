@@ -53,61 +53,22 @@ const RegisterForm = ({ uiStore, history }) => {
           <p className={styles.message}>Alle velden zijn vereist</p>
           <label htmlFor="name" className={styles.name}>
             <p className={styles.text}>Naam (bijnaam)</p>
-            <input
-              type="text"
-              name="name"
-              id="name="
-              defaultValue={name}
-              onChange={handleChange}
-              className={form.input}
-              maxLength="24"
-              required
-            />
+            <input type="text" name="name" id="name=" defaultValue={name} onChange={handleChange} className={form.input} maxLength="24" required />
           </label>
           <label htmlFor="email" className={styles.email}>
             <p className={styles.text}>Email</p>
-            <input
-              type="email"
-              name="email"
-              id="email="
-              defaultValue={email}
-              onChange={handleChange}
-              className={form.input}
-              maxLength="128"
-              required
-            />
+            <input type="email" name="email" id="email=" defaultValue={email} onChange={handleChange} className={form.input} maxLength="128" required />
           </label>
           <p className={styles.error}>{error}</p>
           <label htmlFor="password" className={styles.password}>
             <p className={styles.text}>Wachtwoord</p>
-            <input
-              type="password"
-              name="pwd"
-              id="pwd"
-              defaultValue={pwd}
-              onChange={handleChange}
-              className={form.input}
-              maxLength="128"
-              required
-            />
+            <input type="password" name="pwd" id="pwd" defaultValue={pwd} onChange={handleChange} className={form.input} maxLength="128" required />
           </label>
           <label htmlFor="password" className={styles.password_repeat}>
             <p className={styles.text}>Herhaal wachtwoord</p>
-            <input
-              type="password"
-              name="pwd2"
-              id="pwd2"
-              onChange={handleChange}
-              className={form.input}
-              maxLength="128"
-              required
-            />
+            <input type="password" name="pwd2" id="pwd2" onChange={handleChange} className={form.input} maxLength="128" required />
           </label>
-          <button
-            type="submit"
-            disabled={pwd && pwd !== pwd2}
-            className={`${form.button} ${styles.button}`}
-          >
+          <button type="submit" disabled={pwd && pwd !== pwd2} className={`${form.button} ${styles.button}`}>
             Registreer
           </button>
         </div>

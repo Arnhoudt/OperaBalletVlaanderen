@@ -65,29 +65,17 @@ class ThreeScene extends Component {
     //ADD SCENE
     this.scene = new THREE.Scene();
     {
-      const color =
-          this.currentColor.b +
-          this.currentColor.g * 256 +
-          this.currentColor.r * 256 * 256,
+      const color = this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256,
         near = 300,
         far = 1600;
       this.scene.fog = new THREE.Fog(color, near, far);
     }
     //ADD CAMERA
-    this.camera = new THREE.PerspectiveCamera(
-      45,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      10000
-    );
+    this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
     this.camera.position.z = 1500;
     //ADD RENDERER
     this.renderer = new THREE.WebGLRenderer({ antialias: true });
-    this.renderer.setClearColor(
-      this.currentColor.b +
-        this.currentColor.g * 256 +
-        this.currentColor.r * 256 * 256
-    );
+    this.renderer.setClearColor(this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.mount.appendChild(this.renderer.domElement);
     //ADD RAYCASTER
@@ -95,55 +83,13 @@ class ThreeScene extends Component {
     //ADD MOUSE
     this.mouse = new THREE.Vector2();
     //CREATE IMAGES
-    canary.createImage(
-      this,
-      `assets/img/pikachu.jpg`,
-      200,
-      100,
-      -300,
-      200,
-      150
-    );
-    canary.createImage(
-      this,
-      `assets/img/pikachu.jpg`,
-      -200,
-      -100,
-      -500,
-      200,
-      150
-    );
+    canary.createImage(this, `assets/img/pikachu.jpg`, 200, 100, -300, 200, 150);
+    canary.createImage(this, `assets/img/pikachu.jpg`, -200, -100, -500, 200, 150);
     canary.createImage(this, `assets/img/pikachu.jpg`, 200, 0, -700, 200, 150);
-    canary.createImage(
-      this,
-      `assets/img/pikachu.jpg`,
-      -150,
-      100,
-      -800,
-      200,
-      150
-    );
+    canary.createImage(this, `assets/img/pikachu.jpg`, -150, 100, -800, 200, 150);
     //CREATE FONTS
-    canary.createText(
-      this,
-      this.fonts.helvetacaLight,
-      0xff6690,
-      `Pikachu`,
-      0,
-      0,
-      500,
-      200
-    );
-    canary.createText(
-      this,
-      this.fonts.helvetacaLight,
-      0xff6690,
-      `Pika Pika`,
-      0,
-      0,
-      -1800,
-      200
-    );
+    canary.createText(this, this.fonts.helvetacaLight, 0xff6690, `Pikachu`, 0, 0, 500, 200);
+    canary.createText(this, this.fonts.helvetacaLight, 0xff6690, `Pika Pika`, 0, 0, -1800, 200);
     //ADD LIGHT
     this.light = new THREE.PointLight(0xffffff, 1, 500);
     this.light.position.set(50, 10, 25);
@@ -194,37 +140,13 @@ class ThreeScene extends Component {
         intersects[0].object.position.set(0, 0, this.camera.position.z - 100);
         intersects[0].object.rotation.set(0, 0, 0);
         intersects[0].object.scale.set(60, 40, intersects[0].object.scale.z);
-        this.scene.fog = new THREE.Fog(
-          this.currentColor.b +
-            this.currentColor.g * 256 +
-            this.currentColor.r * 256 * 256,
-          105,
-          120
-        );
+        this.scene.fog = new THREE.Fog(this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256, 105, 120);
         this.closeUpObject = intersects[0];
       } else {
-        this.closeUpObject.object.position.set(
-          this.closeUpData.posX,
-          this.closeUpData.posY,
-          this.closeUpData.posZ
-        );
-        this.closeUpObject.object.rotation.set(
-          this.closeUpData.rotX,
-          this.closeUpData.rotY,
-          this.closeUpData.rotZ
-        );
-        this.closeUpObject.object.scale.set(
-          this.closeUpData.scaleX,
-          this.closeUpData.scaleY,
-          this.closeUpData.scaleZ
-        );
-        this.scene.fog = new THREE.Fog(
-          this.currentColor.b +
-            this.currentColor.g * 256 +
-            this.currentColor.r * 256 * 256,
-          300,
-          1600
-        );
+        this.closeUpObject.object.position.set(this.closeUpData.posX, this.closeUpData.posY, this.closeUpData.posZ);
+        this.closeUpObject.object.rotation.set(this.closeUpData.rotX, this.closeUpData.rotY, this.closeUpData.rotZ);
+        this.closeUpObject.object.scale.set(this.closeUpData.scaleX, this.closeUpData.scaleY, this.closeUpData.scaleZ);
+        this.scene.fog = new THREE.Fog(this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256, 300, 1600);
         this.closeUpObject = undefined;
       }
     }
@@ -236,11 +158,7 @@ class ThreeScene extends Component {
 
   onMouseMove = event => {
     event.preventDefault();
-    this.camera.lookAt(
-      -(window.innerWidth / 2 - event.clientX) / 20,
-      (window.innerHeight / 2 - event.clientY) / 20,
-      this.camera.position.z - 100
-    );
+    this.camera.lookAt(-(window.innerWidth / 2 - event.clientX) / 20, (window.innerHeight / 2 - event.clientY) / 20, this.camera.position.z - 100);
     this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
   };
@@ -264,11 +182,7 @@ class ThreeScene extends Component {
         this.zoomedObject = intersects[0];
       } else {
         if (this.zoomedObject) {
-          this.zoomedObject.object.scale.set(
-            200,
-            150,
-            this.zoomedObject.object.scale.z
-          );
+          this.zoomedObject.object.scale.set(200, 150, this.zoomedObject.object.scale.z);
           this.zoomedObject = undefined;
         }
       }
@@ -282,11 +196,7 @@ class ThreeScene extends Component {
         //alpha = Math.atan((child.position.x - camera.position.x)/(child.position.z - camera.position.z-450));
         //beta = Math.atan((child.position.y - camera.position.y)/(child.position.z -camera.position.z-450));
         //child.rotation.set(-Math.PI*beta, Math.PI*alpha, Math.PI*((camera.position.z)/child.position.z));
-        child.lookAt(
-          this.camera.position.x,
-          this.camera.position.y,
-          this.camera.position.z
-        );
+        child.lookAt(this.camera.position.x, this.camera.position.y, this.camera.position.z);
       });
       if (this.camera.position.z < -1000) {
         this.newColor = {
@@ -324,15 +234,9 @@ class ThreeScene extends Component {
   animate = () => {
     //ANIMATION
     if (this.mouseMoved === true) {
-      const vx =
-        (-(window.innerWidth / 2 - this.mousePosition.x) / 20 -
-          this.lookPosition.x) *
-        0.03;
+      const vx = (-(window.innerWidth / 2 - this.mousePosition.x) / 20 - this.lookPosition.x) * 0.03;
       this.lookPosition.x += vx;
-      const vy =
-        ((window.innerHeight / 2 - this.mousePosition.y) / 20 -
-          this.lookPosition.y) *
-        0.03;
+      const vy = ((window.innerHeight / 2 - this.mousePosition.y) / 20 - this.lookPosition.y) * 0.03;
       this.lookPosition.y += vy;
       const z = this.camera.position.z - 100;
       this.camera.lookAt(this.lookPosition.x, this.lookPosition.y, z);
@@ -344,11 +248,7 @@ class ThreeScene extends Component {
       this.currentColor.g += gv;
       const bv = Math.round((this.newColor.b - this.currentColor.b) * 0.03);
       this.currentColor.b += bv;
-      this.renderer.setClearColor(
-        this.currentColor.b +
-          256 * this.currentColor.g +
-          256 * 256 * this.currentColor.r
-      );
+      this.renderer.setClearColor(this.currentColor.b + 256 * this.currentColor.g + 256 * 256 * this.currentColor.r);
     }
     //ANIMATION
     this.renderScene();

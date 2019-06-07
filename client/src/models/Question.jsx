@@ -2,15 +2,7 @@ import uuid from "uuid";
 import { decorate, observable, action } from "mobx";
 
 class Question {
-  constructor(
-    value,
-    param1,
-    param2,
-    param3,
-    param4,
-    param5,
-    id = uuid.v4()
-  ) {
+  constructor(value, param1, param2, param3, param4, param5, id = uuid.v4()) {
     this.id = id;
     this.value = value;
     this.param1 = param1;

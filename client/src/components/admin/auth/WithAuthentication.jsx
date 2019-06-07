@@ -9,9 +9,7 @@ const withAuthentication = ComponentToProtect => {
     if (!props.uiStore.authAdmin) {
       return <Redirect to={ROUTES.loginAdmin} />;
     }
-    return (
-      <ComponentToProtect {...props} authAdmin={props.uiStore.authAdmin} />
-    );
+    return <ComponentToProtect {...props} authAdmin={props.uiStore.authAdmin} />;
   };
 
   return inject(`uiStore`)(observer(WithAuth));

@@ -35,71 +35,31 @@ const AddCharacter = ({ characterStore }) => {
           <div>
             <label>
               <span>Param1:</span>
-              <input
-                type="number"
-                min="0"
-                max="100"
-                step="1"
-                defaultValue="100"
-                ref={characterParam1}
-                name="param1"
-              />
+              <input type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam1} name="param1" />
             </label>
           </div>
           <div>
             <label>
               <span>Param2:</span>
-              <input
-                type="number"
-                min="0"
-                max="100"
-                step="1"
-                defaultValue="100"
-                ref={characterParam2}
-                name="param2"
-              />
+              <input type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam2} name="param2" />
             </label>
           </div>
           <div>
             <label>
               <span>Param3:</span>
-              <input
-                type="number"
-                min="0"
-                max="100"
-                step="1"
-                defaultValue="100"
-                ref={characterParam3}
-                name="param3"
-              />
+              <input type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam3} name="param3" />
             </label>
           </div>
           <div>
             <label>
               <span>Param4:</span>
-              <input
-                type="number"
-                min="0"
-                max="100"
-                step="1"
-                defaultValue="100"
-                ref={characterParam4}
-                name="param4"
-              />
+              <input type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam4} name="param4" />
             </label>
           </div>
           <div>
             <label>
               <span>Param5:</span>
-              <input
-                type="number"
-                min="0"
-                max="100"
-                step="1"
-                defaultValue="100"
-                ref={characterParam5}
-                name="param5"
-              />
+              <input type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam5} name="param5" />
             </label>
           </div>
           <div>

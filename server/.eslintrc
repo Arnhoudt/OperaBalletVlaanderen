@@ -1,1 +1,6 @@
-{ "extends": "devine" }
+{
+  "extends": "devine",
+  "rules": {
+    "max-len": [2, 160, 4, { "ignoreUrls": true }]
+  }
+}

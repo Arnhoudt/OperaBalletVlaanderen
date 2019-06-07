@@ -2,16 +2,7 @@ import uuid from "uuid";
 import { decorate, observable, action } from "mobx";
 
 class Act {
-  constructor(
-    name,
-    spotifyPlaylist,
-    param1,
-    param2,
-    param3,
-    param4,
-    param5,
-    id = uuid.v4()
-  ) {
+  constructor(name, spotifyPlaylist, param1, param2, param3, param4, param5, id = uuid.v4()) {
     this.id = id;
     this.name = name;
     this.spotifyPlaylist = spotifyPlaylist;

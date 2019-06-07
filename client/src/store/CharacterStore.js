@@ -1,11 +1,4 @@
-import {
-  decorate,
-  configure,
-  observable,
-  action,
-  runInAction,
-  observe
-} from "mobx";
+import { decorate, configure, observable, action, runInAction, observe } from "mobx";
 import Api from "../api";
 import Character from "../models/Character";
 
@@ -33,9 +26,7 @@ class CharacterStore {
     const newCharacter = new Character();
     newCharacter.updateFromServer(character);
     this.characters.push(newCharacter);
-    this.api
-      .create(newCharacter)
-      .then(data => newCharacter.updateFromServer(data));
+    this.api.create(newCharacter).then(data => newCharacter.updateFromServer(data));
   };
 
   update = character => {

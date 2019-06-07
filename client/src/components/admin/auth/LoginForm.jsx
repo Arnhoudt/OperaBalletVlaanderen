@@ -37,29 +37,11 @@ const LoginForm = ({ uiStore, history }) => {
         <div className={styles.form_container}>
           <label htmlFor="email" className={styles.email}>
             <p className={styles.text}>Email</p>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              ref={emailInput}
-              className={form.input}
-              maxLength="128"
-              onChange={handleChange}
-              required
-            />
+            <input type="email" name="email" id="email" ref={emailInput} className={form.input} maxLength="128" onChange={handleChange} required />
           </label>
           <label htmlFor="password" className={styles.password}>
             <p className={styles.text}>Wachtwoord</p>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              ref={pwdInput}
-              className={form.input}
-              maxLength="128"
-              onChange={handleChange}
-              required
-            />
+            <input type="password" name="password" id="password" ref={pwdInput} className={form.input} maxLength="128" onChange={handleChange} required />
           </label>
           <p className={styles.error}>{uiStore.error}</p>
           <button type="submit" className={`${form.button} ${styles.button}`}>
