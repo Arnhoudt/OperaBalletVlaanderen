@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./AddCharacter.module.css";
+import styles from "./EditCharacter.module.css";
 
 const EditCharacter = ({ character, update, remove }) => {
   const handleUpdateCharacter = e => {
@@ -16,9 +16,10 @@ const EditCharacter = ({ character, update, remove }) => {
     <>
       <form method="post" onSubmit={handleUpdateCharacter}>
         <div className={styles.containerLabels}>
+          <div className={styles.line} />
           <input className={styles.input} type="text" name="name" defaultValue={character.name} onChange={e => character.setName(e.target.value)} />
           <input
-            className={styles.input}
+            className={`${styles.input} ${styles.param}`}
             type="number"
             min="0"
             max="100"
@@ -28,7 +29,7 @@ const EditCharacter = ({ character, update, remove }) => {
             onChange={e => character.setParam1(e.target.value)}
           />
           <input
-            className={styles.input}
+            className={`${styles.input} ${styles.param}`}
             type="number"
             min="0"
             max="100"
@@ -38,7 +39,7 @@ const EditCharacter = ({ character, update, remove }) => {
             onChange={e => character.setParam2(e.target.value)}
           />
           <input
-            className={styles.input}
+            className={`${styles.input} ${styles.param}`}
             type="number"
             min="0"
             max="100"
@@ -48,7 +49,7 @@ const EditCharacter = ({ character, update, remove }) => {
             onChange={e => character.setParam3(e.target.value)}
           />
           <input
-            className={styles.input}
+            className={`${styles.input} ${styles.param}`}
             type="number"
             min="0"
             max="100"
@@ -58,7 +59,7 @@ const EditCharacter = ({ character, update, remove }) => {
             onChange={e => character.setParam4(e.target.value)}
           />
           <input
-            className={styles.input}
+            className={`${styles.input} ${styles.param}`}
             type="number"
             min="0"
             max="100"
@@ -67,11 +68,13 @@ const EditCharacter = ({ character, update, remove }) => {
             defaultValue={character.param5}
             onChange={e => character.setParam5(e.target.value)}
           />
-          <button type="submit">Update</button>
+          <button type="submit" className={`${styles.button} ${styles.update}`}>
+            Update
+          </button>
+          <button type="submit" onClick={handleDeleteCharacter} className={styles.button}>
+            Delete
+          </button>
         </div>
-      </form>
-      <form method="post" onSubmit={handleDeleteCharacter}>
-        <button type="submit">Delete</button>
       </form>
     </>
   );

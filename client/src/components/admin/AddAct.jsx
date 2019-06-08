@@ -59,7 +59,7 @@ const AddAct = ({ actStore }) => {
             </label>
             <div>
               <button type="submit" className={styles.add}>
-                Add act
+                <p>Add act</p>
               </button>
             </div>
           </div>

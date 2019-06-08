@@ -10,6 +10,7 @@ import EditCharacter from "../../components/admin/EditCharacter";
 //import EditQuestion from "../../components/admin/EditQuestion";
 import AddAct from "../../components/admin/AddAct";
 import EditAct from "../../components/admin/EditAct";
+import Answers from "../../components/admin/Answers";
 
 const Dashboard = ({ uiStore, actStore, answerStore, characterStore, questionStore, history }) => {
   const [tab, setTab] = useState(`Cijfers`);
@@ -59,16 +60,10 @@ const Dashboard = ({ uiStore, actStore, answerStore, characterStore, questionSto
         {tab === `Cijfers` ? (
           <></>
         ) : tab === `Resultaten` ? (
-          <>
-            {answerStore.answers.map(answer => (
-              <div key={answer.id}>
-                <p>Question: {answer.question}</p>
-                <p>Answer: {`${answer.answer}`}</p>
-              </div>
-            ))}
-          </>
+          <Answers />
         ) : tab === `Content` ? (
           <>
+            <h2 className={styles.subtitle}>__ Characters</h2>
             <AddCharacter />
             {characterStore.characters.map(character => (
               <EditCharacter key={character.id} character={character} update={characterStore.update} remove={characterStore.delete} />
@@ -82,6 +77,7 @@ const Dashboard = ({ uiStore, actStore, answerStore, characterStore, questionSto
               remove={questionStore.delete}
             />
           ))} */}
+            <h2 className={styles.subtitle}>__ Acts</h2>
             <AddAct />
             {actStore.acts.map(act => (
               <EditAct key={act.id} act={act} update={actStore.update} remove={actStore.delete} />
