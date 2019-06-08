@@ -1,11 +1,4 @@
-import {
-  decorate,
-  configure,
-  observable,
-  action,
-  runInAction,
-  observe
-} from "mobx";
+import { decorate, configure, observable, action, runInAction, observe } from "mobx";
 import Api from "../api";
 import Question from "../models/Question";
 
@@ -33,9 +26,7 @@ class QuestionStore {
     const newQuestion = new Question();
     newQuestion.updateFromServer(question);
     this.questions.push(newQuestion);
-    this.api
-      .create(newQuestion)
-      .then(data => newQuestion.updateFromServer(data));
+    this.api.create(newQuestion).then(data => newQuestion.updateFromServer(data));
   };
 
   update = question => {

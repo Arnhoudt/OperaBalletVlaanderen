@@ -1,4 +1,52 @@
+.container {
+  width: 96em;
+  margin: auto;
+}
+
 .title {
-  font-size: 2em;
+  font-size: 6em;
   color: var(--dark-color);
+  padding: 0em 0em .6em 0em;
+}
+
+.containerAdmin {
+  height: 10em;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.admin {
+  composes: buttonLink from "../../styles/uiControls.module.css";
+  padding-top: 1.6em;
+}
+
+.admin p {
+  font-size: 1.6em;
+  text-decoration: underline;
+}
+
+.tab {
+  composes: button from "../../styles/uiControls.module.css";
+  width: 16em;
+  height: 4em;
+  border: .1em solid var(--dark-color);
+}
+
+.tab p {
+  font-size: 1.6em;
+}
+
+.containerTabs {
+  width: 55em;
+  height: 8em;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+
+.selected {
+  background-color: var(--dark-color);
+  color: var(--light-color);
 }

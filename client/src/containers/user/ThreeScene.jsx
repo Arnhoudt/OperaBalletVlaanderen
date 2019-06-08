@@ -5,6 +5,34 @@ import styles from "./ThreeScene.module.css";
 let canary = new Canary();
 
 class ThreeScene extends Component {
+  constructor() {
+    super();
+    this.state = { loading: ``, error: ``, done: false };
+    THREE.DefaultLoadingManager.onStart = (url, itemsLoaded, itemsTotal) => {
+      const state = { ...this.state };
+      state.loading = (itemsLoaded / itemsTotal) * 100;
+      this.setState(state);
+    };
+
+    THREE.DefaultLoadingManager.onLoad = () => {
+      const state = { ...this.state };
+      state.done = true;
+      this.setState(state);
+    };
+
+    THREE.DefaultLoadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
+      const state = { ...this.state };
+      state.loading = (itemsLoaded / itemsTotal) * 100;
+      this.setState(state);
+    };
+
+    THREE.DefaultLoadingManager.onError = url => {
+      const state = { ...this.state };
+      state.error = url;
+      this.setState(state);
+    };
+  }
+
   componentDidMount() {
 
     // INSTELLINGEN <- dit zijn de enige waarden die je mag aanpassen!
@@ -212,8 +240,14 @@ class ThreeScene extends Component {
       window.addEventListener(`wheel`, this.handleMouseScroll);
       window.addEventListener(`keydown`, this.handleKeyDown);
       window.addEventListener(`click`, this.handleMouseClick);
+      const color =
+          this.currentColor.b +
+          this.currentColor.g * 256 +
+          this.currentColor.r * 256 * 256,
+        near = 300,
+        far = 1600;
+      this.scene.fog = new THREE.Fog(color, near, far);
     }
-
     this.start();
   }
 
@@ -279,17 +313,6 @@ class ThreeScene extends Component {
     this.renderer.render(this.scene, this.camera);
   }
 
-  render() {
-    return (
-        <div className={styles.div}
-             ref={mount => {
-               this.mount = mount;
-             }}
-        />
-    );
-  }
-
-
   //Handers
 
   handleMouseClick = e => {
@@ -339,32 +362,22 @@ class ThreeScene extends Component {
     event.preventDefault();
     this.mouseMoved = true;
     this.mousePosition = {
-      x:event.clientX,
-      y:event.clientY
-    }
-    if(this.closeUpObject === undefined){
-      this.mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-      this.mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+      x: event.clientX,
+      y: event.clientY
+    };
+    if (!this.closeUpObject) {
+      this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-      this.raycaster.setFromCamera( this.mouse, this.camera );
-      var intersects = this.raycaster.intersectObjects( this.scene.children );
-
-      if(intersects.length > 0){
-        let image;
-        for (let intersect of intersects){
-          if(intersect.object.name === "image"){
-            image = intersect;
-            break;
-          }
-        }
-        if(image){
-          //intersects[ 0 ].object.scale.set(intersects[ 0 ].object.scale.x,intersects[ 0 ].object.scale.y+1, intersects[ 0 ].object.scale.z+1);
-          image.object.scale.set(240,170, image.object.scale.z);
-          this.zoomedObject = image;
-        }
-      }else {
-        if(this.zoomedObject !== undefined){
-          this.zoomedObject.object.scale.set(200,150, this.zoomedObject.object.scale.z);
+      this.raycaster.setFromCamera(this.mouse, this.camera);
+      var intersects = this.raycaster.intersectObjects(this.scene.children);
+      if (intersects.length > 0) {
+        //intersects[ 0 ].object.scale.set(intersects[ 0 ].object.scale.x,intersects[ 0 ].object.scale.y+1, intersects[ 0 ].object.scale.z+1);
+        intersects[0].object.scale.set(240, 170, intersects[0].object.scale.z);
+        this.zoomedObject = intersects[0];
+      } else {
+        if (this.zoomedObject) {
+          this.zoomedObject.object.scale.set(200, 150, this.zoomedObject.object.scale.z);
           this.zoomedObject = undefined;
         }
       }
@@ -378,7 +391,7 @@ class ThreeScene extends Component {
         //alpha = Math.atan((child.position.x - camera.position.x)/(child.position.z - camera.position.z-450));
         //beta = Math.atan((child.position.y - camera.position.y)/(child.position.z -camera.position.z-450));
         //child.rotation.set(-Math.PI*beta, Math.PI*alpha, Math.PI*((camera.position.z)/child.position.z));
-        child.lookAt(this.camera.position.x,this.camera.position.y,this.camera.position.z);
+        child.lookAt(this.camera.position.x, this.camera.position.y, this.camera.position.z);
       });
 
       let afstand = -1000000000;
@@ -403,6 +416,26 @@ class ThreeScene extends Component {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
   };
+
+  render() {
+    return (
+      <>
+        <div
+          className={styles.div}
+          ref={mount => {
+            this.mount = mount;
+          }}
+        />
+        {!this.state.done ? (
+          <div className={styles.loading}>
+            <p>{this.state.loading} %</p>
+          </div>
+        ) : (
+          <></>
+        )}
+      </>
+    );
+  }
 }
 
 export default ThreeScene;

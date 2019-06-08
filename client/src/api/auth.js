@@ -7,10 +7,7 @@ class Auth {
 
   login = async (email, passwordS) => {
     const password = await sha1(`${passwordS}natr1umchl0ride`);
-    const r = await fetch(
-      `/auth/${this.entity}/login`,
-      this.getOptions(`post`, { email, password })
-    );
+    const r = await fetch(`/auth/${this.entity}/login`, this.getOptions(`post`, { email, password }));
     return await r.json();
   };
 
@@ -20,26 +17,17 @@ class Auth {
 
   register = async (name, email, passwordS) => {
     const password = await sha1(`${passwordS}natr1umchl0ride`);
-    const r = await fetch(
-      `/auth/${this.entity}/register`,
-      this.getOptions(`post`, { name, email, password })
-    );
+    const r = await fetch(`/auth/${this.entity}/register`, this.getOptions(`post`, { name, email, password }));
     return await r.json();
   };
 
   registerRandom = async () => {
-    const r = await fetch(
-      `/auth/${this.entity}/registerRandom`,
-      this.getOptions(`post`)
-    );
+    const r = await fetch(`/auth/${this.entity}/registerRandom`, this.getOptions(`post`));
     return await r.json();
   };
 
   delete = async () => {
-    const r = await fetch(
-      `/auth/${this.entity}/delete`,
-      this.getOptions(`delete`)
-    );
+    const r = await fetch(`/auth/${this.entity}/delete`, this.getOptions(`delete`));
     return await r.json();
   };
 

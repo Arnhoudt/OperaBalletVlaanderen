@@ -1,0 +1,14 @@
+.containerLabels {
+  display: flex;
+  flex-flow: row;
+}
+
+.label {
+  width: 16em;
+  display: flex;
+  flex-flow: column;
+}
+
+.param {
+  width: 8em;
+}

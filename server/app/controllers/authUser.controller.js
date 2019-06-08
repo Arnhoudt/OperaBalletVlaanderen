@@ -47,9 +47,7 @@ exports.login = async (req, res) => {
       }
     }
   } catch (error) {
-    res
-      .status(500)
-      .send({message: 'Internal error, please try again', error});
+    res.status(500).send({message: 'Internal error, please try again', error});
   }
 };
 
@@ -82,13 +80,9 @@ exports.register = async (req, res) => {
 exports.registerRandom = async (req, res) => {
   try {
     const customId = mongoose.Types.ObjectId();
-    const token = jwt.sign(
-      {_id: customId, name: `random`},
-      process.env.SECRET,
-      {
-        expiresIn: '24h'
-      }
-    );
+    const token = jwt.sign({_id: customId, name: `random`}, process.env.SECRET, {
+      expiresIn: '24h'
+    });
     const parts = token.split('.');
     const signature = parts.splice(2);
     const unregisteredUser = new UnregisteredUser({_id: customId, token});

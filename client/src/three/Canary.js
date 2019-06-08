@@ -25,38 +25,20 @@ class Canary {
   }
 
   createImage = (component, path, x, y, z, width, height) => {
-    component.textureLoader.load(
-      path,
-      texture => {
-        let img = new THREE.MeshBasicMaterial({
-          map: texture
-        });
-        let plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), img);
-        plane.overdraw = true;
-        plane.position.set(x, y, z);
-        plane.scale.set(width, height, 1);
+    component.textureLoader.load(path, texture => {
+      let img = new THREE.MeshBasicMaterial({
+        map: texture
+      });
+      let plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), img);
+      plane.overdraw = true;
+      plane.position.set(x, y, z);
+      plane.scale.set(width, height, 1);
 
-        component.scene.add(plane);
-      },
-      xhr => {
-        console.log((xhr.loaded / xhr.total) * 100 + `% loaded`);
-      },
-      xhr => {
-        console.log(`An error happened`);
-      }
-    );
+      component.scene.add(plane);
+    });
   };
 
-  createText = (
-    component,
-    textFont,
-    textColor,
-    textMessage,
-    textPosX,
-    textPosY,
-    textPosZ,
-    textSize
-  ) => {
+  createText = (component, textFont, textColor, textMessage, textPosX, textPosY, textPosZ, textSize) => {
     component.fontLoader.load(textFont, font => {
       let xMid;
       let color = new THREE.Color(textColor);

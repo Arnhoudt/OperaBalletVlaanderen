@@ -1,4 +1,5 @@
-:global(:root){
-  --light-color: #F2F2F2;
+:root{
+  --light-color: #FEFEFE;
   --dark-color: #020202;
+  --background-color: #FEFEFE;
 }

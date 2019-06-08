@@ -19,34 +19,22 @@ class Api {
   };
 
   findAllByUserId = async id => {
-    const r = await fetch(
-      `/api/${this.entity}/user/${id}`,
-      this.getOptions(`get`)
-    );
+    const r = await fetch(`/api/${this.entity}/user/${id}`, this.getOptions(`get`));
     return await r.json();
   };
 
   create = async obj => {
-    const r = await fetch(
-      `/api/${this.entity}/add`,
-      this.getOptions(`post`, obj)
-    );
+    const r = await fetch(`/api/${this.entity}/add`, this.getOptions(`post`, obj));
     return await r.json();
   };
 
   update = async obj => {
-    const r = await fetch(
-      `/api/${this.entity}/${obj.id}`,
-      this.getOptions(`put`, obj)
-    );
+    const r = await fetch(`/api/${this.entity}/${obj.id}`, this.getOptions(`put`, obj));
     return await r.json();
   };
 
   delete = async obj => {
-    const r = await fetch(
-      `/api/${this.entity}/${obj.id}`,
-      this.getOptions(`delete`)
-    );
+    const r = await fetch(`/api/${this.entity}/${obj.id}`, this.getOptions(`delete`));
     return r.json();
   };
 

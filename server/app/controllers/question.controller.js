@@ -1,14 +1,7 @@
 const Question = require('../models/question.model.js');
 
 exports.create = async (req, res) => {
-  const {
-    value,
-    param1,
-    param2,
-    param3,
-    param4,
-    param5
-  } = req.body;
+  const {value, param1, param2, param3, param4, param5} = req.body;
   try {
     const question = new Question({
       value: value,
@@ -35,14 +28,7 @@ exports.findAll = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const {
-    value,
-    param1,
-    param2,
-    param3,
-    param4,
-    param5
-  } = req.body;
+  const {value, param1, param2, param3, param4, param5} = req.body;
   try {
     const r = await Question.findByIdAndUpdate(
       req.params.questionId,

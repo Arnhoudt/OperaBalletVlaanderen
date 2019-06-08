@@ -1,11 +1,4 @@
-import {
-  decorate,
-  configure,
-  observable,
-  action,
-  observe,
-  runInAction
-} from "mobx";
+import { decorate, configure, observable, action, observe, runInAction } from "mobx";
 import Api from "../api";
 import Answer from "../models/Answer";
 

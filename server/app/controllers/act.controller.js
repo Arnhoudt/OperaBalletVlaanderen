@@ -1,15 +1,7 @@
 const Act = require('../models/act.model.js');
 
 exports.create = async (req, res) => {
-  const {
-    name,
-    spotifyPlaylist,
-    param1,
-    param2,
-    param3,
-    param4,
-    param5
-  } = req.body;
+  const {name, spotifyPlaylist, param1, param2, param3, param4, param5} = req.body;
   try {
     const act = new Act({
       name: name,
@@ -46,15 +38,7 @@ exports.findById = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const {
-    name,
-    spotifyPlaylist,
-    param1,
-    param2,
-    param3,
-    param4,
-    param5
-  } = req.body;
+  const {name, spotifyPlaylist, param1, param2, param3, param4, param5} = req.body;
   try {
     const r = await Act.findByIdAndUpdate(
       req.params.actId,

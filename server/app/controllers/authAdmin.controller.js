@@ -45,9 +45,7 @@ exports.login = async (req, res) => {
       }
     }
   } catch (error) {
-    res
-      .status(500)
-      .send({message: 'Internal error, please try again', error});
+    res.status(500).send({message: 'Internal error, please try again', error});
   }
 };
 

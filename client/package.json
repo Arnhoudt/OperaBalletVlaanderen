@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "eslint-plugin-react-hooks": "^1.5.0",
+    "gsap": "^2.1.3",
     "js-cookie": "^2.2.0",
     "mobx": "^5.9.0",
     "mobx-react": "^6.0.2",

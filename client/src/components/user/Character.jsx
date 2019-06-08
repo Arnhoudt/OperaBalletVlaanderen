@@ -39,15 +39,7 @@ const Character = ({ params, characterStore }) => {
           <p>{bestCharacter.name}</p>
           <div>
             <p>de stats van jouw karakter zijn</p>
-            <Stats
-              params={[
-                bestCharacter.param1,
-                bestCharacter.param2,
-                bestCharacter.param3,
-                bestCharacter.param4,
-                bestCharacter.param5
-              ]}
-            />
+            <Stats params={[bestCharacter.param1, bestCharacter.param2, bestCharacter.param3, bestCharacter.param4, bestCharacter.param5]} />
           </div>
         </div>
       </>

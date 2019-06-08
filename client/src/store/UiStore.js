@@ -1,10 +1,6 @@
 import { decorate, observable, action } from "mobx";
 import Auth from "../api/auth";
-import {
-  getUserFromCookie,
-  getAdminFromCookie,
-  getRandomFromCookie
-} from "../utils/index.js";
+import { getUserFromCookie, getAdminFromCookie, getRandomFromCookie } from "../utils/index.js";
 
 class UiStore {
   authUser = null;
@@ -36,9 +32,7 @@ class UiStore {
 
   registerRandom = () => {
     this.emptyError();
-    return this.authServiceUser
-      .registerRandom()
-      .then(data => this.setRandomUser(getRandomFromCookie()));
+    return this.authServiceUser.registerRandom().then(data => this.setRandomUser(getRandomFromCookie()));
   };
 
   loginAdmin = (username, password) => {

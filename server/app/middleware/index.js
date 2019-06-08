@@ -9,21 +9,17 @@ const checkTokenAdmin = (req, res, next) => {
       message: 'Auth token is not supplied'
     });
   } else {
-    jwt.verify(
-      `${tokenAdmin}.${signatureAdmin}`,
-      process.env.SECRET,
-      (err, decoded) => {
-        if (err) {
-          res.status(401).send({
-            success: false,
-            message: 'Token is not valid'
-          });
-        } else {
-          req.authUserId = decoded._id;
-          next();
-        }
+    jwt.verify(`${tokenAdmin}.${signatureAdmin}`, process.env.SECRET, (err, decoded) => {
+      if (err) {
+        res.status(401).send({
+          success: false,
+          message: 'Token is not valid'
+        });
+      } else {
+        req.authUserId = decoded._id;
+        next();
       }
-    );
+    });
   }
 };
 
@@ -77,21 +73,17 @@ const checkTokenUser = (req, res, next) => {
       message: 'Auth token is not supplied'
     });
   } else {
-    jwt.verify(
-      `${tokenUser}.${signatureUser}`,
-      process.env.SECRET,
-      (err, decoded) => {
-        if (err) {
-          res.status(401).send({
-            success: false,
-            message: 'Token is not valid'
-          });
-        } else {
-          req.authUserId = decoded._id;
-          next();
-        }
+    jwt.verify(`${tokenUser}.${signatureUser}`, process.env.SECRET, (err, decoded) => {
+      if (err) {
+        res.status(401).send({
+          success: false,
+          message: 'Token is not valid'
+        });
+      } else {
+        req.authUserId = decoded._id;
+        next();
       }
-    );
+    });
   }
 };
 
@@ -104,27 +96,7 @@ const checkTokenUserRandom = (req, res, next) => {
         message: 'Auth token is not supplied'
       });
     } else {
-      jwt.verify(
-        `${token}.${signature}`,
-        process.env.SECRET,
-        (err, decoded) => {
-          if (err) {
-            res.status(401).send({
-              success: false,
-              message: 'Token is not valid'
-            });
-          } else {
-            req.authUserId = decoded._id;
-            next();
-          }
-        }
-      );
-    }
-  } else {
-    jwt.verify(
-      `${tokenUser}.${signatureUser}`,
-      process.env.SECRET,
-      (err, decoded) => {
+      jwt.verify(`${token}.${signature}`, process.env.SECRET, (err, decoded) => {
         if (err) {
           res.status(401).send({
             success: false,
@@ -134,8 +106,20 @@ const checkTokenUserRandom = (req, res, next) => {
           req.authUserId = decoded._id;
           next();
         }
+      });
+    }
+  } else {
+    jwt.verify(`${tokenUser}.${signatureUser}`, process.env.SECRET, (err, decoded) => {
+      if (err) {
+        res.status(401).send({
+          success: false,
+          message: 'Token is not valid'
+        });
+      } else {
+        req.authUserId = decoded._id;
+        next();
       }
-    );
+    });
   }
 };
 
