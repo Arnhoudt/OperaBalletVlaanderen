@@ -14,7 +14,7 @@
   color: var(--dark-color);
   transition: .3s background-color ease-in-out, .3s color ease-in-out;
   cursor: pointer;
-  border: none;
+  border: .1em solid var(--dark-color);
 }
 
 .button:hover {

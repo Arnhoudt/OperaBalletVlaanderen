@@ -52,7 +52,9 @@ const AddCharacter = ({ characterStore }) => {
               <input type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam5} name="param5" />
             </label>
             <div>
-              <button type="submit">Add character</button>
+              <button type="submit" className={styles.add}>
+                <p>Add character</p>
+              </button>
             </div>
           </div>
         </form>
