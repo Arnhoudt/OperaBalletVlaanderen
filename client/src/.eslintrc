@@ -1,9 +1,7 @@
 {
   "extends": "react-app",
-  "plugins": ["react-hooks"],
   "rules": {
     "max-len": [2, 160, 4, { "ignoreUrls": true }],
-    "quotes": ["error", "backtick"],
-    "react-hooks/exhaustive-deps": "warn"
+    "quotes": ["error", "backtick"]
   }
 }
