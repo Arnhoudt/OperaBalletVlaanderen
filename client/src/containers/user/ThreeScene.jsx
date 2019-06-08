@@ -37,6 +37,7 @@ class ThreeScene extends Component {
   componentDidMount() {
     // INSTELLINGEN <- dit zijn de enige waarden die je mag aanpassen!
     {
+
       this.backgroundColors = {
         default: {
           position: 0,
@@ -106,6 +107,13 @@ class ThreeScene extends Component {
       };
 
       this.ANTIALIASING = true;
+
+      this.WORLDPOSITION = {
+          images : 1500,
+          questions : 50000
+      }
+
+      this.CAMERA.position = this.WORLDPOSITION.questions;
     }
 
     // Maken van een witte bol die de pointer volgt
