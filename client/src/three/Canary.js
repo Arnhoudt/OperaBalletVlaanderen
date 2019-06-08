@@ -3,28 +3,59 @@ import * as SVGLoader from "three-svg-loader";
 
 class Canary {
 
-  // ------------------------ png loader -----------------------------
-  createPng = (component) =>{
+  createPng = (component, path, x, y, z, width, height, name) =>{
     let textureLoader = new THREE.TextureLoader();
-    textureLoader.load("cirlce.png", function(texture){
+    textureLoader.load(path, function(texture){
 
-      let arrowGeo = new THREE.PlaneBufferGeometry(20,20);
+      let arrowGeo = new THREE.PlaneBufferGeometry(width,height);
       let arrowMaterial = new THREE.MeshLambertMaterial({
         map: texture,
         transparent: true
       });
 
       let arrow = new THREE.Mesh(arrowGeo,arrowMaterial);
-      arrow.position.set(0,0,0);
+      arrow.position.set(x,y,z);
       component.scene.add(arrow);
     });
   };
-// ---------------------- end png loader ---------------------------
+
   rubberBand = (current, final, amount) => {
     return (final - current) * amount;
   }
 
-  createImage = (component, path, x, y, z, width, height) => {
+  getClosestObjectWithName = (intersects, name) => {
+    let zoomedObject;
+    intersects.reverse();
+    intersects.forEach(intersect => {
+      if(intersect.object.name === name){
+      //TODO: als een gebruiker over een image en een andere aanraakt zonder dat hij 'niets' heeft aangeraakt zal de vorige foto niet kleiner worden
+      zoomedObject = intersect;
+      }
+    });
+    return zoomedObject;
+  };
+
+  getPhotoData = (intersect) => {
+    return {
+      posX: intersect.object.position.x,
+      posY: intersect.object.position.y,
+      posZ: intersect.object.position.z,
+      rotX: intersect.object.rotation.x,
+      rotY: intersect.object.rotation.y,
+      rotZ: intersect.object.rotation.z,
+      scaleX: intersect.object.scale.x,
+      scaleY: intersect.object.scale.y,
+      scaleZ: intersect.object.scale.z
+    };
+  };
+
+  loadPhotoData = (data, photo) => {
+    photo.object.position.set(data.posX, data.posY, data.posZ);
+    photo.object.rotation.set(data.rotX, data.rotY, data.rotZ);
+    photo.object.scale.set(data.scaleX, data.scaleY, data.scaleZ);
+  }
+
+  createImage = (component, path, x, y, z, width, height, name) => {
     component.textureLoader.load(path, texture => {
       let img = new THREE.MeshBasicMaterial({
         map: texture
@@ -33,6 +64,7 @@ class Canary {
       plane.overdraw = true;
       plane.position.set(x, y, z);
       plane.scale.set(width, height, 1);
+      plane.name = name;
 
       component.scene.add(plane);
     });

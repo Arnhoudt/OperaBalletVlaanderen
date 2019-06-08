@@ -2,7 +2,11 @@
 import React, { Component } from "react";
 import * as THREE from "three";
 import Canary from "../../three/Canary";
+import Images from "../../three/Images";
+import Questions from "../../three/Questions";
+
 import styles from "./ThreeScene.module.css";
+import {POINTER, ANTIALIASING, BACKGROUND_COLORS, CAMERA, FOG, FONTS, WORLD_POSITION} from "../../constants/index";
 let canary = new Canary();
 
 class ThreeScene extends Component {
@@ -11,7 +15,7 @@ class ThreeScene extends Component {
     this.state = { loading: ``, error: ``, done: false };
     THREE.DefaultLoadingManager.onStart = (url, itemsLoaded, itemsTotal) => {
       const state = { ...this.state };
-      state.loading = (itemsLoaded / itemsTotal) * 100;
+      state.loading = Math.round((itemsLoaded / itemsTotal) * 100);
       this.setState(state);
     };
 
@@ -23,7 +27,7 @@ class ThreeScene extends Component {
 
     THREE.DefaultLoadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
       const state = { ...this.state };
-      state.loading = (itemsLoaded / itemsTotal) * 100;
+      state.loading = Math.round((itemsLoaded / itemsTotal) * 100);
       this.setState(state);
     };
 
@@ -35,94 +39,10 @@ class ThreeScene extends Component {
   }
 
   componentDidMount() {
-    // INSTELLINGEN <- dit zijn de enige waarden die je mag aanpassen!
-    {
-
-      this.fonts = {
-        helvetacaLight: `assets/fonts/helvetiker_regular.typeface.json`
-      };
-
-      this.POINTER = {
-        image : `assets/img/whiteCircle.png`,
-        width : 50,
-        height : 50
-      };
-
-      this.CAMERA = {
-        fov: 45,
-        aspect : window.innerWidth / window.innerHeight,
-        near : 0.1,
-        far : 10000,
-        position : 0,
-        movementFreedom : 100 //20 voor bij de foto's is goed denk ik en voor de vragen is 50-100 beter
-      }
-
-      this.FOG = {
-        near : 300,
-        far : 1600
-      }
-
-      this.ANTIALIASING = true;
-
-      this.WORLDPOSITION = {
-          images : 1500,
-          questions : 50000
-      }
-
-      this.CAMERA.position = this.WORLDPOSITION.images;
-
-      this.backgroundColors = {
-        images : {
-          default: {
-            position: this.WORLDPOSITION.images,
-            r: 0,
-            g: 125,
-            b: 125
-          },
-          background1: {
-            position: this.WORLDPOSITION.images-1000,
-            r: 200,
-            g: 0,
-            b: 100
-          },
-          background2: {
-            position: this.WORLDPOSITION.images-2000,
-            r: 50,
-            g: 200,
-            b: 50
-          },
-          background3: {
-            position: this.WORLDPOSITION.images-4000,
-            r: 0,
-            g: 100,
-            b: 200
-          },
-          background4: {
-            position: this.WORLDPOSITION.images-6000,
-            r: 200,
-            g: 200,
-            b: 200
-          },
-          background5: {
-            position: this.WORLDPOSITION.images-8000,
-            r: 50,
-            g: 200,
-            b: 50
-          },
-          end: {
-            position: this.WORLDPOSITION.images-15000,
-            r: 255,
-            g: 255,
-            b: 255
-          },
-        }
-      }
-    }
-
     // Maken van een witte bol die de pointer volgt
     {
       this.pointer = document.createElement(`div`);
-      this.pointer.innerHTML = `<img src=`+this.POINTER.image+` width="`+this.POINTER.width+`" height="`+this.POINTER.height+`" alt="">`;
+      this.pointer.innerHTML = `<img src=` + POINTER.image + ` width="` + POINTER.width + `" height="` + POINTER.height + `" alt="">`;
       this.pointer.classList.add(`pointer`);
       this.pointer.style.transform = `translateX(-100px)`;
       this.pointer.style.position = `absolute`;
@@ -131,26 +51,26 @@ class ThreeScene extends Component {
 
     // variablelen aanmaken (hier mag GEEN data in zitten, dat doe je in de instellingen)
     {
-    this.closeUpData = {};
-    this.currentColor = {...this.backgroundColors.images.default};
-    this.newColor = this.currentColor;
+      this.closeUpData = {};
+      this.currentColor = { ...BACKGROUND_COLORS.images.default };
+      this.newColor = this.currentColor;
 
-    this.mouseMoved = false;
-    this.mousePosition = {
-      x: 0,
-      y: 0
-    };//default waarde zonder betekenis
-    this.lookPosition = {
-      x: 0,
-      y: 0
-    };//default waarde zonder betekenis
-    this.pointerPosition = {
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2
-    }//default waarde zonder betekenis
+      this.mouseMoved = false;
+      this.mousePosition = {
+        x: 0,
+        y: 0
+      }; //default waarde zonder betekenis
+      this.lookPosition = {
+        x: 0,
+        y: 0
+      }; //default waarde zonder betekenis
+      this.pointerPosition = {
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2
+      }; //default waarde zonder betekenis
 
-      this.movementFreedom = this.CAMERA.movementFreedom;
-  }
+      this.movementFreedom = CAMERA.movementFreedom;
+    }
 
     //three variablen zoals loaders, camera's, raycasters en de scene
     {
@@ -161,29 +81,17 @@ class ThreeScene extends Component {
       //ADD SCENE
       this.scene = new THREE.Scene();
       {
-        const color =
-            this.currentColor.b +
-            this.currentColor.g * 256 +
-            this.currentColor.r * 256 * 256,
-            near = this.FOG.near,
-            far = this.FOG.far;
+        const color = this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256,
+          near = FOG.near,
+          far = FOG.far;
         this.scene.fog = new THREE.Fog(color, near, far);
       }
       //ADD CAMERA
-      this.camera = new THREE.PerspectiveCamera(
-          this.CAMERA.fov,
-          this.CAMERA.aspect,
-          this.CAMERA.near,
-          this.CAMERA.far
-      );
-      this.camera.position.z = this.CAMERA.position;
+      this.camera = new THREE.PerspectiveCamera(CAMERA.fov, CAMERA.aspect, CAMERA.near, CAMERA.far);
+      this.camera.position.z = CAMERA.position;
       //ADD RENDERER
-      this.renderer = new THREE.WebGLRenderer({ antialias: this.ANTIALIASING });
-      this.renderer.setClearColor(
-          this.currentColor.b +
-          this.currentColor.g * 256 +
-          this.currentColor.r * 256 * 256
-      );
+      this.renderer = new THREE.WebGLRenderer({ antialias: ANTIALIASING });
+      this.renderer.setClearColor(this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256);
       this.renderer.setSize(window.innerWidth, window.innerHeight);
       this.mount.appendChild(this.renderer.domElement);
       //ADD RAYCASTER
@@ -196,76 +104,48 @@ class ThreeScene extends Component {
     //aanmaken van de images
     {
       //CREATE IMAGES
-      canary.createImage(
-          this,
-          `assets/img/pikachu.jpg`,
-          200,
-          100,
-          this.WORLDPOSITION.images-1800,
-          200,
-          150
-      );
-      canary.createImage(
-          this,
-          `assets/img/pikachu.jpg`,
-          -200,
-          -100,
-          this.WORLDPOSITION.images-2000,
-          200,
-          150
-      );
-      canary.createImage(this, `assets/img/pikachu.jpg`, 200, 0, this.WORLDPOSITION.images-2200, 200, 150);
-      canary.createImage(
-          this,
-          `assets/img/pikachu.jpg`,
-          -150,
-          100,
-          this.WORLDPOSITION.images-2300,
-          200,
-          150
-      );
+      canary.createImage(this, `assets/img/pikachu.jpg`, 200, 100, WORLD_POSITION.images - 1800, 200, 150, `showRoomImage`);
+      canary.createImage(this, `assets/img/pikachu.jpg`, -200, -100, WORLD_POSITION.images - 2000, 200, 150, `showRoomImage`);
+      canary.createImage(this, `assets/img/pikachu.jpg`, 200, 0, WORLD_POSITION.images - 2200, 200, 150, `showRoomImage`);
+      canary.createImage(this, `assets/img/pikachu.jpg`, -150, 100, WORLD_POSITION.images - 2300, 200, 150, `showRoomImage`);
       //CREATE FONTS
-      canary.createText(
-          this,
-          this.fonts.helvetacaLight,
-          0xff6690,
-          `Pikachu`,
-          0,
-          0,
-          this.WORLDPOSITION.images-1000,
-          200
-      );
-      canary.createText(
-          this,
-          this.fonts.helvetacaLight,
-          0xff6690,
-          `Pika Pika`,
-          0,
-          0,
-          this.WORLDPOSITION.images-3300,
-          200
-      );
+      canary.createText(this, FONTS.helvetacaLight, 0xff6690, `Pikachu`, 0, 0, WORLD_POSITION.images - 1000, 200);
+      canary.createText(this, FONTS.helvetacaLight, 0xff6690, `Pika Pika`, 0, 0, WORLD_POSITION.images - 3300, 200);
     }
 
     //aanmaken van de questions
     {
-      this.input = document.createElement(`div`);
-      this.input.innerHTML = `<input></input>`;
-      this.input.classList.add(`question_input`);
-      this.input.style.transform = `translate(`+(window.innerWidth)/2+`px, `+window.innerHeight/1.3+`px) scale(4, 4)`;
-      this.input.style.position = `absolute`;
-      this.mount.appendChild(this.input);
+      this.questionWrapper = document.createElement(`div`);
+      this.questionWrapper.classList.add(`questionWrapper`);
 
-      canary.createText(
-          this,
-          this.fonts.helvetacaLight,
-          0xff6690,
-          `Pikachu`,
-          0,
-          30,
-          this.WORLDPOSITION.questions-300,
-          50
-      );
+      this.question = document.createElement(`div`);
+      this.question.classList.add(`question`);
+
+      this.input = document.createElement(`input`);
+      this.submit = document.createElement(`button`);
+
+      this.question.appendChild(this.submit);
+      this.question.appendChild(this.input);
+      this.questionWrapper.appendChild(this.question);
+      this.mount.appendChild(this.questionWrapper);
+
+      this.question.style.position = `absolute`;
+      this.question.style.top = `70%`;
+      this.question.style.left = `50%`;
+
+      this.input.classList.add(`question_input`);
+      this.input.style.transform = `translate(` + - this.input.offsetWidth/2 + `px, ` + 0 + `px) scale(4, 4)`;
+      this.input.style.position = `relative`;
+
+      this.submit.innerText = `submit`;
+      this.submit.classList.add(`submit`);
+      this.submit.style.transform = `translate(` + this.submit.offsetWidth/2  + `px, ` + window.innerHeight / 10 + `px) scale(4, 4)`;
+      //this.submit.style.transform = 'rotate('+30+'deg)';
+      this.submit.style.position = `relative`;
+
+
+      canary.createPng(this, `assets/img/ontdek_welk_personage_jij_bent.png`, -150, 100, WORLD_POSITION.questions - 300, 200, 150);
+      canary.createText(this, FONTS.helvetacaLight, 0xff6690, `Pikachu`, 0, 30, WORLD_POSITION.questions - 300, 50);
     }
 
     //eventlisteners
@@ -275,10 +155,7 @@ class ThreeScene extends Component {
       window.addEventListener(`wheel`, this.handleMouseScroll);
       window.addEventListener(`keydown`, this.handleKeyDown);
       window.addEventListener(`click`, this.handleMouseClick);
-      const color =
-          this.currentColor.b +
-          this.currentColor.g * 256 +
-          this.currentColor.r * 256 * 256,
+      const color = this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256,
         near = 300,
         far = 1600;
       this.scene.fog = new THREE.Fog(color, near, far);
@@ -302,88 +179,78 @@ class ThreeScene extends Component {
     if (!this.frameId) {
       this.frameId = requestAnimationFrame(this.animate);
     }
-  }
+  };
 
   stop = () => {
     cancelAnimationFrame(this.frameId);
-  }
-
+  };
 
   //animate en render
-
   animate = () => {
     //ANIMATION
-    if(this.mouseMoved === true){
-      const vx = canary.rubberBand(this.lookPosition.x, -(window.innerWidth/2 - this.mousePosition.x)/this.movementFreedom, 0.03);
-      const vy = canary.rubberBand((this.lookPosition.y) , ((window.innerHeight/2 - this.mousePosition.y)/this.movementFreedom), 0.03);
+    if (this.mouseMoved === true) {
+      const vx = canary.rubberBand(this.lookPosition.x, -(window.innerWidth / 2 - this.mousePosition.x) / this.movementFreedom, 0.03);
+      const vy = canary.rubberBand(this.lookPosition.y, (window.innerHeight / 2 - this.mousePosition.y) / this.movementFreedom, 0.03);
       this.lookPosition.x += vx;
       this.lookPosition.y += vy;
-      const z = this.camera.position.z-100;
+      const z = this.camera.position.z - 100;
 
-      this.camera.lookAt(this.lookPosition.x ,this.lookPosition.y , z);
+      this.camera.lookAt(this.lookPosition.x, this.lookPosition.y, z);
 
       const vpx = canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.06);
-      const vpy = canary.rubberBand(this.pointerPosition.y,this.mousePosition.y, 0.06);
+      const vpy = canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.06);
       this.pointerPosition.x += vpx;
       this.pointerPosition.y += vpy;
 
-      this.pointer.style.transform =  `translate(`+(this.pointerPosition.x+16)+`px,`+(this.pointerPosition.y+16)+`px)`;
+      this.pointer.style.transform = `translate(` + (this.pointerPosition.x + 16) + `px,` + (this.pointerPosition.y + 16) + `px)`;
+
+      if(CAMERA.position === WORLD_POSITION.questions){
+        this.question.style.transform = `perspective(1000px) translate(` + -this.lookPosition.x*10 + `px, ` + this.lookPosition.y*10 + `px)
+         rotateX(`+this.lookPosition.y+`deg) rotateY(`+this.lookPosition.x+`deg)`;
+      }
     }
-    if(this.currentColor !== this.newColor){
+    if (this.currentColor !== this.newColor) {
       const rv = Math.round((this.newColor.r - this.currentColor.r) * 0.03);
-      this.currentColor.r += rv;
       const gv = Math.round((this.newColor.g - this.currentColor.g) * 0.03);
-      this.currentColor.g += gv;
       const bv = Math.round((this.newColor.b - this.currentColor.b) * 0.03);
+      this.currentColor.r += rv;
+      this.currentColor.g += gv;
       this.currentColor.b += bv;
-      this.renderer.setClearColor(this.currentColor.b+256*this.currentColor.g+256*256*this.currentColor.r);
-      this.scene.fog = new THREE.Fog(this.currentColor.b+this.currentColor.g*256+this.currentColor.r*256*256, 300, 1600);
+      this.renderer.setClearColor(this.currentColor.b + 256 * this.currentColor.g + 256 * 256 * this.currentColor.r);
+      this.scene.fog = new THREE.Fog(this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256, 300, 1600);
     }
     //ANIMATION
     this.renderScene();
     this.frameId = window.requestAnimationFrame(this.animate);
-  }
+  };
 
   renderScene = () => {
     this.renderer.render(this.scene, this.camera);
-  }
+  };
 
   //Handers
-
   handleMouseClick = e => {
     e.preventDefault();
 
     //De raycaster kijkt welke objecten er in het visier van de muis liggen
-    this.mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
-    this.mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
-    this.raycaster.setFromCamera( this.mouse, this.camera );
-    var intersects = this.raycaster.intersectObjects( this.scene.children );
+    this.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+    this.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    this.raycaster.setFromCamera(this.mouse, this.camera);
+    var intersects = this.raycaster.intersectObjects(this.scene.children);
     //de elementen zitten in intersects
 
-    if(intersects.length > 0){
+    if (intersects.length > 0) {
       //er wordt gecontroleerd of er momenteel naar een object wordt gekeken
-      if(this.closeUpObject === undefined){
-        this.closeUpData = {
-          posX: intersects[ 0 ].object.position.x,
-          posY: intersects[ 0 ].object.position.y,
-          posZ: intersects[ 0 ].object.position.z,
-          rotX: intersects[ 0 ].object.rotation.x,
-          rotY: intersects[ 0 ].object.rotation.y,
-          rotZ: intersects[ 0 ].object.rotation.z,
-          scaleX: intersects[ 0 ].object.scale.x,
-          scaleY: intersects[ 0 ].object.scale.y,
-          scaleZ: intersects[ 0 ].object.scale.z
-        } // de waarden van de huidige foto worden opgeslagen TODO: dit kan efficienter
-        intersects[ 0 ].object.position.set(0,0, this.camera.position.z - 100); //de foto wordt centraal op het scherm van de user geplaatst
-        intersects[ 0 ].object.rotation.set(0,0,0);
-        intersects[ 0 ].object.scale.set(60,40, intersects[ 0 ].object.scale.z);
-        this.scene.fog = new THREE.Fog(this.currentColor.b+this.currentColor.g*256+this.currentColor.r*256*256, 105, 120);
-        this.closeUpObject = intersects[ 0 ];
-      }else{
-        this.closeUpObject.object.position.set(this.closeUpData.posX, this.closeUpData.posY, this.closeUpData.posZ);
-        this.closeUpObject.object.rotation.set(this.closeUpData.rotX, this.closeUpData.rotY, this.closeUpData.rotZ);
-        this.closeUpObject.object.scale.set(this.closeUpData.scaleX, this.closeUpData.scaleY, this.closeUpData.scaleZ);
-        this.scene.fog = new THREE.Fog(this.currentColor.b+this.currentColor.g*256+this.currentColor.r*256*256, 300, 1600);
+      if (this.closeUpObject === undefined) {
+        this.closeUpObject = intersects[0];
+        this.closeUpData = canary.getPhotoData(this.closeUpObject); // de waarden van de huidige foto worden opgeslagen TODO: dit kan efficienter
+        this.closeUpObject.object.position.set(0, 0, this.camera.position.z - 100); //de foto wordt centraal op het scherm van de user geplaatst
+        this.closeUpObject.object.rotation.set(0, 0, 0);
+        this.closeUpObject.object.scale.set(60, 40, this.closeUpObject.object.scale.z);
+        this.scene.fog = new THREE.Fog(this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256, 105, 120);
+      } else {
+        canary.loadPhotoData(this.closeUpData, this.closeUpObject);
+        this.scene.fog = new THREE.Fog(this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256, 300, 1600);
         this.closeUpObject = undefined;
       }
     }
@@ -407,9 +274,10 @@ class ThreeScene extends Component {
       this.raycaster.setFromCamera(this.mouse, this.camera);
       var intersects = this.raycaster.intersectObjects(this.scene.children);
       if (intersects.length > 0) {
-        //intersects[ 0 ].object.scale.set(intersects[ 0 ].object.scale.x,intersects[ 0 ].object.scale.y+1, intersects[ 0 ].object.scale.z+1);
-        intersects[0].object.scale.set(240, 170, intersects[0].object.scale.z);
-        this.zoomedObject = intersects[0];
+        this.zoomedObject = canary.getClosestObjectWithName(intersects, `showRoomImage`);
+        if(this.zoomedObject){
+          this.zoomedObject.object.scale.set(240, 170, this.zoomedObject.object.scale.z);
+        }
       } else {
         if (this.zoomedObject) {
           this.zoomedObject.object.scale.set(200, 150, this.zoomedObject.object.scale.z);
@@ -419,32 +287,29 @@ class ThreeScene extends Component {
     }
   };
 
-  handleMouseScroll = e =>{
-    if(this.closeUpObject === undefined){
-      this.camera.position.z -= e.deltaY/3;
+  handleMouseScroll = e => {
+    if (this.closeUpObject === undefined) {
+      this.camera.position.z -= e.deltaY / 3;
       this.scene.children.forEach(child => {
-        //alpha = Math.atan((child.position.x - camera.position.x)/(child.position.z - camera.position.z-450));
-        //beta = Math.atan((child.position.y - camera.position.y)/(child.position.z -camera.position.z-450));
-        //child.rotation.set(-Math.PI*beta, Math.PI*alpha, Math.PI*((camera.position.z)/child.position.z));
         child.lookAt(this.camera.position.x, this.camera.position.y, this.camera.position.z);
       });
 
       let afstand = -1000000000;
       let color = {};
-      Object.entries(this.backgroundColors.images).forEach(backgroundColor => {
-        const bc = {...backgroundColor[1]};
-        if(bc.position < this.camera.position.z && bc.position > afstand){
+      Object.entries(BACKGROUND_COLORS.images).forEach(backgroundColor => {
+        const bc = { ...backgroundColor[1] };
+        if (bc.position < this.camera.position.z && bc.position > afstand) {
           afstand = bc.position;
           color = bc;
         }
       });
       this.newColor = {
-        r:color.r,
-        g:color.g,
-        b:color.b
-      }
+        r: color.r,
+        g: color.g,
+        b: color.b
+      };
     }
-  }
+  };
 
   onResize = () => {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
