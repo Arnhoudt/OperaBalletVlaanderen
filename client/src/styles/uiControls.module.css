@@ -1,0 +1,47 @@
+.textInput {
+  flex: 1;
+  border: none;
+  font-size: 2rem;
+  background-color: transparent;
+  color: var(--light-color);
+  border-bottom: .1rem solid var(--light-color);
+  outline: none;
+}
+
+.button {
+  display: block;
+  outline: none;
+  color: var(--dark-color);
+  transition: .3s background-color ease-in-out, .3s color ease-in-out;
+  cursor: pointer;
+  border: none;
+}
+
+.button:hover {
+  color: var(--light-color);
+  background-color: var(--dark-color);
+}
+
+.buttonLink {
+  display: block;
+  outline: none;
+  color: var(--dark-color);
+  transition: .3s letter-spacing ease-in-out;
+  cursor: pointer;
+  border: none;
+}
+
+.buttonLink:hover {
+  letter-spacing: .1em;
+}
+
+.input {
+  width: 100%;
+  height: 2em;
+  border: 0;
+  border-bottom: .1em solid var(--dark-color);
+  background-color: transparent;
+  outline: none;
+  font-size: 1.8em;
+  color: var(--dark-color);
+}
