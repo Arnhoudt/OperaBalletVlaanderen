@@ -43,7 +43,7 @@ class ThreeScene extends Component {
       };
 
       this.POINTER = {
-        image : "assets/img/whiteCircle.png",
+        image : `assets/img/whiteCircle.png`,
         width : 50,
         height : 50
       };
@@ -121,11 +121,11 @@ class ThreeScene extends Component {
 
     // Maken van een witte bol die de pointer volgt
     {
-      this.pointer = document.createElement("div");
-      this.pointer.innerHTML = '<img src='+this.POINTER.image+' width="'+this.POINTER.width+'" height="'+this.POINTER.height+'" alt="">';
-      this.pointer.classList.add("pointer");
-      this.pointer.style.transform = 'translateX(-100px)';
-      this.pointer.style.position = "absolute";
+      this.pointer = document.createElement(`div`);
+      this.pointer.innerHTML = `<img src=`+this.POINTER.image+` width="`+this.POINTER.width+`" height="`+this.POINTER.height+`" alt="">`;
+      this.pointer.classList.add(`pointer`);
+      this.pointer.style.transform = `translateX(-100px)`;
+      this.pointer.style.position = `absolute`;
       this.mount.appendChild(this.pointer);
     }
 
@@ -249,11 +249,11 @@ class ThreeScene extends Component {
 
     //aanmaken van de questions
     {
-      this.input = document.createElement("div");
-      this.input.innerHTML = '<input></input>';
-      this.input.classList.add("question_input");
-      this.input.style.transform = 'translate('+(window.innerWidth)/2+'px, '+window.innerHeight/1.3+'px) scale(4, 4)';
-      this.input.style.position = "absolute";
+      this.input = document.createElement(`div`);
+      this.input.innerHTML = `<input></input>`;
+      this.input.classList.add(`question_input`);
+      this.input.style.transform = `translate(`+(window.innerWidth)/2+`px, `+window.innerHeight/1.3+`px) scale(4, 4)`;
+      this.input.style.position = `absolute`;
       this.mount.appendChild(this.input);
 
       canary.createText(
@@ -327,7 +327,7 @@ class ThreeScene extends Component {
       this.pointerPosition.x += vpx;
       this.pointerPosition.y += vpy;
 
-      this.pointer.style.transform =  'translate('+(this.pointerPosition.x+16)+'px,'+(this.pointerPosition.y+16)+'px)';
+      this.pointer.style.transform =  `translate(`+(this.pointerPosition.x+16)+`px,`+(this.pointerPosition.y+16)+`px)`;
     }
     if(this.currentColor !== this.newColor){
       const rv = Math.round((this.newColor.r - this.currentColor.r) * 0.03);
