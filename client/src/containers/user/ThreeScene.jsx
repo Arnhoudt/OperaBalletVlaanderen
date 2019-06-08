@@ -38,9 +38,14 @@ class ThreeScene extends Component {
     // INSTELLINGEN <- dit zijn de enige waarden die je mag aanpassen!
     {
 
-      this.WORLDPOSITION = {
-        images: 1500,
-        questions: 50000
+      this.fonts = {
+        helvetacaLight: `assets/fonts/helvetiker_regular.typeface.json`
+      };
+
+      this.POINTER = {
+        image : "assets/img/whiteCircle.png",
+        width : 50,
+        height : 50
       };
 
       this.CAMERA = {
@@ -52,7 +57,19 @@ class ThreeScene extends Component {
         movementFreedom : 100 //20 voor bij de foto's is goed denk ik en voor de vragen is 50-100 beter
       }
 
-      this.CAMERA.position = this.WORLDPOSITION.input;
+      this.FOG = {
+        near : 300,
+        far : 1600
+      }
+
+      this.ANTIALIASING = true;
+
+      this.WORLDPOSITION = {
+          images : 1500,
+          questions : 50000
+      }
+
+      this.CAMERA.position = this.WORLDPOSITION.images;
 
       this.backgroundColors = {
         images : {
@@ -100,35 +117,15 @@ class ThreeScene extends Component {
           },
         }
       }
-
-      this.fonts = {
-        helvetacaLight: `assets/fonts/helvetiker_regular.typeface.json`
-      };
-
-      this.POINTER = {
-        image: `assets/img/whiteCircle.png`,
-        width: 50,
-        height: 50
-      };
-
-
-
-      this.FOG = {
-        near: 300,
-        far: 1600
-      };
-
-      this.ANTIALIASING = true;
-
     }
 
     // Maken van een witte bol die de pointer volgt
     {
-      this.pointer = document.createElement(`div`);
-      this.pointer.innerHTML = `<img src=` + this.POINTER.image + ` width="` + this.POINTER.width + `" height="` + this.POINTER.height + `" alt="">`;
-      this.pointer.classList.add(`pointer`);
-      this.pointer.style.transform = `translateX(-100px)`;
-      this.pointer.style.position = `absolute`;
+      this.pointer = document.createElement("div");
+      this.pointer.innerHTML = '<img src='+this.POINTER.image+' width="'+this.POINTER.width+'" height="'+this.POINTER.height+'" alt="">';
+      this.pointer.classList.add("pointer");
+      this.pointer.style.transform = 'translateX(-100px)';
+      this.pointer.style.position = "absolute";
       this.mount.appendChild(this.pointer);
     }
 
@@ -164,20 +161,33 @@ class ThreeScene extends Component {
       //ADD SCENE
       this.scene = new THREE.Scene();
       {
-        const color = this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256,
-          near = this.FOG.near,
-          far = this.FOG.far;
+        const color =
+            this.currentColor.b +
+            this.currentColor.g * 256 +
+            this.currentColor.r * 256 * 256,
+            near = this.FOG.near,
+            far = this.FOG.far;
         this.scene.fog = new THREE.Fog(color, near, far);
       }
       //ADD CAMERA
-      this.camera = new THREE.PerspectiveCamera(this.CAMERA.fov, this.CAMERA.aspect, this.CAMERA.near, this.CAMERA.far);
+      this.camera = new THREE.PerspectiveCamera(
+          this.CAMERA.fov,
+          this.CAMERA.aspect,
+          this.CAMERA.near,
+          this.CAMERA.far
+      );
       this.camera.position.z = this.CAMERA.position;
       //ADD RENDERER
       this.renderer = new THREE.WebGLRenderer({ antialias: this.ANTIALIASING });
-      this.renderer.setClearColor(this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256);
+      this.renderer.setClearColor(
+          this.currentColor.b +
+          this.currentColor.g * 256 +
+          this.currentColor.r * 256 * 256
+      );
       this.renderer.setSize(window.innerWidth, window.innerHeight);
       this.mount.appendChild(this.renderer.domElement);
       //ADD RAYCASTER
+      this.raycaster = new THREE.Raycaster();
       this.raycaster = new THREE.Raycaster();
       //ADD MOUSE
       this.mouse = new THREE.Vector2();
@@ -237,26 +247,26 @@ class ThreeScene extends Component {
       );
     }
 
-    // //aanmaken van de questions
-    // {
-    //   this.input = document.createElement("div");
-    //   this.input.innerHTML = '<input></input>';
-    //   this.input.classList.add("question_input");
-    //   this.input.style.transform = 'translate('+(window.innerWidth)/2+'px, '+window.innerHeight/1.3+'px) scale(4, 4)';
-    //   this.input.style.position = "absolute";
-    //   document.body.appendChild(this.input);
-    //
-    //   canary.createText(
-    //       this,
-    //       this.fonts.helvetacaLight,
-    //       0xff6690,
-    //       `Pikachu`,
-    //       0,
-    //       30,
-    //       this.WORLDPOSITION.questions-300,
-    //       50
-    //   );
-    // }
+    //aanmaken van de questions
+    {
+      this.input = document.createElement("div");
+      this.input.innerHTML = '<input></input>';
+      this.input.classList.add("question_input");
+      this.input.style.transform = 'translate('+(window.innerWidth)/2+'px, '+window.innerHeight/1.3+'px) scale(4, 4)';
+      this.input.style.position = "absolute";
+      this.mount.appendChild(this.input);
+
+      canary.createText(
+          this,
+          this.fonts.helvetacaLight,
+          0xff6690,
+          `Pikachu`,
+          0,
+          30,
+          this.WORLDPOSITION.questions-300,
+          50
+      );
+    }
 
     //eventlisteners
     {
@@ -265,7 +275,10 @@ class ThreeScene extends Component {
       window.addEventListener(`wheel`, this.handleMouseScroll);
       window.addEventListener(`keydown`, this.handleKeyDown);
       window.addEventListener(`click`, this.handleMouseClick);
-      const color = this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256,
+      const color =
+          this.currentColor.b +
+          this.currentColor.g * 256 +
+          this.currentColor.r * 256 * 256,
         near = 300,
         far = 1600;
       this.scene.fog = new THREE.Fog(color, near, far);
@@ -289,11 +302,12 @@ class ThreeScene extends Component {
     if (!this.frameId) {
       this.frameId = requestAnimationFrame(this.animate);
     }
-  };
+  }
 
   stop = () => {
     cancelAnimationFrame(this.frameId);
-  };
+  }
+
 
   //animate en render
 
@@ -304,36 +318,35 @@ class ThreeScene extends Component {
       const vy = canary.rubberBand((this.lookPosition.y) , ((window.innerHeight/2 - this.mousePosition.y)/this.movementFreedom), 0.03);
       this.lookPosition.x += vx;
       this.lookPosition.y += vy;
-      const z = this.camera.position.z - 100;
+      const z = this.camera.position.z-100;
 
-      this.camera.lookAt(this.lookPosition.x, this.lookPosition.y, z);
+      this.camera.lookAt(this.lookPosition.x ,this.lookPosition.y , z);
 
       const vpx = canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.06);
-      const vpy = canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.06);
+      const vpy = canary.rubberBand(this.pointerPosition.y,this.mousePosition.y, 0.06);
       this.pointerPosition.x += vpx;
       this.pointerPosition.y += vpy;
 
-      this.pointer.style.transform =
-        `translate(` + (this.pointerPosition.x - this.POINTER.width / 2) + `px,` + (this.pointerPosition.y - this.POINTER.height / 2) + `px)`;
+      this.pointer.style.transform =  'translate('+(this.pointerPosition.x+16)+'px,'+(this.pointerPosition.y+16)+'px)';
     }
-    if (this.currentColor !== this.newColor) {
+    if(this.currentColor !== this.newColor){
       const rv = Math.round((this.newColor.r - this.currentColor.r) * 0.03);
       this.currentColor.r += rv;
       const gv = Math.round((this.newColor.g - this.currentColor.g) * 0.03);
       this.currentColor.g += gv;
       const bv = Math.round((this.newColor.b - this.currentColor.b) * 0.03);
       this.currentColor.b += bv;
-      this.renderer.setClearColor(this.currentColor.b + 256 * this.currentColor.g + 256 * 256 * this.currentColor.r);
-      this.scene.fog = new THREE.Fog(this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256, 300, 1600);
+      this.renderer.setClearColor(this.currentColor.b+256*this.currentColor.g+256*256*this.currentColor.r);
+      this.scene.fog = new THREE.Fog(this.currentColor.b+this.currentColor.g*256+this.currentColor.r*256*256, 300, 1600);
     }
     //ANIMATION
     this.renderScene();
     this.frameId = window.requestAnimationFrame(this.animate);
-  };
+  }
 
   renderScene = () => {
     this.renderer.render(this.scene, this.camera);
-  };
+  }
 
   //Handers
 
@@ -341,36 +354,36 @@ class ThreeScene extends Component {
     e.preventDefault();
 
     //De raycaster kijkt welke objecten er in het visier van de muis liggen
-    this.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-    this.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    this.raycaster.setFromCamera(this.mouse, this.camera);
-    var intersects = this.raycaster.intersectObjects(this.scene.children);
+    this.mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
+    this.mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
+    this.raycaster.setFromCamera( this.mouse, this.camera );
+    var intersects = this.raycaster.intersectObjects( this.scene.children );
     //de elementen zitten in intersects
 
-    if (intersects.length > 0) {
+    if(intersects.length > 0){
       //er wordt gecontroleerd of er momenteel naar een object wordt gekeken
-      if (this.closeUpObject === undefined) {
+      if(this.closeUpObject === undefined){
         this.closeUpData = {
-          posX: intersects[0].object.position.x,
-          posY: intersects[0].object.position.y,
-          posZ: intersects[0].object.position.z,
-          rotX: intersects[0].object.rotation.x,
-          rotY: intersects[0].object.rotation.y,
-          rotZ: intersects[0].object.rotation.z,
-          scaleX: intersects[0].object.scale.x,
-          scaleY: intersects[0].object.scale.y,
-          scaleZ: intersects[0].object.scale.z
-        }; // de waarden van de huidige foto worden opgeslagen TODO: dit kan efficienter
-        intersects[0].object.position.set(0, 0, this.camera.position.z - 100); //de foto wordt centraal op het scherm van de user geplaatst
-        intersects[0].object.rotation.set(0, 0, 0);
-        intersects[0].object.scale.set(60, 40, intersects[0].object.scale.z);
-        this.scene.fog = new THREE.Fog(this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256, 105, 120);
-        this.closeUpObject = intersects[0];
-      } else {
+          posX: intersects[ 0 ].object.position.x,
+          posY: intersects[ 0 ].object.position.y,
+          posZ: intersects[ 0 ].object.position.z,
+          rotX: intersects[ 0 ].object.rotation.x,
+          rotY: intersects[ 0 ].object.rotation.y,
+          rotZ: intersects[ 0 ].object.rotation.z,
+          scaleX: intersects[ 0 ].object.scale.x,
+          scaleY: intersects[ 0 ].object.scale.y,
+          scaleZ: intersects[ 0 ].object.scale.z
+        } // de waarden van de huidige foto worden opgeslagen TODO: dit kan efficienter
+        intersects[ 0 ].object.position.set(0,0, this.camera.position.z - 100); //de foto wordt centraal op het scherm van de user geplaatst
+        intersects[ 0 ].object.rotation.set(0,0,0);
+        intersects[ 0 ].object.scale.set(60,40, intersects[ 0 ].object.scale.z);
+        this.scene.fog = new THREE.Fog(this.currentColor.b+this.currentColor.g*256+this.currentColor.r*256*256, 105, 120);
+        this.closeUpObject = intersects[ 0 ];
+      }else{
         this.closeUpObject.object.position.set(this.closeUpData.posX, this.closeUpData.posY, this.closeUpData.posZ);
         this.closeUpObject.object.rotation.set(this.closeUpData.rotX, this.closeUpData.rotY, this.closeUpData.rotZ);
         this.closeUpObject.object.scale.set(this.closeUpData.scaleX, this.closeUpData.scaleY, this.closeUpData.scaleZ);
-        this.scene.fog = new THREE.Fog(this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256, 300, 1600);
+        this.scene.fog = new THREE.Fog(this.currentColor.b+this.currentColor.g*256+this.currentColor.r*256*256, 300, 1600);
         this.closeUpObject = undefined;
       }
     }
@@ -406,9 +419,9 @@ class ThreeScene extends Component {
     }
   };
 
-  handleMouseScroll = e => {
-    if (this.closeUpObject === undefined) {
-      this.camera.position.z -= e.deltaY / 3;
+  handleMouseScroll = e =>{
+    if(this.closeUpObject === undefined){
+      this.camera.position.z -= e.deltaY/3;
       this.scene.children.forEach(child => {
         //alpha = Math.atan((child.position.x - camera.position.x)/(child.position.z - camera.position.z-450));
         //beta = Math.atan((child.position.y - camera.position.y)/(child.position.z -camera.position.z-450));
@@ -426,12 +439,12 @@ class ThreeScene extends Component {
         }
       });
       this.newColor = {
-        r: color.r,
-        g: color.g,
-        b: color.b
-      };
+        r:color.r,
+        g:color.g,
+        b:color.b
+      }
     }
-  };
+  }
 
   onResize = () => {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
