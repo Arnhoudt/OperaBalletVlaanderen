@@ -38,51 +38,6 @@ class ThreeScene extends Component {
     // INSTELLINGEN <- dit zijn de enige waarden die je mag aanpassen!
     {
 
-      this.backgroundColors = {
-        default: {
-          position: 0,
-          r: 0,
-          g: 125,
-          b: 125
-        },
-        background1: {
-          position: -1000,
-          r: 200,
-          g: 0,
-          b: 100
-        },
-        background2: {
-          position: -2000,
-          r: 50,
-          g: 200,
-          b: 50
-        },
-        background3: {
-          position: -4000,
-          r: 0,
-          g: 100,
-          b: 200
-        },
-        background4: {
-          position: -6000,
-          r: 200,
-          g: 200,
-          b: 200
-        },
-        background5: {
-          position: -8000,
-          r: 50,
-          g: 200,
-          b: 50
-        },
-        end: {
-          position: -99999999,
-          r: 255,
-          g: 255,
-          b: 255
-        },
-      };
-
       this.fonts = {
         helvetacaLight: `assets/fonts/helvetiker_regular.typeface.json`
       };
@@ -98,7 +53,8 @@ class ThreeScene extends Component {
         aspect : window.innerWidth / window.innerHeight,
         near : 0.1,
         far : 10000,
-        position : 1500
+        position : 0,
+        movementFreedom : 100 //20 voor bij de foto's is goed denk ik en voor de vragen is 50-100 beter
       }
 
       this.FOG = {
@@ -114,6 +70,53 @@ class ThreeScene extends Component {
       }
 
       this.CAMERA.position = this.WORLDPOSITION.questions;
+
+      this.backgroundColors = {
+        images : {
+          default: {
+            position: this.WORLDPOSITION.images,
+            r: 0,
+            g: 125,
+            b: 125
+          },
+          background1: {
+            position: this.WORLDPOSITION.images-1000,
+            r: 200,
+            g: 0,
+            b: 100
+          },
+          background2: {
+            position: this.WORLDPOSITION.images-2000,
+            r: 50,
+            g: 200,
+            b: 50
+          },
+          background3: {
+            position: this.WORLDPOSITION.images-4000,
+            r: 0,
+            g: 100,
+            b: 200
+          },
+          background4: {
+            position: this.WORLDPOSITION.images-6000,
+            r: 200,
+            g: 200,
+            b: 200
+          },
+          background5: {
+            position: this.WORLDPOSITION.images-8000,
+            r: 50,
+            g: 200,
+            b: 50
+          },
+          end: {
+            position: this.WORLDPOSITION.images-15000,
+            r: 255,
+            g: 255,
+            b: 255
+          },
+        }
+      }
     }
 
     // Maken van een witte bol die de pointer volgt
@@ -129,7 +132,7 @@ class ThreeScene extends Component {
     // variablelen aanmaken (hier mag GEEN data in zitten, dat doe je in de instellingen)
     {
     this.closeUpData = {};
-    this.currentColor = {...this.backgroundColors.default};
+    this.currentColor = {...this.backgroundColors.images.default};
     this.newColor = this.currentColor;
 
     this.mouseMoved = false;
@@ -145,6 +148,8 @@ class ThreeScene extends Component {
       x: window.innerWidth / 2,
       y: window.innerHeight / 2
     }//default waarde zonder betekenis
+
+      this.movementFreedom = this.CAMERA.movementFreedom;
   }
 
     //three variablen zoals loaders, camera's, raycasters en de scene
@@ -195,7 +200,7 @@ class ThreeScene extends Component {
           `assets/img/pikachu.jpg`,
           200,
           100,
-          -300,
+          this.WORLDPOSITION.images-1800,
           200,
           150
       );
@@ -204,17 +209,17 @@ class ThreeScene extends Component {
           `assets/img/pikachu.jpg`,
           -200,
           -100,
-          -500,
+          this.WORLDPOSITION.images-2000,
           200,
           150
       );
-      canary.createImage(this, `assets/img/pikachu.jpg`, 200, 0, -700, 200, 150);
+      canary.createImage(this, `assets/img/pikachu.jpg`, 200, 0, this.WORLDPOSITION.images-2200, 200, 150);
       canary.createImage(
           this,
           `assets/img/pikachu.jpg`,
           -150,
           100,
-          -800,
+          this.WORLDPOSITION.images-2300,
           200,
           150
       );
@@ -226,7 +231,7 @@ class ThreeScene extends Component {
           `Pikachu`,
           0,
           0,
-          500,
+          this.WORLDPOSITION.images-1000,
           200
       );
       canary.createText(
@@ -236,8 +241,29 @@ class ThreeScene extends Component {
           `Pika Pika`,
           0,
           0,
-          -1800,
+          this.WORLDPOSITION.images-3300,
           200
+      );
+    }
+
+    //aanmaken van de questions
+    {
+      this.input = document.createElement("div");
+      this.input.innerHTML = '<input></input>';
+      this.input.classList.add("question_input");
+      this.input.style.transform = 'translate('+(window.innerWidth)/2+'px, '+window.innerHeight/1.3+'px) scale(4, 4)';
+      this.input.style.position = "absolute";
+      document.body.appendChild(this.input);
+
+      canary.createText(
+          this,
+          this.fonts.helvetacaLight,
+          0xff6690,
+          `Pikachu`,
+          0,
+          30,
+          this.WORLDPOSITION.questions-300,
+          50
       );
     }
 
@@ -287,8 +313,8 @@ class ThreeScene extends Component {
   animate = () => {
     //ANIMATION
     if(this.mouseMoved === true){
-      const vx = canary.rubberBand(this.lookPosition.x, -(window.innerWidth/2 - this.mousePosition.x)/20, 0.03);
-      const vy = canary.rubberBand((this.lookPosition.y) , ((window.innerHeight/2 - this.mousePosition.y)/20), 0.03);
+      const vx = canary.rubberBand(this.lookPosition.x, -(window.innerWidth/2 - this.mousePosition.x)/this.movementFreedom, 0.03);
+      const vy = canary.rubberBand((this.lookPosition.y) , ((window.innerHeight/2 - this.mousePosition.y)/this.movementFreedom), 0.03);
       this.lookPosition.x += vx;
       this.lookPosition.y += vy;
       const z = this.camera.position.z-100;
@@ -404,7 +430,7 @@ class ThreeScene extends Component {
 
       let afstand = -1000000000;
       let color = {};
-      Object.entries(this.backgroundColors).forEach(backgroundColor => {
+      Object.entries(this.backgroundColors.images).forEach(backgroundColor => {
         const bc = {...backgroundColor[1]};
         if(bc.position < this.camera.position.z && bc.position > afstand){
           afstand = bc.position;
