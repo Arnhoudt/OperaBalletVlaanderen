@@ -2,6 +2,28 @@ import * as THREE from "three";
 import * as SVGLoader from "three-svg-loader";
 
 class Canary {
+
+  // ------------------------ png loader -----------------------------
+  createPng = (component) =>{
+    let textureLoader = new THREE.TextureLoader();
+    textureLoader.load("cirlce.png", function(texture){
+
+      let arrowGeo = new THREE.PlaneBufferGeometry(20,20);
+      let arrowMaterial = new THREE.MeshLambertMaterial({
+        map: texture,
+        transparent: true
+      });
+
+      let arrow = new THREE.Mesh(arrowGeo,arrowMaterial);
+      arrow.position.set(0,0,0);
+      component.scene.add(arrow);
+    });
+  };
+// ---------------------- end png loader ---------------------------
+  rubberBand = (current, final, amount) => {
+    return (final - current) * amount;
+  }
+
   createImage = (component, path, x, y, z, width, height) => {
     component.textureLoader.load(
       path,
