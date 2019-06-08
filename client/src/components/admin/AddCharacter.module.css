@@ -12,3 +12,17 @@
 .param {
   width: 8em;
 }
+
+.add {
+  composes: button from "../../styles/uiControls.module.css";
+  width: 12em;
+  height: 3em;
+}
+
+.add p {
+  font-size: 1.2em;
+}
+
+.label span {
+  font-size: 1.4em;
+}

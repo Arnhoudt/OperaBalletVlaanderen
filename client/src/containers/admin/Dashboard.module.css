@@ -31,7 +31,6 @@
   composes: button from "../../styles/uiControls.module.css";
   width: 16em;
   height: 4em;
-  border: .1em solid var(--dark-color);
 }
 
 .tab p {
