@@ -37,7 +37,6 @@ class ThreeScene extends Component {
   componentDidMount() {
     // INSTELLINGEN <- dit zijn de enige waarden die je mag aanpassen!
     {
-
       this.backgroundColors = {
         default: {
           position: 0,
@@ -109,11 +108,11 @@ class ThreeScene extends Component {
       this.ANTIALIASING = true;
 
       this.WORLDPOSITION = {
-          images : 1500,
-          questions : 50000
-      }
+        images: 1500,
+        questions: 50000
+      };
 
-      this.CAMERA.position = this.WORLDPOSITION.questions;
+      this.CAMERA.position = this.WORLDPOSITION.images;
     }
 
     // Maken van een witte bol die de pointer volgt
@@ -123,7 +122,7 @@ class ThreeScene extends Component {
       this.pointer.classList.add(`pointer`);
       this.pointer.style.transform = `translateX(-100px)`;
       this.pointer.style.position = `absolute`;
-      document.body.appendChild(this.pointer);
+      this.mount.appendChild(this.pointer);
     }
 
     // variablelen aanmaken (hier mag GEEN data in zitten, dat doe je in de instellingen)
@@ -242,7 +241,8 @@ class ThreeScene extends Component {
       this.pointerPosition.x += vpx;
       this.pointerPosition.y += vpy;
 
-      this.pointer.style.transform = `translate(` + (this.pointerPosition.x + 16) + `px,` + (this.pointerPosition.y + 16) + `px)`;
+      this.pointer.style.transform =
+        `translate(` + (this.pointerPosition.x - this.POINTER.width / 2) + `px,` + (this.pointerPosition.y - this.POINTER.height / 2) + `px)`;
     }
     if (this.currentColor !== this.newColor) {
       const rv = Math.round((this.newColor.r - this.currentColor.r) * 0.03);

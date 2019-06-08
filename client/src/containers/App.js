@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import styles from "./App.module.css";
 
@@ -11,6 +11,12 @@ import ThreeScene from "./user/ThreeScene";
 import { ROUTES } from "../constants";
 
 const App = () => {
+  useEffect(() => {
+    let element = document.getElementById(`loading_root`);
+    element.remove();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <main className={styles.layout}>
       <Switch>
