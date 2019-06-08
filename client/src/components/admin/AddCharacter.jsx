@@ -29,27 +29,27 @@ const AddCharacter = ({ characterStore }) => {
           <div className={styles.containerLabels}>
             <label className={styles.label}>
               <span>Name:</span>
-              <input type="text" name="name" ref={characterName} />
+              <input className={styles.input} type="text" name="name" ref={characterName} />
             </label>
             <label className={`${styles.label} ${styles.param}`}>
               <span>Param1:</span>
-              <input type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam1} name="param1" />
+              <input className={styles.input} type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam1} name="param1" />
             </label>
             <label className={`${styles.label} ${styles.param}`}>
               <span>Param2:</span>
-              <input type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam2} name="param2" />
+              <input className={styles.input} type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam2} name="param2" />
             </label>
             <label className={`${styles.label} ${styles.param}`}>
               <span>Param3:</span>
-              <input type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam3} name="param3" />
+              <input className={styles.input} type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam3} name="param3" />
             </label>
             <label className={`${styles.label} ${styles.param}`}>
               <span>Param4:</span>
-              <input type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam4} name="param4" />
+              <input className={styles.input} type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam4} name="param4" />
             </label>
             <label className={`${styles.label} ${styles.param}`}>
               <span>Param5:</span>
-              <input type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam5} name="param5" />
+              <input className={styles.input} type="number" min="0" max="100" step="1" defaultValue="100" ref={characterParam5} name="param5" />
             </label>
             <div>
               <button type="submit" className={styles.add}>

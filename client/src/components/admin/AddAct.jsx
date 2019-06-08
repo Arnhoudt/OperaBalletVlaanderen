@@ -1,6 +1,6 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
-//import styles from "./Answers.module.css";
+import styles from "./AddAct.module.css";
 
 const AddAct = ({ actStore }) => {
   const actName = React.createRef();
@@ -28,50 +28,40 @@ const AddAct = ({ actStore }) => {
     <>
       <section>
         <form method="post" onSubmit={handleSubmitAct}>
-          <div>
-            <label>
+          <div className={styles.containerLabels}>
+            <label className={styles.label}>
               <span>Naam:</span>
-              <input type="text" name="name" ref={actName} />
+              <input className={styles.input} type="text" name="name" ref={actName} />
             </label>
-          </div>
-          <div>
-            <label>
+            <label className={styles.label}>
               <span>Spotify playlist:</span>
-              <input type="text" name="spotifyPlaylist" ref={actSpotifyPlaylist} />
+              <input className={styles.input} type="text" name="spotifyPlaylist" ref={actSpotifyPlaylist} />
             </label>
-          </div>
-          <div>
-            <label>
+            <label className={`${styles.label} ${styles.param}`}>
               <span>Param1:</span>
-              <input type="number" min="0" max="50" step="1" defaultValue="50" ref={actParam1} name="param1" />
+              <input className={styles.input} type="number" min="0" max="50" step="1" defaultValue="50" ref={actParam1} name="param1" />
             </label>
-          </div>
-          <div>
-            <label>
+            <label className={`${styles.label} ${styles.param}`}>
               <span>Param2:</span>
-              <input type="number" min="0" max="50" step="1" defaultValue="50" ref={actParam2} name="param2" />
+              <input className={styles.input} type="number" min="0" max="50" step="1" defaultValue="50" ref={actParam2} name="param2" />
             </label>
-          </div>
-          <div>
-            <label>
+            <label className={`${styles.label} ${styles.param}`}>
               <span>Param3:</span>
-              <input type="number" min="0" max="50" step="1" defaultValue="50" ref={actParam3} name="param3" />
+              <input className={styles.input} type="number" min="0" max="50" step="1" defaultValue="50" ref={actParam3} name="param3" />
             </label>
-          </div>
-          <div>
-            <label>
+            <label className={`${styles.label} ${styles.param}`}>
               <span>Param4:</span>
-              <input type="number" min="0" max="50" step="1" defaultValue="50" ref={actParam4} name="param4" />
+              <input className={styles.input} type="number" min="0" max="50" step="1" defaultValue="50" ref={actParam4} name="param4" />
             </label>
-          </div>
-          <div>
-            <label>
+            <label className={`${styles.label} ${styles.param}`}>
               <span>Param5:</span>
-              <input type="number" min="0" max="50" step="1" defaultValue="50" ref={actParam5} name="param5" />
+              <input className={styles.input} type="number" min="0" max="50" step="1" defaultValue="50" ref={actParam5} name="param5" />
             </label>
-          </div>
-          <div>
-            <button type="submit">Add act</button>
+            <div>
+              <button type="submit" className={styles.add}>
+                Add act
+              </button>
+            </div>
           </div>
         </form>
       </section>
