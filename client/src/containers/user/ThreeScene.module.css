@@ -1,6 +1,12 @@
 .div {
   position: fixed;
 }
+body {
+  margin: 0;
+  height: 100vh;
+  overscroll-behavior: none;
+  cursor: url('/assets/img/1x/redCircle.png'), auto;
+}
 
 .loading {
   width: 100vw;
