@@ -20,3 +20,7 @@
 .question_input {
   width: 10rem;
 }
+
+.question {
+  transform-origin: center;
+}
