@@ -23,7 +23,9 @@ class Act {
   setParam5 = value => (this.param5 = value);
 
   updateFromServer = values => {
-    this.setId(values._id);
+    if (values._id) {
+      this.setId(values._id);
+    }
     this.setName(values.name);
     this.setSpotifyPlaylist(values.spotifyPlaylist);
     this.setParam1(values.param1);

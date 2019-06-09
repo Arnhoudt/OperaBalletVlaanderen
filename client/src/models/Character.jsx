@@ -21,7 +21,9 @@ class Character {
   setParam5 = value => (this.param5 = value);
 
   updateFromServer = values => {
-    this.setId(values._id);
+    if (values._id) {
+      this.setId(values._id);
+    }
     this.setName(values.name);
     this.setParam1(values.param1);
     this.setParam2(values.param2);
@@ -45,7 +47,8 @@ decorate(Character, {
   setParam2: action,
   setParam3: action,
   setParam4: action,
-  setParam5: action
+  setParam5: action,
+  updateFromServer: action
 });
 
 export default Character;

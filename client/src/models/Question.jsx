@@ -21,7 +21,9 @@ class Question {
   setParam5 = value => (this.param5 = value);
 
   updateFromServer = values => {
-    this.setId(values._id);
+    if (values._id) {
+      this.setId(values._id);
+    }
     this.setValue(values.value);
     this.setParam1(values.param1);
     this.setParam2(values.param2);
