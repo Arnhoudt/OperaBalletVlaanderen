@@ -5,6 +5,7 @@ const QuestionSchema = mongoose.Schema(
     question: String,
     type: String,
     answers: [String],
+    location: mongoose.Schema.Types.Mixed,
     param1: {type: Number, min: 0, max: 50},
     param2: {type: Number, min: 0, max: 50},
     param3: {type: Number, min: 0, max: 50},
