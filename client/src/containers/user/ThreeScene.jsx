@@ -23,7 +23,7 @@ class ThreeScene extends Component {
     this.characterStore = props.characterStore;
     this.questionStore = props.questionStore;
     this.state = { loading: ``, error: ``, questions: [], answers: [], done: false };
-    this.cameraRubberBanding = false;
+    this.cameraRubberBandingActive = false;
 
     THREE.DefaultLoadingManager.onStart = (url, itemsLoaded, itemsTotal) => {
       const state = { ...this.state };
@@ -160,10 +160,10 @@ class ThreeScene extends Component {
         questions.animate();
       }
     }
-    if(this.cameraRubberBanding){
-      const cameraVx = canary.rubberBand(this.camera.position.x, this.newCameraPosition.x, 0.03);
-      const cameraVy = canary.rubberBand(this.camera.position.y, this.newCameraPosition.y, 0.03);
-      const cameraVz = canary.rubberBand(this.camera.position.z, this.newCameraPosition.z, 0.03);
+    if(this.cameraRubberBandingActive){
+      const cameraVx = canary.rubberBand(this.camera.position.x, this.cameraRubberBanding.position.x, 0.03);
+      const cameraVy = canary.rubberBand(this.camera.position.y, this.cameraRubberBanding.position.y, 0.03);
+      const cameraVz = canary.rubberBand(this.camera.position.z, this.cameraRubberBanding.position.z, 0.03);
       this.camera.position.set(this.camera.position.x + cameraVx, this.camera.position.y + cameraVy, this.camera.position.z + cameraVz);
     }
 

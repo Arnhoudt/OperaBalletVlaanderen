@@ -4,7 +4,7 @@ import {POINTER} from "../constants";
 
 class Canary {
 
-  createPng = (component, path, x, y, z, width, height, name, anisotropy) =>{
+  createPng = (component, path, x, y, z, width, height, anisotropy, name) =>{
     let textureLoader = new THREE.TextureLoader();
     var maxAnisotropy = component.renderer.capabilities.getMaxAnisotropy();
     let planeAnisotropy;

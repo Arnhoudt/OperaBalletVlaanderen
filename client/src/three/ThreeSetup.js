@@ -19,6 +19,7 @@ class ThreeSetup {
         //ADD CAMERA
         that.camera = new THREE.PerspectiveCamera(CAMERA.fov, CAMERA.aspect, CAMERA.near, CAMERA.far);
         that.camera.position.z = CAMERA.position;
+        that.cameraRubberBanding = new THREE.PerspectiveCamera(CAMERA.fov, CAMERA.aspect, CAMERA.near, CAMERA.far);
         //ADD RENDERER
         that.renderer = new THREE.WebGLRenderer({ antialias: ANTIALIASING });
         that.renderer.setClearColor(that.currentColor.b + that.currentColor.g * 256 + that.currentColor.r * 256 * 256);
