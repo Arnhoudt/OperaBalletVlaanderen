@@ -1,0 +1,12 @@
+.button {
+  width: 8em;
+  height: 3.2em;
+  composes: button from "../../../styles/uiControls.module.css";
+  position: absolute;
+  left: 46em;
+  top: 12em;
+}
+
+.button p {
+  font-size: 1.4em;
+}
