@@ -34,19 +34,24 @@ const LoginForm = ({ uiStore, history }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className={styles.form_container}>
-          <label htmlFor="email" className={styles.email}>
-            <p className={styles.text}>Email</p>
-            <input type="email" name="email" id="email" ref={emailInput} className={form.input} maxLength="128" onChange={handleChange} required />
-          </label>
-          <label htmlFor="password" className={styles.password}>
-            <p className={styles.text}>Wachtwoord</p>
-            <input type="password" name="password" id="password" ref={pwdInput} className={form.input} maxLength="128" onChange={handleChange} required />
-          </label>
-          <p className={styles.error}>{uiStore.error}</p>
-          <button type="submit" className={`${form.button} ${styles.button}`}>
-            Inloggen
-          </button>
+        <div className={styles.grid}>
+          <div className={styles.form_container}>
+            <h1 className={styles.title}>Login Admin</h1>
+            <div className={styles.formInputs}>
+              <label htmlFor="email" className={styles.label}>
+                <p className={styles.text}>Email</p>
+                <input className={styles.input} type="email" name="email" id="email" ref={emailInput} maxLength="128" onChange={handleChange} required />
+              </label>
+              <label htmlFor="password" className={styles.label}>
+                <p className={styles.text}>Wachtwoord</p>
+                <input className={styles.input} type="password" name="password" id="password" ref={pwdInput} maxLength="128" onChange={handleChange} required />
+              </label>
+              <p className={styles.error}>{uiStore.error}</p>
+            </div>
+            <button type="submit" className={`${styles.button}`}>
+              <p>Inloggen</p>
+            </button>
+          </div>
         </div>
       </form>
     </>
