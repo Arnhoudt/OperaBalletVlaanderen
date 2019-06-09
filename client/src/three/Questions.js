@@ -62,7 +62,7 @@ class Questions {
 
   handleMouseClick = e => {
     e.preventDefault();
-
+    this.that.cameraRubberBanding = true;
     this.that.newCameraPosition = {
       x:0,
       y:0,
