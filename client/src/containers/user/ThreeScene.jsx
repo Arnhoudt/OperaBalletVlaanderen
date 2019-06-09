@@ -22,7 +22,7 @@ class ThreeScene extends Component {
     this.answerStore = props.answerStore;
     this.characterStore = props.characterStore;
     this.questionStore = props.questionStore;
-    this.state = { loading: ``, error: ``, questions: [], answers: [], done: false };
+    this.state = { loading: ``, error: ``, done: false };
     this.cameraRubberBanding = false;
 
     THREE.DefaultLoadingManager.onStart = (url, itemsLoaded, itemsTotal) => {
@@ -51,33 +51,6 @@ class ThreeScene extends Component {
   }
 
   componentDidMount() {
-    {
-      //GET QUESTIONS AND ADD TO STATE ARRAY
-      this.questionStore.findAll().then(data => {
-        const state = { ...this.state };
-        state.questions = data;
-        this.setState(state);
-      });
-      //PUSH ANSWER INSIDE STATE ARRAY
-      const data = {
-        question: `Oe ist me jou?`,
-        answer: `Goed`,
-        userId: this.uiStore.randomUser._id,
-        param1: 34,
-        param2: 50,
-        param3: 45,
-        param4: 12,
-        param5: 43
-      };
-      const state = { ...this.state };
-      state.answers.push(data);
-      this.setState(state);
-      //ADD ANSWERS TO DATABASE FROM STATE
-      this.state.answers.forEach(async answer => {
-        await this.answerStore.create(answer);
-      });
-    }
-
     {
       this.pointer = canary.createPointer();
       this.mount.appendChild(this.pointer);

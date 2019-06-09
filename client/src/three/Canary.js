@@ -1,32 +1,30 @@
 import * as THREE from "three";
 import * as SVGLoader from "three-svg-loader";
-import {POINTER} from "../constants";
+import { POINTER } from "../constants";
 
 class Canary {
-
-  createPng = (component, path, x, y, z, width, height, name, anisotropy) =>{
+  createPng = (component, path, x, y, z, width, height, anisotropy, name) => {
     let textureLoader = new THREE.TextureLoader();
     var maxAnisotropy = component.renderer.capabilities.getMaxAnisotropy();
     let planeAnisotropy;
-    if(anisotropy === undefined || anisotropy < 1){
-      planeAnisotropy = 1
-    } else if(anisotropy > maxAnisotropy){
-      planeAnisotropy = maxAnisotropy
+    if (anisotropy === undefined || anisotropy < 1) {
+      planeAnisotropy = 1;
+    } else if (anisotropy > maxAnisotropy) {
+      planeAnisotropy = maxAnisotropy;
     } else {
       planeAnisotropy = anisotropy;
     }
 
-    textureLoader.load(path, function(texture){
-
-      let Geo = new THREE.PlaneBufferGeometry(width,height);
+    textureLoader.load(path, function(texture) {
+      let Geo = new THREE.PlaneBufferGeometry(width, height);
       let Material = new THREE.MeshLambertMaterial({
         map: texture,
         transparent: true
       });
       texture.anisotropy = planeAnisotropy;
 
-      let plane = new THREE.Mesh(Geo,Material);
-      plane.position.set(x,y,z);
+      let plane = new THREE.Mesh(Geo, Material);
+      plane.position.set(x, y, z);
       plane.name = name;
       component.scene.add(plane);
     });
@@ -34,21 +32,21 @@ class Canary {
 
   rubberBand = (current, final, amount) => {
     return (final - current) * amount;
-  }
+  };
 
   getClosestObjectWithName = (intersects, name) => {
     let zoomedObject;
     intersects.reverse();
     intersects.forEach(intersect => {
-      if(intersect.object.name === name){
-      //TODO: als een gebruiker over een image en een andere aanraakt zonder dat hij 'niets' heeft aangeraakt zal de vorige foto niet kleiner worden
-      zoomedObject = intersect;
+      if (intersect.object.name === name) {
+        //TODO: als een gebruiker over een image en een andere aanraakt zonder dat hij 'niets' heeft aangeraakt zal de vorige foto niet kleiner worden
+        zoomedObject = intersect;
       }
     });
     return zoomedObject;
   };
 
-  getPhotoData = (intersect) => {
+  getPhotoData = intersect => {
     return {
       posX: intersect.object.position.x,
       posY: intersect.object.position.y,
@@ -66,7 +64,7 @@ class Canary {
     photo.object.position.set(data.posX, data.posY, data.posZ);
     photo.object.rotation.set(data.rotX, data.rotY, data.rotZ);
     photo.object.scale.set(data.scaleX, data.scaleY, data.scaleZ);
-  }
+  };
 
   createImage = (component, path, x, y, z, width, height, name) => {
     component.textureLoader.load(path, texture => {
@@ -135,8 +133,8 @@ class Canary {
     pointer.classList.add(`pointer`);
     pointer.style.transform = `translateX(-100px)`;
     pointer.style.position = `absolute`;
-    return pointer
-  }
+    return pointer;
+  };
 }
 
 export default Canary;
