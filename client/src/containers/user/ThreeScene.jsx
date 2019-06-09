@@ -95,10 +95,10 @@ class ThreeScene extends Component {
       this.pointerPosition = { x: window.innerWidth / 2, y: window.innerHeight / 2 }; //default waarde zonder betekenis
       this.movementFreedom = CAMERA.movementFreedom;
       this.newCameraPosition = {
-        x:0,
-        y:0,
-        z:this.currentWorld
-      }
+        x: 0,
+        y: 0,
+        z: this.currentWorld
+      };
     }
 
     threeSetup.setup(this);
