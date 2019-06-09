@@ -1,3 +1,24 @@
 .containerChart {
-  width: 60%;
+  width: 50%;
+}
+
+.question {
+  font-size: 3em;
+}
+
+.containerQuestion {
+  height: 36em;
+  padding-top: 6em;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  border-bottom: .1em solid var(--dark-color);
+}
+
+.metadata {
+  padding: 2em 0em 0em 3em;
+}
+
+.metadata p {
+  font-size: 1.8em;
 }
