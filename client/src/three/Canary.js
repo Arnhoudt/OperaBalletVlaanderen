@@ -1,10 +1,13 @@
 import * as THREE from "three";
 import * as SVGLoader from "three-svg-loader";
+import {POINTER} from "../constants";
 
 class Canary {
 
   createPng = (component, path, x, y, z, width, height, name) =>{
     let textureLoader = new THREE.TextureLoader();
+    var maxAnisotropy = component.renderer.capabilities.getMaxAnisotropy();
+    console.log(maxAnisotropy);
     textureLoader.load(path, function(texture){
 
       let arrowGeo = new THREE.PlaneBufferGeometry(width,height);
@@ -12,6 +15,7 @@ class Canary {
         map: texture,
         transparent: true
       });
+      texture.anisotropy = maxAnisotropy;
 
       let arrow = new THREE.Mesh(arrowGeo,arrowMaterial);
       arrow.position.set(x,y,z);
@@ -115,6 +119,15 @@ class Canary {
       component.scene.add(strokeText);
     }); //end load function
   };
+
+  createPointer = () => {
+    let pointer = document.createElement(`div`);
+    pointer.innerHTML = `<img src=` + POINTER.image + ` width="` + POINTER.width + `" height="` + POINTER.height + `" alt="">`;
+    pointer.classList.add(`pointer`);
+    pointer.style.transform = `translateX(-100px)`;
+    pointer.style.position = `absolute`;
+    return pointer
+  }
 }
 
 export default Canary;
