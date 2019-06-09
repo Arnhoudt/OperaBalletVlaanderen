@@ -1,17 +1,19 @@
 const Question = require('../models/question.model.js');
 
 exports.create = async (req, res) => {
-  const {value, param1, param2, param3, param4, param5} = req.body;
+  const {question, type, answers, param1, param2, param3, param4, param5} = req.body;
   try {
-    const question = new Question({
-      value: value,
+    const questionValue = new Question({
+      question: question,
+      type: type,
+      answers: answers,
       param1: param1,
       param2: param2,
       param3: param3,
       param4: param4,
       param5: param5
     });
-    const r = await question.save();
+    const r = await questionValue.save();
     res.status(200).send(r);
   } catch (error) {
     res.status(500).send(error);
@@ -28,13 +30,15 @@ exports.findAll = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const {value, param1, param2, param3, param4, param5} = req.body;
+  const {question, type, answers, param1, param2, param3, param4, param5} = req.body;
   try {
     const r = await Question.findByIdAndUpdate(
       req.params.questionId,
       {
         $set: {
-          value: value,
+          question: question,
+          type: type,
+          answers: answers,
           param1: param1,
           param2: param2,
           param3: param3,

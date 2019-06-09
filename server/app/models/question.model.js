@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 
 const QuestionSchema = mongoose.Schema(
   {
-    value: String,
+    question: String,
+    type: String,
+    answers: [String],
     param1: {type: Number, min: 0, max: 50},
     param2: {type: Number, min: 0, max: 50},
     param3: {type: Number, min: 0, max: 50},

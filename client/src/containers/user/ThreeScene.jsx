@@ -1,5 +1,6 @@
 /* eslint-disable no-lone-blocks */
 import React, { Component } from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import * as THREE from "three";
 import Canary from "../../three/Canary";
 import Images from "../../three/Images";
@@ -7,7 +8,7 @@ import Questions from "../../three/Questions";
 import ThreeSetup from "../../three/ThreeSetup";
 
 import styles from "./ThreeScene.module.css";
-import {POINTER, ANTIALIASING, BACKGROUND_COLORS, CAMERA, FOG, FONTS, WORLD_POSITION} from "../../constants/index";
+import { POINTER, ANTIALIASING, BACKGROUND_COLORS, CAMERA, FOG, FONTS, WORLD_POSITION } from "../../constants/index";
 let canary = new Canary();
 let images = new Images();
 let questions = new Questions();
@@ -16,7 +17,13 @@ let threeSetup = new ThreeSetup();
 class ThreeScene extends Component {
   constructor(props) {
     super(props);
-    this.state = { loading: ``, error: ``, done: false };
+    this.uiStore = props.uiStore;
+    this.actStore = props.actStore;
+    this.answerStore = props.answerStore;
+    this.characterStore = props.characterStore;
+    this.questionStore = props.questionStore;
+    this.state = { loading: ``, error: ``, questions: [], answers: [], done: false };
+
     THREE.DefaultLoadingManager.onStart = (url, itemsLoaded, itemsTotal) => {
       const state = { ...this.state };
       state.loading = Math.round((itemsLoaded / itemsTotal) * 100);
@@ -44,6 +51,33 @@ class ThreeScene extends Component {
 
   componentDidMount() {
     {
+      //GET QUESTIONS AND ADD TO STATE ARRAY
+      this.questionStore.findAll().then(data => {
+        const state = { ...this.state };
+        state.questions = data;
+        this.setState(state);
+      });
+      //PUSH ANSWER INSIDE STATE ARRAY
+      const data = {
+        question: `Oe ist me jou?`,
+        answer: `Goed`,
+        userId: this.uiStore.randomUser._id,
+        param1: 34,
+        param2: 50,
+        param3: 45,
+        param4: 12,
+        param5: 43
+      };
+      const state = { ...this.state };
+      state.answers.push(data);
+      this.setState(state);
+      //ADD ANSWERS TO DATABASE FROM STATE
+      this.state.answers.forEach(async answer => {
+        await this.answerStore.create(answer);
+      });
+    }
+
+    {
       this.pointer = canary.createPointer();
       this.mount.appendChild(this.pointer);
     }
@@ -55,9 +89,9 @@ class ThreeScene extends Component {
       this.currentColor = { ...BACKGROUND_COLORS.images.default };
       this.newColor = this.currentColor;
       this.mouseMoved = false;
-      this.mousePosition = {x: 0, y: 0}; //default waarde zonder betekenis
-      this.lookPosition = {x: 0, y: 0}; //default waarde zonder betekenis
-      this.pointerPosition = {x: window.innerWidth / 2, y: window.innerHeight / 2}; //default waarde zonder betekenis
+      this.mousePosition = { x: 0, y: 0 }; //default waarde zonder betekenis
+      this.lookPosition = { x: 0, y: 0 }; //default waarde zonder betekenis
+      this.pointerPosition = { x: window.innerWidth / 2, y: window.innerHeight / 2 }; //default waarde zonder betekenis
       this.movementFreedom = CAMERA.movementFreedom;
     }
 
@@ -65,7 +99,7 @@ class ThreeScene extends Component {
 
     window.addEventListener(`resize`, this.onResize);
 
-    switch(this.currentWorld){
+    switch (this.currentWorld) {
       case WORLD_POSITION.images:
         images.load(this, window);
         break;
@@ -107,7 +141,7 @@ class ThreeScene extends Component {
       const z = this.camera.position.z - 100;
 
       this.camera.lookAt(this.lookPosition.x, this.lookPosition.y, z);
-      this.camera.position.set(this.lookPosition.x/2,this.lookPosition.y/2, this.camera.position.z);
+      this.camera.position.set(this.lookPosition.x / 2, this.lookPosition.y / 2, this.camera.position.z);
 
       const vpx = canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.06);
       const vpy = canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.06);
@@ -116,7 +150,7 @@ class ThreeScene extends Component {
 
       this.pointer.style.transform = `translate(` + (this.pointerPosition.x + 16) + `px,` + (this.pointerPosition.y + 16) + `px)`;
 
-      if(this.currentWorld === WORLD_POSITION.questions){
+      if (this.currentWorld === WORLD_POSITION.questions) {
         questions.animate();
       }
     }
@@ -166,4 +200,12 @@ class ThreeScene extends Component {
   }
 }
 
-export default ThreeScene;
+ThreeScene.propTypes = {
+  uiStore: PropTypes.observableObject.isRequired,
+  actStore: PropTypes.observableObject.isRequired,
+  answerStore: PropTypes.observableObject.isRequired,
+  characterStore: PropTypes.observableObject.isRequired,
+  questionStore: PropTypes.observableObject.isRequired
+};
+
+export default inject(`uiStore`, `actStore`, `answerStore`, `characterStore`, `questionStore`)(observer(ThreeScene));

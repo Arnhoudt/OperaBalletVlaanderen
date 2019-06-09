@@ -2,9 +2,11 @@ import uuid from "uuid";
 import { decorate, observable, action } from "mobx";
 
 class Question {
-  constructor(value, param1, param2, param3, param4, param5, id = uuid.v4()) {
+  constructor(question, type, answers, param1, param2, param3, param4, param5, id = uuid.v4()) {
     this.id = id;
-    this.value = value;
+    this.question = question;
+    this.type = type;
+    this.answers = answers;
     this.param1 = param1;
     this.param2 = param2;
     this.param3 = param3;
@@ -13,7 +15,9 @@ class Question {
   }
 
   setId = value => (this.id = value);
-  setValue = value => (this.value = value);
+  setQuestion = value => (this.question = value);
+  setType = value => (this.type = value);
+  setAnswers = value => (this.answers = value);
   setParam1 = value => (this.param1 = value);
   setParam2 = value => (this.param2 = value);
   setParam3 = value => (this.param3 = value);
@@ -24,7 +28,9 @@ class Question {
     if (values._id) {
       this.setId(values._id);
     }
-    this.setValue(values.value);
+    this.setQuestion(values.question);
+    this.setType(values.type);
+    this.setAnswers(values.answers);
     this.setParam1(values.param1);
     this.setParam2(values.param2);
     this.setParam3(values.param3);
@@ -35,14 +41,18 @@ class Question {
 
 decorate(Question, {
   id: observable,
-  value: observable,
+  question: observable,
+  type: observable,
+  answers: observable,
   param1: observable,
   param2: observable,
   param3: observable,
   param4: observable,
   param5: observable,
   setId: action,
-  setValue: action,
+  setQuestion: action,
+  setType: action,
+  setAnswers: action,
   setParam1: action,
   setParam2: action,
   setParam3: action,
