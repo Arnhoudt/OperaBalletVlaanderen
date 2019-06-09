@@ -35,7 +35,7 @@ export const CAMERA = {
   aspect: window.innerWidth / window.innerHeight,
   near: 0.1,
   far: 10000,
-  position: WORLD_POSITION.images,
+  position: WORLD_POSITION.questions,
   movementFreedom: 100 //20 voor bij de foto's is goed denk ik en voor de vragen is 50-100 beter
 };
 
@@ -44,9 +44,9 @@ export const BACKGROUND_COLORS = {
   images: {
     default: {
       position: WORLD_POSITION.images,
-      r: 0,
-      g: 125,
-      b: 125
+      r: 214,
+      g: 229,
+      b: 255
     },
     background1: {
       position: WORLD_POSITION.images - 1000,
@@ -84,5 +84,6 @@ export const BACKGROUND_COLORS = {
       g: 255,
       b: 255
     }
+
   }
 }
