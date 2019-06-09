@@ -138,6 +138,12 @@ class ThreeScene extends Component {
       const cameraVy = canary.rubberBand(this.camera.position.y, this.cameraRubberBanding.position.y, 0.03);
       const cameraVz = canary.rubberBand(this.camera.position.z, this.cameraRubberBanding.position.z, 0.03);
       this.camera.position.set(this.camera.position.x + cameraVx, this.camera.position.y + cameraVy, this.camera.position.z + cameraVz);
+      // TODO: er moet gezorgd worden dat de camera rotation ook wordt gerubberband
+      // const cameraRotationVx = canary.rubberBand(this.camera.rotation.x, this.cameraRubberBanding.rotation.x, 0.005);
+      // const cameraRotationVy = canary.rubberBand(this.camera.rotation.y, this.cameraRubberBanding.rotation.y, 0.005);
+      // const cameraRotationVz = canary.rubberBand(this.camera.rotation.z, this.cameraRubberBanding.rotation.z, 0.005);
+      // console.log(this.camera.rotation.x);
+      // this.camera.rotation.set(this.camera.rotation.x + cameraRotationVx, this.camera.rotation.y + cameraRotationVy, this.camera.rotation.z + cameraRotationVz);
     }
 
     if (this.currentColor !== this.newColor) {
