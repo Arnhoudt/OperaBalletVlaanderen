@@ -95,10 +95,10 @@ class ThreeScene extends Component {
       this.pointerPosition = { x: window.innerWidth / 2, y: window.innerHeight / 2 }; //default waarde zonder betekenis
       this.movementFreedom = CAMERA.movementFreedom;
       this.newCameraPosition = {
-        x:0,
-        y:0,
-        z:this.currentWorld
-      }
+        x: 0,
+        y: 0,
+        z: this.currentWorld
+      };
     }
 
     threeSetup.setup(this);
@@ -160,7 +160,7 @@ class ThreeScene extends Component {
         questions.animate();
       }
     }
-    if(this.cameraRubberBanding){
+    if (this.cameraRubberBanding) {
       const cameraVx = canary.rubberBand(this.camera.position.x, this.newCameraPosition.x, 0.03);
       const cameraVy = canary.rubberBand(this.camera.position.y, this.newCameraPosition.y, 0.03);
       const cameraVz = canary.rubberBand(this.camera.position.z, this.newCameraPosition.z, 0.03);
