@@ -4,22 +4,31 @@ import {POINTER} from "../constants";
 
 class Canary {
 
-  createPng = (component, path, x, y, z, width, height, name) =>{
+  createPng = (component, path, x, y, z, width, height, name, anisotropy) =>{
     let textureLoader = new THREE.TextureLoader();
     var maxAnisotropy = component.renderer.capabilities.getMaxAnisotropy();
-    console.log(maxAnisotropy);
+    let planeAnisotropy;
+    if(anisotropy === undefined || anisotropy < 1){
+      planeAnisotropy = 1
+    } else if(anisotropy > maxAnisotropy){
+      planeAnisotropy = maxAnisotropy
+    } else {
+      planeAnisotropy = anisotropy;
+    }
+
     textureLoader.load(path, function(texture){
 
-      let arrowGeo = new THREE.PlaneBufferGeometry(width,height);
-      let arrowMaterial = new THREE.MeshLambertMaterial({
+      let Geo = new THREE.PlaneBufferGeometry(width,height);
+      let Material = new THREE.MeshLambertMaterial({
         map: texture,
         transparent: true
       });
-      texture.anisotropy = maxAnisotropy;
+      texture.anisotropy = planeAnisotropy;
 
-      let arrow = new THREE.Mesh(arrowGeo,arrowMaterial);
-      arrow.position.set(x,y,z);
-      component.scene.add(arrow);
+      let plane = new THREE.Mesh(Geo,Material);
+      plane.position.set(x,y,z);
+      plane.name = name;
+      component.scene.add(plane);
     });
   };
 
