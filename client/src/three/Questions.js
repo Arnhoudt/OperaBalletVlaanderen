@@ -63,6 +63,12 @@ class Questions {
   handleMouseClick = e => {
     e.preventDefault();
 
+    this.that.newCameraPosition = {
+      x:0,
+      y:0,
+      z:51000
+    }
+
     //De raycaster kijkt welke objecten er in het visier van de muis liggen
     this.that.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
     this.that.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
