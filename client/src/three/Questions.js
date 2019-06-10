@@ -6,6 +6,7 @@ class Questions {
   canary = new Canary();
   questions = [];
   answers = [];
+  loaded = false;
 
   load = that => {
     this.elements = [];
@@ -13,8 +14,12 @@ class Questions {
     that.movementFreedom = 100;
     this.that.cameraRubberBandingActive = true;
 
-    window.addEventListener(`mousemove`, this.onMouseMove);
-    //window.addEventListener(`wheel`, this.handleMouseScroll);
+    this.that.questionStore.findAll().then(questions => {
+      this.questions = questions;
+      this.loaded = true;
+      this.loadQuestions();
+    });
+
     window.addEventListener(`keydown`, this.handleKeyDown);
     window.addEventListener(`click`, this.handleMouseClick);
 
@@ -48,8 +53,8 @@ class Questions {
     this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_intro_1.png`, -102, -19, WORLD_POSITION.questions - 330, 576 / 5.1, 119 / 6, 16);
     this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_intro_2.png`, 42, 16, WORLD_POSITION.questions - 330, 576 / 5.1, 62 / 6, 16);
     this.canary.createPng(that, `assets/img/pikachu.jpg`, 124, -50, WORLD_POSITION.questions - 330, 576 / 6, 576 / 6, 16);
-    this.elements.push(this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_button.png`, -19, -65, WORLD_POSITION.questions - 300, 90, 18, 16, `start`));
-    this.elements.push(this.canary.createPng(that, `assets/img/a_START-1.png`, 0, 0, WORLD_POSITION.questions - 400, 500, 300, 16));
+    this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_button.png`, -19, -65, WORLD_POSITION.questions - 300, 90, 18, 16, `start`);
+    this.canary.createPng(that, `assets/img/a_START-1.png`, 0, 0, WORLD_POSITION.questions - 400, 500, 300, 16);
     //this.canary.createText(that, FONTS.helvetacaLight, 0xff6690, `Pikachu`, 0, 30, WORLD_POSITION.questions - 300, 50);
   };
 
@@ -59,6 +64,103 @@ class Questions {
     window.removeEventListener(`keydown`, this.handleKeyDown);
     window.removeEventListener(`click`, this.handleMouseClick);
   };
+
+  loadQuestions = () => {
+    this.questions.forEach((question, index) => {
+      this.canary.createPng(
+        this.that,
+        `assets/img/ontdek_wie_jij_bent.png`,
+        question.location.x - 30,
+        question.location.y + 60,
+        WORLD_POSITION.questions - 300 - question.location.z,
+        836 / 5.2,
+        241 / 4,
+        16
+      );
+      this.canary.createPng(
+        this.that,
+        `assets/img/ontdek_wie_jij_bent_blauwe_rechthoek.png`,
+        question.location.x - 130,
+        question.location.y - 10,
+        WORLD_POSITION.questions - 390 - question.location.z,
+        721 / 4.1,
+        840 / 3.7,
+        16
+      );
+      this.canary.createPng(
+        this.that,
+        `assets/img/logo.png`,
+        -18 - question.location.x,
+        -57 - question.location.y,
+        WORLD_POSITION.questions - 250 - question.location.z,
+        440 / 5.2,
+        194 / 5.2,
+        16
+      );
+      this.canary.createPng(
+        this.that,
+        `assets/img/ontdek_wie_jij_bent_intro_1.png`,
+        -102 - question.location.x,
+        -19 - question.location.y,
+        WORLD_POSITION.questions - 330 - question.location.z,
+        576 / 5.1,
+        119 / 6,
+        16
+      );
+      this.canary.createPng(
+        this.that,
+        `assets/img/ontdek_wie_jij_bent_intro_2.png`,
+        42 - question.location.x,
+        16 - question.location.y,
+        WORLD_POSITION.questions - 330 - question.location.z,
+        576 / 5.1,
+        62 / 6,
+        16
+      );
+      this.canary.createPng(
+        this.that,
+        `assets/img/pikachu.jpg`,
+        124 - question.location.x,
+        -50 - question.location.y,
+        WORLD_POSITION.questions - 330 - question.location.z,
+        576 / 6,
+        576 / 6,
+        16
+      );
+      this.canary.createPng(
+        this.that,
+        `assets/img/ontdek_wie_jij_bent_button.png`,
+        -19 - question.location.x,
+        -65 - question.location.y,
+        WORLD_POSITION.questions - 300 - question.location.z,
+        90,
+        18,
+        16,
+        `start`
+      );
+      this.canary.createPng(
+        this.that,
+        `assets/img/a_START-1.png`,
+        0 - question.location.x,
+        0 - question.location.y,
+        WORLD_POSITION.questions - 400 - question.location.z,
+        500,
+        300,
+        16
+      );
+      this.canary.createText(
+        this.that,
+        FONTS.helvetacaLight,
+        0xff6690,
+        question.question,
+        0 - question.location.x,
+        30 - question.location.y,
+        WORLD_POSITION.questions - 300 - question.location.z,
+        50
+      );
+    });
+  };
+
   //Handers
 
   handleMouseClick = e => {
@@ -70,15 +172,15 @@ class Questions {
     this.that.raycaster.setFromCamera(this.that.mouse, this.that.camera);
     let intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
     //de elementen zitten in intersects
-    if (intersects.length > 0) {
+    if (intersects.length > 0 && this.loaded) {
       intersects.forEach(intersect => {
         if (intersect.object.name === `start`) {
-          this.that.cameraRubberBanding.position.set(0, 1000, 50000);
-          // this.that.cameraRubberBanding.position.set(
-          //   this.questions[0].location.x,
-          //   this.questions[0].location.y,
-          //   WORLD_POSITION.questions - this.questions[0].location.z
-          // );
+          //window.addEventListener(`mousemove`, this.onMouseMove);
+          this.that.cameraRubberBanding.position.set(
+            this.questions[0].location.x,
+            this.questions[0].location.y,
+            WORLD_POSITION.questions - this.questions[0].location.z + 600
+          );
         }
       });
       this.questions.forEach((question, index) => {
@@ -121,8 +223,6 @@ class Questions {
       y: event.clientY
     };
   };
-
-  handleMouseScroll = e => {};
 
   animate = () => {
     this.question.style.transform =

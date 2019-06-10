@@ -22,6 +22,8 @@ export const FOG = {
   far: 1600
 };
 
+export const CAMERA_RUBBERBANDING_FORCE = 0.04;
+
 export const ANTIALIASING = true;
 
 export const WORLD_POSITION = {
