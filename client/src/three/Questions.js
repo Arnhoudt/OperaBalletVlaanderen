@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import * as SVGLoader from "three-svg-loader";
 import { BACKGROUND_COLORS, FONTS, WORLD_POSITION } from "../constants";
 import Canary from "./Canary";
 
@@ -12,29 +11,7 @@ class Questions {
     this.elements = [];
     this.that = that;
     that.movementFreedom = 100;
-
-    {
-      //GET QUESTIONS AND ADD TO STATE ARRAY
-      this.that.questionStore.findAll().then(data => {
-        this.questions = data;
-      });
-      //PUSH ANSWER INSIDE STATE ARRAY
-      const data = {
-        question: `Oe ist me jou?`,
-        answer: `Goed`,
-        userId: this.that.uiStore.randomUser._id,
-        param1: 34,
-        param2: 50,
-        param3: 45,
-        param4: 12,
-        param5: 43
-      };
-      this.answers.push(data);
-      //ADD ANSWERS TO DATABASE FROM STATE
-      this.answers.forEach(async answer => {
-        await this.that.answerStore.create(answer);
-      });
-    }
+    this.that.cameraRubberBandingActive = true;
 
     window.addEventListener(`mousemove`, this.onMouseMove);
     //window.addEventListener(`wheel`, this.handleMouseScroll);
@@ -91,7 +68,7 @@ class Questions {
     this.that.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
     this.that.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
     this.that.raycaster.setFromCamera(this.that.mouse, this.that.camera);
-    var intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
+    let intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
     //de elementen zitten in intersects
     if (intersects.length > 0) {
       intersects.forEach(intersect => {
@@ -99,6 +76,37 @@ class Questions {
           this.that.cameraRubberBanding.position.set(-300, 0, 49500);
           this.that.cameraRubberBanding.rotation.set(0, Math.PI*0.6, 0);
           this.that.cameraRubberBandingActive = true;
+
+          // this.that.cameraRubberBanding.position.set(
+          //   this.questions[0].location.x,
+          //   this.questions[0].location.y,
+          //   WORLD_POSITION.questions - this.questions[0].location.z
+          // );
+        }
+      });
+      this.questions.forEach((question, index) => {
+        if (this.questionIndex === index) {
+          question.answers.forEach((answer, index) => {
+            if (intersects[0].object.name === `answer${index}`) {
+              this.that.cameraRubberBanding.position.set(
+                this.questions[index + 1].location.x,
+                this.questions[index + 1].location.y,
+                WORLD_POSITION.questions - this.questions[index + 1].location.z
+              );
+              const data = {
+                question: question,
+                answer: answer,
+                userId: this.that.uiStore.randomUser._id,
+                param1: 34,
+                param2: 50,
+                param3: 45,
+                param4: 12,
+                param5: 43
+              };
+              this.answers.push(data);
+              this.questionIndex += 1;
+            }
+          });
         }
       });
     }
@@ -118,6 +126,7 @@ class Questions {
   };
 
   handleMouseScroll = e => {};
+
   animate = () => {
     this.question.style.transform =
       `perspective(1000px) translate(` +

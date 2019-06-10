@@ -133,6 +133,7 @@ class Canary {
     pointer.classList.add(`pointer`);
     pointer.style.transform = `translateX(-100px)`;
     pointer.style.position = `absolute`;
+    pointer.style.userSelect = `none`;
     return pointer;
   };
 }
