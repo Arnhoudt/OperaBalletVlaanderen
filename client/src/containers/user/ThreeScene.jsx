@@ -23,7 +23,9 @@ class ThreeScene extends Component {
     this.characterStore = props.characterStore;
     this.questionStore = props.questionStore;
     this.state = { loading: ``, error: ``, done: false };
+  }
 
+  componentDidMount() {
     THREE.DefaultLoadingManager.onStart = (url, itemsLoaded, itemsTotal) => {
       const state = { ...this.state };
       state.loading = Math.round((itemsLoaded / itemsTotal) * 100);
@@ -47,9 +49,7 @@ class ThreeScene extends Component {
       state.error = url;
       this.setState(state);
     };
-  }
 
-  componentDidMount() {
     {
       this.pointer = canary.createPointer();
       this.mount.appendChild(this.pointer);
@@ -174,7 +174,11 @@ class ThreeScene extends Component {
         />
         {!this.state.done ? (
           <div className={styles.loading}>
-            <p>{this.state.loading} %</p>
+            <div className={styles.spinner}>
+              <div className={styles.cube1} />
+              <div className={styles.cube2} />
+            </div>
+            <p>{this.state.loading}</p>
           </div>
         ) : (
           <></>

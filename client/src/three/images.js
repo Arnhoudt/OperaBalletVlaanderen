@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { BACKGROUND_COLORS, FONTS, WORLD_POSITION } from "../constants";
 import Canary from "./Canary";
-import ThreeScene from "../containers/user/ThreeScene";
 
 class Images {
   canary = new Canary();
