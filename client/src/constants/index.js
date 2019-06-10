@@ -27,11 +27,11 @@ export const FONTS = {
 };
 
 export const FOG = {
-  near: 300,
-  far: 1600
+  near: 400,
+  far: 600
 };
 
-export const CAMERA_RUBBERBANDING_FORCE = 0.01;
+export const CAMERA_RUBBERBANDING_FORCE = 0.03;
 
 export const ANTIALIASING = true;
 
@@ -39,7 +39,6 @@ export const WORLD_POSITION = {
   images: 1500,
   questions: 50000
 };
-
 
 export const CAMERA = {
   fov: 45,
@@ -50,20 +49,19 @@ export const CAMERA = {
   movementFreedom: 100 //20 voor bij de foto's is goed denk ik en voor de vragen is 50-100 beter
 };
 
-
 export const BACKGROUND_COLORS = {
   images: {
     default: {
       position: WORLD_POSITION.images,
-      r: 214,
-      g: 229,
-      b: 255
+      r: 249,
+      g: 249,
+      b: 249
     },
     background1: {
       position: WORLD_POSITION.images - 1000,
-      r: 200,
-      g: 0,
-      b: 100
+      r: 214,
+      g: 229,
+      b: 255
     },
     background2: {
       position: WORLD_POSITION.images - 2000,
@@ -95,6 +93,5 @@ export const BACKGROUND_COLORS = {
       g: 255,
       b: 255
     }
-
   }
-}
+};

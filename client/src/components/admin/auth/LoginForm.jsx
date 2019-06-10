@@ -2,6 +2,7 @@ import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { withRouter } from "react-router-dom";
 import { ROUTES } from "../../../constants";
+import { Link } from "react-router-dom";
 import styles from "./LoginForm.module.css";
 
 const LoginForm = ({ uiStore, history }) => {
@@ -47,9 +48,16 @@ const LoginForm = ({ uiStore, history }) => {
               </label>
               <p className={styles.error}>{uiStore.error}</p>
             </div>
-            <button type="submit" className={`${styles.button}`}>
-              <p>Inloggen</p>
-            </button>
+            <div className={styles.containerButtons}>
+              <button type="submit" className={`${styles.button}`}>
+                <p>Inloggen</p>
+              </button>
+              <Link to={ROUTES.threeScene}>
+                <button className={styles.button}>
+                  <p>Naar de site</p>
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </form>

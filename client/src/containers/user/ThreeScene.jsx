@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import * as THREE from "three";
 import Canary from "../../three/Canary";
-import Images from "../../three/Images";
+import Images from "../../three/images";
 import Questions from "../../three/Questions";
 import ThreeSetup from "../../three/ThreeSetup";
 
@@ -22,8 +22,11 @@ class ThreeScene extends Component {
     this.answerStore = props.answerStore;
     this.characterStore = props.characterStore;
     this.questionStore = props.questionStore;
+    this.history = props.history;
     this.state = { loading: ``, error: ``, done: false };
+  }
 
+  componentDidMount() {
     THREE.DefaultLoadingManager.onStart = (url, itemsLoaded, itemsTotal) => {
       const state = { ...this.state };
       state.loading = Math.round((itemsLoaded / itemsTotal) * 100);
@@ -34,6 +37,7 @@ class ThreeScene extends Component {
       const state = { ...this.state };
       state.done = true;
       this.setState(state);
+      this.cameraRubberBandingActive = true;
     };
 
     THREE.DefaultLoadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
@@ -47,9 +51,7 @@ class ThreeScene extends Component {
       state.error = url;
       this.setState(state);
     };
-  }
 
-  componentDidMount() {
     {
       this.pointer = canary.createPointer();
       this.mount.appendChild(this.pointer);
@@ -66,7 +68,6 @@ class ThreeScene extends Component {
       this.lookPosition = { x: 0, y: 0 }; //default waarde zonder betekenis
       this.pointerPosition = { x: window.innerWidth / 2, y: window.innerHeight / 2 }; //default waarde zonder betekenis
       this.movementFreedom = CAMERA.movementFreedom;
-      this.cameraRubberBandingActive = true;
     }
 
     threeSetup.setup(this);
@@ -109,7 +110,7 @@ class ThreeScene extends Component {
   animate = () => {
     //ANIMATION
     if (this.mouseMoved === true) {
-      this.camera.position.set(this.camera.position.x - this.lookPosition.x / 2,this.camera.position.y - this.lookPosition.y / 2, this.camera.position.z);
+      this.camera.position.set(this.camera.position.x - this.lookPosition.x / 2, this.camera.position.y - this.lookPosition.y / 2, this.camera.position.z);
       const vx = canary.rubberBand(this.lookPosition.x, -(window.innerWidth / 2 - this.mousePosition.x) / this.movementFreedom, 0.03);
       const vy = canary.rubberBand(this.lookPosition.y, (window.innerHeight / 2 - this.mousePosition.y) / this.movementFreedom, 0.03);
       this.lookPosition.x += vx;
@@ -120,8 +121,8 @@ class ThreeScene extends Component {
 
       this.camera.lookAt(this.lookPosition.x, this.lookPosition.y, z);
 
-      const vpx = canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.06);
-      const vpy = canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.06);
+      const vpx = canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.2);
+      const vpy = canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.2);
       this.pointerPosition.x += vpx;
       this.pointerPosition.y += vpy;
 
@@ -184,7 +185,13 @@ class ThreeScene extends Component {
         />
         {!this.state.done ? (
           <div className={styles.loading}>
-            <p>{this.state.loading} %</p>
+            <div className={styles.spinner}>
+              <div className={styles.cube1} />
+              <div className={styles.cube2} />
+            </div>
+            <div className={styles.containerPercent}>
+              <p>{this.state.loading}</p>
+            </div>
           </div>
         ) : (
           <></>

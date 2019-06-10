@@ -4,7 +4,7 @@
 }
 
 .form_container {
-  height: 32em;
+  height: 38em;
   align-self: center;
   justify-self: center;
   display: flex;
@@ -42,5 +42,12 @@
 
 .error {
   font-size: 1.2em;
-  color: red;
+  color: #ff0000;
+}
+
+.containerButtons {
+  height: 10em;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
 }

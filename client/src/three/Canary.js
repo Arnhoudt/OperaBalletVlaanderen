@@ -1,6 +1,6 @@
 import * as THREE from "three";
-import * as SVGLoader from "three-svg-loader";
 import {POINTER, WORLD_POSITION} from "../constants";
+let SVGLoader = require(`three-svg-loader`);
 
 class Canary {
   createPng = (component, path, x, y, z, width, height, anisotropy, name) => {
