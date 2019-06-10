@@ -22,7 +22,7 @@ export const FOG = {
   far: 600
 };
 
-export const CAMERA_RUBBERBANDING_FORCE = 0.04;
+export const CAMERA_RUBBERBANDING_FORCE = 0.03;
 
 export const ANTIALIASING = true;
 
