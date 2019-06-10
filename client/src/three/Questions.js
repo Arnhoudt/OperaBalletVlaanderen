@@ -50,7 +50,9 @@ class Questions {
     this.canary.createPng(that, `assets/img/pikachu.jpg`, 124, -50, WORLD_POSITION.questions - 330, 576 / 6, 576 / 6, 16);
     this.elements.push(this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_button.png`, -19, -65, WORLD_POSITION.questions - 300, 90, 18, 16, `start`));
     this.elements.push(this.canary.createPng(that, `assets/img/a_START-1.png`, 0, 0, WORLD_POSITION.questions - 400, 500, 300, 16));
-    //this.canary.createText(that, FONTS.helvetacaLight, 0xff6690, `Pikachu`, 0, 30, WORLD_POSITION.questions - 300, 50);
+
+    this.canary.createText(that, `hey`, FONTS.radikalThin, 20, 0xa00000, 0, 0, WORLD_POSITION.questions - 200);
+
   };
 
   unmount = window => {

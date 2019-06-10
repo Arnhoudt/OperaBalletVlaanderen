@@ -13,8 +13,17 @@ export const POINTER = {
   height: 50
 };
 
+const FONT_PATH = `assets/fonts/`;
+
 export const FONTS = {
-  helvetacaLight: `assets/fonts/helvetiker_regular.typeface.json`
+  domaineDispSemibold: FONT_PATH + `DomaineSemibold.json`,
+  domaineRegular: FONT_PATH + `DomaineRegular.json`,
+  radikalRegular: FONT_PATH + `RadikalRegular.json`,
+  radikalLight: FONT_PATH + `RadikalLight.json`,
+  radikalThin: FONT_PATH + `RadikalThin.json`,
+  radikalBold: FONT_PATH + `RadikalBold.json`,
+  radikalMedium: FONT_PATH + `RadikalMedium.json`,
+
 };
 
 export const FOG = {
