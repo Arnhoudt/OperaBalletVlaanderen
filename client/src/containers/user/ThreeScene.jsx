@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import * as THREE from "three";
 import Canary from "../../three/Canary";
-import Images from "../../three/images";
+import Images from "../../three/Images";
 import Questions from "../../three/Questions";
 import ThreeSetup from "../../three/ThreeSetup";
 

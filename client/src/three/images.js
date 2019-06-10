@@ -42,7 +42,7 @@ class Images {
     this.that.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
     this.that.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
     this.that.raycaster.setFromCamera(this.that.mouse, this.that.camera);
-    var intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
+    let intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
     //de elementen zitten in intersects
 
     if (intersects.length > 0) {
@@ -76,7 +76,7 @@ class Images {
       this.that.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
       this.that.raycaster.setFromCamera(this.that.mouse, this.that.camera);
-      var intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
+      let intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
       if (intersects.length > 0) {
         this.that.zoomedObject = this.canary.getClosestObjectWithName(intersects, `showRoomImage`);
         if (this.that.zoomedObject) {

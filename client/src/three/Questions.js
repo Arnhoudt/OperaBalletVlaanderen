@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, ROUTES } from "../constants";
+import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, ROUTES, PLANE_DIFFERENCE, CAMERA_PLANE_DIFFERENCE, ARBITRAIRE_CONSTANTE } from "../constants";
 import Canary from "./Canary";
-import Images from "../three/Images";
+import Images from "./Images";
 let images = new Images();
 
 class Questions {
@@ -11,6 +11,7 @@ class Questions {
   loaded = false;
   questionIndex = 0;
   hover = false;
+  planeZ = WORLD_POSITION.questions - CAMERA_PLANE_DIFFERENCE;
 
   load = that => {
     this.elements = [];
@@ -47,17 +48,6 @@ class Questions {
     this.submit.style.transform = `translate(` + this.submit.offsetWidth / 2 + `px, ` + window.innerHeight / 10 + `px) scale(4, 4)`;
     this.submit.style.position = `relative`;
 
-    this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent.png`, -30, 60, WORLD_POSITION.questions - 300, 836 / 5.2, 241 / 4, 16);
-    this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_blauwe_rechthoek.png`, -130, -10, WORLD_POSITION.questions - 390, 721 / 4.1, 840 / 3.7, 16);
-    this.canary.createPng(that, `assets/img/logo.png`, -18, -57, WORLD_POSITION.questions - 250, 440 / 5.2, 194 / 5.2, 16);
-    this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_intro_1.png`, -102, -19, WORLD_POSITION.questions - 330, 576 / 5.1, 119 / 6, 16);
-    this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_intro_2.png`, 42, 16, WORLD_POSITION.questions - 330, 576 / 5.1, 62 / 6, 16);
-    this.canary.createPng(that, `assets/img/pikachu.jpg`, 124, -50, WORLD_POSITION.questions - 330, 576 / 6, 576 / 6, 16);
-    this.elements.push(this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_button.png`, -19, -65, WORLD_POSITION.questions - 300, 90, 18, 16, `start`));
-    this.elements.push(this.canary.createPng(that, `assets/img/a_START-1.png`, 0, 0, WORLD_POSITION.questions - 400, 500, 300, 16));
-
-    this.canary.createText(that, `hey`, FONTS.radikalThin, 20, 0xa00000, 0, 0, WORLD_POSITION.questions - 200);
-
     this.loadStart();
     this.loadTerugScherm();
 
@@ -74,15 +64,16 @@ class Questions {
   };
 
   loadStart = () => {
-    this.canary.createPng(this.that, `assets/img/ontdek_wie_jij_bent.png`, -30, 60, WORLD_POSITION.questions - 300, 836 / 5.2, 241 / 4, 16);
-    this.canary.createPng(this.that, `assets/img/admin_login.png`, 230, 110, WORLD_POSITION.questions - 390, 40 / 4.1, 122 / 3.7, 16, `admin`);
-    this.canary.createPng(this.that, `assets/img/logo.png`, -18, -57, WORLD_POSITION.questions - 250, 440 / 5.2, 194 / 5.2, 16);
-    this.canary.createPng(this.that, `assets/img/ontdek_wie_jij_bent_intro_1.png`, -103, -19, WORLD_POSITION.questions - 330, 576 / 5.1, 119 / 6, 16);
-    this.canary.createPng(this.that, `assets/img/ontdek_wie_jij_bent_intro_2.png`, 50, 12, WORLD_POSITION.questions - 330, 664 / 5.1, 78 / 6, 16);
-    this.canary.createPng(this.that, `assets/img/rectangle.png`, 123, -54, WORLD_POSITION.questions - 330, 440 / 4.6, 387 / 4.6, 16);
-    this.canary.createPng(this.that, `assets/img/ontdek_wie_jij_bent_button.png`, -19, -65, WORLD_POSITION.questions - 300, 90, 18, 16, `start`);
-    this.canary.createPng(this.that, `assets/img/a_START-1.png`, 0, 0, WORLD_POSITION.questions - 400, 500, 300, 16);
-    //this.canary.createText(that, FONTS.helvetacaLight, 0xff6690, `Pikachu`, 0, 30, WORLD_POSITION.questions - 300, 50);
+    this.canary.createText(this.that, `Ontdek`, FONTS.domaineDispSemibold, 19, 0x000000, -106, 61, this.planeZ, 2);
+    this.canary.createText(this.that, `wie jij bent!`, FONTS.domaineDispSemibold, 19, 0x000000, -93, 32, this.planeZ, 2);
+    this.canary.createText(this.that, `Admin login`, FONTS.radikalLight, 3.6, 0x000000, 198, 73, this.planeZ, 3, Math.PI / 2, `admin`);
+    this.canary.createText(this.that, `Dit is een verwezelijking van Opera Ballet Vlaanderen.`, FONTS.radikalLight, 3.6, 0x000000, 60, -110, this.planeZ, 3);
+    this.canary.createPng(this.that, `assets/img/logo.png`, -18, -48, this.planeZ, 512 / 8, 218 / 8, 1, 16);
+    this.canary.createPng(this.that, `assets/img/ontdek_wie_jij_bent_intro_1.png`, -103, -19, this.planeZ, 576 / 8, 119 / 8, 3, 16);
+    this.canary.createPng(this.that, `assets/img/ontdek_wie_jij_bent_intro_2.png`, 50, 12, this.planeZ, 664 / 8, 78 / 8, 3, 16);
+    this.canary.createPng(this.that, `assets/img/rectangle.png`, 123, -54, this.planeZ, 440 / 8, 387 / 8, 2, 16);
+    this.canary.createPng(this.that, `assets/img/ontdek_wie_jij_bent_button.png`, -19, -56, this.planeZ, 432 / 8, 96 / 8, 2, 16, `start`);
+    this.canary.createPng(this.that, `assets/img/a_START-1.png`, 0, 0, this.planeZ, 1920 / 8, 1080 / 8, 4, 16);
   };
 
   loadTerugScherm = () => {

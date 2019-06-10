@@ -31,7 +31,7 @@ class ThreeSetup {
     //ADD MOUSE
     that.mouse = new THREE.Vector2();
     //ADD LIGHT
-    var light = new THREE.AmbientLight(0xffffff); // soft white light
+    let light = new THREE.AmbientLight(0xffffff); // soft white light
     that.scene.add(light);
   };
 }
