@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { POINTER } from "../constants";
+import {POINTER, WORLD_POSITION} from "../constants";
 let SVGLoader = require(`three-svg-loader`);
 
 class Canary {
@@ -81,7 +81,28 @@ class Canary {
     });
   };
 
-  createText = (component, textFont, textColor, textMessage, textPosX, textPosY, textPosZ, textSize) => {
+  createText = (that, message, textFont, size, color, x, y, z) => {
+    that.fontLoader.load( textFont, function ( font ) {
+
+      let textGeometry = new THREE.TextGeometry( message, {
+        font: font,
+        size: size,
+        height: 0,
+
+      });
+
+      let textMaterial = new THREE.MeshPhongMaterial(
+          { color: color }
+      );
+
+      let mesh = new THREE.Mesh( textGeometry, textMaterial );
+      mesh.position.set(x, y, z);
+      that.scene.add( mesh );
+
+    });
+  }
+
+  createHollowText = (component, textFont, textColor, textMessage, textPosX, textPosY, textPosZ, textSize) => {
     component.fontLoader.load(textFont, font => {
       let xMid;
       let color = new THREE.Color(textColor);

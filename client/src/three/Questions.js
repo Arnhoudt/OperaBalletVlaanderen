@@ -47,6 +47,17 @@ class Questions {
     this.submit.style.transform = `translate(` + this.submit.offsetWidth / 2 + `px, ` + window.innerHeight / 10 + `px) scale(4, 4)`;
     this.submit.style.position = `relative`;
 
+    this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent.png`, -30, 60, WORLD_POSITION.questions - 300, 836 / 5.2, 241 / 4, 16);
+    this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_blauwe_rechthoek.png`, -130, -10, WORLD_POSITION.questions - 390, 721 / 4.1, 840 / 3.7, 16);
+    this.canary.createPng(that, `assets/img/logo.png`, -18, -57, WORLD_POSITION.questions - 250, 440 / 5.2, 194 / 5.2, 16);
+    this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_intro_1.png`, -102, -19, WORLD_POSITION.questions - 330, 576 / 5.1, 119 / 6, 16);
+    this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_intro_2.png`, 42, 16, WORLD_POSITION.questions - 330, 576 / 5.1, 62 / 6, 16);
+    this.canary.createPng(that, `assets/img/pikachu.jpg`, 124, -50, WORLD_POSITION.questions - 330, 576 / 6, 576 / 6, 16);
+    this.elements.push(this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_button.png`, -19, -65, WORLD_POSITION.questions - 300, 90, 18, 16, `start`));
+    this.elements.push(this.canary.createPng(that, `assets/img/a_START-1.png`, 0, 0, WORLD_POSITION.questions - 400, 500, 300, 16));
+
+    this.canary.createText(that, `hey`, FONTS.radikalThin, 20, 0xa00000, 0, 0, WORLD_POSITION.questions - 200);
+
     this.loadStart();
     this.loadTerugScherm();
 

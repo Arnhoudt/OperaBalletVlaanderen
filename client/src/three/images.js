@@ -13,8 +13,8 @@ class Images {
     this.canary.createImage(that, `assets/img/pikachu.jpg`, 200, 0, WORLD_POSITION.images - 2200, 200, 150, `showRoomImage`);
     this.canary.createImage(that, `assets/img/pikachu.jpg`, -150, 100, WORLD_POSITION.images - 2300, 200, 150, `showRoomImage`);
     //CREATE TEXT
-    this.canary.createText(that, FONTS.helvetacaLight, 0xff6690, `Pikachu`, 0, 0, WORLD_POSITION.images - 1000, 200);
-    this.canary.createText(that, FONTS.helvetacaLight, 0xff6690, `Pika Pika`, 0, 0, WORLD_POSITION.images - 3300, 200);
+    this.canary.createHollowText(that, FONTS.helvetacaLight, 0xff6690, `Pikachu`, 0, 0, WORLD_POSITION.images - 1000, 200);
+    this.canary.createHollowText(that, FONTS.helvetacaLight, 0xff6690, `Pika Pika`, 0, 0, WORLD_POSITION.images - 3300, 200);
 
     //eventlisteners
     window.addEventListener(`mousemove`, this.onMouseMove);
