@@ -75,15 +75,7 @@ class ThreeScene extends Component {
 
     window.addEventListener(`resize`, this.onResize);
 
-    switch (this.currentWorld) {
-      case WORLD_POSITION.images:
-        images.load(this, window);
-        break;
-      case WORLD_POSITION.questions:
-      default:
-        questions.load(this);
-        break;
-    }
+    questions.load(this);
 
     this.start();
   }

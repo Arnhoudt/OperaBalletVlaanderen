@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, ROUTES } from "../constants";
 import Canary from "./Canary";
+import Images from "../three/Images";
+let images = new Images();
 
 class Questions {
   canary = new Canary();
@@ -53,7 +55,7 @@ class Questions {
     window.addEventListener(`mousemove`, this.onMouseMove);
   };
 
-  unmount = window => {
+  unmount = () => {
     window.removeEventListener(`mousemove`, this.onMouseMove);
     window.removeEventListener(`wheel`, this.handleMouseScroll);
     window.removeEventListener(`keydown`, this.handleKeyDown);
@@ -190,7 +192,10 @@ class Questions {
                   this.answers.forEach(async answer => {
                     await this.that.answerStore.create(answer);
                   });
-                  this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.questions);
+
+                  this.unmount();
+                  images.load(this.that);
+                  this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.images);
                 }
               }
             });

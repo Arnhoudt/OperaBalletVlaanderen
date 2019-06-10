@@ -4,7 +4,7 @@ import Canary from "./Canary";
 
 class Images {
   canary = new Canary();
-  load = (that, window) => {
+  load = that => {
     this.that = that;
     that.movementFreedom = 20;
     //CREATE IMAGES
@@ -27,7 +27,7 @@ class Images {
     that.scene.fog = new THREE.Fog(color, near, far);
   };
 
-  unmount = window => {
+  unmount = () => {
     window.removeEventListener(`mousemove`, this.onMouseMove);
     window.removeEventListener(`wheel`, this.handleMouseScroll);
     window.removeEventListener(`keydown`, this.handleKeyDown);
