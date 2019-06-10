@@ -96,8 +96,8 @@ class Questions {
     if (intersects.length > 0) {
       intersects.forEach(intersect => {
         if (intersect.object.name === `start`) {
-          this.that.cameraRubberBanding.position.set(0, 0, 51000);
-          this.that.cameraRubberBanding.rotation.set(10, 0, 0);
+          this.that.cameraRubberBanding.position.set(-300, 0, 49500);
+          this.that.cameraRubberBanding.rotation.set(0, Math.PI*0.6, 0);
           this.that.cameraRubberBandingActive = true;
         }
       });

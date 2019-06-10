@@ -8,7 +8,7 @@ import Questions from "../../three/Questions";
 import ThreeSetup from "../../three/ThreeSetup";
 
 import styles from "./ThreeScene.module.css";
-import { POINTER, ANTIALIASING, BACKGROUND_COLORS, CAMERA, FOG, FONTS, WORLD_POSITION } from "../../constants/index";
+import { POINTER, ANTIALIASING, BACKGROUND_COLORS, CAMERA, FOG, FONTS, WORLD_POSITION, CAMERA_RUBBERBANDING_FORCE } from "../../constants/index";
 let canary = new Canary();
 let images = new Images();
 let questions = new Questions();
@@ -113,14 +113,13 @@ class ThreeScene extends Component {
   animate = () => {
     //ANIMATION
     if (this.mouseMoved === true) {
+      this.camera.position.set(this.camera.position.x - this.lookPosition.x / 2,this.camera.position.y - this.lookPosition.y / 2, this.camera.position.z);
       const vx = canary.rubberBand(this.lookPosition.x, -(window.innerWidth / 2 - this.mousePosition.x) / this.movementFreedom, 0.03);
       const vy = canary.rubberBand(this.lookPosition.y, (window.innerHeight / 2 - this.mousePosition.y) / this.movementFreedom, 0.03);
       this.lookPosition.x += vx;
       this.lookPosition.y += vy;
-      const z = this.camera.position.z - 100;
 
-      this.camera.lookAt(this.lookPosition.x, this.lookPosition.y, z);
-      this.camera.position.set(this.lookPosition.x / 2, this.lookPosition.y / 2, this.camera.position.z);
+      this.camera.position.set(this.camera.position.x + this.lookPosition.x / 2, this.camera.position.y + this.lookPosition.y / 2, this.camera.position.z);
 
       const vpx = canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.06);
       const vpy = canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.06);
@@ -134,16 +133,15 @@ class ThreeScene extends Component {
       }
     }
     if (this.cameraRubberBandingActive) {
-      const cameraVx = canary.rubberBand(this.camera.position.x, this.cameraRubberBanding.position.x, 0.03);
-      const cameraVy = canary.rubberBand(this.camera.position.y, this.cameraRubberBanding.position.y, 0.03);
-      const cameraVz = canary.rubberBand(this.camera.position.z, this.cameraRubberBanding.position.z, 0.03);
+      const cameraVx = canary.rubberBand(this.camera.position.x, this.cameraRubberBanding.position.x, CAMERA_RUBBERBANDING_FORCE);
+      const cameraVy = canary.rubberBand(this.camera.position.y, this.cameraRubberBanding.position.y, CAMERA_RUBBERBANDING_FORCE);
+      const cameraVz = canary.rubberBand(this.camera.position.z, this.cameraRubberBanding.position.z, CAMERA_RUBBERBANDING_FORCE);
       this.camera.position.set(this.camera.position.x + cameraVx, this.camera.position.y + cameraVy, this.camera.position.z + cameraVz);
-      // TODO: er moet gezorgd worden dat de camera rotation ook wordt gerubberband
-      // const cameraRotationVx = canary.rubberBand(this.camera.rotation.x, this.cameraRubberBanding.rotation.x, 0.005);
-      // const cameraRotationVy = canary.rubberBand(this.camera.rotation.y, this.cameraRubberBanding.rotation.y, 0.005);
-      // const cameraRotationVz = canary.rubberBand(this.camera.rotation.z, this.cameraRubberBanding.rotation.z, 0.005);
-      // console.log(this.camera.rotation.x);
-      // this.camera.rotation.set(this.camera.rotation.x + cameraRotationVx, this.camera.rotation.y + cameraRotationVy, this.camera.rotation.z + cameraRotationVz);
+
+      const cameraRotationVx = canary.rubberBand(this.camera.rotation.x, this.cameraRubberBanding.rotation.x, CAMERA_RUBBERBANDING_FORCE);
+      const cameraRotationVy = canary.rubberBand(this.camera.rotation.y, this.cameraRubberBanding.rotation.y, CAMERA_RUBBERBANDING_FORCE);
+      const cameraRotationVz = canary.rubberBand(this.camera.rotation.z, this.cameraRubberBanding.rotation.z, CAMERA_RUBBERBANDING_FORCE);
+      this.camera.rotation.set(this.camera.rotation.x + cameraRotationVx, this.camera.rotation.y + cameraRotationVy, this.camera.rotation.z + cameraRotationVz);
     }
 
     if (this.currentColor !== this.newColor) {
