@@ -12,11 +12,18 @@
   justify-content: center;
 }
 
-.loading p {
+.containerPercent {
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-32px, 10px);
+}
+
+.containerPercent p {
   font-size: 4em;
   color: #333;
   font-weight: 400;
-  transform: translate(-30px, 16px);
 }
 
 .question_input {
@@ -31,7 +38,7 @@
   width: 80px;
   height: 80px;
   position: relative;
-  transform: translate(-4px, -21px);
+  transform: translate(12px, -30px);
 }
 
 .cube1, .cube2 {
@@ -52,9 +59,9 @@
 }
 
 @-webkit-keyframes sk-cubemove {
-  25% { -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5) }
-  50% { -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg) }
-  75% { -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5) }
+  25% { -webkit-transform: translateX(126px) rotate(-90deg) scale(0.5) }
+  50% { -webkit-transform: translateX(126px) translateY(126px) rotate(-180deg) }
+  75% { -webkit-transform: translateX(0px) translateY(126px) rotate(-270deg) scale(0.5) }
   100% { -webkit-transform: rotate(-360deg) }
 }
 

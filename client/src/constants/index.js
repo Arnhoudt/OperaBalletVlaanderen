@@ -18,8 +18,8 @@ export const FONTS = {
 };
 
 export const FOG = {
-  near: 300,
-  far: 1600
+  near: 400,
+  far: 600
 };
 
 export const CAMERA_RUBBERBANDING_FORCE = 0.04;

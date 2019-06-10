@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { BACKGROUND_COLORS, FONTS, WORLD_POSITION } from "../constants";
+import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, ROUTES } from "../constants";
 import Canary from "./Canary";
 
 class Questions {
@@ -7,12 +7,12 @@ class Questions {
   questions = [];
   answers = [];
   loaded = false;
+  questionIndex = 0;
 
   load = that => {
     this.elements = [];
     this.that = that;
     that.movementFreedom = 100;
-    this.that.cameraRubberBandingActive = true;
 
     this.that.questionStore.findAll().then(questions => {
       this.questions = questions;
@@ -48,11 +48,11 @@ class Questions {
     this.submit.style.position = `relative`;
 
     this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent.png`, -30, 60, WORLD_POSITION.questions - 300, 836 / 5.2, 241 / 4, 16);
-    this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_blauwe_rechthoek.png`, -130, -10, WORLD_POSITION.questions - 390, 721 / 4.1, 840 / 3.7, 16);
+    this.canary.createPng(that, `assets/img/admin_login.png`, 230, 110, WORLD_POSITION.questions - 390, 40 / 4.1, 122 / 3.7, 16, `admin`);
     this.canary.createPng(that, `assets/img/logo.png`, -18, -57, WORLD_POSITION.questions - 250, 440 / 5.2, 194 / 5.2, 16);
-    this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_intro_1.png`, -102, -19, WORLD_POSITION.questions - 330, 576 / 5.1, 119 / 6, 16);
-    this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_intro_2.png`, 42, 16, WORLD_POSITION.questions - 330, 576 / 5.1, 62 / 6, 16);
-    this.canary.createPng(that, `assets/img/pikachu.jpg`, 124, -50, WORLD_POSITION.questions - 330, 576 / 6, 576 / 6, 16);
+    this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_intro_1.png`, -103, -19, WORLD_POSITION.questions - 330, 576 / 5.1, 119 / 6, 16);
+    this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_intro_2.png`, 50, 12, WORLD_POSITION.questions - 330, 664 / 5.1, 78 / 6, 16);
+    this.canary.createPng(that, `assets/img/rectangle.png`, 123, -54, WORLD_POSITION.questions - 330, 440 / 4.6, 387 / 4.6, 16);
     this.canary.createPng(that, `assets/img/ontdek_wie_jij_bent_button.png`, -19, -65, WORLD_POSITION.questions - 300, 90, 18, 16, `start`);
     this.canary.createPng(that, `assets/img/a_START-1.png`, 0, 0, WORLD_POSITION.questions - 400, 500, 300, 16);
     //this.canary.createText(that, FONTS.helvetacaLight, 0xff6690, `Pikachu`, 0, 30, WORLD_POSITION.questions - 300, 50);
@@ -69,95 +69,48 @@ class Questions {
     this.questions.forEach((question, index) => {
       this.canary.createPng(
         this.that,
-        `assets/img/ontdek_wie_jij_bent.png`,
+        `assets/img/vraag.png`,
         question.location.x - 30,
         question.location.y + 60,
-        WORLD_POSITION.questions - 300 - question.location.z,
+        WORLD_POSITION.questions - question.location.z - 300,
         836 / 5.2,
         241 / 4,
         16
       );
       this.canary.createPng(
         this.that,
-        `assets/img/ontdek_wie_jij_bent_blauwe_rechthoek.png`,
+        `assets/img/terug_naar_begin.png`,
         question.location.x - 130,
         question.location.y - 10,
-        WORLD_POSITION.questions - 390 - question.location.z,
-        721 / 4.1,
-        840 / 3.7,
-        16
-      );
-      this.canary.createPng(
-        this.that,
-        `assets/img/logo.png`,
-        -18 - question.location.x,
-        -57 - question.location.y,
-        WORLD_POSITION.questions - 250 - question.location.z,
-        440 / 5.2,
-        194 / 5.2,
-        16
-      );
-      this.canary.createPng(
-        this.that,
-        `assets/img/ontdek_wie_jij_bent_intro_1.png`,
-        -102 - question.location.x,
-        -19 - question.location.y,
-        WORLD_POSITION.questions - 330 - question.location.z,
-        576 / 5.1,
-        119 / 6,
-        16
-      );
-      this.canary.createPng(
-        this.that,
-        `assets/img/ontdek_wie_jij_bent_intro_2.png`,
-        42 - question.location.x,
-        16 - question.location.y,
-        WORLD_POSITION.questions - 330 - question.location.z,
-        576 / 5.1,
-        62 / 6,
-        16
-      );
-      this.canary.createPng(
-        this.that,
-        `assets/img/pikachu.jpg`,
-        124 - question.location.x,
-        -50 - question.location.y,
-        WORLD_POSITION.questions - 330 - question.location.z,
-        576 / 6,
-        576 / 6,
-        16
-      );
-      this.canary.createPng(
-        this.that,
-        `assets/img/ontdek_wie_jij_bent_button.png`,
-        -19 - question.location.x,
-        -65 - question.location.y,
-        WORLD_POSITION.questions - 300 - question.location.z,
-        90,
-        18,
+        WORLD_POSITION.questions - question.location.z - 390,
+        242 / 4.1,
+        39 / 3.7,
         16,
-        `start`
+        `terug`
       );
       this.canary.createPng(
         this.that,
-        `assets/img/a_START-1.png`,
-        0 - question.location.x,
-        0 - question.location.y,
-        WORLD_POSITION.questions - 400 - question.location.z,
+        `assets/img/b_VRAGEN-1.png`,
+        question.location.x + 0,
+        question.location.y + 0,
+        WORLD_POSITION.questions - question.location.z - 400,
         500,
         300,
         16
       );
-      this.canary.createText(
-        this.that,
-        FONTS.helvetacaLight,
-        0xff6690,
-        question.question,
-        0 - question.location.x,
-        30 - question.location.y,
-        WORLD_POSITION.questions - 300 - question.location.z,
-        50
-      );
+      question.answers.forEach((answer, index2) => {
+        this.canary.createPng(
+          this.that,
+          `assets/img/ontdek_wie_jij_bent_button.png`,
+          question.location.x - 19 + index2 * 100,
+          question.location.y - 65,
+          WORLD_POSITION.questions - question.location.z - 300,
+          90,
+          18,
+          16,
+          `${index}answer${index2}`
+        );
+      });
     });
   };
 
@@ -179,32 +132,56 @@ class Questions {
           this.that.cameraRubberBanding.position.set(
             this.questions[0].location.x,
             this.questions[0].location.y,
-            WORLD_POSITION.questions - this.questions[0].location.z + 600
+            WORLD_POSITION.questions - this.questions[0].location.z
           );
+        }
+        if (intersect.object.name === `admin`) {
+          this.that.history.push(ROUTES.loginAdmin);
         }
       });
       this.questions.forEach((question, index) => {
         if (this.questionIndex === index) {
-          question.answers.forEach((answer, index) => {
-            if (intersects[0].object.name === `answer${index}`) {
-              this.that.cameraRubberBanding.position.set(
-                this.questions[index + 1].location.x,
-                this.questions[index + 1].location.y,
-                WORLD_POSITION.questions - this.questions[index + 1].location.z
-              );
-              const data = {
-                question: question,
-                answer: answer,
-                userId: this.that.uiStore.randomUser._id,
-                param1: 34,
-                param2: 50,
-                param3: 45,
-                param4: 12,
-                param5: 43
-              };
-              this.answers.push(data);
-              this.questionIndex += 1;
-            }
+          question.answers.forEach((answer, index2) => {
+            intersects.forEach(intersect => {
+              if (intersect.object.name === `${index}answer${index2}`) {
+                if (this.questions[index + 1]) {
+                  this.that.cameraRubberBanding.position.set(
+                    this.questions[index + 1].location.x,
+                    this.questions[index + 1].location.y,
+                    WORLD_POSITION.questions - this.questions[index + 1].location.z
+                  );
+                  const data = {
+                    question: question.question,
+                    answer: answer,
+                    userId: this.that.uiStore.randomUser._id,
+                    param1: 34,
+                    param2: 50,
+                    param3: 45,
+                    param4: 12,
+                    param5: 43
+                  };
+                  this.answers.push(data);
+                  this.questionIndex += 1;
+                } else {
+                  const data = {
+                    question: question.question,
+                    answer: answer,
+                    userId: this.that.uiStore.randomUser._id,
+                    param1: 34,
+                    param2: 50,
+                    param3: 45,
+                    param4: 12,
+                    param5: 43
+                  };
+                  this.answers.push(data);
+                  this.questionIndex = 0;
+                  this.answers.forEach(async answer => {
+                    await this.that.answerStore.create(answer);
+                  });
+                  this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.questions);
+                }
+              }
+            });
           });
         }
       });

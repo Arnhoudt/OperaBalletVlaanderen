@@ -22,6 +22,7 @@ class ThreeScene extends Component {
     this.answerStore = props.answerStore;
     this.characterStore = props.characterStore;
     this.questionStore = props.questionStore;
+    this.history = props.history;
     this.state = { loading: ``, error: ``, done: false };
   }
 
@@ -188,7 +189,9 @@ class ThreeScene extends Component {
               <div className={styles.cube1} />
               <div className={styles.cube2} />
             </div>
-            <p>{this.state.loading}</p>
+            <div className={styles.containerPercent}>
+              <p>{this.state.loading}</p>
+            </div>
           </div>
         ) : (
           <></>
