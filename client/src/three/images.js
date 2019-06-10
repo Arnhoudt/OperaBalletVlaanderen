@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import * as SVGLoader from "three-svg-loader";
 import { BACKGROUND_COLORS, FONTS, WORLD_POSITION } from "../constants";
 import Canary from "./Canary";
 import ThreeScene from "../containers/user/ThreeScene";
@@ -115,6 +114,11 @@ class Images {
         b: color.b
       };
     }
+  };
+
+  animate = () => {
+    const z = this.camera.position.z - 100;
+    this.camera.lookAt(this.lookPosition.x, this.lookPosition.y, z);
   };
 }
 
