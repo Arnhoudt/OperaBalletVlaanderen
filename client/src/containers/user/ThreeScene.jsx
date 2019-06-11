@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import * as THREE from "three";
 import Canary from "../../three/Canary";
-import Images from "../../three/images";
+import Images from "../../three/Images";
 import Questions from "../../three/Questions";
 import ThreeSetup from "../../three/ThreeSetup";
 
@@ -79,17 +79,16 @@ class ThreeScene extends Component {
 
     switch (this.currentWorld) {
       case WORLD_POSITION.images:
-        console.log("images");
         images.load(this, window);
         break;
       case WORLD_POSITION.questions:
-        console.log("questions");
       default:
         questions.load(this);
         break;
       case WORLD_POSITION.character:
         character.load(this);
     }
+
 
     this.start();
   }

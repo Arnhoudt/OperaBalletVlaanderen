@@ -22,16 +22,23 @@ export const FONTS = {
   radikalLight: FONT_PATH + `RadikalLight.json`,
   radikalThin: FONT_PATH + `RadikalThin.json`,
   radikalBold: FONT_PATH + `RadikalBold.json`,
-  radikalMedium: FONT_PATH + `RadikalMedium.json`,
-
+  radikalMedium: FONT_PATH + `RadikalMedium.json`
 };
+
+export const PLANE_DIFFERENCE = 50;
+
+export const CAMERA_PLANE_DIFFERENCE = 200;
+
+export const ARBITRAIRE_CONSTANTE = 3141592;
+
+export const PLANE_PERSPECTIVE_CONSTANTE = 0.25;
 
 export const FOG = {
   near: 400,
   far: 600
 };
 
-export const CAMERA_RUBBERBANDING_FORCE = 0.03;
+export const CAMERA_RUBBERBANDING_FORCE = 0.04;
 
 export const ANTIALIASING = true;
 

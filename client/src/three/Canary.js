@@ -1,11 +1,11 @@
 import * as THREE from "three";
-import {POINTER, WORLD_POSITION} from "../constants";
+import { POINTER, WORLD_POSITION, PLANE_DIFFERENCE, CAMERA_PLANE_DIFFERENCE, PLANE_PERSPECTIVE_CONSTANTE } from "../constants";
 let SVGLoader = require(`three-svg-loader`);
 
 class Canary {
-  createPng = (component, path, x, y, z, width, height, anisotropy, name) => {
+  createPng = (component, path, x, y, z, width, height, planeZ, anisotropy, name) => {
     let textureLoader = new THREE.TextureLoader();
-    var maxAnisotropy = component.renderer.capabilities.getMaxAnisotropy();
+    let maxAnisotropy = component.renderer.capabilities.getMaxAnisotropy();
     let planeAnisotropy;
     if (anisotropy === undefined || anisotropy < 1) {
       planeAnisotropy = 1;
@@ -15,7 +15,13 @@ class Canary {
       planeAnisotropy = anisotropy;
     }
 
-    textureLoader.load(path, function(texture) {
+    if (planeZ !== 0) {
+      z += -PLANE_DIFFERENCE * planeZ;
+      width *= 1 + planeZ * PLANE_PERSPECTIVE_CONSTANTE;
+      height *= 1 + planeZ * PLANE_PERSPECTIVE_CONSTANTE;
+    }
+
+    textureLoader.load(path, texture => {
       let Geo = new THREE.PlaneBufferGeometry(width, height);
       let Material = new THREE.MeshLambertMaterial({
         map: texture,
@@ -28,6 +34,20 @@ class Canary {
       plane.name = name;
       component.scene.add(plane);
     });
+  };
+
+  createRectangle = (component, x, y, z, width, height, planeZ, color, name) => {
+    let geometry = new THREE.PlaneGeometry(width, height);
+    let material = new THREE.MeshBasicMaterial({ color: color, side: THREE.DoubleSide });
+    let plane = new THREE.Mesh(geometry, material);
+    if (planeZ !== 0) {
+      z += -PLANE_DIFFERENCE * planeZ;
+      width *= 1 + planeZ * PLANE_PERSPECTIVE_CONSTANTE;
+      height *= 1 + planeZ * PLANE_PERSPECTIVE_CONSTANTE;
+    }
+    plane.position.set(x, y, z);
+    plane.name = name;
+    component.scene.add(plane);
   };
 
   rubberBand = (current, final, amount) => {
@@ -81,26 +101,28 @@ class Canary {
     });
   };
 
-  createText = (that, message, textFont, size, color, x, y, z) => {
-    that.fontLoader.load( textFont, function ( font ) {
-
-      let textGeometry = new THREE.TextGeometry( message, {
+  createText = (that, message, textFont, size, color, x, y, z, planeZ, rotation = 0, name) => {
+    that.fontLoader.load(textFont, font => {
+      let textGeometry = new THREE.TextGeometry(message, {
         font: font,
         size: size,
-        height: 0,
-
+        height: 0
       });
 
-      let textMaterial = new THREE.MeshPhongMaterial(
-          { color: color }
-      );
+      if (planeZ !== 0) {
+        z += -PLANE_DIFFERENCE * planeZ;
+        size *= 1 + planeZ * PLANE_PERSPECTIVE_CONSTANTE;
+      }
 
-      let mesh = new THREE.Mesh( textGeometry, textMaterial );
+      let textMaterial = new THREE.MeshPhongMaterial({ color: color });
+
+      let mesh = new THREE.Mesh(textGeometry, textMaterial);
       mesh.position.set(x, y, z);
-      that.scene.add( mesh );
-
+      mesh.rotation.set(0, 0, rotation);
+      mesh.name = name;
+      that.scene.add(mesh);
     });
-  }
+  };
 
   createHollowText = (component, textFont, textColor, textMessage, textPosX, textPosY, textPosZ, textSize) => {
     component.fontLoader.load(textFont, font => {
