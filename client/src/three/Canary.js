@@ -45,6 +45,7 @@ class Canary {
       width *= 1 + planeZ * PLANE_PERSPECTIVE_CONSTANTE;
       height *= 1 + planeZ * PLANE_PERSPECTIVE_CONSTANTE;
     }
+
     plane.position.set(x, y, z);
     plane.name = name;
     component.scene.add(plane);

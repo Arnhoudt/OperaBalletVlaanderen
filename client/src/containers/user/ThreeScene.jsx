@@ -90,7 +90,6 @@ class ThreeScene extends Component {
         character.load(this);
     }
 
-
     this.start();
   }
 
@@ -120,15 +119,14 @@ class ThreeScene extends Component {
       const vy = canary.rubberBand(this.lookPosition.y, (window.innerHeight / 2 - this.mousePosition.y) / this.movementFreedom, this.cameraRubberBandingForce);
       this.lookPosition.x += vx;
       this.lookPosition.y += vy;
-      console.log(this.lookPosition);
 
-      const vpx = canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.2);
-      const vpy = canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.2);
-      this.pointerPosition.x += vpx;
-      this.pointerPosition.y += vpy;
+      // const vpx = canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.2);
+      // const vpy = canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.2);
+      // this.pointerPosition.x += vpx;
+      // this.pointerPosition.y += vpy;
 
-      this.pointer.style.transform =
-        `translate(` + (this.pointerPosition.x - POINTER.width / 2) + `px,` + (this.pointerPosition.y - POINTER.height / 2) + `px)`;
+      // this.pointer.style.transform =
+      //   `translate(` + (this.pointerPosition.x - POINTER.width / 2) + `px,` + (this.pointerPosition.y - POINTER.height / 2) + `px)`;
 
       if (this.currentWorld === WORLD_POSITION.images) {
         images.animate();
@@ -185,6 +183,25 @@ class ThreeScene extends Component {
             this.mount = mount;
           }}
         />
+        <div
+          className={styles.popup}
+          ref={popup => {
+            this.popup = popup;
+          }}
+        >
+          <div className={styles.contentPopup}>
+            <h1 className={styles.popupTitle}>Wil je stoppen?</h1>
+            <p className={styles.popupText}>
+              <span>Ooooohh… dat is jammer!</span> <br />
+              Kunnen we je nog overtuigen om verder te gaan met de vragen? Je was namelijk nog maar enkele vragen verwijderd om jouw karakter te weten te komen
+              én om gratis tickets te winnen.
+            </p>
+            <div className={styles.containerButtonsPopup}>
+              <button className={styles.buttonPopup}>Ja</button>
+              <button className={styles.buttonPopup}>Neen</button>
+            </div>
+          </div>
+        </div>
         {!this.state.done ? (
           <div className={styles.loading}>
             <div className={styles.spinner}>

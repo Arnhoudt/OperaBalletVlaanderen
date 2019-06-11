@@ -86,7 +86,7 @@ class Questions {
 
     this.canary.createPng(this.that, `assets/img/logo.png`, -14, -48, this.planeZ, 512 / 8, 218 / 8, 1, 1);
     this.canary.createPng(this.that, `assets/img/rectangle.png`, 110, -46, this.planeZ, 440 / 8, 387 / 8, 2, 1);
-    this.canary.createRectangle(this.that, -14, -56, this.planeZ, 432 / 5.2, 96 / 5.2, 2, 0xe63b44, `start`);
+    this.canary.createRectangle(this.that, -10, -46.5, WORLD_POSITION.questions - 251, 432 / 6.6, 96 / 6.6, 0, 0xe63b44, `start`);
     this.canary.createPng(this.that, `assets/img/a_START-1.png`, 0, 0, this.planeZ, 1920 / 8, 1080 / 8, 4, 1);
   };
 
@@ -105,14 +105,11 @@ class Questions {
       const z = question.location.z;
 
       this.canary.createPng(this.that, `assets/img/b_VRAGEN-1.png`, x, y, this.planeZ - z, 1920 / 8, 1080 / 8, 4, 1);
-      //this.canary.createPng(this.that, `assets/img/vraag.png`, x - 30, y + 60, this.planeZ - z, 836 / 8, 241 / 8, 1, 1);
-      this.canary.createText(this.that, `Terug naar beginscherm`, FONTS.radikalLight, 3.2, 0x000000, -36, -48, this.planeZ, 1);
+      this.canary.createText(this.that, `Vraag:`, FONTS.domaineDispSemibold, 19, 0x000000, x - 126, y + 61, this.planeZ - z, 2);
+      this.canary.createText(this.that, `Terug naar beginscherm`, FONTS.radikalLight, 3.2, 0x000000, x - 158, y - 80, this.planeZ - z, 2);
+      this.canary.createRectangle(this.that, x - 134, y - 82, this.planeZ - z, 242 / 5, 1 / 5, 2, 0x000000);
+      this.canary.createPng(this.that, `assets/img/transparant.png`, x - 158, y - 92, this.planeZ - z, 268 / 8, 62 / 8, 3, 1, `terug_scherm`);
 
-      this.canary.createText(this.that, `Vraag:`, FONTS.domaineDispSemibold, 19, 0x000000, x - 185, y - 116, this.planeZ - z, 2);
-      this.canary.createRectangle(this.that, x - 185, y - 116, this.planeZ - z, 242 / 5.2, 1 / 5.2, 2, 0x000000);
-      this.canary.createRectangle(this.that, x - 185, y - 116, this.planeZ - z, 242 / 5.2, 1 / 5.2, 2, 0x000000, `start`);
-
-      this.canary.createPng(this.that, `assets/img/terug_naar_begin.png`, x - 185, y - 116, this.planeZ - z, 242 / 8, 39 / 8, 3, 1, `terug_scherm`);
       question.answers.forEach((answer, index2) => {
         this.canary.createPng(
           this.that,
@@ -150,12 +147,15 @@ class Questions {
           );
         }
         if (intersect.object.name === `terug_scherm`) {
-          this.that.cameraRubberBanding.position.set(0, -1000, WORLD_POSITION.questions);
+          this.that.movementFreedom = 5000;
+          this.that.popup.style.transform = `scale(1, 1)`;
         }
         if (intersect.object.name === `terug`) {
+          this.that.popup.style.display = `none`;
           this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.questions);
         }
         if (intersect.object.name === `verder`) {
+          this.that.popup.style.display = `none`;
           this.that.cameraRubberBanding.position.set(
             this.questions[this.questionIndex].location.x,
             this.questions[this.questionIndex].location.y,
@@ -249,7 +249,8 @@ class Questions {
   };
 
   animate = () => {
-  //   this.that.camera.position.set(this.that.camera.position.x + this.that.lookPosition.x / 2, this.that.camera.position.y + this.that.lookPosition.y / 2, this.that.camera.position.z);
+  //   this.that.camera.position.set(this.that.camera.position.x + this.that.lookPosition.x / 2,
+    //   this.that.camera.position.y + this.that.lookPosition.y / 2, this.that.camera.position.z);
   //   const z = this.that.camera.position.z - 100;
   //
   //   this.that.camera.lookAt(this.that.lookPosition.x, this.that.lookPosition.y, z);
