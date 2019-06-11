@@ -93,9 +93,9 @@ class Images {
 
   handleMouseScroll = e => {
     if (this.that.closeUpObject === undefined) {
-      if (this.that.camera.position.z <= WORLD_POSITION.images){
+      if (this.that.camera.position.z <= WORLD_POSITION.images) {
         this.that.cameraRubberBanding.position.z -= e.deltaY / 3;
-      }else{
+      } else {
         this.that.camera.position.z = WORLD_POSITION.images;
       }
       this.that.scene.children.forEach(child => {

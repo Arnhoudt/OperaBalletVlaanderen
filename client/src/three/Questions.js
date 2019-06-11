@@ -137,7 +137,7 @@ class Questions {
     this.that.raycaster.setFromCamera(this.that.mouse, this.that.camera);
     let intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
     //de elementen zitten in intersects
-    if (intersects.length > 0 && this.loaded) {
+    if (intersects.length > 0 && this.loaded && !this.popup) {
       intersects.forEach(intersect => {
         if (intersect.object.name === `start`) {
           this.that.cameraRubberBanding.position.set(
@@ -148,19 +148,8 @@ class Questions {
         }
         if (intersect.object.name === `terug_scherm`) {
           this.that.movementFreedom = 5000;
-          this.that.popup.style.transform = `scale(1, 1)`;
-        }
-        if (intersect.object.name === `terug`) {
-          this.that.popup.style.display = `none`;
-          this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.questions);
-        }
-        if (intersect.object.name === `verder`) {
-          this.that.popup.style.display = `none`;
-          this.that.cameraRubberBanding.position.set(
-            this.questions[this.questionIndex].location.x,
-            this.questions[this.questionIndex].location.y,
-            WORLD_POSITION.questions - this.questions[this.questionIndex].location.z
-          );
+          this.that.popup.style.transform = `scale(1)`;
+          this.that.popupActive = true;
         }
       });
       this.questions.forEach((question, index) => {
@@ -205,6 +194,7 @@ class Questions {
 
                   this.unmount();
                   images.load(this.that);
+                  this.that.currentWorld = WORLD_POSITION.images;
                   this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.images);
                 }
               }
@@ -249,24 +239,24 @@ class Questions {
   };
 
   animate = () => {
-  //   this.that.camera.position.set(this.that.camera.position.x + this.that.lookPosition.x / 2,
+    //   this.that.camera.position.set(this.that.camera.position.x + this.that.lookPosition.x / 2,
     //   this.that.camera.position.y + this.that.lookPosition.y / 2, this.that.camera.position.z);
-  //   const z = this.that.camera.position.z - 100;
-  //
-  //   this.that.camera.lookAt(this.that.lookPosition.x, this.that.lookPosition.y, z);
-  //
-  //
-  //   this.question.style.transform =
-  //     `perspective(1000px) translate(` +
-  //     -this.that.lookPosition.x * 10 +
-  //     `px, ` +
-  //     this.that.lookPosition.y * 10 +
-  //     `px)
-  //        rotateX(` +
-  //     this.that.lookPosition.y +
-  //     `deg) rotateY(` +
-  //     this.that.lookPosition.x +
-  //     `deg)`;
+    //   const z = this.that.camera.position.z - 100;
+    //
+    //   this.that.camera.lookAt(this.that.lookPosition.x, this.that.lookPosition.y, z);
+    //
+    //
+    //   this.question.style.transform =
+    //     `perspective(1000px) translate(` +
+    //     -this.that.lookPosition.x * 10 +
+    //     `px, ` +
+    //     this.that.lookPosition.y * 10 +
+    //     `px)
+    //        rotateX(` +
+    //     this.that.lookPosition.y +
+    //     `deg) rotateY(` +
+    //     this.that.lookPosition.x +
+    //     `deg)`;
   };
 }
 
