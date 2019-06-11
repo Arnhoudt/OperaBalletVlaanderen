@@ -14,6 +14,7 @@ class Questions {
     this.elements = [];
     this.that = that;
     that.movementFreedom = 100;
+    that.cameraRubberBandingActive = true;
 
     this.that.questionStore.findAll().then(questions => {
       this.questions = questions;
@@ -245,6 +246,12 @@ class Questions {
   };
 
   animate = () => {
+    this.that.camera.position.set(this.that.camera.position.x + this.that.lookPosition.x / 2, this.that.camera.position.y + this.that.lookPosition.y / 2, this.that.camera.position.z);
+    const z = this.that.camera.position.z - 100;
+
+    this.that.camera.lookAt(this.that.lookPosition.x, this.that.lookPosition.y, z);
+
+
     this.question.style.transform =
       `perspective(1000px) translate(` +
       -this.that.lookPosition.x * 10 +

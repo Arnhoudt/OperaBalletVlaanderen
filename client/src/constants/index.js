@@ -37,7 +37,8 @@ export const ANTIALIASING = true;
 
 export const WORLD_POSITION = {
   images: 1500,
-  questions: 50000
+  questions: 50000,
+  character: 20000
 };
 
 export const CAMERA = {
@@ -52,7 +53,7 @@ export const CAMERA = {
 export const BACKGROUND_COLORS = {
   images: {
     default: {
-      position: WORLD_POSITION.images,
+      position: WORLD_POSITION.questions,
       r: 249,
       g: 249,
       b: 249

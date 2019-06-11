@@ -9,9 +9,11 @@ import ThreeSetup from "../../three/ThreeSetup";
 
 import styles from "./ThreeScene.module.css";
 import { POINTER, ANTIALIASING, BACKGROUND_COLORS, CAMERA, FOG, FONTS, WORLD_POSITION, CAMERA_RUBBERBANDING_FORCE } from "../../constants/index";
+import Character from "../../three/Character";
 let canary = new Canary();
 let images = new Images();
 let questions = new Questions();
+let character = new Character();
 let threeSetup = new ThreeSetup();
 
 class ThreeScene extends Component {
@@ -37,7 +39,6 @@ class ThreeScene extends Component {
       const state = { ...this.state };
       state.done = true;
       this.setState(state);
-      this.cameraRubberBandingActive = true;
     };
 
     THREE.DefaultLoadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
@@ -59,7 +60,8 @@ class ThreeScene extends Component {
 
     // variablelen aanmaken (hier mag GEEN data in zitten, dat doe je in de instellingen)
     {
-      this.currentWorld = WORLD_POSITION.questions;
+      this.cameraRubberBandingActive = false;
+      this.currentWorld = CAMERA.position;
       this.closeUpData = {};
       this.currentColor = { ...BACKGROUND_COLORS.images.default };
       this.newColor = this.currentColor;
@@ -77,12 +79,16 @@ class ThreeScene extends Component {
 
     switch (this.currentWorld) {
       case WORLD_POSITION.images:
+        console.log("images");
         images.load(this, window);
         break;
       case WORLD_POSITION.questions:
+        console.log("questions");
       default:
         questions.load(this);
         break;
+      case WORLD_POSITION.character:
+        character.load(this);
     }
 
     this.start();
@@ -110,16 +116,10 @@ class ThreeScene extends Component {
   animate = () => {
     //ANIMATION
     if (this.mouseMoved === true) {
-      this.camera.position.set(this.camera.position.x - this.lookPosition.x / 2, this.camera.position.y - this.lookPosition.y / 2, this.camera.position.z);
       const vx = canary.rubberBand(this.lookPosition.x, -(window.innerWidth / 2 - this.mousePosition.x) / this.movementFreedom, 0.03);
       const vy = canary.rubberBand(this.lookPosition.y, (window.innerHeight / 2 - this.mousePosition.y) / this.movementFreedom, 0.03);
       this.lookPosition.x += vx;
       this.lookPosition.y += vy;
-
-      this.camera.position.set(this.camera.position.x + this.lookPosition.x / 2, this.camera.position.y + this.lookPosition.y / 2, this.camera.position.z);
-      const z = this.camera.position.z - 100;
-
-      this.camera.lookAt(this.lookPosition.x, this.lookPosition.y, z);
 
       const vpx = canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.2);
       const vpy = canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.2);
@@ -134,10 +134,12 @@ class ThreeScene extends Component {
       }
 
       if (this.currentWorld === WORLD_POSITION.questions) {
+        console.log("world = questions");
         questions.animate();
       }
     }
     if (this.cameraRubberBandingActive) {
+      this.camera.position.set(this.camera.position.x - this.lookPosition.x / 2, this.camera.position.y - this.lookPosition.y / 2, this.camera.position.z);
       const cameraVx = canary.rubberBand(this.camera.position.x, this.cameraRubberBanding.position.x, CAMERA_RUBBERBANDING_FORCE);
       const cameraVy = canary.rubberBand(this.camera.position.y, this.cameraRubberBanding.position.y, CAMERA_RUBBERBANDING_FORCE);
       const cameraVz = canary.rubberBand(this.camera.position.z, this.cameraRubberBanding.position.z, CAMERA_RUBBERBANDING_FORCE);
