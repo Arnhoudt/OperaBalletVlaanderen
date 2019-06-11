@@ -68,20 +68,32 @@ class Questions {
     this.canary.createText(this.that, `wie jij bent!`, FONTS.domaineDispSemibold, 19, 0x000000, -93, 32, this.planeZ, 2);
     this.canary.createText(this.that, `Admin login`, FONTS.radikalLight, 3.6, 0x000000, 198, 73, this.planeZ, 3, Math.PI / 2, `admin`);
     this.canary.createText(this.that, `Dit is een verwezelijking van Opera Ballet Vlaanderen.`, FONTS.radikalLight, 3.6, 0x000000, 60, -110, this.planeZ, 3);
-    this.canary.createPng(this.that, `assets/img/logo.png`, -18, -48, this.planeZ, 512 / 8, 218 / 8, 1, 16);
-    this.canary.createPng(this.that, `assets/img/ontdek_wie_jij_bent_intro_1.png`, -103, -19, this.planeZ, 576 / 8, 119 / 8, 3, 16);
-    this.canary.createPng(this.that, `assets/img/ontdek_wie_jij_bent_intro_2.png`, 50, 12, this.planeZ, 664 / 8, 78 / 8, 3, 16);
-    this.canary.createPng(this.that, `assets/img/rectangle.png`, 123, -54, this.planeZ, 440 / 8, 387 / 8, 2, 16);
-    this.canary.createPng(this.that, `assets/img/ontdek_wie_jij_bent_button.png`, -19, -56, this.planeZ, 432 / 8, 96 / 8, 2, 16, `start`);
-    this.canary.createPng(this.that, `assets/img/a_START-1.png`, 0, 0, this.planeZ, 1920 / 8, 1080 / 8, 4, 16);
+    this.canary.createText(this.that, `Er zijn verschillende karakters in de`, FONTS.radikalLight, 4.2, 0x000000, -16, 14, this.planeZ, 3);
+    this.canary.createText(this.that, `opera en ballet`, FONTS.radikalMedium, 4.2, 0x000000, 76, 14, this.planeZ, 3);
+    this.canary.createText(this.that, `wereld maar`, FONTS.radikalLight, 4.2, 0x000000, -16, 4, this.planeZ, 3);
+    this.canary.createText(this.that, `welk karakter ben jij?`, FONTS.radikalMedium, 4.2, 0x000000, 18, 4, this.planeZ, 3);
+    this.canary.createText(this.that, `Kom het nu te weten!`, FONTS.radikalLight, 4.2, 0x000000, 77, 4, this.planeZ, 3);
+    this.canary.createText(this.that, `Jouw karakter live aan het werk zien`, FONTS.radikalMedium, 4.2, 0x000000, -160, -18, this.planeZ, 3);
+    this.canary.createText(this.that, `in een`, FONTS.radikalLight, 4.2, 0x000000, -60, -18, this.planeZ, 3);
+    this.canary.createText(this.that, `opera of ballet voorstelling? Dat kan!`, FONTS.radikalLight, 4.2, 0x000000, -141, -28, this.planeZ, 3);
+    this.canary.createText(this.that, `Wij helpen je een`, FONTS.radikalLight, 4.2, 0x000000, -152, -38, this.planeZ, 3);
+    this.canary.createText(this.that, `gratis ticket`, FONTS.radikalMedium, 4.2, 0x000000, -106, -38, this.planeZ, 3);
+    this.canary.createText(this.that, `te winnen!`, FONTS.radikalLight, 4.2, 0x000000, -72, -38, this.planeZ, 3);
+    this.canary.createText(this.that, `ONTDEK WIE JE BENT`, FONTS.radikalMedium, 3.2, 0xf9f9f9, -36, -48, this.planeZ, 1);
+    this.canary.createText(this.that, `>`, FONTS.radikalLight, 6, 0xf9f9f9, 14, -49, this.planeZ, 1);
+
+    this.canary.createPng(this.that, `assets/img/logo.png`, -14, -48, this.planeZ, 512 / 8, 218 / 8, 1, 1);
+    this.canary.createPng(this.that, `assets/img/rectangle.png`, 110, -46, this.planeZ, 440 / 8, 387 / 8, 2, 1);
+    this.canary.createRectangle(this.that, -14, -56, this.planeZ, 432 / 5.2, 96 / 5.2, 2, 0xe63b44, `start`);
+    this.canary.createPng(this.that, `assets/img/a_START-1.png`, 0, 0, this.planeZ, 1920 / 8, 1080 / 8, 4, 1);
   };
 
   loadTerugScherm = () => {
-    this.canary.createPng(this.that, `assets/img/stoppen.png`, 0, 60 - 1000, WORLD_POSITION.questions - 300, 682 / 5.2, 96 / 4, 16);
-    this.canary.createPng(this.that, `assets/img/terug_scherm_intro.png`, 0, 20 - 1000, WORLD_POSITION.questions - 330, 1154 / 5.1, 107 / 6, 16);
-    this.canary.createPng(this.that, `assets/img/ja.png`, -60, -50 - 1000, WORLD_POSITION.questions - 300, 288 / 5, 96 / 5, 16, `terug`);
-    this.canary.createPng(this.that, `assets/img/neen.png`, 60, -50 - 1000, WORLD_POSITION.questions - 300, 288 / 5, 96 / 5, 16, `verder`);
-    this.canary.createPng(this.that, `assets/img/--b_VRAGEN-1-popup.png`, 0, 0 - 1000, WORLD_POSITION.questions - 400, 500, 300, 16);
+    this.canary.createPng(this.that, `assets/img/stoppen.png`, 0, 60 - 1000, this.planeZ, 682 / 8, 96 / 8, 3, 16);
+    this.canary.createPng(this.that, `assets/img/terug_scherm_intro.png`, 0, 20 - 1000, this.planeZ, 1154 / 8, 107 / 8, 3, 16);
+    this.canary.createPng(this.that, `assets/img/ja.png`, -60, -50 - 1000, this.planeZ, 288 / 8, 96 / 8, 2, 16, `terug`);
+    this.canary.createPng(this.that, `assets/img/neen.png`, 60, -50 - 1000, this.planeZ, 288 / 8, 96 / 8, 2, 16, `verder`);
+    this.canary.createPng(this.that, `assets/img/--b_VRAGEN-1-popup.png`, 0, 0 - 1000, this.planeZ, 1920 / 8, 1080 / 8, 4, 16);
   };
 
   loadQuestions = () => {
@@ -90,28 +102,21 @@ class Questions {
       const y = question.location.y;
       const z = question.location.z;
 
-      this.canary.createPng(this.that, `assets/img/b_VRAGEN-1.png`, x, y, WORLD_POSITION.questions - z - 400, 500, 300, 16);
-      this.canary.createPng(this.that, `assets/img/vraag.png`, x - 30, y + 60, WORLD_POSITION.questions - z - 300, 836 / 5.2, 241 / 4, 16);
-      this.canary.createPng(
-        this.that,
-        `assets/img/terug_naar_begin.png`,
-        x - 185,
-        y - 116,
-        WORLD_POSITION.questions - z - 390,
-        242 / 4.1,
-        39 / 3.7,
-        16,
-        `terug_scherm`
-      );
+      this.canary.createPng(this.that, `assets/img/b_VRAGEN-1.png`, x, y, this.planeZ - z, 1920 / 8, 1080 / 8, 4, 1);
+      //this.canary.createPng(this.that, `assets/img/vraag.png`, x - 30, y + 60, this.planeZ - z, 836 / 8, 241 / 8, 1, 1);
+      this.canary.createText(this.that, `Vraag:`, FONTS.domaineDispSemibold, 19, 0x000000, -106 + x, 61 + y, this.planeZ - z, 2);
+
+      this.canary.createPng(this.that, `assets/img/terug_naar_begin.png`, x - 185, y - 116, this.planeZ - z, 242 / 8, 39 / 8, 3, 1, `terug_scherm`);
       question.answers.forEach((answer, index2) => {
         this.canary.createPng(
           this.that,
           `assets/img/ontdek_wie_jij_bent_button.png`,
           x - 19 + index2 * 100,
           y - 65,
-          WORLD_POSITION.questions - z - 300,
+          this.planeZ - z,
           90,
           18,
+          2,
           16,
           `${index}answer${index2}`
         );
@@ -219,25 +224,25 @@ class Questions {
       y: e.clientY
     };
 
-    //De raycaster kijkt welke objecten er in het visier van de muis liggen
-    this.that.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-    this.that.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    this.that.raycaster.setFromCamera(this.that.mouse, this.that.camera);
-    let intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
-    //de elementen zitten in intersects
-    let objects = intersects.filter(intersect => intersect.object.name === `start`);
-    if (objects.length > 0 && !this.hover) {
-      objects[0].object.scale.x = 1.1;
-      objects[0].object.scale.y = 1.1;
-      this.hover = true;
-    } else if (objects.length === 0 && this.hover) {
-      let objects = this.that.scene.children.filter(child => child.name === `start`);
-      objects.forEach(object => {
-        object.scale.x = 1;
-        object.scale.y = 1;
-      });
-      this.hover = false;
-    }
+    // //De raycaster kijkt welke objecten er in het visier van de muis liggen
+    // this.that.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+    // this.that.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    // this.that.raycaster.setFromCamera(this.that.mouse, this.that.camera);
+    // let intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
+    // //de elementen zitten in intersects
+    // let objects = intersects.filter(intersect => intersect.object.name === `start`);
+    // if (objects.length > 0 && !this.hover) {
+    //   objects[0].object.scale.x = 1.1;
+    //   objects[0].object.scale.y = 1.1;
+    //   this.hover = true;
+    // } else if (objects.length === 0 && this.hover) {
+    //   let objects = this.that.scene.children.filter(child => child.name === `start`);
+    //   objects.forEach(object => {
+    //     object.scale.x = 1;
+    //     object.scale.y = 1;
+    //   });
+    //   this.hover = false;
+    // }
   };
 
   animate = () => {

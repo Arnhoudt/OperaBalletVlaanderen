@@ -36,6 +36,20 @@ class Canary {
     });
   };
 
+  createRectangle = (component, x, y, z, width, height, planeZ, color, name) => {
+    let geometry = new THREE.PlaneGeometry(width, height);
+    let material = new THREE.MeshBasicMaterial({ color: color, side: THREE.DoubleSide });
+    let plane = new THREE.Mesh(geometry, material);
+    if (planeZ !== 0) {
+      z += -PLANE_DIFFERENCE * planeZ;
+      width *= 1 + planeZ * PLANE_PERSPECTIVE_CONSTANTE;
+      height *= 1 + planeZ * PLANE_PERSPECTIVE_CONSTANTE;
+    }
+    plane.position.set(x, y, z);
+    plane.name = name;
+    component.scene.add(plane);
+  };
+
   rubberBand = (current, final, amount) => {
     return (final - current) * amount;
   };
