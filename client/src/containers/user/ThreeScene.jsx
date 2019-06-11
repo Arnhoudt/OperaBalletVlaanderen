@@ -19,6 +19,7 @@ let threeSetup = new ThreeSetup();
 class ThreeScene extends Component {
   constructor(props) {
     super(props);
+    this.cameraRubberBandingForce = CAMERA_RUBBERBANDING_FORCE;
     this.uiStore = props.uiStore;
     this.actStore = props.actStore;
     this.answerStore = props.answerStore;
@@ -115,10 +116,11 @@ class ThreeScene extends Component {
   animate = () => {
     //ANIMATION
     if (this.mouseMoved === true) {
-      const vx = canary.rubberBand(this.lookPosition.x, -(window.innerWidth / 2 - this.mousePosition.x) / this.movementFreedom, 0.03);
-      const vy = canary.rubberBand(this.lookPosition.y, (window.innerHeight / 2 - this.mousePosition.y) / this.movementFreedom, 0.03);
+      const vx = canary.rubberBand(this.lookPosition.x, -(window.innerWidth / 2 - this.mousePosition.x) / this.movementFreedom, this.cameraRubberBandingForce);
+      const vy = canary.rubberBand(this.lookPosition.y, (window.innerHeight / 2 - this.mousePosition.y) / this.movementFreedom, this.cameraRubberBandingForce);
       this.lookPosition.x += vx;
       this.lookPosition.y += vy;
+      console.log(this.lookPosition);
 
       const vpx = canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.2);
       const vpy = canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.2);
@@ -133,19 +135,18 @@ class ThreeScene extends Component {
       }
 
       if (this.currentWorld === WORLD_POSITION.questions) {
-        console.log("world = questions");
         questions.animate();
       }
     }
     if (this.cameraRubberBandingActive) {
       this.camera.position.set(this.camera.position.x - this.lookPosition.x / 2, this.camera.position.y - this.lookPosition.y / 2, this.camera.position.z);
-      const cameraVx = canary.rubberBand(this.camera.position.x, this.cameraRubberBanding.position.x, CAMERA_RUBBERBANDING_FORCE);
-      const cameraVy = canary.rubberBand(this.camera.position.y, this.cameraRubberBanding.position.y, CAMERA_RUBBERBANDING_FORCE);
-      const cameraVz = canary.rubberBand(this.camera.position.z, this.cameraRubberBanding.position.z, CAMERA_RUBBERBANDING_FORCE);
+      const cameraVx = canary.rubberBand(this.camera.position.x, this.cameraRubberBanding.position.x, 0.04);
+      const cameraVy = canary.rubberBand(this.camera.position.y, this.cameraRubberBanding.position.y, 0.04);
+      const cameraVz = canary.rubberBand(this.camera.position.z, this.cameraRubberBanding.position.z, this.cameraRubberBandingForce);
       this.camera.position.set(this.camera.position.x + cameraVx, this.camera.position.y + cameraVy, this.camera.position.z + cameraVz);
 
-      const cameraRotationVx = canary.rubberBand(this.camera.rotation.x, this.cameraRubberBanding.rotation.x, CAMERA_RUBBERBANDING_FORCE);
-      const cameraRotationVy = canary.rubberBand(this.camera.rotation.y, this.cameraRubberBanding.rotation.y, CAMERA_RUBBERBANDING_FORCE);
+      const cameraRotationVx = canary.rubberBand(this.camera.rotation.x, this.cameraRubberBanding.rotation.x, this.cameraRubberBandingForce);
+      const cameraRotationVy = canary.rubberBand(this.camera.rotation.y, this.cameraRubberBanding.rotation.y, this.cameraRubberBandingForce);
       const cameraRotationVz = canary.rubberBand(this.camera.rotation.z, this.cameraRubberBanding.rotation.z, CAMERA_RUBBERBANDING_FORCE);
       this.camera.rotation.set(this.camera.rotation.x + cameraRotationVx, this.camera.rotation.y + cameraRotationVy, this.camera.rotation.z + cameraRotationVz);
     }

@@ -6,8 +6,9 @@ class Images {
   canary = new Canary();
   load = that => {
     this.that = that;
-    that.movementFreedom = 20;
-    that.cameraRubberBandingActive = false;
+    this.that.cameraRubberBandingForce = 1;
+    that.movementFreedom = 100;
+    that.cameraRubberBandingActive = true;
     //CREATE IMAGES
     this.canary.createImage(that, `assets/img/pikachu.jpg`, 200, 100, WORLD_POSITION.images - 1800, 200, 150, `showRoomImage`);
     this.canary.createImage(that, `assets/img/pikachu.jpg`, -200, -100, WORLD_POSITION.images - 1800, 200, 150, `showRoomImage`);
@@ -18,7 +19,7 @@ class Images {
     this.canary.createHollowText(that, FONTS.radikalRegular, 0xff6690, `Pika Pika`, 0, 0, WORLD_POSITION.images - 3300, 200);
 
     //eventlisteners
-    //window.addEventListener(`mousemove`, this.onMouseMove);
+    window.addEventListener(`mousemove`, this.onMouseMove);
     window.addEventListener(`wheel`, this.handleMouseScroll);
     window.addEventListener(`click`, this.handleMouseClick);
     const color = that.currentColor.b + that.currentColor.g * 256 + that.currentColor.r * 256 * 256;
@@ -92,7 +93,11 @@ class Images {
 
   handleMouseScroll = e => {
     if (this.that.closeUpObject === undefined) {
-      this.that.camera.position.z -= e.deltaY / 3;
+      if (this.that.camera.position.z <= WORLD_POSITION.images){
+        this.that.cameraRubberBanding.position.z -= e.deltaY / 3;
+      }else{
+        this.that.camera.position.z = WORLD_POSITION.images;
+      }
       this.that.scene.children.forEach(child => {
         child.lookAt(this.that.camera.position.x, this.that.camera.position.y, this.that.camera.position.z);
       });
