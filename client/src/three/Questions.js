@@ -17,6 +17,7 @@ class Questions {
     this.elements = [];
     this.that = that;
     that.movementFreedom = 100;
+    that.cameraRubberBandingActive = true;
     that.camera.position.y = 400;
 
     this.that.questionStore.findAll().then(questions => {
@@ -59,9 +60,9 @@ class Questions {
 
   unmount = () => {
     window.removeEventListener(`mousemove`, this.onMouseMove);
-    window.removeEventListener(`wheel`, this.handleMouseScroll);
     window.removeEventListener(`keydown`, this.handleKeyDown);
     window.removeEventListener(`click`, this.handleMouseClick);
+    this.that.cameraRubberBandingActive = false;
   };
 
   loadStart = () => {
@@ -201,7 +202,7 @@ class Questions {
 
                   this.unmount();
                   images.load(this.that);
-                  this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.images);
+                  this.that.camera.position.set(0, 0, WORLD_POSITION.images);
                 }
               }
             });
@@ -245,6 +246,12 @@ class Questions {
   };
 
   animate = () => {
+    this.that.camera.position.set(this.that.camera.position.x + this.that.lookPosition.x / 2, this.that.camera.position.y + this.that.lookPosition.y / 2, this.that.camera.position.z);
+    const z = this.that.camera.position.z - 100;
+
+    this.that.camera.lookAt(this.that.lookPosition.x, this.that.lookPosition.y, z);
+
+
     this.question.style.transform =
       `perspective(1000px) translate(` +
       -this.that.lookPosition.x * 10 +
