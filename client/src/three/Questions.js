@@ -104,13 +104,11 @@ class Questions {
 
       this.canary.createPng(this.that, `assets/img/b_VRAGEN-1.png`, x, y, this.planeZ - z, 1920 / 8, 1080 / 8, 4, 1);
       //this.canary.createPng(this.that, `assets/img/vraag.png`, x - 30, y + 60, this.planeZ - z, 836 / 8, 241 / 8, 1, 1);
-      this.canary.createText(this.that, `Terug naar beginscherm`, FONTS.radikalLight, 3.2, 0x000000, -36, -48, this.planeZ, 1);
-
-      this.canary.createText(this.that, `Vraag:`, FONTS.domaineDispSemibold, 19, 0x000000, x - 185, y - 116, this.planeZ - z, 2);
+      this.canary.createText(this.that, `Terug naar beginscherm`, FONTS.radikalLight, 3.2, 0x000000, x - 185, y - 116, this.planeZ - z, 1);
+      this.canary.createText(this.that, `Vraag:`, FONTS.domaineDispSemibold, 19, 0x000000, x - 106, y + 61, this.planeZ - z, 2);
       this.canary.createRectangle(this.that, x - 185, y - 116, this.planeZ - z, 242 / 5.2, 1 / 5.2, 2, 0x000000);
-      this.canary.createRectangle(this.that, x - 185, y - 116, this.planeZ - z, 242 / 5.2, 1 / 5.2, 2, 0x000000, `start`);
+      this.canary.createPng(this.that, `assets/img/transparant.png`, x, y - 100, this.planeZ - z, 268 / 8, 62 / 8, 3, 1, `terug_scherm`);
 
-      this.canary.createPng(this.that, `assets/img/terug_naar_begin.png`, x - 185, y - 116, this.planeZ - z, 242 / 8, 39 / 8, 3, 1, `terug_scherm`);
       question.answers.forEach((answer, index2) => {
         this.canary.createPng(
           this.that,
