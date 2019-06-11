@@ -16,6 +16,7 @@ class Questions {
   load = that => {
     this.elements = [];
     this.that = that;
+    this.that.cameraRubberBandingForce = 0.03;
     that.movementFreedom = 800;
     that.cameraRubberBandingActive = true;
     that.camera.position.y = 400;
@@ -204,7 +205,7 @@ class Questions {
 
                   this.unmount();
                   images.load(this.that);
-                  this.that.camera.position.set(0, 0, WORLD_POSITION.images);
+                  this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.images);
                 }
               }
             });
@@ -247,7 +248,26 @@ class Questions {
     // }
   };
 
-  animate = () => {};
+  animate = () => {
+  //   this.that.camera.position.set(this.that.camera.position.x + this.that.lookPosition.x / 2,
+    //   this.that.camera.position.y + this.that.lookPosition.y / 2, this.that.camera.position.z);
+  //   const z = this.that.camera.position.z - 100;
+  //
+  //   this.that.camera.lookAt(this.that.lookPosition.x, this.that.lookPosition.y, z);
+  //
+  //
+  //   this.question.style.transform =
+  //     `perspective(1000px) translate(` +
+  //     -this.that.lookPosition.x * 10 +
+  //     `px, ` +
+  //     this.that.lookPosition.y * 10 +
+  //     `px)
+  //        rotateX(` +
+  //     this.that.lookPosition.y +
+  //     `deg) rotateY(` +
+  //     this.that.lookPosition.x +
+  //     `deg)`;
+  };
 }
 
 export default Questions;
