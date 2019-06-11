@@ -18,7 +18,7 @@ class Images {
     this.canary.createHollowText(that, FONTS.radikalRegular, 0xff6690, `Pika Pika`, 0, 0, WORLD_POSITION.images - 3300, 200);
 
     //eventlisteners
-    window.addEventListener(`mousemove`, this.onMouseMove);
+    //window.addEventListener(`mousemove`, this.onMouseMove);
     window.addEventListener(`wheel`, this.handleMouseScroll);
     window.addEventListener(`click`, this.handleMouseClick);
     const color = that.currentColor.b + that.currentColor.g * 256 + that.currentColor.r * 256 * 256;
@@ -30,7 +30,6 @@ class Images {
   unmount = () => {
     window.removeEventListener(`mousemove`, this.onMouseMove);
     window.removeEventListener(`wheel`, this.handleMouseScroll);
-    window.removeEventListener(`keydown`, this.handleKeyDown);
     window.removeEventListener(`click`, this.handleMouseClick);
   };
   //Handers
