@@ -182,11 +182,19 @@ class ThreeScene extends Component {
             this.mount = mount;
           }}
         />
-        <div className={styles.popup}>
-          <img className={styles.imgPopup} src="assets/img/--b_VRAGEN-1-popup.png" alt="achtergrond popup" />
+        <div
+          className={styles.popup}
+          ref={popup => {
+            this.popup = popup;
+          }}
+        >
           <div className={styles.contentPopup}>
-            <h1>qss</h1>
-            <p>sdsds</p>
+            <h1 className={styles.popupTitle}>Wil je stoppen?</h1>
+            <p className={styles.popupText}>
+              <span>Ooooohh… dat is jammer!</span> <br />
+              Kunnen we je nog overtuigen om verder te gaan met de vragen? Je was namelijk nog maar enkele vragen verwijderd om jouw karakter te weten te komen
+              én om gratis tickets te winnen.
+            </p>
             <div className={styles.containerButtonsPopup}>
               <button className={styles.buttonPopup}>Ja</button>
               <button className={styles.buttonPopup}>Neen</button>
