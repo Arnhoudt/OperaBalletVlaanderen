@@ -17,6 +17,7 @@ class Questions {
     this.elements = [];
     this.that = that;
     that.movementFreedom = 100;
+    that.camera.position.y = 400;
 
     this.that.questionStore.findAll().then(questions => {
       this.questions = questions;
@@ -66,7 +67,6 @@ class Questions {
   loadStart = () => {
     this.canary.createText(this.that, `Ontdek`, FONTS.domaineDispSemibold, 19, 0x000000, -106, 61, this.planeZ, 2);
     this.canary.createText(this.that, `wie jij bent!`, FONTS.domaineDispSemibold, 19, 0x000000, -93, 32, this.planeZ, 2);
-    this.canary.createText(this.that, `Admin login`, FONTS.radikalLight, 3.6, 0x000000, 198, 73, this.planeZ, 3, Math.PI / 2, `admin`);
     this.canary.createText(this.that, `Dit is een verwezelijking van Opera Ballet Vlaanderen.`, FONTS.radikalLight, 3.6, 0x000000, 60, -110, this.planeZ, 3);
     this.canary.createText(this.that, `Er zijn verschillende karakters in de`, FONTS.radikalLight, 4.2, 0x000000, -16, 14, this.planeZ, 3);
     this.canary.createText(this.that, `opera en ballet`, FONTS.radikalMedium, 4.2, 0x000000, 76, 14, this.planeZ, 3);
@@ -104,7 +104,11 @@ class Questions {
 
       this.canary.createPng(this.that, `assets/img/b_VRAGEN-1.png`, x, y, this.planeZ - z, 1920 / 8, 1080 / 8, 4, 1);
       //this.canary.createPng(this.that, `assets/img/vraag.png`, x - 30, y + 60, this.planeZ - z, 836 / 8, 241 / 8, 1, 1);
-      this.canary.createText(this.that, `Vraag:`, FONTS.domaineDispSemibold, 19, 0x000000, -106 + x, 61 + y, this.planeZ - z, 2);
+      this.canary.createText(this.that, `Terug naar beginscherm`, FONTS.radikalLight, 3.2, 0x000000, -36, -48, this.planeZ, 1);
+
+      this.canary.createText(this.that, `Vraag:`, FONTS.domaineDispSemibold, 19, 0x000000, x - 185, y - 116, this.planeZ - z, 2);
+      this.canary.createRectangle(this.that, x - 185, y - 116, this.planeZ - z, 242 / 5.2, 1 / 5.2, 2, 0x000000);
+      this.canary.createRectangle(this.that, x - 185, y - 116, this.planeZ - z, 242 / 5.2, 1 / 5.2, 2, 0x000000, `start`);
 
       this.canary.createPng(this.that, `assets/img/terug_naar_begin.png`, x - 185, y - 116, this.planeZ - z, 242 / 8, 39 / 8, 3, 1, `terug_scherm`);
       question.answers.forEach((answer, index2) => {
@@ -155,9 +159,6 @@ class Questions {
             this.questions[this.questionIndex].location.y,
             WORLD_POSITION.questions - this.questions[this.questionIndex].location.z
           );
-        }
-        if (intersect.object.name === `admin`) {
-          this.that.history.push(ROUTES.loginAdmin);
         }
       });
       this.questions.forEach((question, index) => {
