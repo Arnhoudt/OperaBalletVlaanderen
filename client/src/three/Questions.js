@@ -16,7 +16,7 @@ class Questions {
   load = that => {
     this.elements = [];
     this.that = that;
-    that.movementFreedom = 100;
+    that.movementFreedom = 800;
     that.cameraRubberBandingActive = true;
     that.camera.position.y = 400;
 
@@ -85,7 +85,7 @@ class Questions {
 
     this.canary.createPng(this.that, `assets/img/logo.png`, -14, -48, this.planeZ, 512 / 8, 218 / 8, 1, 1);
     this.canary.createPng(this.that, `assets/img/rectangle.png`, 110, -46, this.planeZ, 440 / 8, 387 / 8, 2, 1);
-    this.canary.createRectangle(this.that, -14, -56, this.planeZ, 432 / 5.2, 96 / 5.2, 2, 0xe63b44, `start`);
+    this.canary.createRectangle(this.that, -10, -46.5, WORLD_POSITION.questions - 251, 432 / 6.6, 96 / 6.6, 0, 0xe63b44, `start`);
     this.canary.createPng(this.that, `assets/img/a_START-1.png`, 0, 0, this.planeZ, 1920 / 8, 1080 / 8, 4, 1);
   };
 
@@ -104,11 +104,10 @@ class Questions {
       const z = question.location.z;
 
       this.canary.createPng(this.that, `assets/img/b_VRAGEN-1.png`, x, y, this.planeZ - z, 1920 / 8, 1080 / 8, 4, 1);
-      //this.canary.createPng(this.that, `assets/img/vraag.png`, x - 30, y + 60, this.planeZ - z, 836 / 8, 241 / 8, 1, 1);
-      this.canary.createText(this.that, `Terug naar beginscherm`, FONTS.radikalLight, 3.2, 0x000000, x - 185, y - 116, this.planeZ - z, 1);
-      this.canary.createText(this.that, `Vraag:`, FONTS.domaineDispSemibold, 19, 0x000000, x - 106, y + 61, this.planeZ - z, 2);
-      this.canary.createRectangle(this.that, x - 185, y - 116, this.planeZ - z, 242 / 5.2, 1 / 5.2, 2, 0x000000);
-      this.canary.createPng(this.that, `assets/img/transparant.png`, x, y - 100, this.planeZ - z, 268 / 8, 62 / 8, 3, 1, `terug_scherm`);
+      this.canary.createText(this.that, `Vraag:`, FONTS.domaineDispSemibold, 19, 0x000000, x - 126, y + 61, this.planeZ - z, 2);
+      this.canary.createText(this.that, `Terug naar beginscherm`, FONTS.radikalLight, 3.2, 0x000000, x - 158, y - 80, this.planeZ - z, 2);
+      //this.canary.createRectangle(this.that, x - 134, y - 82, this.planeZ - z, 242 / 5, 1 / 5, 2, 0x000000);
+      this.canary.createPng(this.that, `assets/img/transparant.png`, x - 158, y - 92, this.planeZ - z, 268 / 8, 62 / 8, 3, 1, `terug_scherm`);
 
       question.answers.forEach((answer, index2) => {
         this.canary.createPng(
@@ -218,7 +217,7 @@ class Questions {
 
   onMouseMove = e => {
     e.preventDefault();
-    //this.that.mouseMoved = true;
+    this.that.mouseMoved = true;
     this.that.mousePosition = {
       x: e.clientX,
       y: e.clientY
@@ -245,25 +244,7 @@ class Questions {
     // }
   };
 
-  animate = () => {
-    this.that.camera.position.set(this.that.camera.position.x + this.that.lookPosition.x / 2, this.that.camera.position.y + this.that.lookPosition.y / 2, this.that.camera.position.z);
-    const z = this.that.camera.position.z - 100;
-
-    this.that.camera.lookAt(this.that.lookPosition.x, this.that.lookPosition.y, z);
-
-
-    this.question.style.transform =
-      `perspective(1000px) translate(` +
-      -this.that.lookPosition.x * 10 +
-      `px, ` +
-      this.that.lookPosition.y * 10 +
-      `px)
-         rotateX(` +
-      this.that.lookPosition.y +
-      `deg) rotateY(` +
-      this.that.lookPosition.x +
-      `deg)`;
-  };
+  animate = () => {};
 }
 
 export default Questions;

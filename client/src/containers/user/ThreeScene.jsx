@@ -89,7 +89,6 @@ class ThreeScene extends Component {
         character.load(this);
     }
 
-
     this.start();
   }
 
@@ -120,20 +119,19 @@ class ThreeScene extends Component {
       this.lookPosition.x += vx;
       this.lookPosition.y += vy;
 
-      const vpx = canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.2);
-      const vpy = canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.2);
-      this.pointerPosition.x += vpx;
-      this.pointerPosition.y += vpy;
+      // const vpx = canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.2);
+      // const vpy = canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.2);
+      // this.pointerPosition.x += vpx;
+      // this.pointerPosition.y += vpy;
 
-      this.pointer.style.transform =
-        `translate(` + (this.pointerPosition.x - POINTER.width / 2) + `px,` + (this.pointerPosition.y - POINTER.height / 2) + `px)`;
+      // this.pointer.style.transform =
+      //   `translate(` + (this.pointerPosition.x - POINTER.width / 2) + `px,` + (this.pointerPosition.y - POINTER.height / 2) + `px)`;
 
       if (this.currentWorld === WORLD_POSITION.images) {
         images.animate();
       }
 
       if (this.currentWorld === WORLD_POSITION.questions) {
-        console.log("world = questions");
         questions.animate();
       }
     }
@@ -184,6 +182,17 @@ class ThreeScene extends Component {
             this.mount = mount;
           }}
         />
+        <div className={styles.popup}>
+          <img className={styles.imgPopup} src="assets/img/--b_VRAGEN-1-popup.png" alt="achtergrond popup" />
+          <div className={styles.contentPopup}>
+            <h1>qss</h1>
+            <p>sdsds</p>
+            <div className={styles.containerButtonsPopup}>
+              <button className={styles.buttonPopup}>Ja</button>
+              <button className={styles.buttonPopup}>Neen</button>
+            </div>
+          </div>
+        </div>
         {!this.state.done ? (
           <div className={styles.loading}>
             <div className={styles.spinner}>

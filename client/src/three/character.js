@@ -4,13 +4,12 @@ import Canary from "./Canary";
 
 class Character {
   canary = new Canary();
-  load = (that) => {
+  load = that => {
     that.cameraRubberBandingActive = false;
-    console.log("test 9877");
-  }
+    console.log(`test 9877`);
+  };
 
-  animate = () => {
-  }
+  animate = () => {};
 }
 
 export default Character;

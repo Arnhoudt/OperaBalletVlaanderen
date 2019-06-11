@@ -1,6 +1,5 @@
 .div {
   position: fixed;
-  /* cursor: url('/assets/img/1x/redCircle.png'), auto; */
 }
 
 .loading {
@@ -82,4 +81,35 @@
     transform: rotate(-360deg);
     -webkit-transform: rotate(-360deg);
   }
+}
+
+.popup {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: none;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  z-index: 100;
+}
+
+.containerButtonsPopup {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonPopup {
+  composes: button from "../../styles/uiControls.module.css";
+  width: 16em;
+  height: 4em;
+}
+
+.imgPopup {
+  width: 75%;
+  height: 75%;
+}
+
+.contentPopup {
+  position: absolute;
 }
