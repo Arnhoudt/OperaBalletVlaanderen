@@ -189,6 +189,7 @@ class ThreeScene extends Component {
           }}
         >
           <div className={styles.contentPopup}>
+            <div />
             <h1 className={styles.popupTitle}>Wil je stoppen?</h1>
             <p className={styles.popupText}>
               <span>Ooooohh… dat is jammer!</span> <br />
@@ -196,9 +197,14 @@ class ThreeScene extends Component {
               én om gratis tickets te winnen.
             </p>
             <div className={styles.containerButtonsPopup}>
-              <button className={styles.buttonPopup}>Ja</button>
-              <button className={styles.buttonPopup}>Neen</button>
+              <button className={`${styles.buttonPopup} ${styles.ja}`}>
+                <p>Ja</p>
+              </button>
+              <button className={`${styles.buttonPopup} ${styles.neen}`}>
+                <p>Neen</p>
+              </button>
             </div>
+            <div className={styles.cross} />
           </div>
         </div>
         {!this.state.done ? (

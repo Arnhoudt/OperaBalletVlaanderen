@@ -19,6 +19,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "domainedisp";
+  src: url(/assets/fonts/DomaineDisp-Regular.woff2) format("woff2"), url(/assets/fonts/DomaineDisp-Regular.woff) format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
 .div {
   position: fixed;
 }
@@ -117,7 +124,8 @@
 }
 
 .containerButtonsPopup {
-  height: 28em;
+  height: 31em;
+  width: 61em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -125,8 +133,26 @@
 
 .buttonPopup {
   composes: button from "../../styles/uiControls.module.css";
-  width: 16em;
-  height: 4em;
+  width: 22em;
+  height: 7em;
+}
+
+.buttonPopup:hover {
+  border-color: black;
+}
+
+.buttonPopup p {
+  font-family: domainedisp;
+  font-size: 3.4em;
+  font-weight: 300;
+}
+
+.ja {
+  background-color: transparent;
+}
+
+.neen {
+  border: .1em solid #E63B44;
 }
 
 .contentPopup {
@@ -147,15 +173,29 @@
 .popupTitle {
   font-family: domainedisp;
   font-size: 8em;
+  font-weight: 600;
 }
 
 .popupText {
   width: 44em;
-  line-height: 1.5;
+  line-height: 1.6;
   font-family: radikal;
-  font-size: 2em;
+  font-size: 2.2em;
 }
 
 .popupText span {
   font-weight: 400;
+}
+
+.cross {
+  width: 13em;
+  height: 4em;
+  position: absolute;
+  right: 23.1em;
+  top: 8.9em;
+  background-image: url('/assets/img/cross.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 200;
 }
