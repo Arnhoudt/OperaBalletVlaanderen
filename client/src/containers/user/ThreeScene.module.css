@@ -123,14 +123,6 @@
   transition: .3s transform ease-in-out;
 }
 
-.containerButtonsPopup {
-  height: 31em;
-  width: 61em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .buttonPopup {
   composes: button from "../../styles/uiControls.module.css";
   width: 22em;
@@ -156,46 +148,56 @@
 }
 
 .contentPopup {
-  width: 100%;
-  height: 60em;
-  height: calc(100vh*.8);
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-  align-items: center;
+  width: calc(100vw*.712);
+  height: calc(100vh*.79);
   background-image: url('/assets/img/--b_VRAGEN-1-popup.png');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
+  /* background-position: center; */
   text-align: center;
+  display: grid;
+  grid-template-rows: 6em calc(100vh*.79*.2) calc(100vh*.79*.25) calc(100vh*.79*.35);
+  grid-template-columns: calc(100vw*.712);
+}
+
+.cross {
+  width: 13em;
+  height: 4em;
+  background-image: url('/assets/img/cross.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  grid-area: 1/1;
+  justify-self: flex-end;
+  z-index: 200;
 }
 
 .popupTitle {
   font-family: domainedisp;
   font-size: 8em;
   font-weight: 600;
+  grid-area: 2/1;
+  justify-self: center;
 }
 
 .popupText {
-  width: 44em;
+  width: 85%;
   line-height: 1.6;
   font-family: radikal;
   font-size: 2.2em;
+  grid-area: 3/1;
+  justify-self: center;
 }
 
 .popupText span {
   font-weight: 400;
 }
 
-.cross {
-  width: 13em;
-  height: 4em;
-  position: absolute;
-  right: 23.1em;
-  top: 8.9em;
-  background-image: url('/assets/img/cross.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  z-index: 200;
+.containerButtonsPopup {
+  width: 61em;
+  grid-area: 4/1;
+  justify-self: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

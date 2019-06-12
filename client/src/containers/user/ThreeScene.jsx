@@ -203,7 +203,6 @@ class ThreeScene extends Component {
           }}
         >
           <div className={styles.contentPopup}>
-            <div />
             <h1 className={styles.popupTitle}>Wil je stoppen?</h1>
             <p className={styles.popupText}>
               <span>Ooooohh… dat is jammer!</span> <br />
