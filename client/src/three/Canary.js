@@ -28,6 +28,7 @@ class Canary {
         transparent: true
       });
       texture.anisotropy = planeAnisotropy;
+      texture.minFilter = THREE.NearestFilter;
 
       let plane = new THREE.Mesh(Geo, Material);
       plane.position.set(x, y, z);

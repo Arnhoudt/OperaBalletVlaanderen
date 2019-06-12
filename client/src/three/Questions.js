@@ -17,7 +17,7 @@ class Questions {
     this.elements = [];
     this.that = that;
     this.that.cameraRubberBandingForce = 0.03;
-    that.movementFreedom = 800;
+    that.movementFreedom = 1200;
     that.cameraRubberBandingActive = true;
     that.camera.position.y = 400;
 
@@ -26,30 +26,6 @@ class Questions {
       this.loaded = true;
       this.loadQuestions();
     });
-
-    this.question = document.createElement(`div`);
-    this.question.classList.add(`question`);
-    this.question.hidden = true;
-
-    this.input = document.createElement(`input`);
-    this.submit = document.createElement(`button`);
-
-    this.question.appendChild(this.submit);
-    this.question.appendChild(this.input);
-    that.mount.appendChild(this.question);
-
-    this.question.style.position = `absolute`;
-    this.question.style.top = `70%`;
-    this.question.style.left = `50%`;
-
-    this.input.classList.add(`question_input`);
-    this.input.style.transform = `translate(` + -this.input.offsetWidth / 2 + `px, ` + 0 + `px) scale(4, 4)`;
-    this.input.style.position = `relative`;
-
-    this.submit.innerText = `submit`;
-    this.submit.classList.add(`submit`);
-    this.submit.style.transform = `translate(` + this.submit.offsetWidth / 2 + `px, ` + window.innerHeight / 10 + `px) scale(4, 4)`;
-    this.submit.style.position = `relative`;
 
     this.loadStart();
     this.loadTerugScherm();
@@ -71,11 +47,10 @@ class Questions {
     this.canary.createText(this.that, `Ontdek`, FONTS.domaineDispSemibold, 19, 0x000000, -106, 61, this.planeZ, 2);
     this.canary.createText(this.that, `wie jij bent!`, FONTS.domaineDispSemibold, 19, 0x000000, -93, 32, this.planeZ, 2);
     this.canary.createText(this.that, `Dit is een verwezelijking van Opera Ballet Vlaanderen.`, FONTS.radikalLight, 3.6, 0x000000, 60, -110, this.planeZ, 3);
-    this.canary.createText(this.that, `Er zijn verschillende karakters in de`, FONTS.radikalLight, 4.2, 0x000000, -16, 14, this.planeZ, 3);
-    this.canary.createText(this.that, `opera en ballet`, FONTS.radikalMedium, 4.2, 0x000000, 76, 14, this.planeZ, 3);
-    this.canary.createText(this.that, `wereld maar`, FONTS.radikalLight, 4.2, 0x000000, -16, 4, this.planeZ, 3);
-    this.canary.createText(this.that, `welk karakter ben jij?`, FONTS.radikalMedium, 4.2, 0x000000, 18, 4, this.planeZ, 3);
-    this.canary.createText(this.that, `Kom het nu te weten!`, FONTS.radikalLight, 4.2, 0x000000, 77, 4, this.planeZ, 3);
+    this.canary.createText(this.that, `Er zijn verschillende`, FONTS.radikalLight, 4.2, 0x000000, -16, 14, this.planeZ, 3);
+    this.canary.createText(this.that, `karakters in de opera en ballet`, FONTS.radikalLight, 4.2, 0x000000, -16, 4, this.planeZ, 3);
+    this.canary.createText(this.that, `wereld maar welk karakter ben`, FONTS.radikalLight, 4.2, 0x000000, -16, -6, this.planeZ, 3);
+    this.canary.createText(this.that, `jij? Kom het nu te weten`, FONTS.radikalLight, 4.2, 0x000000, -16, -16, this.planeZ, 3);
     this.canary.createText(this.that, `Jouw karakter live aan het werk zien`, FONTS.radikalMedium, 4.2, 0x000000, -160, -18, this.planeZ, 3);
     this.canary.createText(this.that, `in een`, FONTS.radikalLight, 4.2, 0x000000, -60, -18, this.planeZ, 3);
     this.canary.createText(this.that, `opera of ballet voorstelling? Dat kan!`, FONTS.radikalLight, 4.2, 0x000000, -141, -28, this.planeZ, 3);
@@ -86,33 +61,29 @@ class Questions {
     this.canary.createText(this.that, `>`, FONTS.radikalLight, 6, 0xf9f9f9, 14, -49, this.planeZ, 1);
 
     this.canary.createPng(this.that, `assets/img/logo.png`, -14, -48, this.planeZ, 512 / 8, 218 / 8, 1, 1);
-    this.canary.createPng(this.that, `assets/img/rectangle.png`, 110, -46, this.planeZ, 440 / 8, 387 / 8, 2, 1);
+    this.canary.createPng(this.that, `assets/img/img_start.png`, 116, -20, this.planeZ, 444 / 8, 644 / 8, 2, 1);
     this.canary.createRectangle(this.that, -10, -46.5, WORLD_POSITION.questions - 251, 432 / 6.6, 96 / 6.6, 0, 0xe63b44, `start`);
     this.canary.createPng(this.that, `assets/img/a_START-1.png`, 0, 0, this.planeZ, 1920 / 8, 1080 / 8, 4, 1);
   };
 
   loadStartQuestions = () => {
-    this.canary.createText(this.that, `Ontdek`, FONTS.domaineDispSemibold, 19, 0x000000, -106, 61, this.planeZ, 2);
-    this.canary.createText(this.that, `wie jij bent!`, FONTS.domaineDispSemibold, 19, 0x000000, -93, 32, this.planeZ, 2);
-    this.canary.createText(this.that, `Dit is een verwezelijking van Opera Ballet Vlaanderen.`, FONTS.radikalLight, 3.6, 0x000000, 60, -110, this.planeZ, 3);
-    this.canary.createText(this.that, `Er zijn verschillende karakters in de`, FONTS.radikalLight, 4.2, 0x000000, -16, 14, this.planeZ, 3);
-    this.canary.createText(this.that, `opera en ballet`, FONTS.radikalMedium, 4.2, 0x000000, 76, 14, this.planeZ, 3);
-    this.canary.createText(this.that, `wereld maar`, FONTS.radikalLight, 4.2, 0x000000, -16, 4, this.planeZ, 3);
-    this.canary.createText(this.that, `welk karakter ben jij?`, FONTS.radikalMedium, 4.2, 0x000000, 18, 4, this.planeZ, 3);
-    this.canary.createText(this.that, `Kom het nu te weten!`, FONTS.radikalLight, 4.2, 0x000000, 77, 4, this.planeZ, 3);
-    this.canary.createText(this.that, `Jouw karakter live aan het werk zien`, FONTS.radikalMedium, 4.2, 0x000000, -160, -18, this.planeZ, 3);
-    this.canary.createText(this.that, `in een`, FONTS.radikalLight, 4.2, 0x000000, -60, -18, this.planeZ, 3);
-    this.canary.createText(this.that, `opera of ballet voorstelling? Dat kan!`, FONTS.radikalLight, 4.2, 0x000000, -141, -28, this.planeZ, 3);
-    this.canary.createText(this.that, `Wij helpen je een`, FONTS.radikalLight, 4.2, 0x000000, -152, -38, this.planeZ, 3);
-    this.canary.createText(this.that, `gratis ticket`, FONTS.radikalMedium, 4.2, 0x000000, -106, -38, this.planeZ, 3);
-    this.canary.createText(this.that, `te winnen!`, FONTS.radikalLight, 4.2, 0x000000, -72, -38, this.planeZ, 3);
-    this.canary.createText(this.that, `ONTDEK WIE JE BENT`, FONTS.radikalMedium, 3.2, 0xf9f9f9, -36, -48, this.planeZ, 1);
-    this.canary.createText(this.that, `>`, FONTS.radikalLight, 6, 0xf9f9f9, 14, -49, this.planeZ, 1);
+    this.canary.createText(this.that, `Wat geweldig`, FONTS.domaineDispSemibold, 14, 0x000000, -106, 61 - 400, this.planeZ - 300, 2);
+    this.canary.createText(this.that, `dat je jouw verhaal`, FONTS.domaineDispSemibold, 14, 0x000000, -88, 36 - 400, this.planeZ - 300, 2);
+    this.canary.createText(this.that, `wilt delen!`, FONTS.domaineDispSemibold, 14, 0x000000, -96, 11 - 400, this.planeZ - 300, 2);
 
-    this.canary.createPng(this.that, `assets/img/logo.png`, -14, -48, this.planeZ, 512 / 8, 218 / 8, 1, 1);
-    this.canary.createPng(this.that, `assets/img/rectangle.png`, 110, -46, this.planeZ, 440 / 8, 387 / 8, 2, 1);
-    this.canary.createRectangle(this.that, -10, -46.5, WORLD_POSITION.questions - 251, 432 / 6.6, 96 / 6.6, 0, 0xe63b44, `start`);
-    this.canary.createPng(this.that, `assets/img/a_START-1.png`, 0, 0, this.planeZ, 1920 / 8, 1080 / 8, 4, 1);
+    this.canary.createText(this.that, `Terug naar beginscherm`, FONTS.radikalLight, 3.2, 0x000000, -158, -400 - 80, this.planeZ - 300, 2);
+    this.canary.createRectangle(this.that, -134, -400 - 82, this.planeZ - 300, 242 / 5, 1 / 5, 2, 0x000000);
+    this.canary.createPng(this.that, `assets/img/transparant.png`, -158, -400 - 92, this.planeZ - 300, 268 / 8, 62 / 8, 3, 1, `terug_scherm`);
+
+    this.canary.createText(this.that, `Voel je je eerder een:`, FONTS.domaineRegular, 6, 0x000000, -58, -400 - 26, this.planeZ - 300, 2);
+    this.canary.createRectangle(this.that, -50, -400 - 40, WORLD_POSITION.questions - 300 - 251, 432 / 8, 96 / 8, 0, 0x000000, `start_questions_Jos`);
+    this.canary.createText(this.that, `Jos`, FONTS.radikalMedium, 3.2, 0xf9f9f9, -52, -400 - 41.5, this.planeZ - 300, 1);
+    this.canary.createRectangle(this.that, 20, -400 - 40, WORLD_POSITION.questions - 300 - 251, 432 / 8, 96 / 8, 0, 0x000000, `start_questions_Marianne`);
+    this.canary.createText(this.that, `Marianne`, FONTS.radikalMedium, 3.2, 0xf9f9f9, 8, -400 - 41.5, this.planeZ - 300, 1);
+
+    this.canary.createPng(this.that, `assets/img/b_START.png`, 0, -400, this.planeZ - 300, 1920 / 8, 1080 / 8, 4, 1);
+    this.canary.createRectangle(this.that, 105, -400 - 62.5, WORLD_POSITION.questions - 300 - 251, 432 / 8, 96 / 8, 0, 0x000000, `start_questions`);
+    this.canary.createText(this.that, `VOLGENDE VRAAG`, FONTS.radikalMedium, 3.2, 0xf9f9f9, 84, -400 - 64, this.planeZ - 300, 1);
   };
 
   loadTerugScherm = () => {
@@ -165,19 +136,51 @@ class Questions {
     this.that.raycaster.setFromCamera(this.that.mouse, this.that.camera);
     let intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
     //de elementen zitten in intersects
-    if (intersects.length > 0 && this.loaded && !this.popup) {
+    if (intersects.length > 0 && this.loaded && !this.that.popupActive) {
       intersects.forEach(intersect => {
         if (intersect.object.name === `start`) {
+          this.that.cameraRubberBanding.position.set(0, -400, WORLD_POSITION.questions - 300);
+        }
+        if (intersect.object.name === `start_questions_Jos`) {
           this.that.cameraRubberBanding.position.set(
             this.questions[0].location.x,
             this.questions[0].location.y,
             WORLD_POSITION.questions - this.questions[0].location.z
           );
+          const data = {
+            question: `Voel je je eerder een:`,
+            answer: `Jos`,
+            userId: this.that.uiStore.randomUser._id,
+            param1: 34,
+            param2: 50,
+            param3: 45,
+            param4: 12,
+            param5: 43
+          };
+          this.answers.push(data);
+        }
+        if (intersect.object.name === `start_questions_Marianne`) {
+          this.that.cameraRubberBanding.position.set(
+            this.questions[0].location.x,
+            this.questions[0].location.y,
+            WORLD_POSITION.questions - this.questions[0].location.z
+          );
+          const data = {
+            question: `Voel je je eerder een:`,
+            answer: `Marianne`,
+            userId: this.that.uiStore.randomUser._id,
+            param1: 34,
+            param2: 50,
+            param3: 45,
+            param4: 12,
+            param5: 43
+          };
+          this.answers.push(data);
         }
         if (intersect.object.name === `terug_scherm`) {
-          this.that.movementFreedom = 5000;
-          this.that.popup.style.transform = `scale(1)`;
           this.that.popupActive = true;
+          this.that.movementFreedom = 10000;
+          this.that.popup.style.transform = `scale(1)`;
         }
       });
       this.questions.forEach((question, index) => {
@@ -267,24 +270,24 @@ class Questions {
   };
 
   animate = () => {
-    //   this.that.camera.position.set(this.that.camera.position.x + this.that.lookPosition.x / 2,
-    //   this.that.camera.position.y + this.that.lookPosition.y / 2, this.that.camera.position.z);
-    //   const z = this.that.camera.position.z - 100;
-    //
-    //   this.that.camera.lookAt(this.that.lookPosition.x, this.that.lookPosition.y, z);
-    //
-    //
-    //   this.question.style.transform =
-    //     `perspective(1000px) translate(` +
-    //     -this.that.lookPosition.x * 10 +
-    //     `px, ` +
-    //     this.that.lookPosition.y * 10 +
-    //     `px)
+    // this.that.camera.position.set(
+    //   this.that.camera.position.x + this.that.lookPosition.x / 2,
+    //   this.that.camera.position.y + this.that.lookPosition.y / 2,
+    //   this.that.camera.position.z
+    // );
+    // const z = this.that.camera.position.z - 100;
+    // this.that.camera.lookAt(this.that.lookPosition.x, this.that.lookPosition.y, z);
+    // this.question.style.transform =
+    //   `perspective(1000px) translate(` +
+    //   -this.that.lookPosition.x * 10 +
+    //   `px, ` +
+    //   this.that.lookPosition.y * 10 +
+    //   `px)
     //        rotateX(` +
-    //     this.that.lookPosition.y +
-    //     `deg) rotateY(` +
-    //     this.that.lookPosition.x +
-    //     `deg)`;
+    //   this.that.lookPosition.y +
+    //   `deg) rotateY(` +
+    //   this.that.lookPosition.x +
+    //   `deg)`;
   };
 }
 

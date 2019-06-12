@@ -179,9 +179,10 @@ class ThreeScene extends Component {
     if (e.currentTarget.value === `ja`) {
       this.popup.style.transform = `scale(0)`;
       this.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.questions);
+      this.movementFreedom = 1200;
       this.popupActive = false;
     } else {
-      this.movementFreedom = 800;
+      this.movementFreedom = 1200;
       this.popup.style.transform = `scale(0)`;
       this.popupActive = false;
     }

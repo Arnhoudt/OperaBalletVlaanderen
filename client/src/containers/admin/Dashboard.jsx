@@ -6,14 +6,12 @@ import withAuthentication from "../../components/admin/auth/WithAuthentication";
 import { ROUTES } from "../../constants";
 import AddCharacter from "../../components/admin/AddCharacter";
 import EditCharacter from "../../components/admin/EditCharacter";
-//import AddQuestion from "../../components/admin/AddQuestion";
-//import EditQuestion from "../../components/admin/EditQuestion";
 import AddAct from "../../components/admin/AddAct";
 import EditAct from "../../components/admin/EditAct";
 import Answers from "../../components/admin/Answers";
 
 const Dashboard = ({ uiStore, actStore, answerStore, characterStore, questionStore, history }) => {
-  const [tab, setTab] = useState(`Cijfers`);
+  const [tab, setTab] = useState(`Content`);
 
   const handleClick = e => {
     uiStore.logoutAdmin();
@@ -21,9 +19,6 @@ const Dashboard = ({ uiStore, actStore, answerStore, characterStore, questionSto
   };
 
   const handleClickTab = e => {
-    if (e.currentTarget.value === `Cijfers`) {
-      setTab(`Cijfers`);
-    }
     if (e.currentTarget.value === `Resultaten`) {
       setTab(`Resultaten`);
     }
@@ -47,19 +42,14 @@ const Dashboard = ({ uiStore, actStore, answerStore, characterStore, questionSto
         </div>
         <h1 className={`${styles.title}`}>{tab}</h1>
         <div className={styles.containerTabs}>
-          <button onClick={handleClickTab} className={`${styles.tab} ${tab === `Cijfers` ? styles.selected : styles.unselected}`} value="Cijfers">
-            <p>Cijfers</p>
+          <button onClick={handleClickTab} className={`${styles.tab} ${tab === `Content` ? styles.selected : styles.unselected}`} value="Content">
+            <p>Content</p>
           </button>
           <button onClick={handleClickTab} className={`${styles.tab} ${tab === `Resultaten` ? styles.selected : styles.unselected}`} value="Resultaten">
             <p>Resultaten</p>
           </button>
-          <button onClick={handleClickTab} className={`${styles.tab} ${tab === `Content` ? styles.selected : styles.unselected}`} value="Content">
-            <p>Content</p>
-          </button>
         </div>
-        {tab === `Cijfers` ? (
-          <></>
-        ) : tab === `Resultaten` ? (
+        {tab === `Resultaten` ? (
           <Answers />
         ) : tab === `Content` ? (
           <>
@@ -68,15 +58,6 @@ const Dashboard = ({ uiStore, actStore, answerStore, characterStore, questionSto
             {characterStore.characters.map(character => (
               <EditCharacter key={character.id} character={character} update={characterStore.update} remove={characterStore.delete} />
             ))}
-            {/* <AddQuestion />
-          {questionStore.questions.map(question => (
-            <EditQuestion
-              key={question.id}
-              question={question}
-              update={questionStore.update}
-              remove={questionStore.delete}
-            />
-          ))} */}
             <h2 className={styles.subtitle}>__ Acts</h2>
             <AddAct />
             {actStore.acts.map(act => (
