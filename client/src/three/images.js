@@ -28,59 +28,11 @@ class Images {
     this.that.fog = { near: FOG.near, far: FOG.far };
 
     //CREATE IMAGES
-    this.canary.createImage(
-      that,
-      `assets/img/jouwKarakter1.png`,
-      300,
-      150,
-      WORLD_POSITION.images - 800,
-      1920 / HOME_IMAGE_SIZE,
-      1080 / HOME_IMAGE_SIZE,
-      `showRoomImage`
-    );
-    this.canary.createImage(
-      that,
-      `assets/img/jouwKarakter2.png`,
-      -250,
-      -100,
-      WORLD_POSITION.images - 1200,
-      1920 / HOME_IMAGE_SIZE,
-      1080 / HOME_IMAGE_SIZE,
-      `showRoomImage`
-    );
-    this.canary.createImage(
-      that,
-      `assets/img/jouwKarakter3.png`,
-      200,
-      0,
-      WORLD_POSITION.images - 1600,
-      1920 / HOME_IMAGE_SIZE,
-      1080 / HOME_IMAGE_SIZE,
-      `showRoomImage`
-    );
-    this.canary.createImage(
-      that,
-      `assets/img/jouwKarakter4.png`,
-      -200,
-      200,
-      WORLD_POSITION.images - 2000,
-      1920 / HOME_IMAGE_SIZE,
-      1080 / HOME_IMAGE_SIZE,
-      `showRoomImage`
-    );
-    this.canary.createImage(
-      that,
-      `assets/img/jouwKarakter5.png`,
-      0,
-      0,
-      WORLD_POSITION.images - 2500,
-      1920 / HOME_IMAGE_SIZE,
-      1080 / HOME_IMAGE_SIZE,
-      `showRoomImage`
-    );
-    //CREATE TEXT
-    this.canary.createText(that, `Pikachu`, FONTS.radikalRegular, 20, 0xff6690, 0, 0, WORLD_POSITION.images - 1000);
-    this.canary.createHollowText(that, FONTS.radikalRegular, 0xff6690, `Pika Pika`, 0, 0, WORLD_POSITION.images - 3300, 200);
+    this.canary.createPng( that, `assets/img/c1_KARAKTER-1.png`, 300, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
+    this.canary.createPng( that, `assets/img/c1_KARAKTER-2.png`, -250, -100, WORLD_POSITION.images - 1200, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
+    this.canary.createPng( that, `assets/img/c1_KARAKTER-3.png`, 200, 0, WORLD_POSITION.images - 1600, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
+    this.canary.createPng( that, `assets/img/c1_KARAKTER-4.png`, -200, 200, WORLD_POSITION.images - 2000, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
+    this.canary.createPng( that, `assets/img/c1_KARAKTER-5.png`, 0, 0, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
 
     //eventlisteners
     window.addEventListener(`mousemove`, this.onMouseMove);
@@ -148,11 +100,11 @@ class Images {
       if (intersects.length > 0) {
         this.that.zoomedObject = this.canary.getClosestObjectWithName(intersects, `showRoomImage`);
         if (this.that.zoomedObject) {
-          this.that.zoomedObject.object.scale.set(1920 / HOME_IMAGE_SIZE_LARGER, 1080 / HOME_IMAGE_SIZE_LARGER, this.that.zoomedObject.object.scale.z);
+          this.that.zoomedObject.object.scale.set(1.1, 1.1, this.that.zoomedObject.object.scale.z);
         }
       } else {
         if (this.that.zoomedObject) {
-          this.that.zoomedObject.object.scale.set(1920 / HOME_IMAGE_SIZE, 1080 / HOME_IMAGE_SIZE, this.that.zoomedObject.object.scale.z);
+          this.that.zoomedObject.object.scale.set(1, 1, this.that.zoomedObject.object.scale.z);
           this.that.zoomedObject = undefined;
         }
       }
@@ -209,7 +161,7 @@ class Images {
     if (this.that.closeUpObject !== undefined) {
       this.that.closeUpObject.object.position.set(this.that.camera.position.x, this.that.camera.position.y, this.that.camera.position.z - 100);
       this.that.closeUpObject.object.rotation.set(0, 0, 0);
-      this.that.closeUpObject.object.scale.set(60, 40, this.that.closeUpObject.object.scale.z);
+      this.that.closeUpObject.object.scale.set(1920/16, 1080/16, this.that.closeUpObject.object.scale.z);
     }
   };
 }
