@@ -206,6 +206,8 @@ class Questions {
                   this.unmount();
                   images.load(this.that);
                   this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.images);
+                  this.that.currentWorld = WORLD_POSITION.images;
+
                 }
               }
             });

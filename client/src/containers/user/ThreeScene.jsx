@@ -19,7 +19,14 @@ let threeSetup = new ThreeSetup();
 class ThreeScene extends Component {
   constructor(props) {
     super(props);
+
+    images.setThis(this);
+
     this.cameraRubberBandingForce = CAMERA_RUBBERBANDING_FORCE;
+    this.fog = {
+      near : FOG.near,
+      far : FOG.far
+    }
     this.uiStore = props.uiStore;
     this.actStore = props.actStore;
     this.answerStore = props.answerStore;
@@ -127,8 +134,8 @@ class ThreeScene extends Component {
 
       // this.pointer.style.transform =
       //   `translate(` + (this.pointerPosition.x - POINTER.width / 2) + `px,` + (this.pointerPosition.y - POINTER.height / 2) + `px)`;
-
       if (this.currentWorld === WORLD_POSITION.images) {
+        console.log("images animate");
         images.animate();
       }
 
@@ -138,13 +145,13 @@ class ThreeScene extends Component {
     }
     if (this.cameraRubberBandingActive) {
       this.camera.position.set(this.camera.position.x - this.lookPosition.x / 2, this.camera.position.y - this.lookPosition.y / 2, this.camera.position.z);
-      const cameraVx = canary.rubberBand(this.camera.position.x, this.cameraRubberBanding.position.x, 0.04);
-      const cameraVy = canary.rubberBand(this.camera.position.y, this.cameraRubberBanding.position.y, 0.04);
+      const cameraVx = canary.rubberBand(this.camera.position.x, this.cameraRubberBanding.position.x, 0.03);
+      const cameraVy = canary.rubberBand(this.camera.position.y, this.cameraRubberBanding.position.y, 0.03);
       const cameraVz = canary.rubberBand(this.camera.position.z, this.cameraRubberBanding.position.z, this.cameraRubberBandingForce);
       this.camera.position.set(this.camera.position.x + cameraVx, this.camera.position.y + cameraVy, this.camera.position.z + cameraVz);
 
-      const cameraRotationVx = canary.rubberBand(this.camera.rotation.x, this.cameraRubberBanding.rotation.x, this.cameraRubberBandingForce);
-      const cameraRotationVy = canary.rubberBand(this.camera.rotation.y, this.cameraRubberBanding.rotation.y, this.cameraRubberBandingForce);
+      const cameraRotationVx = canary.rubberBand(this.camera.rotation.x, this.cameraRubberBanding.rotation.x, 0.03);
+      const cameraRotationVy = canary.rubberBand(this.camera.rotation.y, this.cameraRubberBanding.rotation.y, 0.03);
       const cameraRotationVz = canary.rubberBand(this.camera.rotation.z, this.cameraRubberBanding.rotation.z, CAMERA_RUBBERBANDING_FORCE);
       this.camera.rotation.set(this.camera.rotation.x + cameraRotationVx, this.camera.rotation.y + cameraRotationVy, this.camera.rotation.z + cameraRotationVz);
     }
@@ -157,8 +164,9 @@ class ThreeScene extends Component {
       this.currentColor.g += gv;
       this.currentColor.b += bv;
       this.renderer.setClearColor(this.currentColor.b + 256 * this.currentColor.g + 256 * 256 * this.currentColor.r);
-      this.scene.fog = new THREE.Fog(this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256, 300, 1600);
     }
+    this.scene.fog = new THREE.Fog(this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256, this.fog.near, this.fog.far);
+
     //ANIMATION
     this.renderScene();
     this.frameId = window.requestAnimationFrame(this.animate);

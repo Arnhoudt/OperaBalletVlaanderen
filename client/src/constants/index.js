@@ -13,6 +13,9 @@ export const POINTER = {
   height: 50
 };
 
+export const HOME_IMAGE_SIZE = 5;
+export const HOME_IMAGE_SIZE_LARGER = 4.8;
+
 const FONT_PATH = `assets/fonts/`;
 
 export const FONTS = {
@@ -34,9 +37,14 @@ export const ARBITRAIRE_CONSTANTE = 3141592;
 export const PLANE_PERSPECTIVE_CONSTANTE = 0.25;
 
 export const FOG = {
-  near: 400,
-  far: 600
+  near: 600,
+  far: 1300
 };
+
+export const SHOWROOM_MAX_X_ROTATION = Math.PI*0.2;
+export const SHOWROOM_MAX_Y_ROTATION = Math.PI*0.2;
+export const SHOWROOM_MAX_Z_ROTATION = Math.PI*0.2;
+
 
 export const CAMERA_RUBBERBANDING_FORCE = 0.04;
 
@@ -60,7 +68,7 @@ export const CAMERA = {
 export const BACKGROUND_COLORS = {
   images: {
     default: {
-      position: WORLD_POSITION.questions,
+      position: WORLD_POSITION.images,
       r: 249,
       g: 249,
       b: 249
