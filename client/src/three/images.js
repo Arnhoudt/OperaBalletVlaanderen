@@ -28,11 +28,11 @@ class Images {
     this.that.fog = { near: FOG.near, far: FOG.far };
 
     //CREATE IMAGES
-    this.canary.createPng( that, `assets/img/c1_KARAKTER-1.png`, 300, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
-    this.canary.createPng( that, `assets/img/c1_KARAKTER-2.png`, -250, -100, WORLD_POSITION.images - 1200, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
-    this.canary.createPng( that, `assets/img/c1_KARAKTER-3.png`, 200, 0, WORLD_POSITION.images - 1600, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
-    this.canary.createPng( that, `assets/img/c1_KARAKTER-4.png`, -200, 200, WORLD_POSITION.images - 2000, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
-    this.canary.createPng( that, `assets/img/c1_KARAKTER-5.png`, 0, 0, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
+    this.canary.createPng(that, `assets/img/c1_KARAKTER-1.png`, 300, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
+    this.canary.createPng(that, `assets/img/c1_KARAKTER-2.png`, -250, -100, WORLD_POSITION.images - 1200, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
+    this.canary.createPng(that, `assets/img/c1_KARAKTER-3.png`, 200, 0, WORLD_POSITION.images - 1600, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
+    this.canary.createPng(that, `assets/img/c1_KARAKTER-4.png`, -200, 200, WORLD_POSITION.images - 2000, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
+    this.canary.createPng(that, `assets/img/c1_KARAKTER-5.png`, 0, 0, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
 
     //eventlisteners
     window.addEventListener(`mousemove`, this.onMouseMove);
@@ -161,7 +161,7 @@ class Images {
     if (this.that.closeUpObject !== undefined) {
       this.that.closeUpObject.object.position.set(this.that.camera.position.x, this.that.camera.position.y, this.that.camera.position.z - 100);
       this.that.closeUpObject.object.rotation.set(0, 0, 0);
-      this.that.closeUpObject.object.scale.set(1920/16, 1080/16, this.that.closeUpObject.object.scale.z);
+      this.that.closeUpObject.object.scale.set(1920 / 16, 1080 / 16, this.that.closeUpObject.object.scale.z);
     }
   };
 }

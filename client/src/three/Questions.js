@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, ROUTES, PLANE_DIFFERENCE, CAMERA_PLANE_DIFFERENCE, ARBITRAIRE_CONSTANTE, FOG_QUESTIONS } from "../constants";
+import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, CAMERA_PLANE_DIFFERENCE, FOG_QUESTIONS } from "../constants";
 import Canary from "./Canary";
 import Images from "./Images";
 let images = new Images();
@@ -323,16 +323,17 @@ class Questions {
               param4: 12,
               param5: 43
             };
-            this.answers.push(data);
             this.questionIndex = 0;
+            this.answers.push(data);
             this.answers.forEach(async answer => {
               await this.that.answerStore.create(answer);
             });
+            this.answers = [];
+            this.currentAnswers = [];
             this.unmount();
+            this.that.currentWorld = WORLD_POSITION.images;
             images.load(this.that);
-            this.that.currentWorld = WORLD_POSITION.images;
             this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.images);
-            this.that.currentWorld = WORLD_POSITION.images;
           } else {
             this.that.cameraRubberBanding.position.set(
               this.questions[this.questionIndex + 1].location.x,
@@ -366,48 +367,9 @@ class Questions {
       x: e.clientX,
       y: e.clientY
     };
-
-    // //De raycaster kijkt welke objecten er in het visier van de muis liggen
-    // this.that.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-    // this.that.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    // this.that.raycaster.setFromCamera(this.that.mouse, this.that.camera);
-    // let intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
-    // //de elementen zitten in intersects
-    // let objects = intersects.filter(intersect => intersect.object.name === `start`);
-    // if (objects.length > 0 && !this.hover) {
-    //   objects[0].object.scale.x = 1.1;
-    //   objects[0].object.scale.y = 1.1;
-    //   this.hover = true;
-    // } else if (objects.length === 0 && this.hover) {
-    //   let objects = this.that.scene.children.filter(child => child.name === `start`);
-    //   objects.forEach(object => {
-    //     object.scale.x = 1;
-    //     object.scale.y = 1;
-    //   });
-    //   this.hover = false;
-    // }
   };
 
-  animate = () => {
-    // this.that.camera.position.set(
-    //   this.that.camera.position.x + this.that.lookPosition.x / 2,
-    //   this.that.camera.position.y + this.that.lookPosition.y / 2,
-    //   this.that.camera.position.z
-    // );
-    // const z = this.that.camera.position.z - 100;
-    // this.that.camera.lookAt(this.that.lookPosition.x, this.that.lookPosition.y, z);
-    // this.question.style.transform =
-    //   `perspective(1000px) translate(` +
-    //   -this.that.lookPosition.x * 10 +
-    //   `px, ` +
-    //   this.that.lookPosition.y * 10 +
-    //   `px)
-    //        rotateX(` +
-    //   this.that.lookPosition.y +
-    //   `deg) rotateY(` +
-    //   this.that.lookPosition.x +
-    //   `deg)`;
-  };
+  animate = () => {};
 }
 
 export default Questions;
