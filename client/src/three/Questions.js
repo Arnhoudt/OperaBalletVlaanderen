@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, ROUTES, PLANE_DIFFERENCE, CAMERA_PLANE_DIFFERENCE, ARBITRAIRE_CONSTANTE } from "../constants";
+import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, ROUTES, PLANE_DIFFERENCE, CAMERA_PLANE_DIFFERENCE, ARBITRAIRE_CONSTANTE, FOG_QUESTIONS } from "../constants";
 import Canary from "./Canary";
 import Images from "./Images";
 let images = new Images();
@@ -20,6 +20,8 @@ class Questions {
     that.movementFreedom = 1200;
     that.cameraRubberBandingActive = true;
     that.camera.position.y = 400;
+
+    this.that.fog = { near: FOG_QUESTIONS.near, far: FOG_QUESTIONS.far };
 
     this.that.questionStore.findAll().then(questions => {
       this.questions = questions;
@@ -227,6 +229,7 @@ class Questions {
                   images.load(this.that);
                   this.that.currentWorld = WORLD_POSITION.images;
                   this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.images);
+                  this.that.currentWorld = WORLD_POSITION.images;
                 }
               }
             });

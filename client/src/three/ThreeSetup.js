@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { ANTIALIASING, CAMERA, FOG } from "../constants";
+import { ANTIALIASING, CAMERA, FOG, FOG_QUESTIONS } from "../constants";
 
 class ThreeSetup {
   setup = that => {
@@ -11,8 +11,8 @@ class ThreeSetup {
     that.scene = new THREE.Scene();
     {
       const color = that.currentColor.b + that.currentColor.g * 256 + that.currentColor.r * 256 * 256,
-        near = FOG.near,
-        far = FOG.far;
+        near = that.fog.near,
+        far = that.fog.far;
       that.scene.fog = new THREE.Fog(color, near, far);
     }
     //ADD CAMERA
