@@ -32,7 +32,6 @@ class ThreeScene extends Component {
     this.questionStore = props.questionStore;
     this.history = props.history;
     this.state = { loading: ``, error: ``, done: false };
-    this.popupActive = false;
   }
 
   componentDidMount() {
@@ -134,7 +133,6 @@ class ThreeScene extends Component {
       // this.pointer.style.transform =
       //   `translate(` + (this.pointerPosition.x - POINTER.width / 2) + `px,` + (this.pointerPosition.y - POINTER.height / 2) + `px)`;
       if (this.currentWorld === WORLD_POSITION.images) {
-        console.log(`images animate`);
         images.animate();
       }
 
@@ -186,11 +184,9 @@ class ThreeScene extends Component {
       this.popup.style.transform = `scale(0)`;
       this.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.questions);
       this.movementFreedom = 1200;
-      this.popupActive = false;
     } else {
       this.movementFreedom = 1200;
       this.popup.style.transform = `scale(0)`;
-      this.popupActive = false;
     }
   };
 

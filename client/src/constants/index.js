@@ -42,8 +42,8 @@ export const FOG = {
 };
 
 export const FOG_QUESTIONS = {
-  near: 300,
-  far: 600
+  near: 400,
+  far: 550
 };
 
 export const SHOWROOM_MAX_X_ROTATION = Math.PI * 0.2;

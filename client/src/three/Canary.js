@@ -3,7 +3,7 @@ import { POINTER, WORLD_POSITION, PLANE_DIFFERENCE, CAMERA_PLANE_DIFFERENCE, PLA
 let SVGLoader = require(`three-svg-loader`);
 
 class Canary {
-  createPng = (component, path, x, y, z, width, height, planeZ, anisotropy, name) => {
+  createPng = (component, path, x, y, z, width, height, planeZ, anisotropy, filter, name) => {
     let textureLoader = new THREE.TextureLoader();
     let maxAnisotropy = component.renderer.capabilities.getMaxAnisotropy();
     let planeAnisotropy;
@@ -28,7 +28,9 @@ class Canary {
         transparent: true
       });
       texture.anisotropy = planeAnisotropy;
-      texture.minFilter = THREE.NearestFilter;
+      if (filter) {
+        texture.minFilter = THREE.NearestFilter;
+      }
 
       let plane = new THREE.Mesh(Geo, Material);
       plane.position.set(x, y, z);

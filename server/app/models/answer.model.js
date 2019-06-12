@@ -4,7 +4,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const AnswerSchema = mongoose.Schema(
   {
     question: String,
-    answer: String,
+    answers: [String],
     userId: ObjectId,
     param1: {type: Number, min: 0, max: 50},
     param2: {type: Number, min: 0, max: 50},
