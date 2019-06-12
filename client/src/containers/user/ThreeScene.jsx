@@ -8,7 +8,7 @@ import Questions from "../../three/Questions";
 import ThreeSetup from "../../three/ThreeSetup";
 
 import styles from "./ThreeScene.module.css";
-import { POINTER, ANTIALIASING, BACKGROUND_COLORS, CAMERA, FOG, FONTS, WORLD_POSITION, CAMERA_RUBBERBANDING_FORCE } from "../../constants/index";
+import { BACKGROUND_COLORS, CAMERA, WORLD_POSITION, CAMERA_RUBBERBANDING_FORCE, FOG } from "../../constants/index";
 import Character from "../../three/Character";
 let canary = new Canary();
 let images = new Images();
@@ -34,6 +34,7 @@ class ThreeScene extends Component {
     this.questionStore = props.questionStore;
     this.history = props.history;
     this.state = { loading: ``, error: ``, done: false };
+    this.popupActive = false;
   }
 
   componentDidMount() {
@@ -182,6 +183,18 @@ class ThreeScene extends Component {
     this.renderer.render(this.scene, this.camera);
   };
 
+  handleClickPopup = e => {
+    if (e.currentTarget.value === `ja`) {
+      this.popup.style.transform = `scale(0)`;
+      this.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.questions);
+      this.popupActive = false;
+    } else {
+      this.movementFreedom = 800;
+      this.popup.style.transform = `scale(0)`;
+      this.popupActive = false;
+    }
+  };
+
   render() {
     return (
       <>
@@ -205,9 +218,14 @@ class ThreeScene extends Component {
               én om gratis tickets te winnen.
             </p>
             <div className={styles.containerButtonsPopup}>
-              <button className={styles.buttonPopup}>Ja</button>
-              <button className={styles.buttonPopup}>Neen</button>
+              <button onClick={this.handleClickPopup} value="ja" className={`${styles.buttonPopup} ${styles.ja}`}>
+                <p>Ja</p>
+              </button>
+              <button onClick={this.handleClickPopup} value="neen" className={`${styles.buttonPopup} ${styles.neen}`}>
+                <p>Neen</p>
+              </button>
             </div>
+            <div onClick={this.handleClickPopup} className={styles.cross} />
           </div>
         </div>
         {!this.state.done ? (
