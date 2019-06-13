@@ -20,8 +20,7 @@ class Canary {
       width *= 1 + planeZ * PLANE_PERSPECTIVE_CONSTANTE;
       height *= 1 + planeZ * PLANE_PERSPECTIVE_CONSTANTE;
     }
-
-    textureLoader.load(path, texture => {
+    return textureLoader.load(path, texture => {
       let Geo = new THREE.PlaneBufferGeometry(width, height);
       let Material = new THREE.MeshLambertMaterial({
         map: texture,
@@ -34,6 +33,7 @@ class Canary {
       plane.position.set(x, y, z);
       plane.name = name;
       component.scene.add(plane);
+      return plane;
     });
   };
 
@@ -172,15 +172,24 @@ class Canary {
     }); //end load function
   };
 
-  createPointer = () => {
+  createPointer = (path) => {
     let pointer = document.createElement(`div`);
-    pointer.innerHTML = `<img src=` + POINTER.image + ` width="` + POINTER.width + `" height="` + POINTER.height + `" alt="">`;
+    pointer.innerHTML = `<img src=` + path + ` width="` + POINTER.width + `" height="` + POINTER.height + `" alt="">`;
     pointer.classList.add(`pointer`);
     pointer.style.transform = `translateX(-100px)`;
     pointer.style.position = `absolute`;
     pointer.style.userSelect = `none`;
     return pointer;
   };
+
+  changePointer = (pointer, path) => {
+    pointer.innerHTML = `<img src=` + path + ` width="` + POINTER.width + `" height="` + POINTER.height + `" alt="">`;
+    pointer.classList.add(`pointer`);
+    pointer.style.transform = `translateX(-100px)`;
+    pointer.style.position = `absolute`;
+    pointer.style.userSelect = `none`;
+  }
+
 }
 
 export default Canary;

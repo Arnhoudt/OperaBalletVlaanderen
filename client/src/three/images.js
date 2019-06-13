@@ -14,7 +14,6 @@ import Canary from "./Canary";
 
 class Images {
   canary = new Canary();
-
   setThis = that => {
     this.that = that;
   };
@@ -27,14 +26,6 @@ class Images {
 
     this.that.fog = { near: FOG.near, far: FOG.far };
 
-    //CREATE IMAGES
-    this.canary.createPng( that, `assets/img/c1_KARAKTER-1.png`, 300, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
-    this.canary.createPng( that, `assets/img/c1_KARAKTER-2.png`, -250, -100, WORLD_POSITION.images - 1200, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
-    this.canary.createPng( that, `assets/img/c1_KARAKTER-3.png`, 200, 0, WORLD_POSITION.images - 1600, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
-    this.canary.createPng( that, `assets/img/c1_KARAKTER-4.png`, -200, 200, WORLD_POSITION.images - 2000, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
-    this.canary.createPng( that, `assets/img/c1_KARAKTER-5.png`, 0, 0, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
-
-    //eventlisteners
     window.addEventListener(`mousemove`, this.onMouseMove);
     window.addEventListener(`wheel`, this.handleMouseScroll);
     window.addEventListener(`click`, this.handleMouseClick);
@@ -42,6 +33,13 @@ class Images {
     let near = 300;
     let far = 1600;
     that.scene.fog = new THREE.Fog(color, near, far);
+
+    //CREATE IMAGES
+    this.createScene1();
+    this.createScene2();
+    this.createScene3();
+    this.createScene4();
+    this.createScene5();
   };
 
   unmount = () => {
@@ -64,20 +62,29 @@ class Images {
     if (intersects.length > 0) {
       //er wordt gecontroleerd of er momenteel naar een object wordt gekeken
       if (this.that.closeUpObject === undefined) {
-        this.that.closeUpObject = intersects[0];
+        this.canary.changePointer(this.that.pointer, `assets/img/mouse_exit.png`);
+        intersects.reverse();
+        intersects.forEach(intersect => {
+          if(intersect.object.name.split(`_`)[0] === `showRoomImage`){
+            this.that.closeUpObject = intersect;
+          }
+        })
         // de waarden van de huidige foto worden opgeslagen TODO: dit kan efficienter
         this.that.closeUpData = this.canary.getPhotoData(this.that.closeUpObject);
         //de foto wordt centraal op het scherm van de user geplaatst
-        this.that.closeUpObject.object.position.set(this.that.camera.position.x, this.that.camera.position.y, this.that.camera.position.z - 100);
         this.that.closeUpObject.object.rotation.set(0, 0, 0);
-        this.that.closeUpObject.object.scale.set(60, 40, this.that.closeUpObject.object.scale.z);
-        this.that.fog.near = 105;
-        this.that.fog.far = 120;
+        this.that.fog.near = 400;
+        this.that.fog.far = 800;
       } else {
+        this.canary.changePointer(this.that.pointer, `assets/img/whiteCircle.png`);
         this.canary.loadPhotoData(this.that.closeUpData, this.that.closeUpObject);
-        this.that.fog.near = 300;
+        this.that.fog.near = 1200;
         this.that.fog.far = 1600;
-        this.that.scene.fog = new THREE.Fog(this.that.currentColor.b + this.that.currentColor.g * 256 + this.that.currentColor.r * 256 * 256, 300, 1600);
+        this.that.scene.children.forEach(child => {
+          if(child.name.split(`_`)[0] === `sceneElement` && child.name.split(`_`)[1] === this.that.closeUpObject.object.name.split(`_`)[1]){
+            this.updateShowRoomChild(child);
+          }
+        })
         this.that.closeUpObject = undefined;
       }
     }
@@ -91,7 +98,6 @@ class Images {
       y: event.clientY
     };
     if (!this.that.closeUpObject) {
-      console.log(`not close up`);
       this.that.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       this.that.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
@@ -119,10 +125,12 @@ class Images {
         }
       }
       this.that.scene.children.forEach(child => {
-        if (this.that.camera.position.z <= WORLD_POSITION.images || e.deltaY > 0) {
+        if ((this.that.camera.position.z <= WORLD_POSITION.images || e.deltaY > 0) && child.name && child.name.split(`_`)[0] === `showRoomImage`) {
           if (this.that.camera.position.z > WORLD_POSITION.images - 2150) {
-            child.position.x += (Math.sign(child.position.x) * e.deltaY) / 30;
+            child.position.x +=  (child.position.x * e.deltaY / 3000);
           }
+        }else if(child.name.split(`_`)[0] === `sceneElement`){
+          this.updateShowRoomChild(child);
         }
         //if(Math.abs(child.rotation.x) < SHOWROOM_MAX_X_ROTATION && Math.abs(child.rotation.y) < SHOWROOM_MAX_Y_ROTATION && Math.abs(child.rotation.z) < SHOWROOM_MAX_Z_ROTATION)
         //child.lookAt(this.that.camera.position.x, this.that.camera.position.y, this.that.camera.position.z);
@@ -157,13 +165,57 @@ class Images {
   animate = () => {
     const z = this.that.camera.position.z - 100;
     this.that.camera.lookAt(this.that.lookPosition.x, this.that.lookPosition.y, z);
-    console.log(`test`);
     if (this.that.closeUpObject !== undefined) {
-      this.that.closeUpObject.object.position.set(this.that.camera.position.x, this.that.camera.position.y, this.that.camera.position.z - 100);
+      this.that.closeUpObject.object.position.set(this.that.camera.position.x, this.that.camera.position.y, this.that.camera.position.z - 500);
+      this.that.closeUpObject.object.scale.set(1, 1, 1);
       this.that.closeUpObject.object.rotation.set(0, 0, 0);
-      this.that.closeUpObject.object.scale.set(1920/16, 1080/16, this.that.closeUpObject.object.scale.z);
+      this.that.scene.children.forEach(child => {
+        if(child.name.split(`_`)[0] === `sceneElement` && child.name.split(`_`)[1] === this.that.closeUpObject.object.name.split(`_`)[1]){
+          this.updateShowRoomChild(child);
+        }
+      })
     }
   };
+
+  createScene1 = () => {
+    this.canary.createText(this.that, `0%`, FONTS.domaineRegular, 10, 0x000000, 225, 80, WORLD_POSITION.images - 800, 1,0,`sceneElement_1_3_-25_-70`);
+    this.canary.createText(this.that, `50%`, FONTS.domaineRegular, 10, 0x000000, 250, 185, WORLD_POSITION.images - 800, 1,0,`sceneElement_1_3_0_35`);
+    this.canary.createText(this.that, `101%`, FONTS.domaineRegular, 20, 0x000000, 120, 140, WORLD_POSITION.images - 800, 1,0,`sceneElement_1_3_-130_-10`);
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_1_layer3.png`,
+        250, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 1, 1, `sceneElement_1_2_0_0`);
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_1_layer2.png`,
+        250, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 2, 1, `sceneElement_1_1_0_0`);
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_1_layer1.png`,
+        250, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 3, 1, `showRoomImage_1`);
+  }
+  createScene2 = () => {
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_2.png`,
+        -200, -100, WORLD_POSITION.images - 1200, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage_2`);
+  }
+  createScene3 = () => {
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_3.png`,
+        130, 0, WORLD_POSITION.images - 1600, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage_3`);
+    }
+  createScene4 = () => {
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_4.png`,
+        -80, 200, WORLD_POSITION.images - 2000, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage_4`);
+   }
+  createScene5 = () => {
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_5.png`,
+        0, 0, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage_5`);
+  }
+
+  updateShowRoomChild = (element) => {
+    this.that.scene.children.forEach(child => {
+      if (child.name.split(`_`)[0] === `showRoomImage`) {
+        if(child.name.split(`_`)[1] === element.name.split(`_`)[1]){
+          element.position.set(child.position.x + parseInt(element.name.split(`_`)[3]),
+              child.position.y + parseInt(element.name.split(`_`)[4]), child.position.z + parseInt(element.name.split(`_`)[2])*10);
+        }
+
+      }
+    });
+  }
 }
 
 export default Images;

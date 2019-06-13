@@ -85,15 +85,15 @@ export const BACKGROUND_COLORS = {
     },
     background2: {
       position: WORLD_POSITION.images - 2000,
-      r: 50,
-      g: 200,
-      b: 50
+      r: 214,
+      g: 229,
+      b: 255
     },
     background3: {
       position: WORLD_POSITION.images - 4000,
-      r: 0,
-      g: 100,
-      b: 200
+      r: 249,
+      g: 249,
+      b: 249
     },
     background4: {
       position: WORLD_POSITION.images - 6000,

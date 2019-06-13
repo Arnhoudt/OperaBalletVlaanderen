@@ -8,7 +8,7 @@ import Questions from "../../three/Questions";
 import ThreeSetup from "../../three/ThreeSetup";
 
 import styles from "./ThreeScene.module.css";
-import { BACKGROUND_COLORS, CAMERA, WORLD_POSITION, CAMERA_RUBBERBANDING_FORCE, FOG } from "../../constants/index";
+import { BACKGROUND_COLORS, CAMERA, WORLD_POSITION, CAMERA_RUBBERBANDING_FORCE, FOG, POINTER } from "../../constants/index";
 import Character from "../../three/Character";
 let canary = new Canary();
 let images = new Images();
@@ -61,7 +61,7 @@ class ThreeScene extends Component {
     };
 
     {
-      this.pointer = canary.createPointer();
+      this.pointer = canary.createPointer(POINTER.image);
       this.mount.appendChild(this.pointer);
     }
 
@@ -126,15 +126,14 @@ class ThreeScene extends Component {
       this.lookPosition.x += vx;
       this.lookPosition.y += vy;
 
-      // const vpx = canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.2);
-      // const vpy = canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.2);
-      // this.pointerPosition.x += vpx;
-      // this.pointerPosition.y += vpy;
+      const vpx = canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.2);
+      const vpy = canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.2);
+      this.pointerPosition.x += vpx;
+      this.pointerPosition.y += vpy;
 
-      // this.pointer.style.transform =
-      //   `translate(` + (this.pointerPosition.x - POINTER.width / 2) + `px,` + (this.pointerPosition.y - POINTER.height / 2) + `px)`;
+      this.pointer.style.transform =
+        `translate(` + (this.pointerPosition.x - POINTER.width / 2) + `px,` + (this.pointerPosition.y - POINTER.height / 2) + `px)`;
       if (this.currentWorld === WORLD_POSITION.images) {
-        console.log(`images animate`);
         images.animate();
       }
 
@@ -164,7 +163,9 @@ class ThreeScene extends Component {
       this.currentColor.b += bv;
       this.renderer.setClearColor(this.currentColor.b + 256 * this.currentColor.g + 256 * 256 * this.currentColor.r);
     }
-    this.scene.fog = new THREE.Fog(this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256, this.fog.near, this.fog.far);
+    this.scene.fog.color.set(this.currentColor.b + this.currentColor.g * 256 + this.currentColor.r * 256 * 256);
+    this.scene.fog.near = this.fog.near;
+    this.scene.fog.far = this.fog.far;
 
     //ANIMATION
     this.renderScene();
