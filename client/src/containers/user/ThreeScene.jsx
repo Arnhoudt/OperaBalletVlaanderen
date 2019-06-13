@@ -3,17 +3,15 @@ import React, { Component } from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import * as THREE from "three";
 import Canary from "../../three/Canary";
-import Images from "../../three/Images";
+import Images from "../../three/Showroom";
 import Questions from "../../three/Questions";
 import ThreeSetup from "../../three/ThreeSetup";
 
 import styles from "./ThreeScene.module.css";
 import { BACKGROUND_COLORS, CAMERA, WORLD_POSITION, CAMERA_RUBBERBANDING_FORCE, FOG, POINTER } from "../../constants/index";
-import Character from "../../three/Character";
 let canary = new Canary();
 let images = new Images();
 let questions = new Questions();
-let character = new Character();
 let threeSetup = new ThreeSetup();
 
 class ThreeScene extends Component {
@@ -103,8 +101,6 @@ class ThreeScene extends Component {
       default:
         questions.load(this);
         break;
-      case WORLD_POSITION.character:
-        character.load(this);
     }
     if(window.innerHeight>window.innerWidth){
       this.turnPhone.style.opacity = 1;
@@ -202,6 +198,44 @@ class ThreeScene extends Component {
       this.popup.style.transform = `scale(0)`;
       this.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.questions);
       this.movementFreedom = 1200;
+      this.scene.children.forEach(mesh => {
+        if (mesh.name) {
+          const a = mesh.name.split(`_`);
+          if (a[0] === `answer`) {
+            if (a[4] === `button`) {
+              mesh.material.map = questions.tex;
+            }
+            if (a[4] === `beeld`) {
+              let meshText = null;
+              this.scene.children.forEach(mesh => {
+                if (mesh.name) {
+                  if (mesh.name.split(`_`)[0] === `answerText`) {
+                    if (mesh.name.split(`_`)[3] === a[3]) {
+                      meshText = mesh;
+                    }
+                  }
+                }
+              });
+              mesh.material.map = questions.imagesUnselected.filter(image => image.image === a[3])[0].tex;
+              meshText.material.color.set(0x000000);
+            }
+            if (a[4] === `geluid`) {
+              let meshText = null;
+              this.scene.children.forEach(mesh => {
+                if (mesh.name) {
+                  if (mesh.name.split(`_`)[0] === `answerText`) {
+                    if (mesh.name.split(`_`)[3] === a[3]) {
+                      meshText = mesh;
+                    }
+                  }
+                }
+              });
+              mesh.material.map = questions.soundUnselected;
+              meshText.material.color.set(0x000000);
+            }
+          }
+        }
+      });
     } else {
       this.movementFreedom = 1200;
       this.popup.style.transform = `scale(0)`;

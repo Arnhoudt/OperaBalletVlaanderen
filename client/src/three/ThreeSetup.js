@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { ANTIALIASING, CAMERA, FOG, FOG_QUESTIONS } from "../constants";
+import { ANTIALIASING, CAMERA } from "../constants";
 
 class ThreeSetup {
   setup = that => {

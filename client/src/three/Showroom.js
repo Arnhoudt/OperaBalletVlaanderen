@@ -1,20 +1,9 @@
 import * as THREE from "three";
-import {
-  BACKGROUND_COLORS,
-  FONTS,
-  HOME_IMAGE_SIZE_LARGER,
-  HOME_IMAGE_SIZE,
-  WORLD_POSITION,
-  SHOWROOM_MAX_X_ROTATION,
-  SHOWROOM_MAX_Y_ROTATION,
-  SHOWROOM_MAX_Z_ROTATION,
-  SCENE_Z_DIFFERENCE,
-  FOG
-} from "../constants";
+import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, SCENE_Z_DIFFERENCE, FOG } from "../constants";
 import Canary from "./Canary";
 import {log} from "three";
 
-class Images {
+class Showroom {
   canary = new Canary();
   setThis = that => {
     this.that = that;
@@ -25,7 +14,6 @@ class Images {
     const answers = await that.answerStore.findAllByUser(that.uiStore.randomUser._id);
    console.log(answers);
    answers.forEach(answer => {
-
    })
     this.that = that;
     console.log(this.that.iconscroll.style);
@@ -35,18 +23,15 @@ class Images {
     this.that.cameraRubberBandingForce = 1;
     that.movementFreedom = 500;
     that.cameraRubberBandingActive = true;
-
     this.that.fog = { near: FOG.near, far: FOG.far };
-
     //eventlisteners
     window.addEventListener(`mousemove`, this.onMouseMove);
     window.addEventListener(`wheel`, this.handleMouseScroll);
-    window.addEventListener(`click`, this.handleMouseClick);
+    window.addEventListener(`touchstart click`, this.handleMouseClick);
     const color = that.currentColor.b + that.currentColor.g * 256 + that.currentColor.r * 256 * 256;
     let near = 300;
     let far = 1600;
     that.scene.fog = new THREE.Fog(color, near, far);
-
     //CREATE IMAGES
     this.createScene1();
     this.createScene2();
@@ -54,24 +39,20 @@ class Images {
     this.createScene4();
     this.createScene5();
   };
-
   unmount = () => {
     window.removeEventListener(`mousemove`, this.onMouseMove);
     window.removeEventListener(`wheel`, this.handleMouseScroll);
-    window.removeEventListener(`click`, this.handleMouseClick);
+    window.removeEventListener(`touchstart click`, this.handleMouseClick);
   };
   //Handerse
-
   handleMouseClick = e => {
     e.preventDefault();
-
     //De raycaster kijkt welke objecten er in het visier van de muis liggen
     this.that.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
     this.that.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
     this.that.raycaster.setFromCamera(this.that.mouse, this.that.camera);
     let intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
     //de elementen zitten in intersects
-
     if (intersects.length > 0) {
       //er wordt gecontroleerd of er momenteel naar een object wordt gekeken
       if (this.that.closeUpObject === undefined) {
@@ -102,7 +83,6 @@ class Images {
       }
     }
   };
-
   onMouseMove = event => {
     event.preventDefault();
     this.that.mouseMoved = true;
@@ -113,7 +93,6 @@ class Images {
     if (!this.that.closeUpObject) {
       this.that.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       this.that.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
       this.that.raycaster.setFromCamera(this.that.mouse, this.that.camera);
       let intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
       if (intersects.length > 0) {
@@ -137,7 +116,6 @@ class Images {
       }
     }
   };
-
   handleMouseScroll = e => {
     this.that.iconscroll.style.opacity -=  Math.abs(e.deltaY)/1000;
     if (this.that.closeUpObject === undefined) {
@@ -151,10 +129,11 @@ class Images {
           if (this.that.camera.position.z > WORLD_POSITION.images - 2150) {
             child.position.x += (child.position.x * e.deltaY) / 3000;
           }
-        } else if (child.name.split(`_`)[0] === `sceneElement`) {
+        } else if (child.name && child.name.split(`_`)[0] === `sceneElement`) {
           this.updateShowRoomChild(child);
         }
-        //if(Math.abs(child.rotation.x) < SHOWROOM_MAX_X_ROTATION && Math.abs(child.rotation.y) < SHOWROOM_MAX_Y_ROTATION && Math.abs(child.rotation.z) < SHOWROOM_MAX_Z_ROTATION)
+        //if(Math.abs(child.rotation.x) < SHOWROOM_MAX_X_ROTATION && Math.abs(child.rotation.y) < SHOWROOM_MAX_Y_ROTATION && Math.abs(child.rotation.z)
+        //< SHOWROOM_MAX_Z_ROTATION)
         //child.lookAt(this.that.camera.position.x, this.that.camera.position.y, this.that.camera.position.z);
         // if(Math.abs(child.rotation.x) > SHOWROOM_MAX_X_ROTATION){
         //   child.rotation.x = Math.sign(child.rotation.x)*SHOWROOM_MAX_X_ROTATION;
@@ -166,7 +145,6 @@ class Images {
         //   child.rotation.z = Math.sign(child.rotation.y)*SHOWROOM_MAX_Z_ROTATION;
         // }
       });
-
       let afstand = -1000000000;
       let color = {};
       Object.entries(BACKGROUND_COLORS.images).forEach(backgroundColor => {
@@ -183,7 +161,6 @@ class Images {
       };
     }
   };
-
   animate = () => {
     const z = this.that.camera.position.z - 100;
     this.that.camera.lookAt(this.that.lookPosition.x, this.that.lookPosition.y, z);
@@ -198,7 +175,6 @@ class Images {
       });
     }
   };
-
   createScene1 = () => {
     this.canary.createText(this.that, `14%`, FONTS.domaineRegular, 7, 0x000000, 230, 94, WORLD_POSITION.images - 780, 0, 0, `sceneElement_1_2_-20_-56`);
     this.canary.createText(this.that, `5%`, FONTS.domaineRegular, 7, 0x000000, 250, 178, WORLD_POSITION.images - 780, 0, 0, `sceneElement_1_2_0_28`);
@@ -369,7 +345,6 @@ class Images {
   createScene5 = () => {
     this.canary.createPng(this.that, `assets/img/c1_KARAKTER_5.png`, 0, 0, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 0, 1, true, `showRoomImage_5`);
   };
-
   updateShowRoomChild = element => {
     this.that.scene.children.forEach(child => {
       if (child.name && child.name.split(`_`)[0] === `showRoomImage`) {
@@ -384,5 +359,4 @@ class Images {
     });
   };
 }
-
-export default Images;
+export default Showroom;

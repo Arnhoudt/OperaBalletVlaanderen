@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { FONTS, WORLD_POSITION, CAMERA_PLANE_DIFFERENCE, FOG_QUESTIONS } from "../constants";
 import Canary from "./Canary";
-import Images from "./Images";
+import Images from "./Showroom";
 
 class Questions {
   canary = new Canary();
@@ -28,6 +28,7 @@ class Questions {
     that.movementFreedom = 1200;
     that.cameraRubberBandingActive = true;
     that.camera.position.y = -400;
+    this.that.fog = { near: FOG_QUESTIONS.near, far: FOG_QUESTIONS.far };
 
     let loader = new THREE.TextureLoader();
     loader.load(`assets/img/button_border.png`, tex => (this.tex = tex));
@@ -57,7 +58,8 @@ class Questions {
     this.canary.createSound(this, `assets/sounds/italiaans_CarmenHabanera_short.mp3`);
     this.canary.createSound(this, `assets/sounds/russisch_CarmenHabanera_short.mp3`);
 
-    this.that.fog = { near: FOG_QUESTIONS.near, far: FOG_QUESTIONS.far };
+    this.loadStart();
+    this.loadStartQuestions();
 
     this.that.questionStore.findAll().then(questions => {
       this.questions = questions;
@@ -65,18 +67,15 @@ class Questions {
       this.loadQuestions();
     });
 
-    this.loadStart();
-    this.loadStartQuestions();
-
     window.addEventListener(`keydown`, this.handleKeyDown);
-    window.addEventListener(`click`, this.handleMouseClick);
+    window.addEventListener(`touchstart click`, this.handleMouseClick);
     window.addEventListener(`mousemove`, this.onMouseMove);
   };
 
   unmount = () => {
     window.removeEventListener(`mousemove`, this.onMouseMove);
     window.removeEventListener(`keydown`, this.handleKeyDown);
-    window.removeEventListener(`click`, this.handleMouseClick);
+    window.removeEventListener(`touchstart click`, this.handleMouseClick);
     this.that.cameraRubberBandingActive = false;
   };
 
@@ -184,7 +183,7 @@ class Questions {
       this.canary.createRectangle(this.that, x - 134, y - 82, this.planeZ - z, 242 / 5, 1 / 5, 2, 0x000000);
       this.canary.createPng(this.that, `assets/img/transparant.png`, x - 158, y - 92, this.planeZ - z, 268 / 8, 62 / 8, 3, 1, false, `terug_scherm`);
       this.canary.createRectangle(this.that, x + 105, y - 62.5, WORLD_POSITION.questions - z - 251, 432 / 8, 96 / 8, 0, 0x000000, `volgende_vraag`);
-      this.canary.createText(this.that, `VOLGENDE VRAAG`, FONTS.radikalMedium, 3.2, 0xf9f9f9, x + 84, y - 64, this.planeZ - z, 1);
+      this.canary.createText(this.that, `VOLGENDE VRAAG`, FONTS.radikalMedium, 3.2, 0xf9f9f9, x + 84, y - 64, this.planeZ - z, 1, `volgende_text_${question}`);
       const positionButtons = [
         { x: -80, y: 0 },
         { x: -12, y: 0 },
@@ -315,68 +314,73 @@ class Questions {
         if (intersect.object.name) {
           const a = intersect.object.name.split(`_`);
           if (a[0] === `answer`) {
-            if (a[4] === `button`) {
-              if (this.selectedAnswers[`${a[1]}${a[2]}`]) {
-                this.currentAnswers.splice(this.currentAnswers.findIndex(answer => answer === a[3]), 1);
-                intersect.object.material.map = this.tex;
-                this.selectedAnswers[`${a[1]}${a[2]}`] = false;
-              } else {
-                this.currentAnswers.push(a[3]);
-                intersect.object.material.map = this.texSelected;
-                this.selectedAnswers[`${a[1]}${a[2]}`] = true;
-              }
-            }
-            if (a[4] === `beeld`) {
-              let meshText = null;
-              this.that.scene.children.forEach(mesh => {
-                if (mesh.name) {
-                  if (mesh.name.split(`_`)[0] === `answerText`) {
-                    if (mesh.name.split(`_`)[3] === a[3]) {
-                      meshText = mesh;
-                    }
-                  }
+            if (
+              this.planeZ - this.questions[this.questionIndex].location.z + 249 === intersect.object.position.z ||
+              this.planeZ - this.questions[this.questionIndex].location.z - 51 === intersect.object.position.z
+            ) {
+              if (a[4] === `button`) {
+                if (this.selectedAnswers[`${a[1]}${a[2]}`]) {
+                  this.currentAnswers.splice(this.currentAnswers.findIndex(answer => answer === a[3]), 1);
+                  intersect.object.material.map = this.tex;
+                  this.selectedAnswers[`${a[1]}${a[2]}`] = false;
+                } else {
+                  this.currentAnswers.push(a[3]);
+                  intersect.object.material.map = this.texSelected;
+                  this.selectedAnswers[`${a[1]}${a[2]}`] = true;
                 }
-              });
-              if (this.selectedAnswers[`${a[1]}${a[2]}`]) {
-                this.currentAnswers.splice(this.currentAnswers.findIndex(answer => answer === a[3]), 1);
-                intersect.object.material.map = this.imagesUnselected.filter(image => image.image === a[3])[0].tex;
-                meshText.material.color.set(0x000000);
-                this.selectedAnswers[`${a[1]}${a[2]}`] = false;
-              } else {
-                this.currentAnswers.push(a[3]);
-                intersect.object.material.map = this.imagesSelected.filter(image => image.image === a[3])[0].tex;
-                meshText.material.color.set(0xe63b44);
-                this.selectedAnswers[`${a[1]}${a[2]}`] = true;
               }
-            }
-            if (a[4] === `geluid`) {
-              let meshText = null;
-              this.that.scene.children.forEach(mesh => {
-                if (mesh.name) {
-                  if (mesh.name.split(`_`)[0] === `answerText`) {
-                    if (mesh.name.split(`_`)[3] === a[3]) {
-                      meshText = mesh;
+              if (a[4] === `beeld`) {
+                let meshText = null;
+                this.that.scene.children.forEach(mesh => {
+                  if (mesh.name) {
+                    if (mesh.name.split(`_`)[0] === `answerText`) {
+                      if (mesh.name.split(`_`)[3] === a[3]) {
+                        meshText = mesh;
+                      }
                     }
-                  }
-                }
-              });
-              if (this.selectedAnswers[`${a[1]}${a[2]}`]) {
-                this.sounds[a[2]].pause();
-                this.currentAnswers.splice(this.currentAnswers.findIndex(answer => answer === a[3]), 1);
-                intersect.object.material.map = this.soundUnselected;
-                meshText.material.color.set(0x000000);
-                this.selectedAnswers[`${a[1]}${a[2]}`] = false;
-              } else {
-                this.sounds.forEach(sound => {
-                  if (sound.isPlaying) {
-                    sound.stop();
                   }
                 });
-                this.sounds[a[2]].play();
-                this.currentAnswers.push(a[3]);
-                intersect.object.material.map = this.soundSelected;
-                meshText.material.color.set(0xe63b44);
-                this.selectedAnswers[`${a[1]}${a[2]}`] = true;
+                if (this.selectedAnswers[`${a[1]}${a[2]}`]) {
+                  this.currentAnswers.splice(this.currentAnswers.findIndex(answer => answer === a[3]), 1);
+                  intersect.object.material.map = this.imagesUnselected.filter(image => image.image === a[3])[0].tex;
+                  meshText.material.color.set(0x000000);
+                  this.selectedAnswers[`${a[1]}${a[2]}`] = false;
+                } else {
+                  this.currentAnswers.push(a[3]);
+                  intersect.object.material.map = this.imagesSelected.filter(image => image.image === a[3])[0].tex;
+                  meshText.material.color.set(0xe63b44);
+                  this.selectedAnswers[`${a[1]}${a[2]}`] = true;
+                }
+              }
+              if (a[4] === `geluid`) {
+                let meshText = null;
+                this.that.scene.children.forEach(mesh => {
+                  if (mesh.name) {
+                    if (mesh.name.split(`_`)[0] === `answerText`) {
+                      if (mesh.name.split(`_`)[3] === a[3]) {
+                        meshText = mesh;
+                      }
+                    }
+                  }
+                });
+                if (this.selectedAnswers[`${a[1]}${a[2]}`]) {
+                  this.sounds[a[2]].pause();
+                  this.currentAnswers.splice(this.currentAnswers.findIndex(answer => answer === a[3]), 1);
+                  intersect.object.material.map = this.soundUnselected;
+                  meshText.material.color.set(0x000000);
+                  this.selectedAnswers[`${a[1]}${a[2]}`] = false;
+                } else {
+                  this.sounds.forEach(sound => {
+                    if (sound.isPlaying) {
+                      sound.stop();
+                    }
+                  });
+                  this.sounds[a[2]].play();
+                  this.currentAnswers.push(a[3]);
+                  intersect.object.material.map = this.soundSelected;
+                  meshText.material.color.set(0xe63b44);
+                  this.selectedAnswers[`${a[1]}${a[2]}`] = true;
+                }
               }
             }
           }
@@ -387,17 +391,17 @@ class Questions {
             this.questions[this.questionIndex].location.y,
             WORLD_POSITION.questions - this.questions[this.questionIndex].location.z
           );
-          const data = {
-            question: `Voel je je eerder een:`,
-            answers: this.currentAnswers,
-            userId: this.that.uiStore.randomUser._id,
-            param1: 34,
-            param2: 50,
-            param3: 45,
-            param4: 12,
-            param5: 43
-          };
-          this.that.answers.push(data);
+          this.currentAnswers.forEach(answer => {
+            const data = {
+              question: `Voel je je eerder een:`,
+              answer: answer,
+              userId: this.that.uiStore.randomUser._id,
+              param1: 10,
+              param2: 10,
+              param3: 10
+            };
+            this.that.answers.push(data);
+          });
           this.currentAnswers = [];
         }
         if (intersect.object.name === `terug_scherm`) {
@@ -411,50 +415,53 @@ class Questions {
           }
         }
         if (intersect.object.name === `volgende_vraag`) {
-          if (!this.questions[this.questionIndex + 1]) {
-            const data = {
-              question: this.questions[this.questionIndex].question,
-              answer: this.currentAnswers,
-              userId: this.that.uiStore.randomUser._id,
-              param1: 34,
-              param2: 50,
-              param3: 45,
-              param4: 12,
-              param5: 43
-            };
-            this.questionIndex = 0;
-            this.that.answers.push(data);
-            this.that.answers.forEach(async answer => {
-              await this.that.answerStore.create(answer);
-            });
-            this.sounds.forEach(sound => {
-              if (sound.isPlaying) {
-                sound.stop();
-              }
-            });
-            this.currentAnswers = [];
-            this.unmount();
-            this.that.currentWorld = WORLD_POSITION.images;
-            this.images.load(this.that);
-            this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.images);
-          } else {
-            this.that.cameraRubberBanding.position.set(
-              this.questions[this.questionIndex + 1].location.x,
-              this.questions[this.questionIndex + 1].location.y,
-              WORLD_POSITION.questions - this.questions[this.questionIndex + 1].location.z
-            );
-            const data = {
-              question: this.questions[this.questionIndex].question,
-              answers: this.currentAnswers,
-              userId: this.that.uiStore.randomUser._id,
-              param1: 34,
-              param2: 50,
-              param3: 45,
-              param4: 12,
-              param5: 43
-            };
-            this.that.answers.push(data);
-            this.questionIndex += 1;
+          if (this.planeZ - this.questions[this.questionIndex].location.z - 51 === intersect.object.position.z) {
+            if (!this.questions[this.questionIndex + 1]) {
+              this.currentAnswers.forEach(answer => {
+                const data = {
+                  question: this.questions[this.questionIndex].question,
+                  answer: answer,
+                  userId: this.that.uiStore.randomUser._id,
+                  param1: 10,
+                  param2: 10,
+                  param3: 10
+                };
+                this.that.answers.push(data);
+              });
+              this.currentAnswers = [];
+              this.questionIndex = 0;
+              this.that.answers.forEach(async answer => {
+                await this.that.answerStore.create(answer);
+              });
+              this.sounds.forEach(sound => {
+                if (sound.isPlaying) {
+                  sound.stop();
+                }
+              });
+              this.unmount();
+              this.that.currentWorld = WORLD_POSITION.images;
+              this.images.load(this.that);
+              this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.images);
+            } else {
+              this.that.cameraRubberBanding.position.set(
+                this.questions[this.questionIndex + 1].location.x,
+                this.questions[this.questionIndex + 1].location.y,
+                WORLD_POSITION.questions - this.questions[this.questionIndex + 1].location.z
+              );
+              this.currentAnswers.forEach(answer => {
+                const data = {
+                  question: this.questions[this.questionIndex].question,
+                  answer: answer,
+                  userId: this.that.uiStore.randomUser._id,
+                  param1: 10,
+                  param2: 10,
+                  param3: 10
+                };
+                this.that.answers.push(data);
+              });
+              this.currentAnswers = [];
+              this.questionIndex += 1;
+            }
           }
         }
       });
