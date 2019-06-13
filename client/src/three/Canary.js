@@ -105,14 +105,16 @@ class Canary {
     });
   };
 
-  createText = (that, message, textFont, size, color, x, y, z, planeZ, rotation = 0, name) => {
+  createText = (that, message, textFont, size, color, x, y, z, planeZ, rotation = 0, name, center) => {
     that.fontLoader.load(textFont, font => {
       let textGeometry = new THREE.TextGeometry(message, {
         font: font,
         size: size,
         height: 0
       });
-
+      if (center) {
+        textGeometry.center();
+      }
       if (planeZ !== 0) {
         z += -PLANE_DIFFERENCE * planeZ;
         size *= 1 + planeZ * PLANE_PERSPECTIVE_CONSTANTE;
