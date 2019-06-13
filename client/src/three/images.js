@@ -26,6 +26,14 @@ class Images {
 
     this.that.fog = { near: FOG.near, far: FOG.far };
 
+    //CREATE IMAGES
+    this.canary.createPng( that, `assets/img/c1_KARAKTER-1.png`, 300, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
+    this.canary.createPng( that, `assets/img/c1_KARAKTER-2.png`, -250, -100, WORLD_POSITION.images - 1200, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
+    this.canary.createPng( that, `assets/img/c1_KARAKTER-3.png`, 200, 0, WORLD_POSITION.images - 1600, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
+    this.canary.createPng( that, `assets/img/c1_KARAKTER-4.png`, -200, 200, WORLD_POSITION.images - 2000, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
+    this.canary.createPng( that, `assets/img/c1_KARAKTER-5.png`, 0, 0, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
+
+    //eventlisteners
     window.addEventListener(`mousemove`, this.onMouseMove);
     window.addEventListener(`wheel`, this.handleMouseScroll);
     window.addEventListener(`click`, this.handleMouseClick);

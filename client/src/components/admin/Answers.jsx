@@ -15,17 +15,21 @@ class Answers extends Component {
   componentDidMount() {
     let state = { ...this.state };
     this.answerStore.answers.forEach(answer => {
-      if (this.state.questions.filter(question => question.question === answer.question).length === 0) {
-        let q = { question: answer.question, answers: [] };
-        state.questions.push(q);
-        this.refCharts.push(React.createRef());
-      }
-      if (this.state.questions.filter(question => question.question === answer.question)[0].answers) {
-        if (this.state.questions.filter(question => question.question === answer.question)[0].answers.filter(a => a.value === answer.answer).length > 0) {
-          state.questions.filter(question => question.question === answer.question)[0].answers.filter(a => a.value === answer.answer)[0].count += 1;
-        } else {
-          state.questions.filter(question => question.question === answer.question)[0].answers.push({ value: answer.answer, count: 1 });
-        }
+      if (answer.answers) {
+        answer.answers.forEach(answerValue => {
+          if (this.state.questions.filter(question => question.question === answer.question).length === 0) {
+            let q = { question: answer.question, answers: [] };
+            state.questions.push(q);
+            this.refCharts.push(React.createRef());
+          }
+          if (this.state.questions.filter(question => question.question === answer.question)[0].answers) {
+            if (this.state.questions.filter(question => question.question === answer.question)[0].answers.filter(a => a.value === answerValue).length > 0) {
+              state.questions.filter(question => question.question === answer.question)[0].answers.filter(a => a.value === answerValue)[0].count += 1;
+            } else {
+              state.questions.filter(question => question.question === answer.question)[0].answers.push({ value: answerValue, count: 1 });
+            }
+          }
+        });
       }
     });
     this.setState(state);
