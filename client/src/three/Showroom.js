@@ -17,7 +17,7 @@ class Showroom {
     //eventlisteners
     window.addEventListener(`mousemove`, this.onMouseMove);
     window.addEventListener(`wheel`, this.handleMouseScroll);
-    window.addEventListener(`touchstart click`, this.handleMouseClick);
+    window.addEventListener(`mouseup`, this.handleMouseClick);
     const color = that.currentColor.b + that.currentColor.g * 256 + that.currentColor.r * 256 * 256;
     let near = 300;
     let far = 1600;
@@ -32,7 +32,7 @@ class Showroom {
   unmount = () => {
     window.removeEventListener(`mousemove`, this.onMouseMove);
     window.removeEventListener(`wheel`, this.handleMouseScroll);
-    window.removeEventListener(`touchstart click`, this.handleMouseClick);
+    window.removeEventListener(`mouseup`, this.handleMouseClick);
   };
   //Handerse
   handleMouseClick = e => {

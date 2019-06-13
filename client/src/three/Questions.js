@@ -68,14 +68,14 @@ class Questions {
     });
 
     window.addEventListener(`keydown`, this.handleKeyDown);
-    window.addEventListener(`touchstart click`, this.handleMouseClick);
+    window.addEventListener(`mouseup`, this.handleMouseClick);
     window.addEventListener(`mousemove`, this.onMouseMove);
   };
 
   unmount = () => {
     window.removeEventListener(`mousemove`, this.onMouseMove);
     window.removeEventListener(`keydown`, this.handleKeyDown);
-    window.removeEventListener(`touchstart click`, this.handleMouseClick);
+    window.removeEventListener(`mouseup`, this.handleMouseClick);
     this.that.cameraRubberBandingActive = false;
   };
 
