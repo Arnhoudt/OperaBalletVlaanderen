@@ -1,16 +1,5 @@
 import * as THREE from "three";
-import {
-  BACKGROUND_COLORS,
-  FONTS,
-  HOME_IMAGE_SIZE_LARGER,
-  HOME_IMAGE_SIZE,
-  WORLD_POSITION,
-  SHOWROOM_MAX_X_ROTATION,
-  SHOWROOM_MAX_Y_ROTATION,
-  SHOWROOM_MAX_Z_ROTATION,
-  SCENE_Z_DIFFERENCE,
-  FOG
-} from "../constants";
+import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, SCENE_Z_DIFFERENCE, FOG } from "../constants";
 import Canary from "./Canary";
 class Images {
   canary = new Canary();
