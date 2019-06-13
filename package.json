@@ -5,9 +5,6 @@
   "repository": "git@github.com:KindtAnton/OperaBalletVlaanderen.git",
   "author": "Frederik Cypers <frederikcypers1705@gmail.com>",
   "license": "MIT",
-  "engines": {
-    "node": "6.11.1"
-  },
   "scripts": {
     "start": "cd server/ && yarn && yarn start",
     "build": "cd client/ && yarn && yarn build"
