@@ -1,15 +1,25 @@
 import * as THREE from "three";
 import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, SCENE_Z_DIFFERENCE, FOG } from "../constants";
 import Canary from "./Canary";
+import {log} from "three";
+
 class Showroom {
   canary = new Canary();
   setThis = that => {
     this.that = that;
   };
-  load = that => {
-    console.log(that.answers);
 
+  load = async that => {
+    //console.log(that.answers);
+    const answers = await that.answerStore.findAllByUser(that.uiStore.randomUser._id);
+   console.log(answers);
+   answers.forEach(answer => {
+   })
     this.that = that;
+    console.log(this.that.iconscroll.style);
+    console.log(this.that.iconscroll.classList);
+    this.that.iconscroll.style.opacity = 1;
+
     this.that.cameraRubberBandingForce = 1;
     that.movementFreedom = 500;
     that.cameraRubberBandingActive = true;
@@ -57,8 +67,8 @@ class Showroom {
         this.that.closeUpData = this.canary.getPhotoData(this.that.closeUpObject);
         //de foto wordt centraal op het scherm van de user geplaatst
         this.that.closeUpObject.object.rotation.set(0, 0, 0);
-        this.that.fog.near = 400;
-        this.that.fog.far = 800;
+        this.that.fog.near = 300;
+        this.that.fog.far = 400;
       } else {
         this.canary.changePointer(this.that.pointer, `assets/img/mouse_pointer.png`);
         this.canary.loadPhotoData(this.that.closeUpData, this.that.closeUpObject);
@@ -86,13 +96,19 @@ class Showroom {
       this.that.raycaster.setFromCamera(this.that.mouse, this.that.camera);
       let intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
       if (intersects.length > 0) {
-        if (this.pointerName) this.canary.changePointer(this.that.pointer, `assets/img/mouse_view.png`);
+        if(this.that.pointerName !== `view`){
+          this.canary.changePointer(this.that.pointer, `assets/img/mouse_view.png`);
+          this.that.pointerName = `view`;
+        }
         this.that.zoomedObject = this.canary.getClosestObjectWithName(intersects, `showRoomImage`);
         if (this.that.zoomedObject) {
           this.that.zoomedObject.object.scale.set(1.1, 1.1, this.that.zoomedObject.object.scale.z);
         }
       } else {
-        this.canary.changePointer(this.that.pointer, `assets/img/mouse_pointer.png`);
+        if(this.that.pointerName !== `arrow`){
+          this.canary.changePointer(this.that.pointer, `assets/img/mouse_pointer.png`);
+          this.that.pointerName = `arrow`;
+        }
         if (this.that.zoomedObject) {
           this.that.zoomedObject.object.scale.set(1, 1, this.that.zoomedObject.object.scale.z);
           this.that.zoomedObject = undefined;
@@ -101,6 +117,7 @@ class Showroom {
     }
   };
   handleMouseScroll = e => {
+    this.that.iconscroll.style.opacity -=  Math.abs(e.deltaY)/1000;
     if (this.that.closeUpObject === undefined) {
       if (this.that.camera.position.z <= WORLD_POSITION.images || e.deltaY > 0) {
         if (this.that.camera.position.z > WORLD_POSITION.images - 2150 || e.deltaY < 0) {

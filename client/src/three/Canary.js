@@ -197,6 +197,12 @@ class Canary {
     return pointer;
   };
 
+  createScroll = () => {
+    let scroll = document.createElement(`div`);
+    scroll.classList.add(`icon-scroll`);
+    return scroll;
+  }
+
   changePointer = (pointer, path) => {
     pointer.innerHTML = `<img src=` + path + ` width="` + POINTER.width + `" height="` + POINTER.height + `" alt="">`;
     pointer.classList.add(`pointer`);

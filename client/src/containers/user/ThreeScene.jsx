@@ -33,7 +33,11 @@ class ThreeScene extends Component {
     this.answers = [];
   }
 
+
   componentDidMount() {
+    window.addEventListener(`orientationchange`, this.doOnOrientationChange);
+
+
     THREE.DefaultLoadingManager.onStart = (url, itemsLoaded, itemsTotal) => {
       const state = { ...this.state };
       state.loading = Math.round((itemsLoaded / itemsTotal) * 100);
@@ -61,7 +65,13 @@ class ThreeScene extends Component {
     {
       this.pointer = canary.createPointer(POINTER.image);
       this.mount.appendChild(this.pointer);
+      this.iconscroll.style.opacity = 0;
     }
+
+    if(window.innerWidth > window.innerHeight){
+      console.log("port");
+    }
+
 
     // variablelen aanmaken (hier mag GEEN data in zitten, dat doe je in de instellingen)
     {
@@ -75,6 +85,7 @@ class ThreeScene extends Component {
       this.lookPosition = { x: 0, y: 0 }; //default waarde zonder betekenis
       this.pointerPosition = { x: window.innerWidth / 2, y: window.innerHeight / 2 }; //default waarde zonder betekenis
       this.movementFreedom = CAMERA.movementFreedom;
+      this.pointerName = `none`;
     }
 
     threeSetup.setup(this);
@@ -91,7 +102,11 @@ class ThreeScene extends Component {
         questions.load(this);
         break;
     }
-
+    if(window.innerHeight>window.innerWidth){
+      this.turnPhone.style.opacity = 1;
+    } else {
+      this.turnPhone.style.opacity = 0;
+    }
     this.start();
   }
 
@@ -227,6 +242,14 @@ class ThreeScene extends Component {
     }
   };
 
+  doOnOrientationChange = ()  => {
+    if(window.innerHeight>window.innerWidth){
+      this.turnPhone.style.opacity = 0;
+    } else {
+      this.turnPhone.style.opacity = 1;
+    }
+  }
+
   render() {
     return (
       <>
@@ -236,6 +259,20 @@ class ThreeScene extends Component {
             this.mount = mount;
           }}
         />
+        <div className={`${styles.iconscroll}` }
+             ref={iconscroll => {
+               this.iconscroll = iconscroll;
+             }}> </div>
+        <div className={`${styles.turnPhone}` }
+             ref={turnPhone => {
+               this.turnPhone = turnPhone;
+             }}>
+          <div> </div>
+          <img src="assets/img/turn.png" alt="draai je gsm aub"/>
+          <h2>Oeps ...</h2>
+          <p>Kaltel je gsm/table voor de beste ervaring</p>
+
+        </div>
         <div
           className={styles.popup}
           ref={popup => {
