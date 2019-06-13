@@ -8,6 +8,7 @@ import {
   SHOWROOM_MAX_X_ROTATION,
   SHOWROOM_MAX_Y_ROTATION,
   SHOWROOM_MAX_Z_ROTATION,
+  SCENE_Z_DIFFERENCE,
   FOG
 } from "../constants";
 import Canary from "./Canary";
@@ -25,13 +26,6 @@ class Images {
     that.cameraRubberBandingActive = true;
 
     this.that.fog = { near: FOG.near, far: FOG.far };
-
-    //CREATE IMAGES
-    this.canary.createPng( that, `assets/img/c1_KARAKTER-1.png`, 300, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
-    this.canary.createPng( that, `assets/img/c1_KARAKTER-2.png`, -250, -100, WORLD_POSITION.images - 1200, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
-    this.canary.createPng( that, `assets/img/c1_KARAKTER-3.png`, 200, 0, WORLD_POSITION.images - 1600, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
-    this.canary.createPng( that, `assets/img/c1_KARAKTER-4.png`, -200, 200, WORLD_POSITION.images - 2000, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
-    this.canary.createPng( that, `assets/img/c1_KARAKTER-5.png`, 0, 0, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage`);
 
     //eventlisteners
     window.addEventListener(`mousemove`, this.onMouseMove);
@@ -84,7 +78,7 @@ class Images {
         this.that.fog.near = 400;
         this.that.fog.far = 800;
       } else {
-        this.canary.changePointer(this.that.pointer, `assets/img/whiteCircle.png`);
+        this.canary.changePointer(this.that.pointer, `assets/img/mouse_pointer.png`);
         this.canary.loadPhotoData(this.that.closeUpData, this.that.closeUpObject);
         this.that.fog.near = 1200;
         this.that.fog.far = 1600;
@@ -112,11 +106,13 @@ class Images {
       this.that.raycaster.setFromCamera(this.that.mouse, this.that.camera);
       let intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
       if (intersects.length > 0) {
+        this.canary.changePointer(this.that.pointer, `assets/img/mouse_view.png`);
         this.that.zoomedObject = this.canary.getClosestObjectWithName(intersects, `showRoomImage`);
         if (this.that.zoomedObject) {
           this.that.zoomedObject.object.scale.set(1.1, 1.1, this.that.zoomedObject.object.scale.z);
         }
       } else {
+        this.canary.changePointer(this.that.pointer, `assets/img/mouse_pointer.png`);
         if (this.that.zoomedObject) {
           this.that.zoomedObject.object.scale.set(1, 1, this.that.zoomedObject.object.scale.z);
           this.that.zoomedObject = undefined;
@@ -174,7 +170,7 @@ class Images {
     const z = this.that.camera.position.z - 100;
     this.that.camera.lookAt(this.that.lookPosition.x, this.that.lookPosition.y, z);
     if (this.that.closeUpObject !== undefined) {
-      this.that.closeUpObject.object.position.set(this.that.camera.position.x, this.that.camera.position.y, this.that.camera.position.z - 500);
+      this.that.closeUpObject.object.position.set(this.that.camera.position.x, this.that.camera.position.y, this.that.camera.position.z - 300);
       this.that.closeUpObject.object.scale.set(1, 1, 1);
       this.that.closeUpObject.object.rotation.set(0, 0, 0);
       this.that.scene.children.forEach(child => {
@@ -186,31 +182,31 @@ class Images {
   };
 
   createScene1 = () => {
-    this.canary.createText(this.that, `0%`, FONTS.domaineRegular, 10, 0x000000, 225, 80, WORLD_POSITION.images - 800, 1,0,`sceneElement_1_3_-25_-70`);
-    this.canary.createText(this.that, `50%`, FONTS.domaineRegular, 10, 0x000000, 250, 185, WORLD_POSITION.images - 800, 1,0,`sceneElement_1_3_0_35`);
-    this.canary.createText(this.that, `101%`, FONTS.domaineRegular, 20, 0x000000, 120, 140, WORLD_POSITION.images - 800, 1,0,`sceneElement_1_3_-130_-10`);
+    this.canary.createText(this.that, `14%`, FONTS.domaineRegular, 7, 0x000000, 230, 94, WORLD_POSITION.images - 780, 0,0,`sceneElement_1_2_-20_-56`);
+    this.canary.createText(this.that, `5%`, FONTS.domaineRegular, 7, 0x000000, 250, 178, WORLD_POSITION.images - 780, 0,0,`sceneElement_1_2_0_28`);
+    this.canary.createText(this.that, `79%`, FONTS.domaineDispSemibold, 14, 0x000000, 150, 140, WORLD_POSITION.images - 780, 0,0,`sceneElement_1_2_-100_-10`);
     this.canary.createPng( this.that, `assets/img/c1_KARAKTER_1_layer3.png`,
-        250, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 1, 1,true, `sceneElement_1_2_0_0`);
+        250, 150, WORLD_POSITION.images - 780, 1920 / 5, 1080 / 5, 0, 16,false, `sceneElement_1_2_0_0`);
     this.canary.createPng( this.that, `assets/img/c1_KARAKTER_1_layer2.png`,
-        250, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 2, 1,true, `sceneElement_1_1_0_0`);
+        250, 150, WORLD_POSITION.images - 790, 1920 / 5, 1080 / 5, 0, 1,true, `sceneElement_1_1_0_0`);
     this.canary.createPng( this.that, `assets/img/c1_KARAKTER_1_layer1.png`,
-        250, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 3, 1,true, `showRoomImage_1`);
+        250, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 0, 1,true, `showRoomImage_1`);
   }
   createScene2 = () => {
     this.canary.createPng( this.that, `assets/img/c1_KARAKTER_2.png`,
-        -200, -100, WORLD_POSITION.images - 1200, 1920 / 5, 1080 / 5, 1, 1,true, `showRoomImage_2`);
+        -200, -100, WORLD_POSITION.images - 1200, 1920 / 5, 1080 / 5, 0, 1,true, `showRoomImage_2`);
   }
   createScene3 = () => {
     this.canary.createPng( this.that, `assets/img/c1_KARAKTER_3.png`,
-        130, 0, WORLD_POSITION.images - 1600, 1920 / 5, 1080 / 5, 1, 1,true, `showRoomImage_3`);
+        130, 0, WORLD_POSITION.images - 1600, 1920 / 5, 1080 / 5, 0, 1,true, `showRoomImage_3`);
     }
   createScene4 = () => {
     this.canary.createPng( this.that, `assets/img/c1_KARAKTER_4.png`,
-        -80, 200, WORLD_POSITION.images - 2000, 1920 / 5, 1080 / 5, 1, 1,true, `showRoomImage_4`);
+        -80, 200, WORLD_POSITION.images - 2000, 1920 / 5, 1080 / 5, 0, 1,true, `showRoomImage_4`);
    }
   createScene5 = () => {
     this.canary.createPng( this.that, `assets/img/c1_KARAKTER_5.png`,
-        0, 0, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 1, 1,true, `showRoomImage_5`);
+        0, 0, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 0, 1,true, `showRoomImage_5`);
   }
 
   updateShowRoomChild = (element) => {
@@ -218,7 +214,7 @@ class Images {
       if (child.name.split(`_`)[0] === `showRoomImage`) {
         if(child.name.split(`_`)[1] === element.name.split(`_`)[1]){
           element.position.set(child.position.x + parseInt(element.name.split(`_`)[3]),
-              child.position.y + parseInt(element.name.split(`_`)[4]), child.position.z + parseInt(element.name.split(`_`)[2])*10);
+              child.position.y + parseInt(element.name.split(`_`)[4]), child.position.z + parseInt(element.name.split(`_`)[2])*SCENE_Z_DIFFERENCE);
         }
 
       }

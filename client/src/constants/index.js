@@ -8,7 +8,7 @@ export const ROUTES = {
 };
 
 export const POINTER = {
-  image: `assets/img/whiteCircle.png`,
+  image: `assets/img/mouse_pointer.png`,
   width: 50,
   height: 50
 };
@@ -68,6 +68,8 @@ export const CAMERA = {
   position: WORLD_POSITION.images,
   movementFreedom: 100 //20 voor bij de foto's is goed denk ik en voor de vragen is 50-100 beter
 };
+
+export const SCENE_Z_DIFFERENCE = 10;
 
 export const BACKGROUND_COLORS = {
   images: {
