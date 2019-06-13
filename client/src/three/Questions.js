@@ -68,14 +68,14 @@ class Questions {
     });
 
     window.addEventListener(`keydown`, this.handleKeyDown);
-    window.addEventListener(`touchstart click`, this.handleMouseClick);
+    window.addEventListener(`mouseup`, this.handleMouseClick);
     window.addEventListener(`mousemove`, this.onMouseMove);
   };
 
   unmount = () => {
     window.removeEventListener(`mousemove`, this.onMouseMove);
     window.removeEventListener(`keydown`, this.handleKeyDown);
-    window.removeEventListener(`touchstart click`, this.handleMouseClick);
+    window.removeEventListener(`mouseup`, this.handleMouseClick);
     this.that.cameraRubberBandingActive = false;
   };
 
@@ -183,7 +183,27 @@ class Questions {
       this.canary.createRectangle(this.that, x - 134, y - 82, this.planeZ - z, 242 / 5, 1 / 5, 2, 0x000000);
       this.canary.createPng(this.that, `assets/img/transparant.png`, x - 158, y - 92, this.planeZ - z, 268 / 8, 62 / 8, 3, 1, false, `terug_scherm`);
       this.canary.createRectangle(this.that, x + 105, y - 62.5, WORLD_POSITION.questions - z - 251, 432 / 8, 96 / 8, 0, 0x000000, `volgende_vraag`);
-      this.canary.createText(this.that, `VOLGENDE VRAAG`, FONTS.radikalMedium, 3.2, 0xf9f9f9, x + 84, y - 64, this.planeZ - z, 1, `volgende_text_${question}`);
+      this.canary.createText(
+        this.that,
+        `VOLGENDE VRAAG`,
+        FONTS.radikalMedium,
+        3.2,
+        0xf9f9f9,
+        x + 84,
+        y - 64,
+        this.planeZ - z,
+        1,
+        false,
+        `volgende_text_${question}`
+      );
+      this.that.scene.children.forEach(mesh => {
+        if (mesh.name) {
+          const a = mesh.name.split(`_`);
+          if (a[2] === question.question) {
+            console.log(mesh);
+          }
+        }
+      });
       const positionButtons = [
         { x: -80, y: 0 },
         { x: -12, y: 0 },
