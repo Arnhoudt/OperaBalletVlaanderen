@@ -62,6 +62,7 @@ class ThreeScene extends Component {
     {
       this.pointer = canary.createPointer(POINTER.image);
       this.mount.appendChild(this.pointer);
+      this.iconscroll.style.opacity = 0;
     }
 
     // variablelen aanmaken (hier mag GEEN data in zitten, dat doe je in de instellingen)
@@ -76,6 +77,7 @@ class ThreeScene extends Component {
       this.lookPosition = { x: 0, y: 0 }; //default waarde zonder betekenis
       this.pointerPosition = { x: window.innerWidth / 2, y: window.innerHeight / 2 }; //default waarde zonder betekenis
       this.movementFreedom = CAMERA.movementFreedom;
+      this.pointerName = `none`;
     }
 
     threeSetup.setup(this);
@@ -201,6 +203,10 @@ class ThreeScene extends Component {
             this.mount = mount;
           }}
         />
+        <div className={`${styles.iconscroll}` }
+             ref={iconscroll => {
+               this.iconscroll = iconscroll;
+             }}> </div>
         <div
           className={styles.popup}
           ref={popup => {

@@ -21,6 +21,10 @@ class Images {
 
   load = that => {
     this.that = that;
+    console.log(this.that.iconscroll.style);
+    console.log(this.that.iconscroll.classList);
+    this.that.iconscroll.style.opacity = 1;
+
     this.that.cameraRubberBandingForce = 1;
     that.movementFreedom = 500;
     that.cameraRubberBandingActive = true;
@@ -106,13 +110,19 @@ class Images {
       this.that.raycaster.setFromCamera(this.that.mouse, this.that.camera);
       let intersects = this.that.raycaster.intersectObjects(this.that.scene.children);
       if (intersects.length > 0) {
-        this.canary.changePointer(this.that.pointer, `assets/img/mouse_view.png`);
+        if(this.that.pointerName !== `view`){
+          this.canary.changePointer(this.that.pointer, `assets/img/mouse_view.png`);
+          this.that.pointerName = `view`;
+        }
         this.that.zoomedObject = this.canary.getClosestObjectWithName(intersects, `showRoomImage`);
         if (this.that.zoomedObject) {
           this.that.zoomedObject.object.scale.set(1.1, 1.1, this.that.zoomedObject.object.scale.z);
         }
       } else {
-        this.canary.changePointer(this.that.pointer, `assets/img/mouse_pointer.png`);
+        if(this.that.pointerName !== `arrow`){
+          this.canary.changePointer(this.that.pointer, `assets/img/mouse_pointer.png`);
+          this.that.pointerName = `arrow`;
+        }
         if (this.that.zoomedObject) {
           this.that.zoomedObject.object.scale.set(1, 1, this.that.zoomedObject.object.scale.z);
           this.that.zoomedObject = undefined;
@@ -122,6 +132,7 @@ class Images {
   };
 
   handleMouseScroll = e => {
+    this.that.iconscroll.style.opacity -=  Math.abs(e.deltaY)/1000;
     if (this.that.closeUpObject === undefined) {
       if (this.that.camera.position.z <= WORLD_POSITION.images || e.deltaY > 0) {
         if (this.that.camera.position.z > WORLD_POSITION.images - 2150 || e.deltaY < 0) {
