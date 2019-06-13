@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { FONTS, WORLD_POSITION, CAMERA_PLANE_DIFFERENCE, FOG_QUESTIONS } from "../constants";
 import Canary from "./Canary";
-import Images from "./Images";
+import Images from "./Showroom";
 
 class Questions {
   canary = new Canary();
