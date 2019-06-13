@@ -9,11 +9,9 @@ import ThreeSetup from "../../three/ThreeSetup";
 
 import styles from "./ThreeScene.module.css";
 import { BACKGROUND_COLORS, CAMERA, WORLD_POSITION, CAMERA_RUBBERBANDING_FORCE, FOG, POINTER } from "../../constants/index";
-import Character from "../../three/Character";
 let canary = new Canary();
 let images = new Images();
 let questions = new Questions();
-let character = new Character();
 let threeSetup = new ThreeSetup();
 
 class ThreeScene extends Component {
@@ -92,8 +90,6 @@ class ThreeScene extends Component {
       default:
         questions.load(this);
         break;
-      case WORLD_POSITION.character:
-        character.load(this);
     }
 
     this.start();

@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, SCENE_Z_DIFFERENCE, FOG } from "../constants";
 import Canary from "./Canary";
-class Images {
+class Showroom {
   canary = new Canary();
   setThis = that => {
     this.that = that;
@@ -115,7 +115,8 @@ class Images {
         } else if (child.name && child.name.split(`_`)[0] === `sceneElement`) {
           this.updateShowRoomChild(child);
         }
-        //if(Math.abs(child.rotation.x) < SHOWROOM_MAX_X_ROTATION && Math.abs(child.rotation.y) < SHOWROOM_MAX_Y_ROTATION && Math.abs(child.rotation.z) < SHOWROOM_MAX_Z_ROTATION)
+        //if(Math.abs(child.rotation.x) < SHOWROOM_MAX_X_ROTATION && Math.abs(child.rotation.y) < SHOWROOM_MAX_Y_ROTATION && Math.abs(child.rotation.z)
+        //< SHOWROOM_MAX_Z_ROTATION)
         //child.lookAt(this.that.camera.position.x, this.that.camera.position.y, this.that.camera.position.z);
         // if(Math.abs(child.rotation.x) > SHOWROOM_MAX_X_ROTATION){
         //   child.rotation.x = Math.sign(child.rotation.x)*SHOWROOM_MAX_X_ROTATION;
@@ -341,4 +342,4 @@ class Images {
     });
   };
 }
-export default Images;
+export default Showroom;
