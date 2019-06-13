@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { POINTER, WORLD_POSITION, PLANE_DIFFERENCE, CAMERA_PLANE_DIFFERENCE, PLANE_PERSPECTIVE_CONSTANTE } from "../constants";
+import { POINTER, PLANE_DIFFERENCE, PLANE_PERSPECTIVE_CONSTANTE } from "../constants";
 let SVGLoader = require(`three-svg-loader`);
 
 class Canary {
@@ -36,6 +36,17 @@ class Canary {
       plane.name = name;
       component.scene.add(plane);
       return plane;
+    });
+  };
+
+  createSound = (component, clip) => {
+    let sound = new THREE.Audio(component.that.listener);
+    let audioLoader = new THREE.AudioLoader();
+    audioLoader.load(clip, buffer => {
+      sound.setBuffer(buffer);
+      sound.setLoop(true);
+      sound.setVolume(0.5);
+      component.sounds.push(sound);
     });
   };
 
@@ -176,7 +187,7 @@ class Canary {
     }); //end load function
   };
 
-  createPointer = (path) => {
+  createPointer = path => {
     let pointer = document.createElement(`div`);
     pointer.innerHTML = `<img src=` + path + ` width="` + POINTER.width + `" height="` + POINTER.height + `" alt="">`;
     pointer.classList.add(`pointer`);
@@ -198,8 +209,7 @@ class Canary {
     pointer.style.transform = `translateX(-100px)`;
     pointer.style.position = `absolute`;
     pointer.style.userSelect = `none`;
-  }
-
+  };
 }
 
 export default Canary;

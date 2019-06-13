@@ -32,6 +32,7 @@ class ThreeScene extends Component {
     this.questionStore = props.questionStore;
     this.history = props.history;
     this.state = { loading: ``, error: ``, done: false };
+    this.answers = [];
   }
 
   componentDidMount() {

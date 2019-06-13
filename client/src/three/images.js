@@ -20,6 +20,8 @@ class Images {
   };
 
   load = that => {
+    console.log(that.answers);
+
     this.that = that;
     console.log(this.that.iconscroll.style);
     console.log(this.that.iconscroll.classList);
@@ -71,10 +73,10 @@ class Images {
         this.canary.changePointer(this.that.pointer, `assets/img/mouse_exit.png`);
         intersects.reverse();
         intersects.forEach(intersect => {
-          if(intersect.object.name.split(`_`)[0] === `showRoomImage`){
+          if (intersect.object.name.split(`_`)[0] === `showRoomImage`) {
             this.that.closeUpObject = intersect;
           }
-        })
+        });
         // de waarden van de huidige foto worden opgeslagen TODO: dit kan efficienter
         this.that.closeUpData = this.canary.getPhotoData(this.that.closeUpObject);
         //de foto wordt centraal op het scherm van de user geplaatst
@@ -87,10 +89,10 @@ class Images {
         this.that.fog.near = 1200;
         this.that.fog.far = 1600;
         this.that.scene.children.forEach(child => {
-          if(child.name.split(`_`)[0] === `sceneElement` && child.name.split(`_`)[1] === this.that.closeUpObject.object.name.split(`_`)[1]){
+          if (child.name.split(`_`)[0] === `sceneElement` && child.name.split(`_`)[1] === this.that.closeUpObject.object.name.split(`_`)[1]) {
             this.updateShowRoomChild(child);
           }
-        })
+        });
         this.that.closeUpObject = undefined;
       }
     }
@@ -142,9 +144,9 @@ class Images {
       this.that.scene.children.forEach(child => {
         if ((this.that.camera.position.z <= WORLD_POSITION.images || e.deltaY > 0) && child.name && child.name.split(`_`)[0] === `showRoomImage`) {
           if (this.that.camera.position.z > WORLD_POSITION.images - 2150) {
-            child.position.x +=  (child.position.x * e.deltaY / 3000);
+            child.position.x += (child.position.x * e.deltaY) / 3000;
           }
-        }else if(child.name.split(`_`)[0] === `sceneElement`){
+        } else if (child.name.split(`_`)[0] === `sceneElement`) {
           this.updateShowRoomChild(child);
         }
         //if(Math.abs(child.rotation.x) < SHOWROOM_MAX_X_ROTATION && Math.abs(child.rotation.y) < SHOWROOM_MAX_Y_ROTATION && Math.abs(child.rotation.z) < SHOWROOM_MAX_Z_ROTATION)
@@ -185,64 +187,197 @@ class Images {
       this.that.closeUpObject.object.scale.set(1, 1, 1);
       this.that.closeUpObject.object.rotation.set(0, 0, 0);
       this.that.scene.children.forEach(child => {
-        if(child.name.split(`_`)[0] === `sceneElement` && child.name.split(`_`)[1] === this.that.closeUpObject.object.name.split(`_`)[1]){
+        if (child.name.split(`_`)[0] === `sceneElement` && child.name.split(`_`)[1] === this.that.closeUpObject.object.name.split(`_`)[1]) {
           this.updateShowRoomChild(child);
         }
-      })
+      });
     }
   };
 
   createScene1 = () => {
-    this.canary.createText(this.that, `14%`, FONTS.domaineRegular, 7, 0x000000, 230, 94, WORLD_POSITION.images - 780, 0,0,`sceneElement_1_2_-20_-56`);
-    this.canary.createText(this.that, `5%`, FONTS.domaineRegular, 7, 0x000000, 250, 178, WORLD_POSITION.images - 780, 0,0,`sceneElement_1_2_0_28`);
-    this.canary.createText(this.that, `79%`, FONTS.domaineDispSemibold, 14, 0x000000, 150, 140, WORLD_POSITION.images - 780, 0,0,`sceneElement_1_2_-100_-10`);
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_1_layer3.png`,
-        250, 150, WORLD_POSITION.images - 780, 1920 / 5, 1080 / 5, 0, 16,false, `sceneElement_1_2_0_0`);
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_1_layer2.png`,
-        250, 150, WORLD_POSITION.images - 790, 1920 / 5, 1080 / 5, 0, 1,true, `sceneElement_1_1_0_0`);
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_1_layer1.png`,
-        250, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 0, 1,true, `showRoomImage_1`);
-  }
+    this.canary.createText(this.that, `14%`, FONTS.domaineRegular, 7, 0x000000, 230, 94, WORLD_POSITION.images - 780, 0, 0, `sceneElement_1_2_-20_-56`);
+    this.canary.createText(this.that, `5%`, FONTS.domaineRegular, 7, 0x000000, 250, 178, WORLD_POSITION.images - 780, 0, 0, `sceneElement_1_2_0_28`);
+    this.canary.createText(this.that, `79%`, FONTS.domaineDispSemibold, 14, 0x000000, 150, 140, WORLD_POSITION.images - 780, 0, 0, `sceneElement_1_2_-100_-10`);
+    this.canary.createPng(
+      this.that,
+      `assets/img/c1_KARAKTER_1_layer3.png`,
+      250,
+      150,
+      WORLD_POSITION.images - 780,
+      1920 / 5,
+      1080 / 5,
+      0,
+      16,
+      false,
+      `sceneElement_1_2_0_0`
+    );
+    this.canary.createPng(
+      this.that,
+      `assets/img/c1_KARAKTER_1_layer2.png`,
+      250,
+      150,
+      WORLD_POSITION.images - 790,
+      1920 / 5,
+      1080 / 5,
+      0,
+      1,
+      true,
+      `sceneElement_1_1_0_0`
+    );
+    this.canary.createPng(
+      this.that,
+      `assets/img/c1_KARAKTER_1_layer1.png`,
+      250,
+      150,
+      WORLD_POSITION.images - 800,
+      1920 / 5,
+      1080 / 5,
+      0,
+      1,
+      true,
+      `showRoomImage_1`
+    );
+  };
   createScene2 = () => {
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_2_layer2.png`,
-        -200, -100, WORLD_POSITION.images - 1190, 1920 / 5.2, 1080 / 5.2, 0, 1,true, `sceneElement_2_1_0_0`);
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_2_layer3.png`,
-        -200, -100, WORLD_POSITION.images - 1190, 1920 / 5.2, 1080 / 5.2, 0, 16,false, `sceneElement_2_2_0_0`);
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_2_layer1.png`,
-        -200, -100, WORLD_POSITION.images - 1200, 1920 / 5, 1080 / 5, 0, 1,true, `showRoomImage_2`);
-  }
+    this.canary.createPng(
+      this.that,
+      `assets/img/c1_KARAKTER_2_layer2.png`,
+      -200,
+      -100,
+      WORLD_POSITION.images - 1190,
+      1920 / 5.2,
+      1080 / 5.2,
+      0,
+      1,
+      true,
+      `sceneElement_2_1_0_0`
+    );
+    this.canary.createPng(
+      this.that,
+      `assets/img/c1_KARAKTER_2_layer3.png`,
+      -200,
+      -100,
+      WORLD_POSITION.images - 1190,
+      1920 / 5.2,
+      1080 / 5.2,
+      0,
+      16,
+      false,
+      `sceneElement_2_2_0_0`
+    );
+    this.canary.createPng(
+      this.that,
+      `assets/img/c1_KARAKTER_2_layer1.png`,
+      -200,
+      -100,
+      WORLD_POSITION.images - 1200,
+      1920 / 5,
+      1080 / 5,
+      0,
+      1,
+      true,
+      `showRoomImage_2`
+    );
+  };
   createScene3 = () => {
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_3_layer2.png`,
-        130, 0, WORLD_POSITION.images - 1580, 1920 / 5.2, 1080 / 5.2, 0, 1,true, `sceneElement_3_1_0_0`);
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_3_layer3.png`,
-        130, 0, WORLD_POSITION.images - 1590, 1920 / 5.2, 1080 / 5.2, 0, 16,false, `sceneElement_3_1_0_0`);
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_3_layer1.png`,
-        130, 0, WORLD_POSITION.images - 1600, 1920 / 5, 1080 / 5, 0, 1,true, `showRoomImage_3`);
-    }
+    this.canary.createPng(
+      this.that,
+      `assets/img/c1_KARAKTER_3_layer2.png`,
+      130,
+      0,
+      WORLD_POSITION.images - 1580,
+      1920 / 5.2,
+      1080 / 5.2,
+      0,
+      1,
+      true,
+      `sceneElement_3_1_0_0`
+    );
+    this.canary.createPng(
+      this.that,
+      `assets/img/c1_KARAKTER_3_layer3.png`,
+      130,
+      0,
+      WORLD_POSITION.images - 1590,
+      1920 / 5.2,
+      1080 / 5.2,
+      0,
+      16,
+      false,
+      `sceneElement_3_1_0_0`
+    );
+    this.canary.createPng(
+      this.that,
+      `assets/img/c1_KARAKTER_3_layer1.png`,
+      130,
+      0,
+      WORLD_POSITION.images - 1600,
+      1920 / 5,
+      1080 / 5,
+      0,
+      1,
+      true,
+      `showRoomImage_3`
+    );
+  };
   createScene4 = () => {
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_4_layer2.png`,
-        -80, 200, WORLD_POSITION.images - 1980, 1920 / 5.2, 1080 / 5.2, 0, 1,true, `sceneElement_4_1_0_0`);
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_4_layer3.png`,
-        -80, 200, WORLD_POSITION.images - 1990, 1920 / 5.2, 1080 / 5.2, 0, 16,false, `sceneElement_4_1_0_0`);
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_4_layer1.png`,
-        -80, 200, WORLD_POSITION.images - 2000, 1920 / 5, 1080 / 5, 0, 1,true, `showRoomImage_4`);
-   }
+    this.canary.createPng(
+      this.that,
+      `assets/img/c1_KARAKTER_4_layer2.png`,
+      -80,
+      200,
+      WORLD_POSITION.images - 1980,
+      1920 / 5.2,
+      1080 / 5.2,
+      0,
+      1,
+      true,
+      `sceneElement_4_1_0_0`
+    );
+    this.canary.createPng(
+      this.that,
+      `assets/img/c1_KARAKTER_4_layer3.png`,
+      -80,
+      200,
+      WORLD_POSITION.images - 1990,
+      1920 / 5.2,
+      1080 / 5.2,
+      0,
+      16,
+      false,
+      `sceneElement_4_1_0_0`
+    );
+    this.canary.createPng(
+      this.that,
+      `assets/img/c1_KARAKTER_4_layer1.png`,
+      -80,
+      200,
+      WORLD_POSITION.images - 2000,
+      1920 / 5,
+      1080 / 5,
+      0,
+      1,
+      true,
+      `showRoomImage_4`
+    );
+  };
   createScene5 = () => {
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_5.png`,
-        0, 0, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 0, 1,true, `showRoomImage_5`);
-  }
+    this.canary.createPng(this.that, `assets/img/c1_KARAKTER_5.png`, 0, 0, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 0, 1, true, `showRoomImage_5`);
+  };
 
-  updateShowRoomChild = (element) => {
+  updateShowRoomChild = element => {
     this.that.scene.children.forEach(child => {
       if (child.name.split(`_`)[0] === `showRoomImage`) {
-        if(child.name.split(`_`)[1] === element.name.split(`_`)[1]){
-          element.position.set(child.position.x + parseInt(element.name.split(`_`)[3]),
-              child.position.y + parseInt(element.name.split(`_`)[4]), child.position.z + parseInt(element.name.split(`_`)[2])*SCENE_Z_DIFFERENCE);
+        if (child.name.split(`_`)[1] === element.name.split(`_`)[1]) {
+          element.position.set(
+            child.position.x + parseInt(element.name.split(`_`)[3]),
+            child.position.y + parseInt(element.name.split(`_`)[4]),
+            child.position.z + parseInt(element.name.split(`_`)[2]) * SCENE_Z_DIFFERENCE
+          );
         }
-
       }
     });
-  }
+  };
 }
 
 export default Images;

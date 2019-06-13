@@ -33,6 +33,9 @@ class ThreeSetup {
     //ADD LIGHT
     let light = new THREE.AmbientLight(0xffffff); // soft white light
     that.scene.add(light);
+    //ADD AUDIO
+    that.listener = new THREE.AudioListener();
+    that.camera.add(that.listener);
   };
 }
 
