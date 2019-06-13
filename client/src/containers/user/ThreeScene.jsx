@@ -35,7 +35,11 @@ class ThreeScene extends Component {
     this.answers = [];
   }
 
+
   componentDidMount() {
+    window.addEventListener(`orientationchange`, this.doOnOrientationChange);
+
+
     THREE.DefaultLoadingManager.onStart = (url, itemsLoaded, itemsTotal) => {
       const state = { ...this.state };
       state.loading = Math.round((itemsLoaded / itemsTotal) * 100);
@@ -65,6 +69,11 @@ class ThreeScene extends Component {
       this.mount.appendChild(this.pointer);
       this.iconscroll.style.opacity = 0;
     }
+
+    if(window.innerWidth > window.innerHeight){
+      console.log("port");
+    }
+
 
     // variablelen aanmaken (hier mag GEEN data in zitten, dat doe je in de instellingen)
     {
@@ -97,7 +106,11 @@ class ThreeScene extends Component {
       case WORLD_POSITION.character:
         character.load(this);
     }
-
+    if(window.innerHeight>window.innerWidth){
+      this.turnPhone.style.opacity = 1;
+    } else {
+      this.turnPhone.style.opacity = 0;
+    }
     this.start();
   }
 
@@ -195,6 +208,14 @@ class ThreeScene extends Component {
     }
   };
 
+  doOnOrientationChange = ()  => {
+    if(window.innerHeight>window.innerWidth){
+      this.turnPhone.style.opacity = 0;
+    } else {
+      this.turnPhone.style.opacity = 1;
+    }
+  }
+
   render() {
     return (
       <>
@@ -208,6 +229,16 @@ class ThreeScene extends Component {
              ref={iconscroll => {
                this.iconscroll = iconscroll;
              }}> </div>
+        <div className={`${styles.turnPhone}` }
+             ref={turnPhone => {
+               this.turnPhone = turnPhone;
+             }}>
+          <div> </div>
+          <img src="assets/img/turn.png" alt="draai je gsm aub"/>
+          <h2>Oeps ...</h2>
+          <p>Kaltel je gsm/table voor de beste ervaring</p>
+
+        </div>
         <div
           className={styles.popup}
           ref={popup => {

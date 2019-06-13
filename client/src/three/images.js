@@ -12,6 +12,7 @@ import {
   FOG
 } from "../constants";
 import Canary from "./Canary";
+import {log} from "three";
 
 class Images {
   canary = new Canary();
@@ -19,9 +20,13 @@ class Images {
     this.that = that;
   };
 
-  load = that => {
-    console.log(that.answers);
+  load = async that => {
+    //console.log(that.answers);
+    const answers = await that.answerStore.findAllByUser(that.uiStore.randomUser._id);
+   console.log(answers);
+   answers.forEach(answer => {
 
+   })
     this.that = that;
     console.log(this.that.iconscroll.style);
     console.log(this.that.iconscroll.classList);
@@ -81,8 +86,8 @@ class Images {
         this.that.closeUpData = this.canary.getPhotoData(this.that.closeUpObject);
         //de foto wordt centraal op het scherm van de user geplaatst
         this.that.closeUpObject.object.rotation.set(0, 0, 0);
-        this.that.fog.near = 400;
-        this.that.fog.far = 800;
+        this.that.fog.near = 300;
+        this.that.fog.far = 400;
       } else {
         this.canary.changePointer(this.that.pointer, `assets/img/mouse_pointer.png`);
         this.canary.loadPhotoData(this.that.closeUpData, this.that.closeUpObject);
@@ -367,7 +372,7 @@ class Images {
 
   updateShowRoomChild = element => {
     this.that.scene.children.forEach(child => {
-      if (child.name.split(`_`)[0] === `showRoomImage`) {
+      if (child.name && child.name.split(`_`)[0] === `showRoomImage`) {
         if (child.name.split(`_`)[1] === element.name.split(`_`)[1]) {
           element.position.set(
             child.position.x + parseInt(element.name.split(`_`)[3]),
