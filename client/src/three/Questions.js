@@ -69,9 +69,7 @@ class Questions {
 
     window.addEventListener(`keydown`, this.handleKeyDown);
     window.addEventListener(`mouseup`, this.handleMouseClick);
-    window.addEventListener(`touchstart`, this.handleMouseClick);
     window.addEventListener(`mousemove`, this.onMouseMove);
-    window.addEventListener(`touchmove`, this.onMouseMove);
   };
 
   unmount = () => {

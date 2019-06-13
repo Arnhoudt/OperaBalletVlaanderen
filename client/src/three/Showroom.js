@@ -16,10 +16,8 @@ class Showroom {
     this.that.fog = { near: FOG.near, far: FOG.far };
     //eventlisteners
     window.addEventListener(`mousemove`, this.onMouseMove);
-    window.addEventListener(`touchmove`, this.onMouseMove);
     window.addEventListener(`wheel`, this.handleMouseScroll);
     window.addEventListener(`mouseup`, this.handleMouseClick);
-    window.addEventListener(`touchstart`, this.handleMouseClick);
     const color = that.currentColor.b + that.currentColor.g * 256 + that.currentColor.r * 256 * 256;
     let near = 300;
     let far = 1600;
