@@ -190,27 +190,27 @@ class Images {
     this.canary.createText(this.that, `50%`, FONTS.domaineRegular, 10, 0x000000, 250, 185, WORLD_POSITION.images - 800, 1,0,`sceneElement_1_3_0_35`);
     this.canary.createText(this.that, `101%`, FONTS.domaineRegular, 20, 0x000000, 120, 140, WORLD_POSITION.images - 800, 1,0,`sceneElement_1_3_-130_-10`);
     this.canary.createPng( this.that, `assets/img/c1_KARAKTER_1_layer3.png`,
-        250, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 1, 1, `sceneElement_1_2_0_0`);
+        250, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 1, 1,true, `sceneElement_1_2_0_0`);
     this.canary.createPng( this.that, `assets/img/c1_KARAKTER_1_layer2.png`,
-        250, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 2, 1, `sceneElement_1_1_0_0`);
+        250, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 2, 1,true, `sceneElement_1_1_0_0`);
     this.canary.createPng( this.that, `assets/img/c1_KARAKTER_1_layer1.png`,
-        250, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 3, 1, `showRoomImage_1`);
+        250, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 3, 1,true, `showRoomImage_1`);
   }
   createScene2 = () => {
     this.canary.createPng( this.that, `assets/img/c1_KARAKTER_2.png`,
-        -200, -100, WORLD_POSITION.images - 1200, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage_2`);
+        -200, -100, WORLD_POSITION.images - 1200, 1920 / 5, 1080 / 5, 1, 1,true, `showRoomImage_2`);
   }
   createScene3 = () => {
     this.canary.createPng( this.that, `assets/img/c1_KARAKTER_3.png`,
-        130, 0, WORLD_POSITION.images - 1600, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage_3`);
+        130, 0, WORLD_POSITION.images - 1600, 1920 / 5, 1080 / 5, 1, 1,true, `showRoomImage_3`);
     }
   createScene4 = () => {
     this.canary.createPng( this.that, `assets/img/c1_KARAKTER_4.png`,
-        -80, 200, WORLD_POSITION.images - 2000, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage_4`);
+        -80, 200, WORLD_POSITION.images - 2000, 1920 / 5, 1080 / 5, 1, 1,true, `showRoomImage_4`);
    }
   createScene5 = () => {
     this.canary.createPng( this.that, `assets/img/c1_KARAKTER_5.png`,
-        0, 0, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 1, 1, `showRoomImage_5`);
+        0, 0, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 1, 1,true, `showRoomImage_5`);
   }
 
   updateShowRoomChild = (element) => {
