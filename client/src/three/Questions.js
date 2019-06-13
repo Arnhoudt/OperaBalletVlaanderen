@@ -1,13 +1,12 @@
 import * as THREE from "three";
-import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, CAMERA_PLANE_DIFFERENCE, FOG_QUESTIONS } from "../constants";
+import { FONTS, WORLD_POSITION, CAMERA_PLANE_DIFFERENCE, FOG_QUESTIONS } from "../constants";
 import Canary from "./Canary";
 import Images from "./Images";
-let images = new Images();
 
 class Questions {
   canary = new Canary();
+  images = new Images();
   questions = [];
-  answers = [];
   loaded = false;
   questionIndex = 0;
   hover = false;
@@ -16,8 +15,11 @@ class Questions {
   selectedAnswers = [];
   tex = null;
   texSelected = null;
-  images = [];
+  imagesUnselected = [];
   imagesSelected = [];
+  soundUnselected = null;
+  soundSelected = null;
+  sounds = [];
 
   load = that => {
     this.elements = [];
@@ -30,16 +32,30 @@ class Questions {
     let loader = new THREE.TextureLoader();
     loader.load(`assets/img/button_border.png`, tex => (this.tex = tex));
     loader.load(`assets/img/button_border_selected.png`, tex => (this.texSelected = tex));
+    loader.load(`assets/img/questions/aarde.png`, image => this.imagesUnselected.push({ image: `aarde`, tex: image }));
+    loader.load(`assets/img/questions/collegas.png`, image => this.imagesUnselected.push({ image: `collegas`, tex: image }));
+    loader.load(`assets/img/questions/familie.png`, image => this.imagesUnselected.push({ image: `familie`, tex: image }));
+    loader.load(`assets/img/questions/hel.png`, image => this.imagesUnselected.push({ image: `hel`, tex: image }));
+    loader.load(`assets/img/questions/hemel.png`, image => this.imagesUnselected.push({ image: `hemel`, tex: image }));
+    loader.load(`assets/img/questions/India.png`, image => this.imagesUnselected.push({ image: `India`, tex: image }));
+    loader.load(`assets/img/questions/Schotland.png`, image => this.imagesUnselected.push({ image: `Schotland`, tex: image }));
+    loader.load(`assets/img/questions/Spanje.png`, image => this.imagesUnselected.push({ image: `Spanje`, tex: image }));
+    loader.load(`assets/img/questions/vrienden.png`, image => this.imagesUnselected.push({ image: `vrienden`, tex: image }));
+    loader.load(`assets/img/questions/aarde_selected.png`, image => this.imagesSelected.push({ image: `aarde`, tex: image }));
+    loader.load(`assets/img/questions/collegas_selected.png`, image => this.imagesSelected.push({ image: `collegas`, tex: image }));
+    loader.load(`assets/img/questions/familie_selected.png`, image => this.imagesSelected.push({ image: `familie`, tex: image }));
+    loader.load(`assets/img/questions/hel_selected.png`, image => this.imagesSelected.push({ image: `hel`, tex: image }));
+    loader.load(`assets/img/questions/hemel_selected.png`, image => this.imagesSelected.push({ image: `hemel`, tex: image }));
+    loader.load(`assets/img/questions/India_selected.png`, image => this.imagesSelected.push({ image: `India`, tex: image }));
+    loader.load(`assets/img/questions/Schotland_selected.png`, image => this.imagesSelected.push({ image: `Schotland`, tex: image }));
+    loader.load(`assets/img/questions/Spanje_selected.png`, image => this.imagesSelected.push({ image: `Spanje`, tex: image }));
+    loader.load(`assets/img/questions/vrienden_selected.png`, image => this.imagesSelected.push({ image: `vrienden`, tex: image }));
+    loader.load(`assets/img/questions/play.png`, sound => (this.soundUnselected = sound));
+    loader.load(`assets/img/questions/pauze.png`, sound => (this.soundSelected = sound));
 
-    loader.load(`assets/img/aarde.png`, image => this.images.push({ aarde: image }));
-    loader.load(`assets/img/collegas.png`, image => this.images.push({ collegas: image }));
-    loader.load(`assets/img/familie.png`, image => this.images.push({ familie: image }));
-    loader.load(`assets/img/hel.png`, image => this.images.push({ hel: image }));
-    loader.load(`assets/img/hemel.png`, image => this.images.push({ hemel: image }));
-    loader.load(`assets/img/India.png`, image => this.images.push({ India: image }));
-    loader.load(`assets/img/Schotland.png`, image => this.images.push({ Schotland: image }));
-    loader.load(`assets/img/Spanje.png`, image => this.images.push({ Spanje: image }));
-    loader.load(`assets/img/vrienden.png`, image => this.images.push({ vrienden: image }));
+    this.canary.createSound(this, `assets/sounds/frans_CarmenHabanera_short.mp3`);
+    this.canary.createSound(this, `assets/sounds/italiaans_CarmenHabanera_short.mp3`);
+    this.canary.createSound(this, `assets/sounds/russisch_CarmenHabanera_short.mp3`);
 
     this.that.fog = { near: FOG_QUESTIONS.near, far: FOG_QUESTIONS.far };
 
@@ -239,22 +255,21 @@ class Questions {
               this.planeZ - z,
               1,
               0,
-              `textBeeld`,
+              `answerText_${index}_${index2}_${answer}_beeld`,
               true
             );
           });
           break;
         case `Geluid`:
           question.answers.forEach((answer, index2) => {
-            //createSound
             this.canary.createPng(
               this.that,
-              `assets/img/questions/${answer}.png`,
+              `assets/img/questions/play.png`,
               x + positionImages[index2].x,
               y + positionImages[index2].y,
               WORLD_POSITION.questions - z - 251,
-              432 / 8,
-              312 / 8,
+              432 / 6.4,
+              312 / 6.4,
               0,
               1,
               false,
@@ -267,18 +282,15 @@ class Questions {
               3.2,
               0x000000,
               x + positionImages[index2].x,
-              y + positionImages[index2].y,
+              y + positionImages[index2].y - 30,
               this.planeZ - z,
               1,
               0,
-              `textGeluid`,
+              `answerText_${index}_${index2}_${answer}_geluid`,
               true
             );
           });
           break;
-        case `Slider`:
-          break;
-
         default:
           break;
       }
@@ -315,24 +327,55 @@ class Questions {
               }
             }
             if (a[4] === `beeld`) {
+              let meshText = null;
+              this.that.scene.children.forEach(mesh => {
+                if (mesh.name) {
+                  if (mesh.name.split(`_`)[0] === `answerText`) {
+                    if (mesh.name.split(`_`)[3] === a[3]) {
+                      meshText = mesh;
+                    }
+                  }
+                }
+              });
               if (this.selectedAnswers[`${a[1]}${a[2]}`]) {
                 this.currentAnswers.splice(this.currentAnswers.findIndex(answer => answer === a[3]), 1);
-                //intersect.object.material.map = this.tex;
+                intersect.object.material.map = this.imagesUnselected.filter(image => image.image === a[3])[0].tex;
+                meshText.material.color.set(0x000000);
                 this.selectedAnswers[`${a[1]}${a[2]}`] = false;
               } else {
                 this.currentAnswers.push(a[3]);
-                //intersect.object.material.map = this.texSelected;
+                intersect.object.material.map = this.imagesSelected.filter(image => image.image === a[3])[0].tex;
+                meshText.material.color.set(0xe63b44);
                 this.selectedAnswers[`${a[1]}${a[2]}`] = true;
               }
             }
             if (a[4] === `geluid`) {
+              let meshText = null;
+              this.that.scene.children.forEach(mesh => {
+                if (mesh.name) {
+                  if (mesh.name.split(`_`)[0] === `answerText`) {
+                    if (mesh.name.split(`_`)[3] === a[3]) {
+                      meshText = mesh;
+                    }
+                  }
+                }
+              });
               if (this.selectedAnswers[`${a[1]}${a[2]}`]) {
+                this.sounds[a[2]].pause();
                 this.currentAnswers.splice(this.currentAnswers.findIndex(answer => answer === a[3]), 1);
-                //intersect.object.material.map = this.tex;
+                intersect.object.material.map = this.soundUnselected;
+                meshText.material.color.set(0x000000);
                 this.selectedAnswers[`${a[1]}${a[2]}`] = false;
               } else {
+                this.sounds.forEach(sound => {
+                  if (sound.isPlaying) {
+                    sound.stop();
+                  }
+                });
+                this.sounds[a[2]].play();
                 this.currentAnswers.push(a[3]);
-                //intersect.object.material.map = this.texSelected;
+                intersect.object.material.map = this.soundSelected;
+                meshText.material.color.set(0xe63b44);
                 this.selectedAnswers[`${a[1]}${a[2]}`] = true;
               }
             }
@@ -354,7 +397,7 @@ class Questions {
             param4: 12,
             param5: 43
           };
-          this.answers.push(data);
+          this.that.answers.push(data);
           this.currentAnswers = [];
         }
         if (intersect.object.name === `terug_scherm`) {
@@ -380,15 +423,19 @@ class Questions {
               param5: 43
             };
             this.questionIndex = 0;
-            this.answers.push(data);
-            this.answers.forEach(async answer => {
+            this.that.answers.push(data);
+            this.that.answers.forEach(async answer => {
               await this.that.answerStore.create(answer);
             });
-            this.answers = [];
+            this.sounds.forEach(sound => {
+              if (sound.isPlaying) {
+                sound.stop();
+              }
+            });
             this.currentAnswers = [];
             this.unmount();
             this.that.currentWorld = WORLD_POSITION.images;
-            images.load(this.that);
+            this.images.load(this.that);
             this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.images);
           } else {
             this.that.cameraRubberBanding.position.set(
@@ -406,7 +453,7 @@ class Questions {
               param4: 12,
               param5: 43
             };
-            this.answers.push(data);
+            this.that.answers.push(data);
             this.questionIndex += 1;
           }
         }

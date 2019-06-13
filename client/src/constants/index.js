@@ -65,7 +65,7 @@ export const CAMERA = {
   aspect: window.innerWidth / window.innerHeight,
   near: 0.1,
   far: 10000,
-  position: WORLD_POSITION.images,
+  position: WORLD_POSITION.questions,
   movementFreedom: 100 //20 voor bij de foto's is goed denk ik en voor de vragen is 50-100 beter
 };
 
