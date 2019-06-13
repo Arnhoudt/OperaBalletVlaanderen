@@ -193,15 +193,27 @@ class Images {
         250, 150, WORLD_POSITION.images - 800, 1920 / 5, 1080 / 5, 0, 1,true, `showRoomImage_1`);
   }
   createScene2 = () => {
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_2.png`,
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_2_layer2.png`,
+        -200, -100, WORLD_POSITION.images - 1190, 1920 / 5.2, 1080 / 5.2, 0, 1,true, `sceneElement_2_1_0_0`);
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_2_layer3.png`,
+        -200, -100, WORLD_POSITION.images - 1190, 1920 / 5.2, 1080 / 5.2, 0, 16,false, `sceneElement_2_2_0_0`);
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_2_layer1.png`,
         -200, -100, WORLD_POSITION.images - 1200, 1920 / 5, 1080 / 5, 0, 1,true, `showRoomImage_2`);
   }
   createScene3 = () => {
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_3.png`,
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_3_layer2.png`,
+        130, 0, WORLD_POSITION.images - 1580, 1920 / 5.2, 1080 / 5.2, 0, 1,true, `sceneElement_3_1_0_0`);
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_3_layer3.png`,
+        130, 0, WORLD_POSITION.images - 1590, 1920 / 5.2, 1080 / 5.2, 0, 16,false, `sceneElement_3_1_0_0`);
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_3_layer1.png`,
         130, 0, WORLD_POSITION.images - 1600, 1920 / 5, 1080 / 5, 0, 1,true, `showRoomImage_3`);
     }
   createScene4 = () => {
-    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_4.png`,
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_4_layer2.png`,
+        -80, 200, WORLD_POSITION.images - 1980, 1920 / 5.2, 1080 / 5.2, 0, 1,true, `sceneElement_4_1_0_0`);
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_4_layer3.png`,
+        -80, 200, WORLD_POSITION.images - 1990, 1920 / 5.2, 1080 / 5.2, 0, 16,false, `sceneElement_4_1_0_0`);
+    this.canary.createPng( this.that, `assets/img/c1_KARAKTER_4_layer1.png`,
         -80, 200, WORLD_POSITION.images - 2000, 1920 / 5, 1080 / 5, 0, 1,true, `showRoomImage_4`);
    }
   createScene5 = () => {
