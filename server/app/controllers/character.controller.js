@@ -1,15 +1,10 @@
 const Character = require('../models/character.model.js');
 
 exports.create = async (req, res) => {
-  const {name, param1, param2, param3, param4, param5} = req.body;
+  const {name} = req.body;
   try {
     const character = new Character({
-      name: name,
-      param1: param1,
-      param2: param2,
-      param3: param3,
-      param4: param4,
-      param5: param5
+      name: name
     });
     const r = await character.save();
     res.status(200).send(r);
@@ -37,18 +32,13 @@ exports.findById = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const {name, param1, param2, param3, param4, param5} = req.body;
+  const {name} = req.body;
   try {
     const r = await Character.findByIdAndUpdate(
       req.params.characterId,
       {
         $set: {
-          name: name,
-          param1: param1,
-          param2: param2,
-          param3: param3,
-          param4: param4,
-          param5: param5
+          name: name
         }
       },
       {new: true}

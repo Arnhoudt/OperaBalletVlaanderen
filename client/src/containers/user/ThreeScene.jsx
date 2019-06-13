@@ -187,6 +187,44 @@ class ThreeScene extends Component {
       this.popup.style.transform = `scale(0)`;
       this.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.questions);
       this.movementFreedom = 1200;
+      this.scene.children.forEach(mesh => {
+        if (mesh.name) {
+          const a = mesh.name.split(`_`);
+          if (a[0] === `answer`) {
+            if (a[4] === `button`) {
+              mesh.material.map = questions.tex;
+            }
+            if (a[4] === `beeld`) {
+              let meshText = null;
+              this.scene.children.forEach(mesh => {
+                if (mesh.name) {
+                  if (mesh.name.split(`_`)[0] === `answerText`) {
+                    if (mesh.name.split(`_`)[3] === a[3]) {
+                      meshText = mesh;
+                    }
+                  }
+                }
+              });
+              mesh.material.map = questions.imagesUnselected.filter(image => image.image === a[3])[0].tex;
+              meshText.material.color.set(0x000000);
+            }
+            if (a[4] === `geluid`) {
+              let meshText = null;
+              this.scene.children.forEach(mesh => {
+                if (mesh.name) {
+                  if (mesh.name.split(`_`)[0] === `answerText`) {
+                    if (mesh.name.split(`_`)[3] === a[3]) {
+                      meshText = mesh;
+                    }
+                  }
+                }
+              });
+              mesh.material.map = questions.soundUnselected;
+              meshText.material.color.set(0x000000);
+            }
+          }
+        }
+      });
     } else {
       this.movementFreedom = 1200;
       this.popup.style.transform = `scale(0)`;

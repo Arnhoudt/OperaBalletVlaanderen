@@ -1,7 +1,7 @@
 const Answer = require('../models/answer.model.js');
 
 exports.create = async (req, res) => {
-  const {question, answers, userId, param1, param2, param3, param4, param5} = req.body;
+  const {question, answer, userId, param1, param2, param3} = req.body;
   try {
     const currentAnswer = await Answer.findOne({
       userId: userId,
@@ -10,13 +10,11 @@ exports.create = async (req, res) => {
     if (!currentAnswer) {
       const answerD = new Answer({
         question: question,
-        answers: answers,
+        answer: answer,
         userId: userId,
         param1: param1,
         param2: param2,
-        param3: param3,
-        param4: param4,
-        param5: param5
+        param3: param3
       });
       const r = await answerD.save();
       res.status(200).send(r);
@@ -26,13 +24,11 @@ exports.create = async (req, res) => {
         {
           $set: {
             question: question,
-            answers: answers,
+            answer: answer,
             userId: userId,
             param1: param1,
             param2: param2,
-            param3: param3,
-            param4: param4,
-            param5: param5
+            param3: param3
           }
         },
         {new: true}
