@@ -16,6 +16,8 @@ class Questions {
   selectedAnswers = [];
   tex = null;
   texSelected = null;
+  images = [];
+  imagesSelected = [];
 
   load = that => {
     this.elements = [];
@@ -26,12 +28,18 @@ class Questions {
     that.camera.position.y = -400;
 
     let loader = new THREE.TextureLoader();
-    loader.load(`assets/img/button_border.png`, tex => {
-      this.tex = tex;
-    });
-    loader.load(`assets/img/button_border_selected.png`, tex => {
-      this.texSelected = tex;
-    });
+    loader.load(`assets/img/button_border.png`, tex => (this.tex = tex));
+    loader.load(`assets/img/button_border_selected.png`, tex => (this.texSelected = tex));
+
+    loader.load(`assets/img/aarde.png`, image => this.images.push({ aarde: image }));
+    loader.load(`assets/img/collegas.png`, image => this.images.push({ collegas: image }));
+    loader.load(`assets/img/familie.png`, image => this.images.push({ familie: image }));
+    loader.load(`assets/img/hel.png`, image => this.images.push({ hel: image }));
+    loader.load(`assets/img/hemel.png`, image => this.images.push({ hemel: image }));
+    loader.load(`assets/img/India.png`, image => this.images.push({ India: image }));
+    loader.load(`assets/img/Schotland.png`, image => this.images.push({ Schotland: image }));
+    loader.load(`assets/img/Spanje.png`, image => this.images.push({ Spanje: image }));
+    loader.load(`assets/img/vrienden.png`, image => this.images.push({ vrienden: image }));
 
     this.that.fog = { near: FOG_QUESTIONS.near, far: FOG_QUESTIONS.far };
 
@@ -172,7 +180,7 @@ class Questions {
         { x: -12, y: -40 },
         { x: 56, y: -40 }
       ];
-      const positionImages = [{ x: -78, y: -16 }, { x: 2, y: -16 }, { x: 82, y: -16 }];
+      const positionImages = [{ x: -79, y: -15 }, { x: 0, y: -15 }, { x: 79, y: -15 }];
       switch (question.type) {
         case `Button`:
           question.answers.forEach((answer, index2) => {
@@ -227,7 +235,7 @@ class Questions {
               3.2,
               0x000000,
               x + positionImages[index2].x,
-              y + positionImages[index2].y - 32,
+              y + positionImages[index2].y - 30,
               this.planeZ - z,
               1,
               0,
