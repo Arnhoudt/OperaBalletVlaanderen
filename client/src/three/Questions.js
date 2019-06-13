@@ -58,14 +58,14 @@ class Questions {
     this.canary.createSound(this, `assets/sounds/italiaans_CarmenHabanera_short.mp3`);
     this.canary.createSound(this, `assets/sounds/russisch_CarmenHabanera_short.mp3`);
 
+    this.loadStart();
+    this.loadStartQuestions();
+
     this.that.questionStore.findAll().then(questions => {
       this.questions = questions;
       this.loaded = true;
       this.loadQuestions();
     });
-
-    this.loadStart();
-    this.loadStartQuestions();
 
     window.addEventListener(`keydown`, this.handleKeyDown);
     window.addEventListener(`click`, this.handleMouseClick);
