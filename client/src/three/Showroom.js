@@ -13,7 +13,9 @@ class Showroom {
     this.char1 = 0;
     this.char2 = 0;
     this.char3 = 0;
+    this.charSorted = [this.char1, this.char2, this.char3].sort((a,b) => a -b );
 
+    this.answers = [`test`];
     this.answers.forEach(answer => {
       this.char1 += answer.param1;
       this.char2 += answer.param2;
@@ -75,7 +77,7 @@ class Showroom {
         this.canary.changePointer(this.that.pointer, `assets/img/mouse_exit.png`);
         intersects.reverse();
         intersects.forEach(intersect => {
-          if (intersect.object.name.split(`_`)[0] === `showRoomImage`) {
+          if (intersect.object.name && intersect.object.name.split(`_`)[0] === `showRoomImage`) {
             this.that.closeUpObject = intersect;
           }
         });
@@ -86,6 +88,9 @@ class Showroom {
         this.that.fog.near = 300;
         this.that.fog.far = 400;
       } else {
+        if(intersects[0].object.name === `sceneElement_6_3_0_0`){
+          this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.questions);
+        }
         this.canary.changePointer(this.that.pointer, `assets/img/mouse_pointer.png`);
         this.canary.loadPhotoData(this.that.closeUpData, this.that.closeUpObject);
         this.that.fog.near = 1200;
@@ -194,7 +199,7 @@ class Showroom {
   createScene1 = number => {
     this.canary.createText(
       this.that,
-      Math.round((this.char1 / this.answers.length) * 10) + `%`,
+      Math.round((this.charSorted[0] / this.answers.length) * 10) + `%`,
       FONTS.domaineRegular,
       7,
       0x000000,
@@ -207,7 +212,7 @@ class Showroom {
     );
     this.canary.createText(
       this.that,
-      Math.round((this.char2 / this.answers.length) * 10) + `%`,
+      Math.round((this.charSorted[1] / this.answers.length) * 10) + `%`,
       FONTS.domaineRegular,
       7,
       0x000000,
@@ -220,7 +225,7 @@ class Showroom {
     );
     this.canary.createText(
       this.that,
-      Math.round((this.char3 / this.answers.length) * 10) + `%`,
+      Math.round((this.charSorted[2] / this.answers.length) * 10) + `%`,
       FONTS.domaineDispSemibold,
       14,
       0x000000,
@@ -426,6 +431,19 @@ class Showroom {
       `sceneElement_6_2_0_0`
     );
     this.canary.createPng(
+        this.that,
+        `assets/img/c1_KARAKTER_6_layer4.png`,
+        0,
+        0,
+        WORLD_POSITION.images - 2970,
+        1920 / 5.2,
+        1080 / 5.2,
+        0,
+        16,
+        false,
+        `sceneElement_6_3_0_0`
+    );
+    this.canary.createPng(
       this.that,
       `assets/img/c` + number + `_KARAKTER_6_layer1.png`,
       0,
@@ -438,6 +456,7 @@ class Showroom {
       true,
       `showRoomImage_6`
     );
+
   };
   updateShowRoomChild = element => {
     this.that.scene.children.forEach(child => {
