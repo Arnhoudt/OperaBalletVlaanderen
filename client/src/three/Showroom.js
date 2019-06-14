@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, SCENE_Z_DIFFERENCE, FOG } from "../constants";
+import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, SCENE_Z_DIFFERENCE, FOG, FOG_QUESTIONS, CAMERA } from "../constants";
 import Canary from "./Canary";
 
 class Showroom {
@@ -13,7 +13,7 @@ class Showroom {
     this.char1 = 0;
     this.char2 = 0;
     this.char3 = 0;
-    this.charSorted = [this.char1, this.char2, this.char3].sort((a,b) => a -b );
+    this.charSorted = [this.char1, this.char2, this.char3].sort((a, b) => a - b);
 
     this.answers = [`test`];
     this.answers.forEach(answer => {
@@ -88,19 +88,71 @@ class Showroom {
         this.that.fog.near = 300;
         this.that.fog.far = 400;
       } else {
-        if(intersects[0].object.name === `sceneElement_6_3_0_0`){
+        if (intersects[0].object.name === `sceneElement_6_3_0_0`) {
+          this.unmount();
           this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.questions);
+          this.that.movementFreedom = 1200;
+          this.that.scene.children.forEach(mesh => {
+            if (mesh.name) {
+              const a = mesh.name.split(`_`);
+              if (a[0] === `answer`) {
+                let meshText = null;
+                this.that.scene.children.forEach(mesh => {
+                  if (mesh.name) {
+                    if (mesh.name.split(`_`)[0] === `answerText`) {
+                      if (mesh.name.split(`_`)[3] === a[3]) {
+                        meshText = mesh;
+                      }
+                    }
+                  }
+                });
+                if (a[4] === `button`) {
+                  mesh.material.map = this.that.questions.tex;
+                  this.that.questions.selectedAnswers[`${a[1]}${a[2]}`] = false;
+                }
+                if (a[4] === `beeld`) {
+                  mesh.material.map = this.that.questions.imagesUnselected.filter(image => image.image === a[3])[0].tex;
+                  meshText.material.color.set(0x000000);
+                  this.that.questions.selectedAnswers[`${a[1]}${a[2]}`] = false;
+                }
+                if (a[4] === `geluid`) {
+                  mesh.material.map = this.that.questions.soundUnselected;
+                  meshText.material.color.set(0x000000);
+                  this.that.questions.selectedAnswers[`${a[1]}${a[2]}`] = false;
+                }
+              }
+              if (mesh.name === `button` || mesh.name === `volgende_vraag` || mesh.name === `start_questions`) {
+                this.that.scene.remove(mesh);
+                mesh.geometry.dispose();
+                mesh.material.dispose();
+                mesh = undefined;
+              }
+            }
+          });
+          this.that.currentWorld = CAMERA.position;
+          this.that.cameraRubberBandingActive = true;
+          this.that.cameraRubberBandingForce = 0.03;
+          this.that.currentColor = { ...BACKGROUND_COLORS.images.default };
+          this.that.newColor = this.that.currentColor;
+          this.that.fog = { near: FOG_QUESTIONS.near, far: FOG_QUESTIONS.far };
+          this.that.renderer.setClearColor(this.that.currentColor.b + this.that.currentColor.g * 256 + this.that.currentColor.r * 256 * 256);
+          this.that.pointerName = `none`;
+          window.addEventListener(`mouseup`, this.that.questions.handleMouseClick);
+          window.addEventListener(`mousemove`, this.that.questions.onMouseMove);
+          this.canary.changePointer(this.that.pointer, `assets/img/mouse_pointer.png`);
+          this.that.answers = [];
+        } else {
+          this.canary.changePointer(this.that.pointer, `assets/img/mouse_pointer.png`);
+          this.canary.loadPhotoData(this.that.closeUpData, this.that.closeUpObject);
+          this.that.fog.near = 1200;
+          this.that.fog.far = 1600;
+          this.that.scene.children.forEach(child => {
+            if (child.name && child.name.split(`_`)[0] === `sceneElement` && child.name.split(`_`)[1] === this.that.closeUpObject.object.name.split(`_`)[1]) {
+              this.updateShowRoomChild(child);
+            }
+          });
+          this.that.closeUpObject = undefined;
         }
-        this.canary.changePointer(this.that.pointer, `assets/img/mouse_pointer.png`);
-        this.canary.loadPhotoData(this.that.closeUpData, this.that.closeUpObject);
-        this.that.fog.near = 1200;
-        this.that.fog.far = 1600;
-        this.that.scene.children.forEach(child => {
-          if (child.name && child.name.split(`_`)[0] === `sceneElement` && child.name.split(`_`)[1] === this.that.closeUpObject.object.name.split(`_`)[1]) {
-            this.updateShowRoomChild(child);
-          }
-        });
-        this.that.closeUpObject = undefined;
       }
     }
   };
@@ -431,17 +483,17 @@ class Showroom {
       `sceneElement_6_2_0_0`
     );
     this.canary.createPng(
-        this.that,
-        `assets/img/c1_KARAKTER_6_layer4.png`,
-        0,
-        0,
-        WORLD_POSITION.images - 2970,
-        1920 / 5.2,
-        1080 / 5.2,
-        0,
-        16,
-        false,
-        `sceneElement_6_3_0_0`
+      this.that,
+      `assets/img/c1_KARAKTER_6_layer4.png`,
+      0,
+      0,
+      WORLD_POSITION.images - 2970,
+      1920 / 5.2,
+      1080 / 5.2,
+      0,
+      16,
+      false,
+      `sceneElement_6_3_0_0`
     );
     this.canary.createPng(
       this.that,
@@ -456,7 +508,6 @@ class Showroom {
       true,
       `showRoomImage_6`
     );
-
   };
   updateShowRoomChild = element => {
     this.that.scene.children.forEach(child => {

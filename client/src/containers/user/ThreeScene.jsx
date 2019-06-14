@@ -9,15 +9,15 @@ import ThreeSetup from "../../three/ThreeSetup";
 
 import styles from "./ThreeScene.module.css";
 import { BACKGROUND_COLORS, CAMERA, WORLD_POSITION, CAMERA_RUBBERBANDING_FORCE, FOG, POINTER } from "../../constants/index";
-let canary = new Canary();
-let images = new Images();
-let questions = new Questions();
-let threeSetup = new ThreeSetup();
 
 class ThreeScene extends Component {
   constructor(props) {
     super(props);
-    images.setThis(this);
+    this.canary = new Canary();
+    this.images = new Images();
+    this.questions = new Questions();
+    this.threeSetup = new ThreeSetup();
+    this.images.setThis(this);
     this.cameraRubberBandingForce = CAMERA_RUBBERBANDING_FORCE;
     this.fog = {
       near: FOG.near,
@@ -59,7 +59,7 @@ class ThreeScene extends Component {
     };
 
     {
-      this.pointer = canary.createPointer(POINTER.image);
+      this.pointer = this.canary.createPointer(POINTER.image);
       this.mount.appendChild(this.pointer);
       this.iconscroll.style.opacity = 0;
     }
@@ -79,16 +79,16 @@ class ThreeScene extends Component {
       this.pointerName = `none`;
     }
 
-    threeSetup.setup(this);
+    this.threeSetup.setup(this);
     this.cameraRubberBanding.position.set(0, 0, this.currentWorld);
     this.start();
 
     switch (this.currentWorld) {
       case WORLD_POSITION.images:
-        images.load(this);
+        this.images.load(this);
         break;
       case WORLD_POSITION.questions:
-        questions.load(this);
+        this.questions.load(this);
         break;
       default:
         break;
@@ -99,7 +99,7 @@ class ThreeScene extends Component {
 
   componentWillUnmount() {
     this.stop();
-    images.unmount(window);
+    this.images.unmount(window);
     if (this.renderer) {
       this.mount.removeChild(this.renderer.domElement);
     }
@@ -119,13 +119,21 @@ class ThreeScene extends Component {
   animate = () => {
     //ANIMATION
     if (this.mouseMoved === true && this.state.done) {
-      const vx = canary.rubberBand(this.lookPosition.x, -(window.innerWidth / 2 - this.mousePosition.x) / this.movementFreedom, this.cameraRubberBandingForce);
-      const vy = canary.rubberBand(this.lookPosition.y, (window.innerHeight / 2 - this.mousePosition.y) / this.movementFreedom, this.cameraRubberBandingForce);
+      const vx = this.canary.rubberBand(
+        this.lookPosition.x,
+        -(window.innerWidth / 2 - this.mousePosition.x) / this.movementFreedom,
+        this.cameraRubberBandingForce
+      );
+      const vy = this.canary.rubberBand(
+        this.lookPosition.y,
+        (window.innerHeight / 2 - this.mousePosition.y) / this.movementFreedom,
+        this.cameraRubberBandingForce
+      );
       this.lookPosition.x += vx;
       this.lookPosition.y += vy;
 
-      const vpx = canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.2);
-      const vpy = canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.2);
+      const vpx = this.canary.rubberBand(this.pointerPosition.x, this.mousePosition.x, 0.2);
+      const vpy = this.canary.rubberBand(this.pointerPosition.y, this.mousePosition.y, 0.2);
       this.pointerPosition.x += vpx;
       this.pointerPosition.y += vpy;
 
@@ -133,22 +141,22 @@ class ThreeScene extends Component {
         `translate(` + (this.pointerPosition.x - POINTER.width / 2) + `px,` + (this.pointerPosition.y - POINTER.height / 2) + `px)`;
 
       if (this.currentWorld === WORLD_POSITION.images) {
-        images.animate();
+        this.images.animate();
       }
       if (this.currentWorld === WORLD_POSITION.questions) {
-        questions.animate();
+        this.questions.animate();
       }
     }
     if (this.cameraRubberBandingActive && this.state.done) {
       this.camera.position.set(this.camera.position.x - this.lookPosition.x / 2, this.camera.position.y - this.lookPosition.y / 2, this.camera.position.z);
-      const cameraVx = canary.rubberBand(this.camera.position.x, this.cameraRubberBanding.position.x, 0.03);
-      const cameraVy = canary.rubberBand(this.camera.position.y, this.cameraRubberBanding.position.y, 0.03);
-      const cameraVz = canary.rubberBand(this.camera.position.z, this.cameraRubberBanding.position.z, this.cameraRubberBandingForce);
+      const cameraVx = this.canary.rubberBand(this.camera.position.x, this.cameraRubberBanding.position.x, 0.03);
+      const cameraVy = this.canary.rubberBand(this.camera.position.y, this.cameraRubberBanding.position.y, 0.03);
+      const cameraVz = this.canary.rubberBand(this.camera.position.z, this.cameraRubberBanding.position.z, this.cameraRubberBandingForce);
       this.camera.position.set(this.camera.position.x + cameraVx, this.camera.position.y + cameraVy, this.camera.position.z + cameraVz);
 
-      const cameraRotationVx = canary.rubberBand(this.camera.rotation.x, this.cameraRubberBanding.rotation.x, 0.03);
-      const cameraRotationVy = canary.rubberBand(this.camera.rotation.y, this.cameraRubberBanding.rotation.y, 0.03);
-      const cameraRotationVz = canary.rubberBand(this.camera.rotation.z, this.cameraRubberBanding.rotation.z, CAMERA_RUBBERBANDING_FORCE);
+      const cameraRotationVx = this.canary.rubberBand(this.camera.rotation.x, this.cameraRubberBanding.rotation.x, 0.03);
+      const cameraRotationVy = this.canary.rubberBand(this.camera.rotation.y, this.cameraRubberBanding.rotation.y, 0.03);
+      const cameraRotationVz = this.canary.rubberBand(this.camera.rotation.z, this.cameraRubberBanding.rotation.z, CAMERA_RUBBERBANDING_FORCE);
       this.camera.rotation.set(this.camera.rotation.x + cameraRotationVx, this.camera.rotation.y + cameraRotationVy, this.camera.rotation.z + cameraRotationVz);
     }
 
@@ -200,18 +208,18 @@ class ThreeScene extends Component {
               }
             });
             if (a[4] === `button`) {
-              mesh.material.map = questions.tex;
-              questions.selectedAnswers[`${a[1]}${a[2]}`] = false;
+              mesh.material.map = this.questions.tex;
+              this.questions.selectedAnswers[`${a[1]}${a[2]}`] = false;
             }
             if (a[4] === `beeld`) {
-              mesh.material.map = questions.imagesUnselected.filter(image => image.image === a[3])[0].tex;
+              mesh.material.map = this.questions.imagesUnselected.filter(image => image.image === a[3])[0].tex;
               meshText.material.color.set(0x000000);
-              questions.selectedAnswers[`${a[1]}${a[2]}`] = false;
+              this.questions.selectedAnswers[`${a[1]}${a[2]}`] = false;
             }
             if (a[4] === `geluid`) {
-              mesh.material.map = questions.soundUnselected;
+              mesh.material.map = this.questions.soundUnselected;
               meshText.material.color.set(0x000000);
-              questions.selectedAnswers[`${a[1]}${a[2]}`] = false;
+              this.questions.selectedAnswers[`${a[1]}${a[2]}`] = false;
             }
           }
           if (mesh.name === `button` || mesh.name === `volgende_vraag` || mesh.name === `start_questions`) {
