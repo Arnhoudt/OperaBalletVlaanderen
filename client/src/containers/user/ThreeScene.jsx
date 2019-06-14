@@ -198,6 +198,7 @@ class ThreeScene extends Component {
       this.popup.style.transform = `scale(0)`;
       this.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.questions);
       this.movementFreedom = 1200;
+      this.questions.questionIndex = 0;
       this.scene.children.forEach(mesh => {
         if (mesh.name) {
           const a = mesh.name.split(`_`);
