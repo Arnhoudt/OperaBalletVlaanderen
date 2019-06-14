@@ -119,8 +119,8 @@ class ThreeScene extends Component {
   //animate en render
   animate = () => {
     this.idleTime += 1;
-    if(this.idleTime > 60*120){
-      console.log("you are idle");
+    if (this.idleTime > 60 * 120) {
+      console.log(`you are idle`);
     }
     //ANIMATION
     if (this.mouseMoved === true && this.state.done) {
