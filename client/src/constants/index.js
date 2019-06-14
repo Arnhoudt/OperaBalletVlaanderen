@@ -32,8 +32,6 @@ export const PLANE_DIFFERENCE = 50;
 
 export const CAMERA_PLANE_DIFFERENCE = 200;
 
-export const ARBITRAIRE_CONSTANTE = 3141592;
-
 export const PLANE_PERSPECTIVE_CONSTANTE = 0.25;
 
 export const FOG = {
