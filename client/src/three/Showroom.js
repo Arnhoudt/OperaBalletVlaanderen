@@ -13,14 +13,12 @@ class Showroom {
     this.char1 = 0;
     this.char2 = 0;
     this.char3 = 0;
-    this.charSorted = [this.char1, this.char2, this.char3].sort((a,b) => a -b );
-
-    this.answers = [`test`];
     this.answers.forEach(answer => {
       this.char1 += answer.param1;
       this.char2 += answer.param2;
       this.char3 += answer.param3;
     });
+    this.charSorted = [this.char1, this.char2, this.char3].sort((a,b) => a -b );
 
     this.that = that;
     this.that.iconscroll.style.opacity = 1;
@@ -89,7 +87,7 @@ class Showroom {
         this.that.fog.far = 400;
       } else {
         if(intersects[0].object.name === `sceneElement_6_3_0_0`){
-          this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.questions);
+          //de gebruiker moet naar het begin terug
         }
         this.canary.changePointer(this.that.pointer, `assets/img/mouse_pointer.png`);
         this.canary.loadPhotoData(this.that.closeUpData, this.that.closeUpObject);
