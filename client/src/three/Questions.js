@@ -499,7 +499,6 @@ class Questions {
             this.planeZ - this.questions[this.questionIndex].location.z - 150 === intersect.object.position.z ||
             this.planeZ - this.questions[this.questionIndex].location.z + 150 === intersect.object.position.z
           ) {
-            this.questionIndex = 0;
             this.that.movementFreedom = 10000;
             this.that.popup.style.transform = `scale(1)`;
           }
