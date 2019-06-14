@@ -79,7 +79,7 @@ class Questions {
       { answer: `tante/nonkel`, param1: 10, param2: 10, param3: 10 },
       { answer: `neef/nicht`, param1: 10, param2: 10, param3: 10 },
       { answer: `beste vriend`, param1: 10, param2: 10, param3: 10 },
-      { answer: `huidier`, param1: 10, param2: 10, param3: 10 },
+      { answer: `huisdier`, param1: 10, param2: 10, param3: 10 },
       { answer: `Frans`, param1: 10, param2: 3, param3: 1 },
       { answer: `Italiaans`, param1: 4, param2: 10, param3: 3 },
       { answer: `Russisch`, param1: 1, param2: 4, param3: 10 }

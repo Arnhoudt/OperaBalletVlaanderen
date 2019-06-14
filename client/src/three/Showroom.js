@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { BACKGROUND_COLORS, FONTS, WORLD_POSITION, SCENE_Z_DIFFERENCE, FOG } from "../constants";
 import Canary from "./Canary";
-import { log } from "three";
 
 class Showroom {
   canary = new Canary();
@@ -10,8 +9,7 @@ class Showroom {
   };
 
   load = async that => {
-    //console.log(that.answers);
-    this.answers = await that.answerStore.findAllByUser(that.uiStore.randomUser._id);
+    this.answers = that.answers;
     this.char1 = 0;
     this.char2 = 0;
     this.char3 = 0;
@@ -21,8 +19,6 @@ class Showroom {
       this.char2 += answer.param2;
       this.char3 += answer.param3;
     });
-
-    console.log(this.char1);
 
     this.that = that;
     this.that.iconscroll.style.opacity = 1;
@@ -95,7 +91,7 @@ class Showroom {
         this.that.fog.near = 1200;
         this.that.fog.far = 1600;
         this.that.scene.children.forEach(child => {
-          if (child.name.split(`_`)[0] === `sceneElement` && child.name.split(`_`)[1] === this.that.closeUpObject.object.name.split(`_`)[1]) {
+          if (child.name && child.name.split(`_`)[0] === `sceneElement` && child.name.split(`_`)[1] === this.that.closeUpObject.object.name.split(`_`)[1]) {
             this.updateShowRoomChild(child);
           }
         });
@@ -198,7 +194,7 @@ class Showroom {
   createScene1 = number => {
     this.canary.createText(
       this.that,
-      (this.char1 / this.answers.length) * 10 + `%`,
+      Math.round((this.char1 / this.answers.length) * 10) + `%`,
       FONTS.domaineRegular,
       7,
       0x000000,
@@ -211,7 +207,7 @@ class Showroom {
     );
     this.canary.createText(
       this.that,
-      (this.char2 / this.answers.length) * 10 + `%`,
+      Math.round((this.char2 / this.answers.length) * 10) + `%`,
       FONTS.domaineRegular,
       7,
       0x000000,
@@ -224,7 +220,7 @@ class Showroom {
     );
     this.canary.createText(
       this.that,
-      (this.char3 / this.answers.length) * 10 + `%`,
+      Math.round((this.char3 / this.answers.length) * 10) + `%`,
       FONTS.domaineDispSemibold,
       14,
       0x000000,
