@@ -20,6 +20,7 @@ class Questions {
   soundUnselected = null;
   soundSelected = null;
   sounds = [];
+  characterStats = [];
 
   load = that => {
     this.elements = [];
@@ -29,6 +30,60 @@ class Questions {
     that.cameraRubberBandingActive = true;
     that.camera.position.y = -400;
     this.that.fog = { near: FOG_QUESTIONS.near, far: FOG_QUESTIONS.far };
+
+    this.characterStats = [
+      { answer: `Man`, param1: 5, param2: 10, param3: 2 },
+      { answer: `Women`, param1: 6, param2: 1, param3: 10 },
+      { answer: `Man Women`, param1: 7, param2: 4, param3: 5 },
+      { answer: `slecht`, param1: 3, param2: 6, param3: 1 },
+      { answer: `goed`, param1: 8, param2: 3, param3: 8 },
+      { answer: `super`, param1: 7, param2: 2, param3: 10 },
+      { answer: `slecht eigenlijk`, param1: 3, param2: 6, param3: 1 },
+      { answer: `ups en downs`, param1: 8, param2: 5, param3: 4 },
+      { answer: `echt goed`, param1: 7, param2: 2, param3: 10 },
+      { answer: `werk`, param1: 10, param2: 6, param3: 5 },
+      { answer: `huishouden`, param1: 1, param2: 1, param3: 10 },
+      { answer: `hobbies`, param1: 6, param2: 10, param3: 8 },
+      { answer: `studies`, param1: 10, param2: 4, param3: 1 },
+      { answer: `voeding`, param1: 6, param2: 8, param3: 10 },
+      { answer: `vrienden`, param1: 5, param2: 10, param3: 2 },
+      { answer: `liefde`, param1: 9, param2: 2, param3: 10 },
+      { answer: `gezondheid`, param1: 10, param2: 3, param3: 8 },
+      { answer: `geld`, param1: 10, param2: 5, param3: 1 },
+      { answer: `hemel`, param1: 5, param2: 2, param3: 10 },
+      { answer: `aarde`, param1: 10, param2: 6, param3: 5 },
+      { answer: `hel`, param1: 6, param2: 10, param3: 1 },
+      { answer: `de dood`, param1: 10, param2: 1, param3: 4 },
+      { answer: `geldproblemen`, param1: 10, param2: 4, param3: 1 },
+      { answer: `schuld dragen`, param1: 5, param2: 2, param3: 8 },
+      { answer: `eenzaamheid`, param1: 4, param2: 1, param3: 10 },
+      { answer: `onsuccesvol zijn`, param1: 10, param2: 7, param3: 1 },
+      { answer: `saai leven`, param1: 5, param2: 10, param3: 2 },
+      { answer: `Schotland`, param1: 6, param2: 10, param3: 1 },
+      { answer: `India`, param1: 10, param2: 3, param3: 4 },
+      { answer: `Spanje`, param1: 5, param2: 6, param3: 10 },
+      { answer: `genot/plezier`, param1: 4, param2: 6, param3: 10 },
+      { answer: `macht`, param1: 10, param2: 4, param3: 1 },
+      { answer: `persoonlijk succes`, param1: 10, param2: 7, param3: 1 },
+      { answer: `veiligheid`, param1: 5, param2: 1, param3: 10 },
+      { answer: `onafhankelijkheid`, param1: 7, param2: 10, param3: 3 },
+      { answer: `verbinding`, param1: 6, param2: 3, param3: 8 },
+      { answer: `collegas`, param1: 8, param2: 2, param3: 5 },
+      { answer: `familie`, param1: 6, param2: 4, param3: 8 },
+      { answer: `vrienden`, param1: 3, param2: 7, param3: 6 },
+      { answer: `ouders`, param1: 10, param2: 10, param3: 10 },
+      { answer: `(levens)partner`, param1: 10, param2: 10, param3: 10 },
+      { answer: `zoon/dochter`, param1: 10, param2: 10, param3: 10 },
+      { answer: `broer/zus`, param1: 10, param2: 10, param3: 10 },
+      { answer: `grootouders`, param1: 10, param2: 10, param3: 10 },
+      { answer: `tante/nonkel`, param1: 10, param2: 10, param3: 10 },
+      { answer: `neef/nicht`, param1: 10, param2: 10, param3: 10 },
+      { answer: `beste vriend`, param1: 10, param2: 10, param3: 10 },
+      { answer: `huidier`, param1: 10, param2: 10, param3: 10 },
+      { answer: `Frans`, param1: 10, param2: 3, param3: 1 },
+      { answer: `Italiaans`, param1: 4, param2: 10, param3: 3 },
+      { answer: `Russisch`, param1: 1, param2: 4, param3: 10 }
+    ];
 
     let loader = new THREE.TextureLoader();
     loader.load(`assets/img/button_border.png`, tex => (this.tex = tex));
@@ -112,7 +167,7 @@ class Questions {
     this.canary.createText(this.that, `Terug naar beginscherm`, FONTS.radikalLight, 3.2, 0x000000, -158, -400 - 80, this.planeZ - 300, 2);
     this.canary.createRectangle(this.that, -134, -400 - 82, this.planeZ - 300, 242 / 5, 1 / 5, 2, 0x000000);
     this.canary.createPng(this.that, `assets/img/transparant.png`, -158, -400 - 92, this.planeZ - 300, 268 / 8, 62 / 8, 3, 1, false, `terug_scherm`);
-    this.canary.createText(this.that, `Voel je jou eerder een:`, FONTS.domaineRegular, 6, 0x000000, -58, -400 - 26, this.planeZ - 300, 2);
+    this.canary.createText(this.that, `Voel je jou eerder een:`, FONTS.domaineRegular, 6, 0x000000, -58, -400 - 20, this.planeZ - 300, 2);
     this.canary.createPng(
       this.that,
       `assets/img/button_border.png`,
@@ -156,8 +211,6 @@ class Questions {
     );
     this.canary.createPng(this.that, `assets/img/man_women_icon.png`, 50, -400 - 40, this.planeZ - 300, 30 / 6.6, 42 / 6.6, 1, 1, false);
     this.canary.createPng(this.that, `assets/img/b_START.png`, 0, -400, this.planeZ - 300, 1920 / 8, 1080 / 8, 4, 1, true);
-    this.canary.createRectangle(this.that, 105, -400 - 62.5, WORLD_POSITION.questions - 300 - 251, 432 / 8, 96 / 8, 0, 0x000000, `start_questions`);
-    this.canary.createText(this.that, `VOLGENDE VRAAG`, FONTS.radikalMedium, 3.2, 0xf9f9f9, 84, -400 - 64, this.planeZ - 300, 1);
     this.canary.createText(
       this.that,
       `* Dit is definitief. Je kunt niet meer terugkeren.`,
@@ -182,28 +235,15 @@ class Questions {
       this.canary.createText(this.that, `Terug naar beginscherm`, FONTS.radikalLight, 3.2, 0x000000, x - 158, y - 80, this.planeZ - z, 2);
       this.canary.createRectangle(this.that, x - 134, y - 82, this.planeZ - z, 242 / 5, 1 / 5, 2, 0x000000);
       this.canary.createPng(this.that, `assets/img/transparant.png`, x - 158, y - 92, this.planeZ - z, 268 / 8, 62 / 8, 3, 1, false, `terug_scherm`);
-      this.canary.createRectangle(this.that, x + 105, y - 62.5, WORLD_POSITION.questions - z - 251, 432 / 8, 96 / 8, 0, 0x000000, `volgende_vraag`);
-      this.canary.createText(
-        this.that,
-        `VOLGENDE VRAAG`,
-        FONTS.radikalMedium,
-        3.2,
-        0xf9f9f9,
-        x + 84,
-        y - 64,
-        this.planeZ - z,
-        1,
-        false,
-        `volgende_text_${question}`
-      );
-      this.that.scene.children.forEach(mesh => {
-        if (mesh.name) {
-          const a = mesh.name.split(`_`);
-          if (a[2] === question.question) {
-            console.log(mesh);
-          }
+
+      this.questions.forEach((question, index2) => {
+        if (index === index2) {
+          this.canary.createRectangle(this.that, x + 0 + index2 * 15.8, y + 88, this.planeZ - z, 12 / 6, 246 / 4, 3, 0x000000);
+        } else {
+          this.canary.createRectangle(this.that, x + 0 + index2 * 15.8, y + 92, this.planeZ - z, 12 / 6, 216 / 4, 3, 0xffffff);
         }
       });
+
       const positionButtons = [
         { x: -80, y: 0 },
         { x: -12, y: 0 },
@@ -334,6 +374,38 @@ class Questions {
         if (intersect.object.name) {
           const a = intersect.object.name.split(`_`);
           if (a[0] === `answer`) {
+            if (a[1] === `${this.questionIndex}`) {
+              this.canary.createRectangle(
+                this.that,
+                this.questions[this.questionIndex].location.x + 105,
+                this.questions[this.questionIndex].location.y - 62.5,
+                WORLD_POSITION.questions - this.questions[this.questionIndex].location.z - 251,
+                432 / 8,
+                96 / 8,
+                0,
+                0x000000,
+                `volgende_vraag`
+              );
+              this.canary.createText(
+                this.that,
+                `VOLGENDE VRAAG`,
+                FONTS.radikalMedium,
+                3.2,
+                0xf9f9f9,
+                this.questions[this.questionIndex].location.x + 84,
+                this.questions[this.questionIndex].location.y - 64,
+                this.planeZ - this.questions[this.questionIndex].location.z,
+                1,
+                0,
+                `button`
+              );
+            }
+
+            if (a[1] === `111`) {
+              this.canary.createRectangle(this.that, 105, -400 - 62.5, WORLD_POSITION.questions - 300 - 251, 432 / 8, 96 / 8, 0, 0x000000, `start_questions`);
+              this.canary.createText(this.that, `VOLGENDE VRAAG`, FONTS.radikalMedium, 3.2, 0xf9f9f9, 84, -400 - 64, this.planeZ - 300, 1, 0, `button`);
+            }
+
             if (
               this.planeZ - this.questions[this.questionIndex].location.z + 249 === intersect.object.position.z ||
               this.planeZ - this.questions[this.questionIndex].location.z - 51 === intersect.object.position.z
@@ -412,13 +484,14 @@ class Questions {
             WORLD_POSITION.questions - this.questions[this.questionIndex].location.z
           );
           this.currentAnswers.forEach(answer => {
-            const data = {
+            let stat = this.characterStats.filter(stat => stat.answer === answer)[0];
+            let data = {
               question: `Voel je je eerder een:`,
               answer: answer,
               userId: this.that.uiStore.randomUser._id,
-              param1: 10,
-              param2: 10,
-              param3: 10
+              param1: stat.param1,
+              param2: stat.param2,
+              param3: stat.param3
             };
             this.that.answers.push(data);
           });
@@ -438,13 +511,14 @@ class Questions {
           if (this.planeZ - this.questions[this.questionIndex].location.z - 51 === intersect.object.position.z) {
             if (!this.questions[this.questionIndex + 1]) {
               this.currentAnswers.forEach(answer => {
-                const data = {
+                let stat = this.characterStats.filter(stat => stat.answer === answer)[0];
+                let data = {
                   question: this.questions[this.questionIndex].question,
                   answer: answer,
                   userId: this.that.uiStore.randomUser._id,
-                  param1: 10,
-                  param2: 10,
-                  param3: 10
+                  param1: stat.param1,
+                  param2: stat.param2,
+                  param3: stat.param3
                 };
                 this.that.answers.push(data);
               });
@@ -469,13 +543,14 @@ class Questions {
                 WORLD_POSITION.questions - this.questions[this.questionIndex + 1].location.z
               );
               this.currentAnswers.forEach(answer => {
-                const data = {
+                let stat = this.characterStats.filter(stat => stat.answer === answer)[0];
+                let data = {
                   question: this.questions[this.questionIndex].question,
                   answer: answer,
                   userId: this.that.uiStore.randomUser._id,
-                  param1: 10,
-                  param2: 10,
-                  param3: 10
+                  param1: stat.param1,
+                  param2: stat.param2,
+                  param3: stat.param3
                 };
                 this.that.answers.push(data);
               });

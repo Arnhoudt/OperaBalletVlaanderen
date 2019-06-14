@@ -33,11 +33,7 @@ class ThreeScene extends Component {
     this.answers = [];
   }
 
-
   componentDidMount() {
-    window.addEventListener(`orientationchange`, this.doOnOrientationChange);
-
-
     THREE.DefaultLoadingManager.onStart = (url, itemsLoaded, itemsTotal) => {
       const state = { ...this.state };
       state.loading = Math.round((itemsLoaded / itemsTotal) * 100);
@@ -68,10 +64,9 @@ class ThreeScene extends Component {
       this.iconscroll.style.opacity = 0;
     }
 
-    if(window.innerWidth > window.innerHeight){
-      console.log("port");
+    if (window.innerWidth > window.innerHeight) {
+      console.log(`port`);
     }
-
 
     // variablelen aanmaken (hier mag GEEN data in zitten, dat doe je in de instellingen)
     {
@@ -101,11 +96,6 @@ class ThreeScene extends Component {
       default:
         questions.load(this);
         break;
-    }
-    if(window.innerHeight>window.innerWidth){
-      this.turnPhone.style.opacity = 1;
-    } else {
-      this.turnPhone.style.opacity = 0;
     }
     this.start();
   }
@@ -204,6 +194,7 @@ class ThreeScene extends Component {
           if (a[0] === `answer`) {
             if (a[4] === `button`) {
               mesh.material.map = questions.tex;
+              questions.selectedAnswers[`${a[1]}${a[2]}`] = false;
             }
             if (a[4] === `beeld`) {
               let meshText = null;
@@ -218,6 +209,7 @@ class ThreeScene extends Component {
               });
               mesh.material.map = questions.imagesUnselected.filter(image => image.image === a[3])[0].tex;
               meshText.material.color.set(0x000000);
+              questions.selectedAnswers[`${a[1]}${a[2]}`] = false;
             }
             if (a[4] === `geluid`) {
               let meshText = null;
@@ -234,6 +226,12 @@ class ThreeScene extends Component {
               meshText.material.color.set(0x000000);
             }
           }
+          if (mesh.name === `button` || mesh.name === `volgende_vraag` || mesh.name === `start_questions`) {
+            this.scene.remove(mesh);
+            mesh.geometry.dispose();
+            mesh.material.dispose();
+            mesh = undefined;
+          }
         }
       });
     } else {
@@ -242,13 +240,13 @@ class ThreeScene extends Component {
     }
   };
 
-  doOnOrientationChange = ()  => {
-    if(window.innerHeight>window.innerWidth){
+  doOnOrientationChange = () => {
+    if (window.innerHeight > window.innerWidth) {
       this.turnPhone.style.opacity = 0;
     } else {
       this.turnPhone.style.opacity = 1;
     }
-  }
+  };
 
   render() {
     return (
@@ -259,19 +257,13 @@ class ThreeScene extends Component {
             this.mount = mount;
           }}
         />
-        <div className={`${styles.iconscroll}` }
-             ref={iconscroll => {
-               this.iconscroll = iconscroll;
-             }}> </div>
-        <div className={`${styles.turnPhone}` }
-             ref={turnPhone => {
-               this.turnPhone = turnPhone;
-             }}>
-          <div> </div>
-          <img src="assets/img/turn.png" alt="draai je gsm aub"/>
-          <h2>Oeps ...</h2>
-          <p>Kaltel je gsm/table voor de beste ervaring</p>
-
+        <div
+          className={`${styles.iconscroll}`}
+          ref={iconscroll => {
+            this.iconscroll = iconscroll;
+          }}
+        >
+          {` `}
         </div>
         <div
           className={styles.popup}
