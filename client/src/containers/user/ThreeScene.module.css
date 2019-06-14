@@ -151,17 +151,17 @@
   width: calc(100vw*.712);
   height: calc(100vh*.79);
   background-image: url('/assets/img/--b_VRAGEN-1-popup.png');
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   /* background-position: center; */
   text-align: center;
   display: grid;
-  grid-template-rows: 6em calc(100vh*.79*.2) calc(100vh*.79*.25) calc(100vh*.79*.35);
+  grid-template-rows: 12em calc(100vh*.79*.2) calc(100vh*.79*.25) calc(100vh*.79*.35);
   grid-template-columns: calc(100vw*.712);
 }
 
 .cross {
-  width: 13em;
+  width: 12em;
   height: 4em;
   background-image: url('/assets/img/cross.png');
   background-size: contain;
@@ -211,8 +211,6 @@
   position: absolute;
   left: 50%;
 }
-
-
 
 .iconscroll {
   width: 40px;

@@ -64,10 +64,6 @@ class ThreeScene extends Component {
       this.iconscroll.style.opacity = 0;
     }
 
-    if (window.innerWidth > window.innerHeight) {
-      console.log(`port`);
-    }
-
     // variablelen aanmaken (hier mag GEEN data in zitten, dat doe je in de instellingen)
     {
       this.cameraRubberBandingActive = false;
@@ -85,19 +81,20 @@ class ThreeScene extends Component {
 
     threeSetup.setup(this);
     this.cameraRubberBanding.position.set(0, 0, this.currentWorld);
-
-    window.addEventListener(`resize`, this.onResize);
+    this.start();
 
     switch (this.currentWorld) {
       case WORLD_POSITION.images:
-        images.load(this, window);
+        images.load(this);
         break;
       case WORLD_POSITION.questions:
-      default:
         questions.load(this);
         break;
+      default:
+        break;
     }
-    this.start();
+
+    window.addEventListener(`resize`, this.onResize);
   }
 
   componentWillUnmount() {
@@ -121,7 +118,7 @@ class ThreeScene extends Component {
   //animate en render
   animate = () => {
     //ANIMATION
-    if (this.mouseMoved === true) {
+    if (this.mouseMoved === true && this.state.done) {
       const vx = canary.rubberBand(this.lookPosition.x, -(window.innerWidth / 2 - this.mousePosition.x) / this.movementFreedom, this.cameraRubberBandingForce);
       const vy = canary.rubberBand(this.lookPosition.y, (window.innerHeight / 2 - this.mousePosition.y) / this.movementFreedom, this.cameraRubberBandingForce);
       this.lookPosition.x += vx;
@@ -134,15 +131,15 @@ class ThreeScene extends Component {
 
       this.pointer.style.transform =
         `translate(` + (this.pointerPosition.x - POINTER.width / 2) + `px,` + (this.pointerPosition.y - POINTER.height / 2) + `px)`;
+
       if (this.currentWorld === WORLD_POSITION.images) {
         images.animate();
       }
-
       if (this.currentWorld === WORLD_POSITION.questions) {
         questions.animate();
       }
     }
-    if (this.cameraRubberBandingActive) {
+    if (this.cameraRubberBandingActive && this.state.done) {
       this.camera.position.set(this.camera.position.x - this.lookPosition.x / 2, this.camera.position.y - this.lookPosition.y / 2, this.camera.position.z);
       const cameraVx = canary.rubberBand(this.camera.position.x, this.cameraRubberBanding.position.x, 0.03);
       const cameraVy = canary.rubberBand(this.camera.position.y, this.cameraRubberBanding.position.y, 0.03);
@@ -192,38 +189,29 @@ class ThreeScene extends Component {
         if (mesh.name) {
           const a = mesh.name.split(`_`);
           if (a[0] === `answer`) {
+            let meshText = null;
+            this.scene.children.forEach(mesh => {
+              if (mesh.name) {
+                if (mesh.name.split(`_`)[0] === `answerText`) {
+                  if (mesh.name.split(`_`)[3] === a[3]) {
+                    meshText = mesh;
+                  }
+                }
+              }
+            });
             if (a[4] === `button`) {
               mesh.material.map = questions.tex;
               questions.selectedAnswers[`${a[1]}${a[2]}`] = false;
             }
             if (a[4] === `beeld`) {
-              let meshText = null;
-              this.scene.children.forEach(mesh => {
-                if (mesh.name) {
-                  if (mesh.name.split(`_`)[0] === `answerText`) {
-                    if (mesh.name.split(`_`)[3] === a[3]) {
-                      meshText = mesh;
-                    }
-                  }
-                }
-              });
               mesh.material.map = questions.imagesUnselected.filter(image => image.image === a[3])[0].tex;
               meshText.material.color.set(0x000000);
               questions.selectedAnswers[`${a[1]}${a[2]}`] = false;
             }
             if (a[4] === `geluid`) {
-              let meshText = null;
-              this.scene.children.forEach(mesh => {
-                if (mesh.name) {
-                  if (mesh.name.split(`_`)[0] === `answerText`) {
-                    if (mesh.name.split(`_`)[3] === a[3]) {
-                      meshText = mesh;
-                    }
-                  }
-                }
-              });
               mesh.material.map = questions.soundUnselected;
               meshText.material.color.set(0x000000);
+              questions.selectedAnswers[`${a[1]}${a[2]}`] = false;
             }
           }
           if (mesh.name === `button` || mesh.name === `volgende_vraag` || mesh.name === `start_questions`) {
@@ -237,14 +225,6 @@ class ThreeScene extends Component {
     } else {
       this.movementFreedom = 1200;
       this.popup.style.transform = `scale(0)`;
-    }
-  };
-
-  doOnOrientationChange = () => {
-    if (window.innerHeight > window.innerWidth) {
-      this.turnPhone.style.opacity = 0;
-    } else {
-      this.turnPhone.style.opacity = 1;
     }
   };
 

@@ -122,14 +122,12 @@ class Questions {
       this.loadQuestions();
     });
 
-    window.addEventListener(`keydown`, this.handleKeyDown);
     window.addEventListener(`mouseup`, this.handleMouseClick);
     window.addEventListener(`mousemove`, this.onMouseMove);
   };
 
   unmount = () => {
     window.removeEventListener(`mousemove`, this.onMouseMove);
-    window.removeEventListener(`keydown`, this.handleKeyDown);
     window.removeEventListener(`mouseup`, this.handleMouseClick);
     this.that.cameraRubberBandingActive = false;
   };
@@ -400,12 +398,10 @@ class Questions {
                 `button`
               );
             }
-
             if (a[1] === `111`) {
               this.canary.createRectangle(this.that, 105, -400 - 62.5, WORLD_POSITION.questions - 300 - 251, 432 / 8, 96 / 8, 0, 0x000000, `start_questions`);
               this.canary.createText(this.that, `VOLGENDE VRAAG`, FONTS.radikalMedium, 3.2, 0xf9f9f9, 84, -400 - 64, this.planeZ - 300, 1, 0, `button`);
             }
-
             if (
               this.planeZ - this.questions[this.questionIndex].location.z + 249 === intersect.object.position.z ||
               this.planeZ - this.questions[this.questionIndex].location.z - 51 === intersect.object.position.z
@@ -562,8 +558,6 @@ class Questions {
       });
     }
   };
-
-  handleKeyDown = e => {};
 
   onMouseMove = e => {
     e.preventDefault();
