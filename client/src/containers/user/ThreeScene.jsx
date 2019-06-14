@@ -31,6 +31,7 @@ class ThreeScene extends Component {
     this.history = props.history;
     this.state = { loading: ``, error: ``, done: false };
     this.answers = [];
+    this.idleTime = 0;
   }
 
   componentDidMount() {
@@ -117,6 +118,10 @@ class ThreeScene extends Component {
 
   //animate en render
   animate = () => {
+    this.idleTime += 1;
+    if(this.idleTime > 60*120){
+      console.log("you are idle");
+    }
     //ANIMATION
     if (this.mouseMoved === true && this.state.done) {
       const vx = this.canary.rubberBand(

@@ -13,14 +13,15 @@ class Showroom {
     this.char1 = 0;
     this.char2 = 0;
     this.char3 = 0;
+
     this.charSorted = [this.char1, this.char2, this.char3].sort((a, b) => a - b);
 
-    this.answers = [`test`];
     this.answers.forEach(answer => {
       this.char1 += answer.param1;
       this.char2 += answer.param2;
       this.char3 += answer.param3;
     });
+    this.charSorted = [this.char1, this.char2, this.char3].sort((a, b) => a - b);
 
     this.that = that;
     this.that.iconscroll.style.opacity = 1;
@@ -64,6 +65,7 @@ class Showroom {
   };
   //Handerse
   handleMouseClick = e => {
+    this.that.idleTime = 0;
     e.preventDefault();
     //De raycaster kijkt welke objecten er in het visier van de muis liggen
     this.that.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -152,11 +154,15 @@ class Showroom {
             }
           });
           this.that.closeUpObject = undefined;
+          if (intersects[0].object.name === `sceneElement_4_3_0_0`) {
+            window.open(`https://operaballet.be/en/programme/2019-2020/rasa-after-la-bayadere`);
+          }
         }
       }
     }
   };
   onMouseMove = event => {
+    this.that.idleTime = 0;
     event.preventDefault();
     this.that.mouseMoved = true;
     this.that.mousePosition = {
@@ -436,6 +442,19 @@ class Showroom {
       16,
       false,
       `sceneElement_4_2_0_0`
+    );
+    this.canary.createPng(
+      this.that,
+      `assets/img/c2_KARAKTER_4_layer4.png`,
+      -80,
+      200,
+      WORLD_POSITION.images - 1970,
+      1920 / 5.2,
+      1080 / 5.2,
+      0,
+      16,
+      false,
+      `sceneElement_4_3_0_0`
     );
     this.canary.createPng(
       this.that,

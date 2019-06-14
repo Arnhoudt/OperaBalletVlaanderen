@@ -358,6 +358,7 @@ class Questions {
 
   handleMouseClick = e => {
     e.preventDefault();
+    this.that.idleTime = 0;
     //De raycaster kijkt welke objecten er in het visier van de muis liggen
     this.that.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
     this.that.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
@@ -561,6 +562,7 @@ class Questions {
 
   onMouseMove = e => {
     e.preventDefault();
+    this.that.idleTime = 0;
     this.that.mouseMoved = true;
     this.that.mousePosition = {
       x: e.clientX,
