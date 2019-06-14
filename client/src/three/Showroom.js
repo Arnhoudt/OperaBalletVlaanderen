@@ -57,6 +57,7 @@ class Showroom {
     this.createScene3();
     this.createScene4(numberChar);
     this.createScene5();
+    this.createScene6(numberChar);
   };
   unmount = () => {
     window.removeEventListener(`mousemove`, this.onMouseMove);
@@ -139,7 +140,7 @@ class Showroom {
     this.that.iconscroll.style.opacity -=  Math.abs(e.deltaY)/1000;
     if (this.that.closeUpObject === undefined) {
       if (this.that.camera.position.z <= WORLD_POSITION.images || e.deltaY > 0) {
-        if (this.that.camera.position.z > WORLD_POSITION.images - 2150 || e.deltaY < 0) {
+        if (this.that.camera.position.z > WORLD_POSITION.images - 2650 || e.deltaY < 0) {
           this.that.cameraRubberBanding.position.z -= e.deltaY / 3;
         }
       }
@@ -285,7 +286,7 @@ class Showroom {
       `assets/img/c1_KARAKTER_3_layer2.png`,
       130,
       0,
-      WORLD_POSITION.images - 1580,
+      WORLD_POSITION.images - 1590,
       1920 / 5.2,
       1080 / 5.2,
       0,
@@ -298,13 +299,13 @@ class Showroom {
       `assets/img/c1_KARAKTER_3_layer3.png`,
       130,
       0,
-      WORLD_POSITION.images - 1590,
+      WORLD_POSITION.images - 1580,
       1920 / 5.2,
       1080 / 5.2,
       0,
       16,
       false,
-      `sceneElement_3_1_0_0`
+      `sceneElement_3_2_0_0`
     );
     this.canary.createPng(
       this.that,
@@ -362,7 +363,49 @@ class Showroom {
     );
   };
   createScene5 = () => {
-    this.canary.createPng(this.that, `assets/img/c1_KARAKTER_5.png`, 0, 0, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 0, 1, true, `showRoomImage_5`);
+    this.canary.createPng(this.that, `assets/img/c1_KARAKTER_5.png`, -45, -25, WORLD_POSITION.images - 2500, 1920 / 5, 1080 / 5, 0, 1, true, `showRoomImage_5`);
+  };
+
+  createScene6 = (number) => {
+    this.canary.createPng(
+        this.that,
+        `assets/img/c`+number+`_KARAKTER_6_layer2.png`,
+        0,
+        0,
+        WORLD_POSITION.images - 2990,
+        1920 / 5.2,
+        1080 / 5.2,
+        0,
+        1,
+        true,
+        `sceneElement_6_1_0_0`
+    );
+    this.canary.createPng(
+        this.that,
+        `assets/img/c1_KARAKTER_6_layer3.png`,
+        0,
+        0,
+        WORLD_POSITION.images - 2980,
+        1920 / 5.2,
+        1080 / 5.2,
+        0,
+        16,
+        false,
+        `sceneElement_6_2_0_0`
+    );
+    this.canary.createPng(
+        this.that,
+        `assets/img/c`+number+`_KARAKTER_6_layer1.png`,
+        0,
+        0,
+        WORLD_POSITION.images - 3000,
+        1920 / 5,
+        1080 / 5,
+        0,
+        1,
+        true,
+        `showRoomImage_6`
+    );
   };
   updateShowRoomChild = element => {
     this.that.scene.children.forEach(child => {
