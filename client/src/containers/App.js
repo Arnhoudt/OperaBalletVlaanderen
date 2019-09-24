@@ -9,10 +9,9 @@ import ThreeScene from "./user/ThreeScene";
 import { ROUTES } from "../constants";
 
 const App = () => {
-  useEffect(() => {
+  useEffect(() => {    
     let element = document.getElementById(`loading_root`);
     element.remove();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

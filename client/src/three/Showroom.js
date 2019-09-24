@@ -8,7 +8,11 @@ class Showroom {
     this.that = that;
   };
 
-  load = async that => {
+  load = that => {
+    const state = { ...that.state };
+    state.done = false;
+    that.setState(state);
+
     this.answers = that.answers;
     this.char1 = 0;
     this.char2 = 0;
@@ -51,13 +55,18 @@ class Showroom {
     } else {
       numberChar = 2;
     }
+
     this.createScene1(numberChar);
     this.createScene2(numberChar);
     this.createScene3();
     this.createScene4(numberChar);
     this.createScene5();
     this.createScene6(numberChar);
+
+    this.that.currentWorld = WORLD_POSITION.images;
+    this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.images);
   };
+
   unmount = () => {
     window.removeEventListener(`mousemove`, this.onMouseMove);
     window.removeEventListener(`wheel`, this.handleMouseScroll);

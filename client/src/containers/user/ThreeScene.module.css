@@ -1,27 +1,31 @@
 @font-face {
   font-family: "radikal";
-  src: url(/assets/fonts/radikal_light.woff2) format("woff2"), url(/assets/fonts/radikal_light.woff) format("woff");
+  src: url(/assets/fonts/radikal_light.woff2) format("woff2"),
+    url(/assets/fonts/radikal_light.woff) format("woff");
   font-weight: 200;
   font-style: normal;
 }
 
 @font-face {
   font-family: "radikal";
-  src: url(/assets/fonts/radikal_medium.woff2) format("woff2"), url(/assets/fonts/radikal_medium.woff) format("woff");
+  src: url(/assets/fonts/radikal_medium.woff2) format("woff2"),
+    url(/assets/fonts/radikal_medium.woff) format("woff");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: "domainedisp";
-  src: url(/assets/fonts/DomaineDisp-Semibold.woff2) format("woff2"), url(/assets/fonts/DomaineDisp-Semibold.woff) format("woff");
+  src: url(/assets/fonts/DomaineDisp-Semibold.woff2) format("woff2"),
+    url(/assets/fonts/DomaineDisp-Semibold.woff) format("woff");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "domainedisp";
-  src: url(/assets/fonts/DomaineDisp-Regular.woff2) format("woff2"), url(/assets/fonts/DomaineDisp-Regular.woff) format("woff");
+  src: url(/assets/fonts/DomaineDisp-Regular.woff2) format("woff2"),
+    url(/assets/fonts/DomaineDisp-Regular.woff) format("woff");
   font-weight: 300;
   font-style: normal;
 }
@@ -40,11 +44,13 @@
 }
 
 .containerPercent {
-  width: 80px;
+  width: 18em;
+  height: 18em;
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translate(-32px, 10px);
+  transform: translate(-50px, 0em);
+  background-color: #f9f9f9;
 }
 
 .containerPercent p {
@@ -65,17 +71,19 @@
   width: 80px;
   height: 80px;
   position: relative;
-  transform: translate(12px, -30px);
+  transform: translate(40px, -40px);
+  z-index: 100;
 }
 
-.cube1, .cube2 {
+.cube1,
+.cube2 {
   background-color: #000;
   width: 30px;
   height: 30px;
   position: absolute;
   top: 0;
   left: 0;
-  
+
   -webkit-animation: sk-cubemove 1.8s infinite ease-in-out;
   animation: sk-cubemove 1.8s infinite ease-in-out;
 }
@@ -86,26 +94,40 @@
 }
 
 @-webkit-keyframes sk-cubemove {
-  25% { -webkit-transform: translateX(126px) rotate(-90deg) scale(0.5) }
-  50% { -webkit-transform: translateX(126px) translateY(126px) rotate(-180deg) }
-  75% { -webkit-transform: translateX(0px) translateY(126px) rotate(-270deg) scale(0.5) }
-  100% { -webkit-transform: rotate(-360deg) }
+  25% {
+    -webkit-transform: translateX(126px) rotate(-90deg) scale(0.5);
+  }
+  50% {
+    -webkit-transform: translateX(126px) translateY(126px) rotate(-180deg);
+  }
+  75% {
+    -webkit-transform: translateX(0px) translateY(126px) rotate(-270deg)
+      scale(0.5);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+  }
 }
 
 @keyframes sk-cubemove {
-  25% { 
+  25% {
     transform: translateX(126px) rotate(-90deg) scale(0.5);
     -webkit-transform: translateX(126px) rotate(-90deg) scale(0.5);
-  } 50% { 
+  }
+  50% {
     transform: translateX(126px) translateY(126px) rotate(-179deg);
     -webkit-transform: translateX(126px) translateY(126px) rotate(-179deg);
-  } 50.1% { 
+  }
+  50.1% {
     transform: translateX(126px) translateY(126px) rotate(-180deg);
     -webkit-transform: translateX(126px) translateY(126px) rotate(-180deg);
-  } 75% { 
+  }
+  75% {
     transform: translateX(0px) translateY(126px) rotate(-270deg) scale(0.5);
-    -webkit-transform: translateX(0px) translateY(126px) rotate(-270deg) scale(0.5);
-  } 100% { 
+    -webkit-transform: translateX(0px) translateY(126px) rotate(-270deg)
+      scale(0.5);
+  }
+  100% {
     transform: rotate(-360deg);
     -webkit-transform: rotate(-360deg);
   }
@@ -120,7 +142,7 @@
   align-items: center;
   z-index: 100;
   transform: scale(0);
-  transition: .3s transform ease-in-out;
+  transition: 0.3s transform ease-in-out;
 }
 
 .buttonPopup {
@@ -144,26 +166,28 @@
 }
 
 .neen {
-  border: .1em solid #E63B44;
+  border: 0.1em solid #e63b44;
 }
 
 .contentPopup {
-  width: calc(100vw*.712);
-  height: calc(100vh*.79);
-  background-image: url('/assets/img/--b_VRAGEN-1-popup.png');
+  width: calc(100vw * 0.712);
+  height: calc(100vh * 0.79);
+  background-image: url("/assets/img/--b_VRAGEN-1-popup.png");
   background-size: cover;
   background-repeat: no-repeat;
   /* background-position: center; */
   text-align: center;
   display: grid;
-  grid-template-rows: 12em calc(100vh*.79*.2) calc(100vh*.79*.25) calc(100vh*.79*.35);
-  grid-template-columns: calc(100vw*.712);
+  grid-template-rows: 12em calc(100vh * 0.79 * 0.2) calc(100vh * 0.79 * 0.25) calc(
+      100vh * 0.79 * 0.35
+    );
+  grid-template-columns: calc(100vw * 0.712);
 }
 
 .cross {
   width: 12em;
   height: 4em;
-  background-image: url('/assets/img/cross.png');
+  background-image: url("/assets/img/cross.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -207,7 +231,7 @@
 }
 
 .iconscroll,
-.iconscroll:before{
+.iconscroll:before {
   position: absolute;
   left: 50%;
 }
@@ -220,16 +244,16 @@
   box-shadow: inset 0 0 0 1px #000;
   border-radius: 25px;
 }
-.iconscroll:before{
-   content: '';
-   width: 8px;
-   height: 8px;
-   background: #000;
-   top: 8px;
-   border-radius: 4px;
-   margin-left: -4px;
-   animation: scroll infinite 1.5s;
- }
+.iconscroll:before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: #000;
+  top: 8px;
+  border-radius: 4px;
+  margin-left: -4px;
+  animation: scroll infinite 1.5s;
+}
 
 .turnPhone {
   position: absolute;
@@ -248,11 +272,11 @@
   z-index: 9999;
 }
 
-.turnPhone>h2{
+.turnPhone > h2 {
   font-size: 4.2rem;
   padding-bottom: 5rem;
 }
-.turnPhone>p{
+.turnPhone > p {
   font-family: Radikal, sans-serif;
   font-weight: 100;
   font-size: 1.8rem;
@@ -262,12 +286,12 @@
   padding-bottom: 10rem;
 }
 
-.turnPhone>img{
+.turnPhone > img {
   width: 14rem;
   padding-bottom: 10rem;
 }
 
-.turnPhone>div {
+.turnPhone > div {
   background-color: #f9f9f9;
   width: 100vw;
   height: 34vh;
@@ -276,13 +300,12 @@
   z-index: -1;
 }
 
-@keyframes scroll{
-  0%{
+@keyframes scroll {
+  0% {
     opacity: 1;
   }
-  100%{
+  100% {
     opacity: 0;
     transform: translateY(46px);
   }
-
 }

@@ -21,6 +21,7 @@ class Questions {
   soundSelected = null;
   sounds = [];
   characterStats = [];
+  questionsLoaded = [];
 
   load = that => {
     this.elements = [];
@@ -115,11 +116,12 @@ class Questions {
 
     this.loadStart();
     this.loadStartQuestions();
-
     this.that.questionStore.findAll().then(questions => {
       this.questions = questions;
       this.loaded = true;
-      this.loadQuestions();
+      this.questions.forEach(question => {
+        this.questionsLoaded.push({loaded: false});
+      });
     });
 
     window.addEventListener(`mouseup`, this.handleMouseClick);
@@ -222,9 +224,9 @@ class Questions {
     );
   };
 
-  loadQuestions = () => {
-    this.questions.forEach((question, index) => {
-      const x = question.location.x;
+  loadQuestion = index => {
+    const question = this.questions[index];
+    const x = question.location.x;
       const y = question.location.y;
       const z = question.location.z;
       this.canary.createText(this.that, `${question.question}`, FONTS.domaineRegular, 7, 0x000000, x - 106, y + 40, this.planeZ - z, 2);
@@ -351,7 +353,7 @@ class Questions {
         default:
           break;
       }
-    });
+      this.questionsLoaded[index].loaded = true;
   };
 
   //Handers
@@ -368,6 +370,14 @@ class Questions {
     if (intersects.length > 0 && this.loaded) {
       intersects.forEach(intersect => {
         if (intersect.object.name === `start`) {
+          this.questions.forEach((question, index) => {
+            if (this.questionsLoaded[index].loaded === false) {
+              const state = { ...this.that.state };
+              state.done = false;
+              this.that.setState(state);
+              this.loadQuestion(index);
+            }
+          });
           this.that.cameraRubberBanding.position.set(0, -400, WORLD_POSITION.questions - 300);
         }
         if (intersect.object.name) {
@@ -529,9 +539,7 @@ class Questions {
                 }
               });
               this.unmount();
-              this.that.currentWorld = WORLD_POSITION.images;
               this.images.load(this.that);
-              this.that.cameraRubberBanding.position.set(0, 0, WORLD_POSITION.images);
             } else {
               this.that.cameraRubberBanding.position.set(
                 this.questions[this.questionIndex + 1].location.x,
