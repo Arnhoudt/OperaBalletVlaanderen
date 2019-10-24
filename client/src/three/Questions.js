@@ -6,6 +6,7 @@ import Images from "./Showroom";
 class Questions {
   canary = new Canary();
   images = new Images();
+  path = `assets/img/`;
   questions = [];
   loaded = false;
   questionIndex = 0;
@@ -33,82 +34,82 @@ class Questions {
     this.that.fog = { near: FOG_QUESTIONS.near, far: FOG_QUESTIONS.far };
 
     this.characterStats = [
-      { answer: `Man`, param1: 5, param2: 10, param3: 2 },
+      { answer: `Man`, param1: 5, param2: 9, param3: 2 },
       { answer: `Women`, param1: 6, param2: 1, param3: 10 },
-      { answer: `Man Women`, param1: 7, param2: 4, param3: 5 },
+      { answer: `Man Women`, param1: 6, param2: 4, param3: 5 },
       { answer: `slecht`, param1: 3, param2: 6, param3: 1 },
-      { answer: `goed`, param1: 8, param2: 3, param3: 8 },
+      { answer: `goed`, param1: 8, param2: 4, param3: 8 },
       { answer: `super`, param1: 7, param2: 2, param3: 10 },
       { answer: `slecht eigenlijk`, param1: 3, param2: 6, param3: 1 },
       { answer: `ups en downs`, param1: 8, param2: 5, param3: 4 },
       { answer: `echt goed`, param1: 7, param2: 2, param3: 10 },
       { answer: `werk`, param1: 10, param2: 6, param3: 5 },
       { answer: `huishouden`, param1: 1, param2: 1, param3: 10 },
-      { answer: `hobbies`, param1: 6, param2: 10, param3: 8 },
-      { answer: `studies`, param1: 10, param2: 4, param3: 1 },
+      { answer: `hobbies`, param1: 7, param2: 10, param3: 8 },
+      { answer: `studies`, param1: 9, param2: 4, param3: 1 },
       { answer: `voeding`, param1: 6, param2: 8, param3: 10 },
-      { answer: `vrienden`, param1: 5, param2: 10, param3: 2 },
+      { answer: `vrienden`, param1: 5, param2: 9, param3: 2 },
       { answer: `liefde`, param1: 9, param2: 2, param3: 10 },
       { answer: `gezondheid`, param1: 10, param2: 3, param3: 8 },
-      { answer: `geld`, param1: 10, param2: 5, param3: 1 },
+      { answer: `geld`, param1: 10, param2: 6, param3: 1 },
       { answer: `hemel`, param1: 5, param2: 2, param3: 10 },
       { answer: `aarde`, param1: 10, param2: 6, param3: 5 },
       { answer: `hel`, param1: 6, param2: 10, param3: 1 },
       { answer: `de dood`, param1: 10, param2: 1, param3: 4 },
-      { answer: `geldproblemen`, param1: 10, param2: 4, param3: 1 },
+      { answer: `geldproblemen`, param1: 9, param2: 4, param3: 2 },
       { answer: `schuld dragen`, param1: 5, param2: 2, param3: 8 },
       { answer: `eenzaamheid`, param1: 4, param2: 1, param3: 10 },
       { answer: `onsuccesvol zijn`, param1: 10, param2: 7, param3: 1 },
       { answer: `saai leven`, param1: 5, param2: 10, param3: 2 },
       { answer: `Schotland`, param1: 6, param2: 10, param3: 1 },
       { answer: `India`, param1: 10, param2: 3, param3: 4 },
-      { answer: `Spanje`, param1: 5, param2: 6, param3: 10 },
+      { answer: `Spanje`, param1: 5, param2: 7, param3: 10 },
       { answer: `genot/plezier`, param1: 4, param2: 6, param3: 10 },
       { answer: `macht`, param1: 10, param2: 4, param3: 1 },
       { answer: `persoonlijk succes`, param1: 10, param2: 7, param3: 1 },
-      { answer: `veiligheid`, param1: 5, param2: 1, param3: 10 },
-      { answer: `onafhankelijkheid`, param1: 7, param2: 10, param3: 3 },
+      { answer: `veiligheid`, param1: 5, param2: 2, param3: 10 },
+      { answer: `onafhankelijkheid`, param1: 6, param2: 10, param3: 3 },
       { answer: `verbinding`, param1: 6, param2: 3, param3: 8 },
       { answer: `collegas`, param1: 8, param2: 2, param3: 5 },
-      { answer: `familie`, param1: 6, param2: 4, param3: 8 },
+      { answer: `familie`, param1: 6, param2: 5, param3: 8 },
       { answer: `vrienden`, param1: 3, param2: 7, param3: 6 },
       { answer: `ouders`, param1: 10, param2: 10, param3: 10 },
-      { answer: `(levens)partner`, param1: 10, param2: 10, param3: 10 },
+      { answer: `(levens)partner`, param1: 9, param2: 10, param3: 10 },
       { answer: `zoon/dochter`, param1: 10, param2: 10, param3: 10 },
-      { answer: `broer/zus`, param1: 10, param2: 10, param3: 10 },
+      { answer: `broer/zus`, param1: 10, param2: 9, param3: 10 },
       { answer: `grootouders`, param1: 10, param2: 10, param3: 10 },
       { answer: `tante/nonkel`, param1: 10, param2: 10, param3: 10 },
-      { answer: `neef/nicht`, param1: 10, param2: 10, param3: 10 },
+      { answer: `neef/nicht`, param1: 9, param2: 9, param3: 9 },
       { answer: `beste vriend`, param1: 10, param2: 10, param3: 10 },
       { answer: `huisdier`, param1: 10, param2: 10, param3: 10 },
-      { answer: `Frans`, param1: 10, param2: 3, param3: 1 },
-      { answer: `Italiaans`, param1: 4, param2: 10, param3: 3 },
-      { answer: `Russisch`, param1: 1, param2: 4, param3: 10 }
+      { answer: `Frans`, param1: 9, param2: 3, param3: 2 },
+      { answer: `Italiaans`, param1: 5, param2: 10, param3: 3 },
+      { answer: `Russisch`, param1: 2, param2: 4, param3: 10 }
     ];
 
     let loader = new THREE.TextureLoader();
-    loader.load(`assets/img/button_border.png`, tex => (this.tex = tex));
-    loader.load(`assets/img/button_border_selected.png`, tex => (this.texSelected = tex));
-    loader.load(`assets/img/questions/aarde.png`, image => this.imagesUnselected.push({ image: `aarde`, tex: image }));
-    loader.load(`assets/img/questions/collegas.png`, image => this.imagesUnselected.push({ image: `collegas`, tex: image }));
-    loader.load(`assets/img/questions/familie.png`, image => this.imagesUnselected.push({ image: `familie`, tex: image }));
-    loader.load(`assets/img/questions/hel.png`, image => this.imagesUnselected.push({ image: `hel`, tex: image }));
-    loader.load(`assets/img/questions/hemel.png`, image => this.imagesUnselected.push({ image: `hemel`, tex: image }));
-    loader.load(`assets/img/questions/India.png`, image => this.imagesUnselected.push({ image: `India`, tex: image }));
-    loader.load(`assets/img/questions/Schotland.png`, image => this.imagesUnselected.push({ image: `Schotland`, tex: image }));
-    loader.load(`assets/img/questions/Spanje.png`, image => this.imagesUnselected.push({ image: `Spanje`, tex: image }));
-    loader.load(`assets/img/questions/vrienden.png`, image => this.imagesUnselected.push({ image: `vrienden`, tex: image }));
-    loader.load(`assets/img/questions/aarde_selected.png`, image => this.imagesSelected.push({ image: `aarde`, tex: image }));
-    loader.load(`assets/img/questions/collegas_selected.png`, image => this.imagesSelected.push({ image: `collegas`, tex: image }));
-    loader.load(`assets/img/questions/familie_selected.png`, image => this.imagesSelected.push({ image: `familie`, tex: image }));
-    loader.load(`assets/img/questions/hel_selected.png`, image => this.imagesSelected.push({ image: `hel`, tex: image }));
-    loader.load(`assets/img/questions/hemel_selected.png`, image => this.imagesSelected.push({ image: `hemel`, tex: image }));
-    loader.load(`assets/img/questions/India_selected.png`, image => this.imagesSelected.push({ image: `India`, tex: image }));
-    loader.load(`assets/img/questions/Schotland_selected.png`, image => this.imagesSelected.push({ image: `Schotland`, tex: image }));
-    loader.load(`assets/img/questions/Spanje_selected.png`, image => this.imagesSelected.push({ image: `Spanje`, tex: image }));
-    loader.load(`assets/img/questions/vrienden_selected.png`, image => this.imagesSelected.push({ image: `vrienden`, tex: image }));
-    loader.load(`assets/img/questions/play.png`, sound => (this.soundUnselected = sound));
-    loader.load(`assets/img/questions/pauze.png`, sound => (this.soundSelected = sound));
+    loader.load(path+`button_border.png`, tex => (this.tex = tex));
+    loader.load(path+`assets/img/button_border_selected.png`, tex => (this.texSelected = tex));
+    loader.load(path+`assets/img/questions/aarde.png`, image => this.imagesUnselected.push({ image: `aarde`, tex: image }));
+    loader.load(path+`assets/img/questions/collegas.png`, image => this.imagesUnselected.push({ image: `collegas`, tex: image }));
+    loader.load(path+`assets/img/questions/familie.png`, image => this.imagesUnselected.push({ image: `familie`, tex: image }));
+    loader.load(path+`assets/img/questions/hel.png`, image => this.imagesUnselected.push({ image: `hel`, tex: image }));
+    loader.load(path+`assets/img/questions/hemel.png`, image => this.imagesUnselected.push({ image: `hemel`, tex: image }));
+    loader.load(path+`assets/img/questions/India.png`, image => this.imagesUnselected.push({ image: `India`, tex: image }));
+    loader.load(path+`assets/img/questions/Schotland.png`, image => this.imagesUnselected.push({ image: `Schotland`, tex: image }));
+    loader.load(path+`assets/img/questions/Spanje.png`, image => this.imagesUnselected.push({ image: `Spanje`, tex: image }));
+    loader.load(path+`assets/img/questions/vrienden.png`, image => this.imagesUnselected.push({ image: `vrienden`, tex: image }));
+    loader.load(path+`assets/img/questions/aarde_selected.png`, image => this.imagesSelected.push({ image: `aarde`, tex: image }));
+    loader.load(path+`assets/img/questions/collegas_selected.png`, image => this.imagesSelected.push({ image: `collegas`, tex: image }));
+    loader.load(path+`assets/img/questions/familie_selected.png`, image => this.imagesSelected.push({ image: `familie`, tex: image }));
+    loader.load(path+`assets/img/questions/hel_selected.png`, image => this.imagesSelected.push({ image: `hel`, tex: image }));
+    loader.load(path+`assets/img/questions/hemel_selected.png`, image => this.imagesSelected.push({ image: `hemel`, tex: image }));
+    loader.load(path+`assets/img/questions/India_selected.png`, image => this.imagesSelected.push({ image: `India`, tex: image }));
+    loader.load(path+`assets/img/questions/Schotland_selected.png`, image => this.imagesSelected.push({ image: `Schotland`, tex: image }));
+    loader.load(path+`assets/img/questions/Spanje_selected.png`, image => this.imagesSelected.push({ image: `Spanje`, tex: image }));
+    loader.load(path+`assets/img/questions/vrienden_selected.png`, image => this.imagesSelected.push({ image: `vrienden`, tex: image }));
+    loader.load(path+`assets/img/questions/play.png`, sound => (this.soundUnselected = sound));
+    loader.load(path+`assets/img/questions/pauze.png`, sound => (this.soundSelected = sound));
 
     this.canary.createSound(this, `assets/sounds/frans_CarmenHabanera_short.mp3`);
     this.canary.createSound(this, `assets/sounds/italiaans_CarmenHabanera_short.mp3`);

@@ -74,8 +74,8 @@ class Showroom {
   };
   //Handerse
   handleMouseClick = e => {
-    this.that.idleTime = 0;
     e.preventDefault();
+    this.that.idleTime = 0;
     //De raycaster kijkt welke objecten er in het visier van de muis liggen
     this.that.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
     this.that.mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
@@ -220,18 +220,6 @@ class Showroom {
         } else if (child.name && child.name.split(`_`)[0] === `sceneElement`) {
           this.updateShowRoomChild(child);
         }
-        //if(Math.abs(child.rotation.x) < SHOWROOM_MAX_X_ROTATION && Math.abs(child.rotation.y) < SHOWROOM_MAX_Y_ROTATION && Math.abs(child.rotation.z)
-        //< SHOWROOM_MAX_Z_ROTATION)
-        //child.lookAt(this.that.camera.position.x, this.that.camera.position.y, this.that.camera.position.z);
-        // if(Math.abs(child.rotation.x) > SHOWROOM_MAX_X_ROTATION){
-        //   child.rotation.x = Math.sign(child.rotation.x)*SHOWROOM_MAX_X_ROTATION;
-        // }
-        // if(Math.abs(child.rotation.y) > SHOWROOM_MAX_Y_ROTATION){
-        //   child.rotation.y = Math.sign(child.rotation.y)*SHOWROOM_MAX_Y_ROTATION;
-        // }
-        // if(Math.abs(child.rotation.z) > SHOWROOM_MAX_Z_ROTATION){
-        //   child.rotation.z = Math.sign(child.rotation.y)*SHOWROOM_MAX_Z_ROTATION;
-        // }
       });
       let afstand = -1000000000;
       let color = {};

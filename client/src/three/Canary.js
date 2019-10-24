@@ -2,9 +2,14 @@ import * as THREE from "three";
 import { POINTER, PLANE_DIFFERENCE, PLANE_PERSPECTIVE_CONSTANTE } from "../constants";
 
 class Canary {
-  createPng = (component, path, x, y, z, width, height, planeZ, anisotropy, filter, name) => {
+  constructor(length) {
+    super();
     let textureLoader = new THREE.TextureLoader();
     let maxAnisotropy = component.renderer.capabilities.getMaxAnisotropy();
+  }
+  createPng = (component, path, x, y, z, width, height, planeZ, anisotropy, filter, name) => {
+    let textureLoader = new THREE.TextureLoader();//TODO: volgens mij mogen deze twee functies weg aangezien we worden aangemaakt in de constructor
+    let maxAnisotropy = component.renderer.capabilities.getMaxAnisotropy();// deze lijn mag ook weg, denk ik
     let planeAnisotropy;
     if (anisotropy === undefined || anisotropy < 1) {
       planeAnisotropy = 1;
@@ -13,7 +18,6 @@ class Canary {
     } else {
       planeAnisotropy = anisotropy;
     }
-
     if (planeZ !== 0) {
       z += -PLANE_DIFFERENCE * planeZ;
       width *= 1 + planeZ * PLANE_PERSPECTIVE_CONSTANTE;
@@ -73,7 +77,6 @@ class Canary {
     intersects.reverse();
     intersects.forEach(intersect => {
       if (intersect.object.name === name) {
-        //TODO: als een gebruiker over een image en een andere aanraakt zonder dat hij 'niets' heeft aangeraakt zal de vorige foto niet kleiner worden
         zoomedObject = intersect;
       }
     });
@@ -116,7 +119,6 @@ class Canary {
       }
 
       let textMaterial = new THREE.MeshPhongMaterial({ color: color });
-
       let mesh = new THREE.Mesh(textGeometry, textMaterial);
       mesh.position.set(x, y, z);
       mesh.rotation.set(0, 0, rotation);
